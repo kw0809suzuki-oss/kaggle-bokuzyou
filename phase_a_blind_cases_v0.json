@@ -1,0 +1,54 @@
+{
+  "source": "dual_trace_seed7001",
+  "note": "Blind Phase A snapshots only. No original actions or terminal outcomes are included.",
+  "cases": [
+    {
+      "id": "self_d7_h0",
+      "day": 7, "hour": 0, "money": 1630, "land": 1, "hands": 0, "hires_today": 0,
+      "plants": 16, "pastures": 4, "empty": 3, "weeds": 2, "seeds": 3,
+      "prices": {"WHEAT":33,"CARROT":37,"TOMATO":64,"STRAWBERRY":167,"MELON":268,"EGG":50,"MILK":191,"WOOL":206}
+    },
+    {
+      "id": "self_d7_h3",
+      "day": 7, "hour": 3, "money": 946, "land": 1, "hands": 3, "hires_today": 3,
+      "plants": 16, "pastures": 4, "empty": 3, "weeds": 2, "seeds": 12,
+      "prices": {"WHEAT":33,"CARROT":37,"TOMATO":64,"STRAWBERRY":167,"MELON":268,"EGG":50,"MILK":191,"WOOL":206}
+    },
+    {
+      "id": "self_d8_h6",
+      "day": 8, "hour": 6, "money": 753, "land": 2, "hands": 4, "hires_today": 4,
+      "plants": 15, "pastures": 4, "empty": 28, "weeds": 3, "seeds": 12,
+      "prices": {"WHEAT":33,"CARROT":38,"TOMATO":66,"STRAWBERRY":172,"MELON":269,"EGG":50,"MILK":199,"WOOL":209}
+    },
+    {
+      "id": "self_d9_h3",
+      "day": 9, "hour": 3, "money": 923, "land": 2, "hands": 6, "hires_today": 6,
+      "plants": 15, "pastures": 5, "empty": 27, "weeds": 3, "seeds": 24,
+      "prices": {"WHEAT":35,"CARROT":38,"TOMATO":68,"STRAWBERRY":176,"MELON":270,"EGG":51,"MILK":175,"WOOL":212}
+    },
+    {
+      "id": "self_d10_h0",
+      "day": 10, "hour": 0, "money": 3005, "land": 2, "hands": 0, "hires_today": 0,
+      "plants": 15, "pastures": 5, "empty": 27, "weeds": 3, "seeds": 25,
+      "prices": {"WHEAT":36,"CARROT":40,"TOMATO":70,"STRAWBERRY":184,"MELON":271,"EGG":51,"MILK":156,"WOOL":200}
+    },
+    {
+      "id": "opponent_d7_h3",
+      "day": 7, "hour": 3, "money": 491, "land": 2, "hands": 7, "hires_today": 7,
+      "plants": 18, "pastures": 7, "empty": 25, "weeds": 0, "seeds": 10,
+      "prices": {"WHEAT":33,"CARROT":37,"TOMATO":64,"STRAWBERRY":167,"MELON":268,"EGG":50,"MILK":191,"WOOL":206}
+    },
+    {
+      "id": "opponent_d9_h6",
+      "day": 9, "hour": 6, "money": 709, "land": 2, "hands": 11, "hires_today": 11,
+      "plants": 30, "pastures": 11, "empty": 7, "weeds": 2, "seeds": 9,
+      "prices": {"WHEAT":35,"CARROT":38,"TOMATO":68,"STRAWBERRY":176,"MELON":270,"EGG":51,"MILK":175,"WOOL":212}
+    },
+    {
+      "id": "opponent_d10_h6",
+      "day": 10, "hour": 6, "money": 324, "land": 2, "hands": 12, "hires_today": 12,
+      "plants": 35, "pastures": 12, "empty": 3, "weeds": 0, "seeds": 6,
+      "prices": {"WHEAT":36,"CARROT":40,"TOMATO":70,"STRAWBERRY":184,"MELON":271,"EGG":51,"MILK":156,"WOOL":200}
+    }
+  ]
+}
