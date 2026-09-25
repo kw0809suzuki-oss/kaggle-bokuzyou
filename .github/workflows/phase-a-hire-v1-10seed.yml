@@ -1,0 +1,30 @@
+name: Phase A HIRE v1 10-seed
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "phase_a_hire_v1.py"
+      - "run_phase_a_hire_v1_10seed.py"
+      - ".github/workflows/phase-a-hire-v1-10seed.yml"
+  workflow_dispatch:
+
+jobs:
+  battle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: kw0809suzuki-oss/relation-flow-agent
+          ref: 5d8a01a218b5766528580b9bb88d842b7e8951be
+          path: selfsrc
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install -r requirements.txt
+      - run: |
+          mkdir -p opponents
+          curl -fL --retry 3 -o opponents/seyamalam_v21.py https://raw.githubusercontent.com/Seyamalam/Kaggriculture/8b8c421eb10634c756583ce10c75189f50c83a72/main.py
+      - run: python run_phase_a_hire_v1_10seed.py
