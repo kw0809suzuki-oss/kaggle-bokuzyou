@@ -1,0 +1,33 @@
+name: Seyamalam on Self Seat State Trajectory v0
+
+on:
+  push:
+    branches: ["experiment/phase-a-lens-v0"]
+    paths:
+      - "run_seyamalam_on_self_seat_state_v0.py"
+      - ".github/workflows/seyamalam-on-self-seat-state-v0.yml"
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: kw0809suzuki-oss/relation-flow-agent
+          ref: 5d8a01a218b5766528580b9bb88d842b7e8951be
+          path: selfsrc
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install -r requirements.txt
+      - run: |
+          mkdir -p opponents
+          curl -fL --retry 3 -o opponents/seyamalam_v21.py https://raw.githubusercontent.com/Seyamalam/Kaggriculture/8b8c421eb10634c756583ce10c75189f50c83a72/main.py
+      - run: python run_seyamalam_on_self_seat_state_v0.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: seyamalam-on-self-seat-state-result-v0
+          path: seyamalam_on_self_seat_state_result_v0.json
