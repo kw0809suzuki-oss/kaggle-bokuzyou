@@ -1,0 +1,28 @@
+name: Seyamalam Cash-to-Cash Cycle Trace v0
+
+on:
+  push:
+    branches: ["experiment/phase-a-lens-v0"]
+    paths:
+      - "run_seyamalam_cash_to_cash_cycle_v0.py"
+      - ".github/workflows/seyamalam-cash-to-cash-cycle-v0.yml"
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install -r requirements.txt
+      - run: |
+          mkdir -p opponents
+          curl -fL --retry 3 -o opponents/seyamalam_v21.py https://raw.githubusercontent.com/Seyamalam/Kaggriculture/8b8c421eb10634c756583ce10c75189f50c83a72/main.py
+      - run: python run_seyamalam_cash_to_cash_cycle_v0.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: seyamalam-cash-to-cash-cycle-result-v0
+          path: seyamalam_cash_to_cash_cycle_result_v0.json
