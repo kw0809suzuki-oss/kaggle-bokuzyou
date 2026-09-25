@@ -1,0 +1,117 @@
+{
+  "probe": "phase_a_external_alignment_v0",
+  "source": "dual_trace_seed7001",
+  "definition": {
+    "prediction": "Phase A Lens Model v0 direction at observed opponent state",
+    "external_reference": "largest observed investment spend by asset class over the following 24 turns",
+    "boundary": "reference is observed strong-opponent behavior, not proof of optimality"
+  },
+  "cases": [
+    {
+      "id": "opponent_d7_h0",
+      "predicted": "SURFACE",
+      "observed": "SURFACE",
+      "match": true,
+      "spend": {
+        "THROUGHPUT": 54,
+        "SURFACE": 1000,
+        "CROP_ENGINE": 450
+      }
+    },
+    {
+      "id": "opponent_d7_h3",
+      "predicted": "CROP_ENGINE",
+      "observed": "CROP_ENGINE",
+      "match": true,
+      "spend": {
+        "THROUGHPUT": 109,
+        "CROP_ENGINE": 200
+      }
+    },
+    {
+      "id": "opponent_d8_h0",
+      "predicted": "THROUGHPUT",
+      "observed": "ANIMAL_ENGINE",
+      "match": false,
+      "spend": {
+        "THROUGHPUT": 143,
+        "CROP_ENGINE": 1160,
+        "ANIMAL_ENGINE": 2000
+      }
+    },
+    {
+      "id": "opponent_d8_h6",
+      "predicted": "CROP_ENGINE",
+      "observed": "ANIMAL_ENGINE",
+      "match": false,
+      "spend": {
+        "ANIMAL_ENGINE": 1500,
+        "CROP_ENGINE": 760,
+        "THROUGHPUT": 232
+      }
+    },
+    {
+      "id": "opponent_d9_h0",
+      "predicted": "THROUGHPUT",
+      "observed": "CROP_ENGINE",
+      "match": false,
+      "spend": {
+        "THROUGHPUT": 232,
+        "CROP_ENGINE": 400,
+        "ANIMAL_ENGINE": 400
+      }
+    },
+    {
+      "id": "opponent_d9_h3",
+      "predicted": "SURFACE",
+      "observed": "ANIMAL_ENGINE",
+      "match": false,
+      "spend": {
+        "THROUGHPUT": 232,
+        "ANIMAL_ENGINE": 400,
+        "CROP_ENGINE": 200
+      }
+    },
+    {
+      "id": "opponent_d9_h6",
+      "predicted": "SURFACE",
+      "observed": "ANIMAL_ENGINE",
+      "match": false,
+      "spend": {
+        "ANIMAL_ENGINE": 400,
+        "CROP_ENGINE": 200,
+        "THROUGHPUT": 376
+      }
+    },
+    {
+      "id": "opponent_d10_h0",
+      "predicted": "THROUGHPUT",
+      "observed": "SURFACE",
+      "match": false,
+      "spend": {
+        "THROUGHPUT": 376,
+        "ANIMAL_ENGINE": 800,
+        "CROP_ENGINE": 700,
+        "SURFACE": 2000
+      }
+    },
+    {
+      "id": "opponent_d10_h6",
+      "predicted": "SURFACE",
+      "observed": "SURFACE",
+      "match": true,
+      "spend": {
+        "ANIMAL_ENGINE": 800,
+        "CROP_ENGINE": 700,
+        "SURFACE": 2000,
+        "THROUGHPUT": 376
+      }
+    }
+  ],
+  "summary": {
+    "cases": 9,
+    "matches": 3,
+    "mismatches": 6,
+    "match_rate": 0.3333333333333333
+  }
+}
