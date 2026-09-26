@@ -19,8 +19,10 @@ import copy, hashlib, json
 from dataclasses import dataclass
 from typing import Any, Mapping, Sequence
 
+from kaggle_environments.envs.kaggriculture.kaggriculture import CROPS
+
 SCHEMA_VERSION="official-state-snapshot-v0"
-PLAN_SCHEMA_VERSION="short-plan-candidate-v3"
+PLAN_SCHEMA_VERSION="short-plan-candidate-v4"
 REQUIRED_TOP_LEVEL=("player","day","hour","farms","private","market","town")
 
 class StateSchemaError(ValueError): pass
@@ -269,6 +271,50 @@ def generate_plans(state:StateSnapshot)->list[ShortPlanCandidate]:
                     "This Plan only closes today's observed maintenance condition.",
                     "Reaching maturity, harvest, sale, and profitability are not claimed.",
                     "The projector may fail to reach the tile before the day boundary; Official World decides the result.",
+                ),
+                (("farms",p,"tiles",y,x),),
+            ))
+
+    # Observed Yield -> output collection job.
+    # Read the maturity threshold directly from the Official Kaggriculture
+    # source of truth instead of copying crop schedules into this module.
+    for y,row in enumerate(tiles):
+        if not isinstance(row,Sequence) or isinstance(row,(str,bytes)):
+            continue
+        for x,tile in enumerate(row):
+            if not (isinstance(tile,Mapping) and tile.get("kind")=="PLANT"):
+                continue
+            crop=str(tile.get("crop"))
+            if crop not in CROPS:
+                continue
+            yield_units=int(tile.get("yield_units",0) or 0)
+            planted_day=int(tile.get("planted_day",raw["day"]))
+            age_days=int(raw["day"])-planted_day
+            first_yield_day=int(CROPS[crop]["first_yield_day"])
+            if yield_units<=0 or age_days<first_yield_day:
+                continue
+            target={
+                "crop":crop,
+                "tile":[x,y],
+                "planted_day":planted_day,
+                "available_yield_units":yield_units,
+            }
+            plans.append(ShortPlanCandidate(
+                PLAN_SCHEMA_VERSION,_candidate_id(state,"collect_plant_output",target),
+                "collect_plant_output",target,
+                {
+                    "observable":"Official World reduces/removes the target plant yield and the crop output appears in self inventory or shed"
+                },
+                (
+                    {"raw_fact":"target tile is the specified PLANT","crop":crop,"tile":[x,y]},
+                    {"raw_fact":"target yield_units > 0","value":yield_units},
+                    {"official_condition":"current day satisfies the Official crop first_yield_day threshold",
+                     "age_days":age_days,"first_yield_day":first_yield_day},
+                ),
+                (
+                    "This job only moves already-present output out of the plant.",
+                    "Transport to shed, sale, and cash recovery remain separate downstream jobs.",
+                    "If an end-of-day boundary auto-drops carried output to shed, that Official result is accepted rather than simulated here.",
                 ),
                 (("farms",p,"tiles",y,x),),
             ))
