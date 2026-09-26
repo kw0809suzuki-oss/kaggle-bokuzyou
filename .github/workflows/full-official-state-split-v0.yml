@@ -1,0 +1,36 @@
+name: Full Official State Split v0
+
+on:
+  push:
+    branches:
+      - "observer/full-official-state-split-v0-20260926"
+    paths:
+      - "run_full_official_state_split_v0.py"
+      - ".github/workflows/full-official-state-split-v0.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  observe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install official Kaggle environments
+        run: python -m pip install -r requirements.txt
+      - name: Fetch pinned Seyamalam opponent
+        run: |
+          mkdir -p opponents
+          curl -fL --retry 3             -o opponents/seyamalam_v21.py             https://raw.githubusercontent.com/Seyamalam/Kaggriculture/8b8c421eb10634c756583ce10c75189f50c83a72/main.py
+      - name: Compare complete Official World before turn3
+        run: python run_full_official_state_split_v0.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: full-official-state-split-v0
+          path: full_official_state_split_v0.json
