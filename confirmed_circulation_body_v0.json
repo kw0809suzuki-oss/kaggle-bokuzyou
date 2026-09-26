@@ -1,0 +1,21 @@
+{
+  "schema": "confirmed-circulation-body-v0",
+  "meaning": "Snapshot reference only. This file does not implement or alter behavior.",
+  "source_branch": "experiment/exclude-confirmed-blocked-v0",
+  "source_commit": "696ac759b66e3fe0463dd9d0bc60fc33b1d714c2",
+  "frozen_blobs": {
+    "plan_generator_entrance_v0.py": "0c92c25202bec0ef9c7e1ef6127fee9420d9b9f4",
+    "short_plan_action_projector_v0.py": "17d98f9cc42dbbeed0a424b2a0975044c057e06a",
+    "run_exclude_confirmed_blocked_ab_v0.py": "b10833e771a0c1893728dde89a3e4e8d298c1a17"
+  },
+  "environment": {
+    "seed": 7001,
+    "policy_seed": 20260926,
+    "opponent": "Seyamalam pinned v21"
+  },
+  "body_policy": {
+    "mode": "exclude_blocked",
+    "note": "Use the existing run_policy('exclude_blocked') implementation unchanged."
+  },
+  "observer_rule": "Observer must remain external to Body behavior and may not alter Candidate generation, status, selection, continuation, projection, completion, action bundles, or Official World stepping."
+}
