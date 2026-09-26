@@ -1,0 +1,44 @@
+name: One-Shot View Lens Opponent Response Replay v0
+
+on:
+  push:
+    branches:
+      - "experiment/one-shot-view-lens-harness-v0-20260926"
+    paths:
+      - ".github/workflows/one-shot-view-lens-opponent-response-replay-v0.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  opponent-response:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    strategy:
+      fail-fast: false
+      matrix:
+        lens:
+          - nearby_density
+          - relationship_age
+          - exit_proximity
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install official Kaggle environments
+        run: python -m pip install -r requirements.txt
+      - name: Fetch pinned Seyamalam opponent
+        run: |
+          mkdir -p opponents
+          curl -fL --retry 3 \
+            -o opponents/seyamalam_v21.py \
+            https://raw.githubusercontent.com/Seyamalam/Kaggriculture/8b8c421eb10634c756583ce10c75189f50c83a72/main.py
+      - name: Replay Fresh20 and trace opponent response
+        run: python run_one_shot_view_lens_fresh20_opponent_response_replay_v0.py --lens "${{ matrix.lens }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: one-shot-view-lens-opponent-response-${{ matrix.lens }}-v0
+          path: one_shot_view_lens_fresh20_opponent_response_${{ matrix.lens }}_v0.json
