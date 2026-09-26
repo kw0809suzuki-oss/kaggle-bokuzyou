@@ -149,6 +149,14 @@ def project_short_plan(state: StateSnapshot, plan: ShortPlanCandidate) -> dict[s
         _set_unit_action(bundle, unit_index, action)
         return bundle
 
+    if plan.kind == "prepare_surface_for_plant":
+        x, y = (int(plan.target["tile"][0]), int(plan.target["tile"][1]))
+        unit_index = _nearest_unit(raw, (x, y))
+        pos = _unit_position(raw, unit_index)
+        action = ["DIG"] if tuple(pos) == (x, y) else _move_toward(pos, (x, y))
+        _set_unit_action(bundle, unit_index, action)
+        return bundle
+
     raise NotImplementedError(plan.kind)
 
 
@@ -196,6 +204,11 @@ def semantic_plan_match(
             str(plan.target.get("crop")) == str(target["crop"])
             and list(plan.target.get("tile", [])) == list(target["tile"])
             and int(plan.target.get("planted_day", -1)) == int(target["planted_day"])
+        )
+    if kind == "prepare_surface_for_plant":
+        return (
+            str(plan.target.get("crop")) == str(target["crop"])
+            and list(plan.target.get("tile", [])) == list(target["tile"])
         )
     return False
 
@@ -384,6 +397,30 @@ def completion_from_states(
             "pre_owned_quantity": pre_owned,
             "post_owned_quantity": post_owned,
             "owned_output_gain": output_gain,
+        }
+
+
+    if plan.kind == "prepare_surface_for_plant":
+        crop = str(plan.target["crop"])
+        x, y = (int(plan.target["tile"][0]), int(plan.target["tile"][1]))
+        p = pre_raw["player"]
+        pre_tile = pre_raw["farms"][p]["tiles"][y][x]
+        post_tile = post_raw["farms"][p]["tiles"][y][x]
+        exact_establish_present = any(
+            q.kind == "establish_plant"
+            and str(q.target.get("crop")) == crop
+            and list(q.target.get("tile", [])) == [x, y]
+            for q in generate_plans(post)
+        )
+        complete = post_tile is None and exact_establish_present
+        return {
+            "complete": complete,
+            "status": "complete" if complete else "in_progress",
+            "crop": crop,
+            "tile": [x, y],
+            "pre_tile": copy.deepcopy(pre_tile),
+            "post_tile": copy.deepcopy(post_tile),
+            "target_establish_plan_present": exact_establish_present,
         }
 
     raise NotImplementedError(plan.kind)
