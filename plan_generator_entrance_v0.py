@@ -1,321 +1,195 @@
-"""Plan Generator entrance + minimal ShortPlan candidate generation v0.
+"""Plan Generator entrance + explicit ShortPlan candidate space v1.
 
-Flow:
-    Official Kaggriculture observation
-    -> schema bind
-    -> validate
-    -> canonical StateSnapshot
-    -> raw-backed accessor
-    -> generate_plans(state)
+OfficialState -> StateSnapshot -> generate_plans(state)
 
-Design boundary:
-- candidates are short jobs, not Action rankings or fixed strategies
-- every candidate is grounded in raw Official State facts
-- no terminal value, score, preference, or selection is assigned
-- no ActionBundle is generated yet
-- no economic derived fields such as productive_tiles / occupied_capacity /
-  empty_capacity are invented here
-
-Canonical means deterministic and raw-backed, not compressed or interpreted.
+Rules:
+- StateSnapshot is lossless/raw-backed.
+- generate_plans discovers raw-grounded short jobs.
+- It does not score, rank, select, truncate, or project ActionBundles.
+- Enumeration order is only deterministic serialization; every matching
+  candidate is returned.
+- No economic derived fields (productive_tiles / occupied_capacity /
+  empty_capacity) are introduced here.
 """
 
 from __future__ import annotations
-
-import copy
-import hashlib
-import json
+import copy, hashlib, json
 from dataclasses import dataclass
 from typing import Any, Mapping, Sequence
 
+SCHEMA_VERSION="official-state-snapshot-v0"
+PLAN_SCHEMA_VERSION="short-plan-candidate-v1"
+REQUIRED_TOP_LEVEL=("player","day","hour","farms","private","market","town")
 
-SCHEMA_VERSION = "official-state-snapshot-v0"
-PLAN_SCHEMA_VERSION = "short-plan-candidate-v0"
-REQUIRED_TOP_LEVEL = ("player", "day", "hour", "farms", "private", "market", "town")
+class StateSchemaError(ValueError): pass
 
+def _plain(v:Any)->Any:
+    if isinstance(v,Mapping): return {str(k):_plain(x) for k,x in v.items()}
+    if isinstance(v,(list,tuple)): return [_plain(x) for x in v]
+    if isinstance(v,(str,int,float,bool)) or v is None: return v
+    if hasattr(v,"items"): return {str(k):_plain(x) for k,x in v.items()}
+    raise StateSchemaError(f"Unsupported Official State value type: {type(v).__name__}")
 
-class StateSchemaError(ValueError):
-    pass
-
-
-def _plain(value: Any) -> Any:
-    if isinstance(value, Mapping):
-        return {str(k): _plain(v) for k, v in value.items()}
-    if isinstance(value, (list, tuple)):
-        return [_plain(v) for v in value]
-    if isinstance(value, (str, int, float, bool)) or value is None:
-        return value
-    if hasattr(value, "items"):
-        return {str(k): _plain(v) for k, v in value.items()}
-    raise StateSchemaError(f"Unsupported Official State value type: {type(value).__name__}")
-
-
-def validate_official_state(raw: Mapping[str, Any]) -> None:
-    if not isinstance(raw, Mapping):
-        raise StateSchemaError("Official State must be mapping-like")
-
-    missing = [k for k in REQUIRED_TOP_LEVEL if k not in raw]
-    if missing:
-        raise StateSchemaError(f"Missing required Official State field(s): {missing}")
-
-    player = raw["player"]
-    if not isinstance(player, int) or isinstance(player, bool):
-        raise StateSchemaError("player must be int")
-
-    farms = raw["farms"]
-    if not isinstance(farms, Sequence) or isinstance(farms, (str, bytes)):
-        raise StateSchemaError("farms must be a sequence")
-    if not farms:
-        raise StateSchemaError("farms must not be empty")
-    if player < 0 or player >= len(farms):
-        raise StateSchemaError("player index outside farms")
-
-    for k in ("day", "hour"):
-        v = raw[k]
-        if not isinstance(v, int) or isinstance(v, bool):
-            raise StateSchemaError(f"{k} must be int")
-
-    for k in ("private", "market", "town"):
-        if not isinstance(raw[k], Mapping):
-            raise StateSchemaError(f"{k} must be mapping-like")
-
+def validate_official_state(raw:Mapping[str,Any])->None:
+    if not isinstance(raw,Mapping): raise StateSchemaError("Official State must be mapping-like")
+    missing=[k for k in REQUIRED_TOP_LEVEL if k not in raw]
+    if missing: raise StateSchemaError(f"Missing required Official State field(s): {missing}")
+    p=raw["player"]
+    if not isinstance(p,int) or isinstance(p,bool): raise StateSchemaError("player must be int")
+    farms=raw["farms"]
+    if not isinstance(farms,Sequence) or isinstance(farms,(str,bytes)) or not farms:
+        raise StateSchemaError("farms must be a non-empty sequence")
+    if p<0 or p>=len(farms): raise StateSchemaError("player index outside farms")
+    for k in ("day","hour"):
+        if not isinstance(raw[k],int) or isinstance(raw[k],bool): raise StateSchemaError(f"{k} must be int")
+    for k in ("private","market","town"):
+        if not isinstance(raw[k],Mapping): raise StateSchemaError(f"{k} must be mapping-like")
 
 @dataclass(frozen=True)
 class StateSnapshot:
-    """Canonical, lossless wrapper around one Official observation."""
-
-    schema_version: str
-    _raw: dict[str, Any]
-    _canonical_json: str
-    _canonical_hash: str
+    schema_version:str
+    _raw:dict[str,Any]
+    _canonical_json:str
+    _canonical_hash:str
 
     @classmethod
-    def bind(cls, official_state: Any) -> "StateSnapshot":
-        raw = _plain(official_state)
-        validate_official_state(raw)
-
-        owned = copy.deepcopy(raw)
-        canonical_json = json.dumps(
-            owned,
-            sort_keys=True,
-            separators=(",", ":"),
-            ensure_ascii=False,
-            allow_nan=False,
-        )
-        canonical_hash = hashlib.sha256(canonical_json.encode("utf-8")).hexdigest()
-        return cls(
-            schema_version=SCHEMA_VERSION,
-            _raw=owned,
-            _canonical_json=canonical_json,
-            _canonical_hash=canonical_hash,
-        )
+    def bind(cls,official_state:Any)->"StateSnapshot":
+        raw=_plain(official_state); validate_official_state(raw)
+        owned=copy.deepcopy(raw)
+        cj=json.dumps(owned,sort_keys=True,separators=(",",":"),ensure_ascii=False,allow_nan=False)
+        return cls(SCHEMA_VERSION,owned,cj,hashlib.sha256(cj.encode()).hexdigest())
 
     @property
-    def canonical_hash(self) -> str:
-        return self._canonical_hash
-
-    def canonical_json(self) -> str:
-        return self._canonical_json
-
-    def raw(self) -> dict[str, Any]:
-        return copy.deepcopy(self._raw)
-
-    def get(self, *path: Any) -> Any:
-        value: Any = self._raw
-        for key in path:
-            if isinstance(value, Mapping):
-                value = value[key]
-            elif isinstance(value, Sequence) and not isinstance(value, (str, bytes)):
-                value = value[key]
-            else:
-                raise KeyError(path)
-        return copy.deepcopy(value)
-
+    def canonical_hash(self): return self._canonical_hash
+    def canonical_json(self): return self._canonical_json
+    def raw(self): return copy.deepcopy(self._raw)
+    def get(self,*path):
+        v=self._raw
+        for k in path:
+            if isinstance(v,Mapping): v=v[k]
+            elif isinstance(v,Sequence) and not isinstance(v,(str,bytes)): v=v[k]
+            else: raise KeyError(path)
+        return copy.deepcopy(v)
 
 @dataclass(frozen=True)
 class ShortPlanCandidate:
-    """A raw-grounded short job. It is not an ActionBundle or a preference."""
+    plan_schema_version:str
+    candidate_id:str
+    kind:str
+    target:dict[str,Any]
+    completion:dict[str,Any]
+    requirements:tuple[dict[str,Any],...]
+    unknowns:tuple[str,...]
+    source_paths:tuple[tuple[Any,...],...]
 
-    plan_schema_version: str
-    candidate_id: str
-    kind: str
-    target: dict[str, Any]
-    completion: dict[str, Any]
-    requirements: tuple[dict[str, Any], ...]
-    unknowns: tuple[str, ...]
-    source_paths: tuple[tuple[Any, ...], ...]
-
-    def to_dict(self) -> dict[str, Any]:
+    def to_dict(self):
         return {
-            "plan_schema_version": self.plan_schema_version,
-            "candidate_id": self.candidate_id,
-            "kind": self.kind,
-            "target": copy.deepcopy(self.target),
-            "completion": copy.deepcopy(self.completion),
-            "requirements": [copy.deepcopy(x) for x in self.requirements],
-            "unknowns": list(self.unknowns),
-            "source_paths": [list(x) for x in self.source_paths],
+            "plan_schema_version":self.plan_schema_version,
+            "candidate_id":self.candidate_id,
+            "kind":self.kind,
+            "target":copy.deepcopy(self.target),
+            "completion":copy.deepcopy(self.completion),
+            "requirements":[copy.deepcopy(x) for x in self.requirements],
+            "unknowns":list(self.unknowns),
+            "source_paths":[list(x) for x in self.source_paths],
         }
 
+def bind_official_state(x): return StateSnapshot.bind(x)
 
-def bind_official_state(official_state: Any) -> StateSnapshot:
-    return StateSnapshot.bind(official_state)
+def _candidate_id(state,kind,target):
+    payload={"state":state.canonical_hash,"kind":kind,"target":_plain(target)}
+    h=hashlib.sha256(json.dumps(payload,sort_keys=True,separators=(",",":"),ensure_ascii=False).encode()).hexdigest()[:16]
+    return f"{kind}:{h}"
 
+def _positions_and_inventories(raw):
+    invs=raw["private"].get("inventories",[]) or []
+    for i,inv in enumerate(invs):
+        if not isinstance(inv,Mapping): continue
+        items={str(k):q for k,q in inv.items() if isinstance(q,(int,float)) and q>0}
+        if items: yield i,dict(sorted(items.items()))
 
-def _candidate_id(state: StateSnapshot, kind: str, target: Mapping[str, Any]) -> str:
-    payload = {
-        "state": state.canonical_hash,
-        "kind": kind,
-        "target": _plain(target),
-    }
-    digest = hashlib.sha256(
-        json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
-    ).hexdigest()[:16]
-    return f"{kind}:{digest}"
-
-
-def _first_carried_inventory(raw: Mapping[str, Any]):
-    inventories = raw["private"].get("inventories", []) or []
-    for unit_index, inv in enumerate(inventories):
-        if not isinstance(inv, Mapping):
-            continue
-        positive = {str(item): qty for item, qty in inv.items() if isinstance(qty, (int, float)) and qty > 0}
-        if positive:
-            return unit_index, dict(sorted(positive.items()))
-    return None
-
-
-def _first_sellable_shed_item(raw: Mapping[str, Any]):
-    shed = raw["private"].get("shed", {}) or {}
-    prices = raw["market"].get("prices", {}) or {}
-    # Raw market price keys define the market-visible product names in this State.
+def _sellable_shed(raw):
+    shed=raw["private"].get("shed",{}) or {}
+    prices=raw["market"].get("prices",{}) or {}
     for item in sorted(prices):
-        qty = shed.get(item, 0)
-        if isinstance(qty, (int, float)) and qty > 0:
-            return item, qty
-    return None
+        q=shed.get(item,0)
+        if isinstance(q,(int,float)) and q>0: yield item,q
 
+def _raw_empty_tiles(raw):
+    p=raw["player"]; tiles=raw["farms"][p].get("tiles",[]) or []
+    for y,row in enumerate(tiles):
+        if not isinstance(row,Sequence) or isinstance(row,(str,bytes)): continue
+        for x,tile in enumerate(row):
+            if tile is None: yield x,y
 
-def _first_seed_and_raw_empty_tile(raw: Mapping[str, Any]):
-    player = raw["player"]
-    tiles = raw["farms"][player].get("tiles", []) or []
-    target_tile = None
-    for y, row in enumerate(tiles):
-        if not isinstance(row, Sequence) or isinstance(row, (str, bytes)):
-            continue
-        for x, tile in enumerate(row):
-            # This is a direct raw predicate, not an empty_capacity derivation.
-            if tile is None:
-                target_tile = (x, y)
-                break
-        if target_tile is not None:
-            break
-
-    if target_tile is None:
-        return None
-
-    seeds = raw["private"].get("seeds", {}) or {}
+def _positive_seeds(raw):
+    seeds=raw["private"].get("seeds",{}) or {}
     for crop in sorted(seeds):
-        qty = seeds.get(crop, 0)
-        if isinstance(qty, (int, float)) and qty > 0:
-            return crop, qty, target_tile
-    return None
+        q=seeds.get(crop,0)
+        if isinstance(q,(int,float)) and q>0: yield crop,q
 
+def generate_plans(state:StateSnapshot)->list[ShortPlanCandidate]:
+    if not isinstance(state,StateSnapshot): raise TypeError("generate_plans expects StateSnapshot")
+    raw=state.raw(); p=raw["player"]; plans=[]
 
-def generate_plans(state: StateSnapshot) -> list[ShortPlanCandidate]:
-    """Generate at most three raw-grounded short jobs.
-
-    Stable enumeration order is only for reproducibility; it is NOT a ranking:
-      1. carried inventory -> shed-available state
-      2. shed stock -> sale realization
-      3. seed + one raw None tile -> planted state
-
-    The generator does not choose a plan, score a plan, or project actions.
-    """
-    if not isinstance(state, StateSnapshot):
-        raise TypeError("generate_plans expects StateSnapshot")
-
-    raw = state.raw()
-    player = raw["player"]
-    plans: list[ShortPlanCandidate] = []
-
-    carried = _first_carried_inventory(raw)
-    if carried is not None:
-        unit_index, items = carried
-        target = {"unit_index": unit_index, "carried_items": items}
+    # Every unit currently carrying something gets a concrete delivery job.
+    for unit_index,items in _positions_and_inventories(raw):
+        target={"unit_index":unit_index,"carried_items":items}
         plans.append(ShortPlanCandidate(
-            plan_schema_version=PLAN_SCHEMA_VERSION,
-            candidate_id=_candidate_id(state, "deliver_carried_to_shed", target),
-            kind="deliver_carried_to_shed",
-            target=target,
-            completion={
-                "observable": "the targeted unit no longer carries the targeted items and Official World shows any realized shed transfer",
-            },
-            requirements=(
-                {"raw_fact": "private.inventories[unit_index] contains positive quantity", "unit_index": unit_index},
-                {"official_condition": "the unit must reach a shed-access position before DROP can realize"},
+            PLAN_SCHEMA_VERSION,_candidate_id(state,"deliver_carried_to_shed",target),
+            "deliver_carried_to_shed",target,
+            {"observable":"targeted carried items leave the unit inventory and any realized shed transfer is visible in Official World"},
+            (
+                {"raw_fact":"private.inventories[unit_index] contains positive quantity","unit_index":unit_index},
+                {"official_condition":"unit must reach a shed-access position before DROP can realize"},
             ),
-            unknowns=(
-                "Action sequence and unit routing are not generated yet.",
-                "Realized transfer remains an Official World result; shed-capacity configuration is not derived here.",
+            (
+                "Action sequence and routing are not generated yet.",
+                "Realized transfer remains an Official World result.",
             ),
-            source_paths=(("private", "inventories", unit_index),),
+            (("private","inventories",unit_index),),
         ))
 
-    sellable = _first_sellable_shed_item(raw)
-    if sellable is not None:
-        item, qty = sellable
-        pre_money = raw["farms"][player].get("money", 0)
-        target = {"item": item, "available_quantity": qty}
+    # Every market-visible positive shed item gets its own sale-realization job.
+    for item,qty in _sellable_shed(raw):
+        target={"item":item,"available_quantity":qty}
         plans.append(ShortPlanCandidate(
-            plan_schema_version=PLAN_SCHEMA_VERSION,
-            candidate_id=_candidate_id(state, "realize_shed_stock_sale", target),
-            kind="realize_shed_stock_sale",
-            target=target,
-            completion={
-                "observable": "Official World shows the targeted shed quantity decrease and self cash increase",
-                "pre_cash": pre_money,
-                "pre_shed_quantity": qty,
-            },
-            requirements=(
-                {"raw_fact": "private.shed[item] > 0", "item": item, "quantity": qty},
-                {"raw_fact": "market.prices exposes the same item", "item": item},
+            PLAN_SCHEMA_VERSION,_candidate_id(state,"realize_shed_stock_sale",target),
+            "realize_shed_stock_sale",target,
+            {"observable":"Official World shows target shed quantity decrease and self cash increase",
+             "pre_cash":raw["farms"][p].get("money",0),"pre_shed_quantity":qty},
+            (
+                {"raw_fact":"private.shed[item] > 0","item":item,"quantity":qty},
+                {"raw_fact":"market.prices exposes the same item","item":item},
             ),
-            unknowns=(
-                "Exact realized sale price is left to the shared Official World.",
-                "Opponent market actions are not predicted by this generator.",
+            (
+                "Exact realized price is left to the shared Official World.",
+                "Opponent market actions are not predicted here.",
             ),
-            source_paths=(
-                ("private", "shed", item),
-                ("market", "prices", item),
-                ("farms", player, "money"),
-            ),
+            (("private","shed",item),("market","prices",item),("farms",p,"money")),
         ))
 
-    plantable = _first_seed_and_raw_empty_tile(raw)
-    if plantable is not None:
-        crop, seed_qty, (x, y) = plantable
-        target = {"crop": crop, "tile": [x, y]}
-        plans.append(ShortPlanCandidate(
-            plan_schema_version=PLAN_SCHEMA_VERSION,
-            candidate_id=_candidate_id(state, "establish_plant", target),
-            kind="establish_plant",
-            target=target,
-            completion={
-                "observable": "Official World shows the target raw tile as a PLANT of the target crop",
-            },
-            requirements=(
-                {"raw_fact": "private.seeds[crop] > 0", "crop": crop, "quantity": seed_qty},
-                {"raw_fact": "farms[player].tiles[y][x] is None", "tile": [x, y]},
-                {"official_condition": "a farmer/hand must be assigned to reach the target tile and PLANT"},
-            ),
-            unknowns=(
-                "Action sequence and unit assignment are not generated yet.",
-                "Plant establishment is only this Plan's completion; economic recovery is not claimed.",
-            ),
-            source_paths=(
-                ("private", "seeds", crop),
-                ("farms", player, "tiles", y, x),
-            ),
-        ))
+    # Every (positive seed crop, raw None tile) pair remains visible.
+    # No crop/tile is hidden by first-match truncation.
+    seeds=list(_positive_seeds(raw))
+    empties=list(_raw_empty_tiles(raw))
+    for crop,qty in seeds:
+        for x,y in empties:
+            target={"crop":crop,"tile":[x,y]}
+            plans.append(ShortPlanCandidate(
+                PLAN_SCHEMA_VERSION,_candidate_id(state,"establish_plant",target),
+                "establish_plant",target,
+                {"observable":"Official World shows target raw tile as a PLANT of the target crop"},
+                (
+                    {"raw_fact":"private.seeds[crop] > 0","crop":crop,"quantity":qty},
+                    {"raw_fact":"farms[player].tiles[y][x] is None","tile":[x,y]},
+                    {"official_condition":"a farmer/hand must be assigned to reach the target tile and PLANT"},
+                ),
+                (
+                    "Action sequence and unit assignment are not generated yet.",
+                    "Plant establishment completes only this ShortPlan; economic recovery is not claimed.",
+                ),
+                (("private","seeds",crop),("farms",p,"tiles",y,x)),
+            ))
 
-    return plans[:3]
+    return plans
