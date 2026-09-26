@@ -67,6 +67,21 @@ def main():
     exit_obs, _ = lenses._exit(snapshot, [e1, e2, e3])
     exit_ok = exit_obs == {"e1": 2, "e2": 2, "e3": 2}
 
+    # The same World target may participate in different immediate
+    # destinations. exit_proximity must dedupe within each destination without
+    # falsely requiring one global observable per target.
+    x1 = candidate("x1", "prepare_for_plant", {"crop": "CARROT", "tile": [0, 0]})
+    x2 = candidate("x2", "establish_plant", {"crop": "CARROT", "tile": [0, 0]})
+    x3 = candidate("x3", "prepare_for_plant", {"crop": "CARROT", "tile": [1, 0]})
+    exit_mixed = lenses.evaluate_lens(
+        "exit_proximity", snapshot, [x1, x2, x3], "x2"
+    )
+    exit_mixed_ok = (
+        exit_mixed["eligible"] is True
+        and exit_mixed["observable_by_candidate"]
+        == {"x1": 2, "x2": 1, "x3": 2}
+    )
+
     body_sha = git_blob_sha("relationship_surface_body_v0.py")
     body_frozen = body_sha == PROMOTED_BODY_BLOB_SHA
 
@@ -84,8 +99,15 @@ def main():
         "frozen_body_unchanged": body_frozen,
         "distinct_object_nearby_no_inflation": nearby_ok,
         "distinct_object_exit_no_inflation": exit_ok,
+        "exit_same_target_different_destination_supported": exit_mixed_ok,
         "single_harness_registry_has_three_lenses_plus_disabled": registry_ok,
-        "passed": all([body_frozen, nearby_ok, exit_ok, registry_ok]),
+        "passed": all([
+            body_frozen,
+            nearby_ok,
+            exit_ok,
+            exit_mixed_ok,
+            registry_ok,
+        ]),
     }
 
     Path("one_shot_view_lens_harness_acceptance_v0.json").write_text(
