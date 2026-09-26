@@ -1,0 +1,40 @@
+name: P1 Paired Transition Packets v1
+
+on:
+  push:
+    branches:
+      - "experiment/p1-paired-transition-packets-v1"
+    paths:
+      - "run_p1_paired_transition_packets_v1.py"
+      - ".github/workflows/p1-paired-transition-packets-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  observe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: kw0809suzuki-oss/relation-flow-agent
+          ref: observer/wr02-value-carry-reanchor-v0-20260925
+          path: selfsrc
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install official Kaggle environments
+        run: python -m pip install -r requirements.txt
+      - name: Fetch pinned Seyamalam opponent
+        run: |
+          mkdir -p opponents
+          curl -fL --retry 3             -o opponents/seyamalam_v21.py             https://raw.githubusercontent.com/Seyamalam/Kaggriculture/8b8c421eb10634c756583ce10c75189f50c83a72/main.py
+      - name: Build validated paired transition packets
+        run: python run_p1_paired_transition_packets_v1.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: p1-paired-transition-packets-v1
+          path: p1_paired_transition_packets_v1.json
