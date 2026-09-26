@@ -1,9 +1,10 @@
-"""ShortPlan -> one-turn ActionBundle projector v1.
+"""ShortPlan -> one-turn ActionBundle projector v2.
 
 Supported ShortPlan kinds:
 - deliver_carried_to_shed
 - realize_shed_stock_sale
 - establish_plant
+- prepare_for_plant
 
 This module executes an explicitly supplied ShortPlan. It does not rank or select
 plans and does not attach economic value to them. Callers must re-run
@@ -15,12 +16,7 @@ from __future__ import annotations
 import copy
 from typing import Any
 
-from plan_generator_entrance_v0 import StateSnapshot, ShortPlanCandidate
-
-
-def _farm(state: StateSnapshot) -> dict[str, Any]:
-    raw = state.raw()
-    return raw["farms"][raw["player"]]
+from plan_generator_entrance_v0 import StateSnapshot, ShortPlanCandidate, generate_plans
 
 
 def _unit_positions(raw: dict[str, Any]) -> list[list[int]]:
@@ -76,8 +72,6 @@ def _set_unit_action(bundle: dict[str, Any], unit_index: int, action: list[Any])
 def _nearest_unit(raw: dict[str, Any], tile: tuple[int, int]) -> int:
     tx, ty = tile
     positions = _unit_positions(raw)
-    # Stable geometry tie-break. This chooses an executor for one explicit Plan;
-    # it does not rank Plan candidates.
     return min(
         range(len(positions)),
         key=lambda i: (abs(positions[i][0] - tx) + abs(positions[i][1] - ty), i),
@@ -85,7 +79,6 @@ def _nearest_unit(raw: dict[str, Any], tile: tuple[int, int]) -> int:
 
 
 def project_short_plan(state: StateSnapshot, plan: ShortPlanCandidate) -> dict[str, Any]:
-    """Project one explicit ShortPlan into exactly one Official action bundle."""
     if not isinstance(state, StateSnapshot):
         raise TypeError("state must be StateSnapshot")
     if not isinstance(plan, ShortPlanCandidate):
@@ -123,6 +116,14 @@ def project_short_plan(state: StateSnapshot, plan: ShortPlanCandidate) -> dict[s
         _set_unit_action(bundle, unit_index, action)
         return bundle
 
+    if plan.kind == "prepare_for_plant":
+        crop = str(plan.target["crop"])
+        missing = int(plan.target["missing_seed_quantity"])
+        if missing <= 0:
+            raise ValueError("prepare_for_plant has no missing seed")
+        bundle["market"] = [["BUY_SEED", crop, missing]]
+        return bundle
+
     raise NotImplementedError(plan.kind)
 
 
@@ -153,6 +154,12 @@ def semantic_plan_match(
             str(plan.target.get("crop")) == str(target["crop"])
             and list(plan.target.get("tile", [])) == list(target["tile"])
         )
+    if kind == "prepare_for_plant":
+        return (
+            str(plan.target.get("crop")) == str(target["crop"])
+            and list(plan.target.get("tile", [])) == list(target["tile"])
+            and int(plan.target.get("missing_seed_quantity", -1)) == int(target["missing_seed_quantity"])
+        )
     return False
 
 
@@ -164,12 +171,22 @@ def semantic_delivery_match(plan: ShortPlanCandidate, unit_index: int, carried_i
     )
 
 
+def _establish_present(post: StateSnapshot, crop: str, tile: list[int]) -> bool:
+    for p in generate_plans(post):
+        if (
+            p.kind == "establish_plant"
+            and str(p.target.get("crop")) == crop
+            and list(p.target.get("tile", [])) == list(tile)
+        ):
+            return True
+    return False
+
+
 def completion_from_states(
     plan: ShortPlanCandidate,
     pre: StateSnapshot,
     post: StateSnapshot,
 ) -> dict[str, Any]:
-    """Observe Plan completion from Official PostState, never from action submission."""
     pre_raw = pre.raw()
     post_raw = post.raw()
 
@@ -250,6 +267,31 @@ def completion_from_states(
             "post_tile": copy.deepcopy(post_tile),
             "pre_seed_quantity": pre_raw["private"].get("seeds", {}).get(crop, 0),
             "post_seed_quantity": post_raw["private"].get("seeds", {}).get(crop, 0),
+        }
+
+    if plan.kind == "prepare_for_plant":
+        crop = str(plan.target["crop"])
+        tile = [int(plan.target["tile"][0]), int(plan.target["tile"][1])]
+        p = pre_raw["player"]
+        pre_seed = pre_raw["private"].get("seeds", {}).get(crop, 0)
+        post_seed = post_raw["private"].get("seeds", {}).get(crop, 0)
+        pre_cash = pre_raw["farms"][p].get("money", 0)
+        post_cash = post_raw["farms"][p].get("money", 0)
+        establish_present = _establish_present(post, crop, tile)
+        complete = bool(establish_present)
+        return {
+            "complete": complete,
+            "status": "complete" if complete else "incomplete",
+            "crop": crop,
+            "tile": tile,
+            "missing_seed_quantity": int(plan.target["missing_seed_quantity"]),
+            "pre_seed_quantity": pre_seed,
+            "post_seed_quantity": post_seed,
+            "seed_gain": post_seed - pre_seed,
+            "pre_cash": pre_cash,
+            "post_cash": post_cash,
+            "cash_delta": post_cash - pre_cash,
+            "target_establish_plan_present": establish_present,
         }
 
     raise NotImplementedError(plan.kind)
