@@ -1,0 +1,41 @@
+name: One-Shot View Lens Fresh20 v0
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fresh20:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    strategy:
+      fail-fast: false
+      matrix:
+        lens:
+          - nearby_density
+          - relationship_age
+          - exit_proximity
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install official Kaggle environments
+        run: python -m pip install -r requirements.txt
+      - name: Fetch pinned Seyamalam opponent
+        run: |
+          mkdir -p opponents
+          curl -fL --retry 3 \
+            -o opponents/seyamalam_v21.py \
+            https://raw.githubusercontent.com/Seyamalam/Kaggriculture/8b8c421eb10634c756583ce10c75189f50c83a72/main.py
+      - name: Run paired Fresh20 reproducibility screen
+        run: python run_one_shot_view_lens_fresh5_v0.py --lens "${{ matrix.lens }}" --seeds 7501,7502,7503,7504,7505,7506,7507,7508,7509,7510,7511,7512,7513,7514,7515,7516,7517,7518,7519,7520
+      - name: Preserve Fresh20 result name
+        run: mv "one_shot_view_lens_fresh5_${{ matrix.lens }}_v0.json" "one_shot_view_lens_fresh20_${{ matrix.lens }}_v0.json"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: one-shot-view-lens-fresh20-${{ matrix.lens }}-v0
+          path: one_shot_view_lens_fresh20_${{ matrix.lens }}_v0.json
