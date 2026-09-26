@@ -222,7 +222,20 @@ def run_policy(mode):
                 active_steps=0
 
         if active is None and selectable:
-            chosen=selectable[rng.randrange(len(selectable))]
+            if mode=="baseline":
+                chosen=plans[rng.randrange(len(plans))]
+                selection_reason="fixed_rng_uniform_over_all_candidates"
+            else:
+                # Coupled rejection sampling: draw from the same full C_t
+                # distribution as Baseline and reject only confirmed BLOCKED.
+                # Therefore the paired runs remain identical until Baseline
+                # actually draws a BLOCKED candidate.
+                while True:
+                    drawn=plans[rng.randrange(len(plans))]
+                    if drawn.candidate_id not in blocked_ids:
+                        chosen=drawn
+                        break
+                selection_reason="coupled_rng_reject_only_confirmed_blocked"
             plan_sequence+=1
             active={
                 "sequence":plan_sequence,
@@ -231,11 +244,6 @@ def run_policy(mode):
             }
             active_steps=0
             selected_counts[chosen.kind]+=1
-            selection_reason=(
-                "fixed_rng_uniform_over_all_candidates"
-                if mode=="baseline"
-                else "fixed_rng_uniform_over_candidates_excluding_confirmed_blocked"
-            )
 
         current_plan=None
         current_status=None
@@ -427,7 +435,7 @@ def main():
         },
         "comparison":{
             "baseline_selection":"uniform RNG over C_t",
-            "p1_selection":"uniform RNG over C_t minus confirmed BLOCKED_t",
+            "p1_selection":"coupled rejection sampling over full C_t; reject only confirmed BLOCKED draws",
             "generator_changed":False,
             "projector_changed":False,
             "completion_changed":False,
