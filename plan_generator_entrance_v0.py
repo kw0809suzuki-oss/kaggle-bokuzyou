@@ -20,7 +20,7 @@ from dataclasses import dataclass
 from typing import Any, Mapping, Sequence
 
 SCHEMA_VERSION="official-state-snapshot-v0"
-PLAN_SCHEMA_VERSION="short-plan-candidate-v2"
+PLAN_SCHEMA_VERSION="short-plan-candidate-v3"
 REQUIRED_TOP_LEVEL=("player","day","hour","farms","private","market","town")
 
 class StateSchemaError(ValueError): pass
@@ -228,6 +228,49 @@ def generate_plans(state:StateSnapshot)->list[ShortPlanCandidate]:
                     "Purchase success and any cash limitation are observed from Official World, not assumed here.",
                 ),
                 (("private","seeds",crop),("farms",p,"tiles",y,x),("farms",p,"money")),
+            ))
+
+    # Targeted plant maintenance only when the raw plant is currently unwatered
+    # and already carries one or more consecutive unwatered days. Under the
+    # Official World daily refresh, another unwatered day crosses the observed
+    # survival boundary at >= 2. This is an explicit PlanGenerator calculation
+    # from raw State; StateSnapshot remains untouched.
+    tiles=raw["farms"][p].get("tiles",[]) or []
+    for y,row in enumerate(tiles):
+        if not isinstance(row,Sequence) or isinstance(row,(str,bytes)):
+            continue
+        for x,tile in enumerate(row):
+            if not (isinstance(tile,Mapping) and tile.get("kind")=="PLANT"):
+                continue
+            crop=str(tile.get("crop"))
+            watered=bool(tile.get("watered_today",False))
+            streak=int(tile.get("consecutive_unwatered",0) or 0)
+            if watered or streak<1:
+                continue
+            target={
+                "crop":crop,
+                "tile":[x,y],
+                "planted_day":int(tile.get("planted_day",raw["day"])),
+                "pre_consecutive_unwatered":streak,
+            }
+            plans.append(ShortPlanCandidate(
+                PLAN_SCHEMA_VERSION,_candidate_id(state,"maintain_plant_today",target),
+                "maintain_plant_today",target,
+                {
+                    "observable":"Official World keeps the target as the same PLANT and sets watered_today true"
+                },
+                (
+                    {"raw_fact":"target tile is the specified PLANT","crop":crop,"tile":[x,y]},
+                    {"raw_fact":"target watered_today is false","tile":[x,y]},
+                    {"raw_fact":"target consecutive_unwatered >= 1","value":streak},
+                    {"official_condition":"without watering, daily refresh increments consecutive_unwatered and converts a plant to WEED at >= 2"},
+                ),
+                (
+                    "This Plan only closes today's observed maintenance condition.",
+                    "Reaching maturity, harvest, sale, and profitability are not claimed.",
+                    "The projector may fail to reach the tile before the day boundary; Official World decides the result.",
+                ),
+                (("farms",p,"tiles",y,x),),
             ))
 
     return plans
