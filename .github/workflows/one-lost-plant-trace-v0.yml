@@ -1,0 +1,36 @@
+name: One Lost Plant Trace v0
+
+on:
+  push:
+    branches:
+      - "experiment/one-lost-plant-trace-v0"
+    paths:
+      - "run_one_lost_plant_trace_v0.py"
+      - ".github/workflows/one-lost-plant-trace-v0.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  observe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install official Kaggle environments
+        run: python -m pip install -r requirements.txt
+      - name: Fetch pinned Seyamalam opponent
+        run: |
+          mkdir -p opponents
+          curl -fL --retry 3             -o opponents/seyamalam_v21.py             https://raw.githubusercontent.com/Seyamalam/Kaggriculture/8b8c421eb10634c756583ce10c75189f50c83a72/main.py
+      - name: Trace one lost plant
+        run: python run_one_lost_plant_trace_v0.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: one-lost-plant-trace-v0
+          path: one_lost_plant_trace_v0.json
