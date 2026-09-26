@@ -1,6 +1,11 @@
 name: One-Shot View Lens Fresh20 v0
 
 on:
+  push:
+    branches:
+      - "experiment/one-shot-view-lens-harness-v0-20260926"
+    paths:
+      - ".github/workflows/one-shot-view-lens-fresh20-v0.yml"
   workflow_dispatch:
 
 permissions:
