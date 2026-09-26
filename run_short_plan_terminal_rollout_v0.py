@@ -285,6 +285,7 @@ def main():
                 "establish_plant",
                 "prepare_for_plant",
                 "maintain_plant_today",
+                "collect_plant_output",
             ],
             "missing_jobs_are_not_filled_ad_hoc":True,
         },
