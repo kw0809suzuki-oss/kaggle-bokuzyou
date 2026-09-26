@@ -1,0 +1,36 @@
+name: Current-World Relationship Surface A/B v0
+
+on:
+  push:
+    branches:
+      - "experiment/current-world-relationship-surface-ab-v0-20260926"
+    paths:
+      - "run_current_world_relationship_surface_ab_v0.py"
+      - ".github/workflows/current-world-relationship-surface-ab-v0.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  experiment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install official Kaggle environments
+        run: python -m pip install -r requirements.txt
+      - name: Fetch pinned Seyamalam opponent
+        run: |
+          mkdir -p opponents
+          curl -fL --retry 3             -o opponents/seyamalam_v21.py             https://raw.githubusercontent.com/Seyamalam/Kaggriculture/8b8c421eb10634c756583ce10c75189f50c83a72/main.py
+      - name: Run Current-World Relationship Surface A/B v0
+        run: python run_current_world_relationship_surface_ab_v0.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: current-world-relationship-surface-ab-v0
+          path: current_world_relationship_surface_ab_v0.json
