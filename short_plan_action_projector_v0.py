@@ -124,6 +124,15 @@ def project_short_plan(state: StateSnapshot, plan: ShortPlanCandidate) -> dict[s
         bundle["market"] = [["BUY_SEED", crop, missing]]
         return bundle
 
+    if plan.kind == "maintain_plant_today":
+        crop = str(plan.target["crop"])
+        x, y = (int(plan.target["tile"][0]), int(plan.target["tile"][1]))
+        unit_index = _nearest_unit(raw, (x, y))
+        pos = _unit_position(raw, unit_index)
+        action = ["WATER"] if tuple(pos) == (x, y) else _move_toward(pos, (x, y))
+        _set_unit_action(bundle, unit_index, action)
+        return bundle
+
     raise NotImplementedError(plan.kind)
 
 
@@ -159,6 +168,12 @@ def semantic_plan_match(
             str(plan.target.get("crop")) == str(target["crop"])
             and list(plan.target.get("tile", [])) == list(target["tile"])
             and int(plan.target.get("missing_seed_quantity", -1)) == int(target["missing_seed_quantity"])
+        )
+    if kind == "maintain_plant_today":
+        return (
+            str(plan.target.get("crop")) == str(target["crop"])
+            and list(plan.target.get("tile", [])) == list(target["tile"])
+            and int(plan.target.get("planted_day", -1)) == int(target["planted_day"])
         )
     return False
 
@@ -292,6 +307,33 @@ def completion_from_states(
             "post_cash": post_cash,
             "cash_delta": post_cash - pre_cash,
             "target_establish_plan_present": establish_present,
+        }
+
+    if plan.kind == "maintain_plant_today":
+        crop = str(plan.target["crop"])
+        x, y = (int(plan.target["tile"][0]), int(plan.target["tile"][1]))
+        p = pre_raw["player"]
+        pre_tile = pre_raw["farms"][p]["tiles"][y][x]
+        post_tile = post_raw["farms"][p]["tiles"][y][x]
+        same_plant = (
+            isinstance(post_tile, dict)
+            and post_tile.get("kind") == "PLANT"
+            and post_tile.get("crop") == crop
+            and int(post_tile.get("planted_day", -1)) == int(plan.target["planted_day"])
+        )
+        watered = bool(post_tile.get("watered_today", False)) if isinstance(post_tile, dict) else False
+        complete = same_plant and watered
+        return {
+            "complete": complete,
+            "status": "complete" if complete else "in_progress",
+            "crop": crop,
+            "tile": [x, y],
+            "pre_tile": copy.deepcopy(pre_tile),
+            "post_tile": copy.deepcopy(post_tile),
+            "post_watered_today": watered,
+            "post_consecutive_unwatered": (
+                post_tile.get("consecutive_unwatered") if isinstance(post_tile, dict) else None
+            ),
         }
 
     raise NotImplementedError(plan.kind)
