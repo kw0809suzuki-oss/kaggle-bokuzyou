@@ -78,6 +78,14 @@ def _nearest_unit(raw: dict[str, Any], tile: tuple[int, int]) -> int:
     )
 
 
+def _owned_crop_quantity(raw: dict[str, Any], crop: str) -> int:
+    total = int((raw["private"].get("shed", {}) or {}).get(crop, 0) or 0)
+    for inv in (raw["private"].get("inventories", []) or []):
+        if isinstance(inv, dict):
+            total += int(inv.get(crop, 0) or 0)
+    return total
+
+
 def project_short_plan(state: StateSnapshot, plan: ShortPlanCandidate) -> dict[str, Any]:
     if not isinstance(state, StateSnapshot):
         raise TypeError("state must be StateSnapshot")
@@ -133,6 +141,14 @@ def project_short_plan(state: StateSnapshot, plan: ShortPlanCandidate) -> dict[s
         _set_unit_action(bundle, unit_index, action)
         return bundle
 
+    if plan.kind == "collect_plant_output":
+        x, y = (int(plan.target["tile"][0]), int(plan.target["tile"][1]))
+        unit_index = _nearest_unit(raw, (x, y))
+        pos = _unit_position(raw, unit_index)
+        action = ["HARVEST"] if tuple(pos) == (x, y) else _move_toward(pos, (x, y))
+        _set_unit_action(bundle, unit_index, action)
+        return bundle
+
     raise NotImplementedError(plan.kind)
 
 
@@ -170,6 +186,12 @@ def semantic_plan_match(
             and int(plan.target.get("missing_seed_quantity", -1)) == int(target["missing_seed_quantity"])
         )
     if kind == "maintain_plant_today":
+        return (
+            str(plan.target.get("crop")) == str(target["crop"])
+            and list(plan.target.get("tile", [])) == list(target["tile"])
+            and int(plan.target.get("planted_day", -1)) == int(target["planted_day"])
+        )
+    if kind == "collect_plant_output":
         return (
             str(plan.target.get("crop")) == str(target["crop"])
             and list(plan.target.get("tile", [])) == list(target["tile"])
@@ -334,6 +356,34 @@ def completion_from_states(
             "post_consecutive_unwatered": (
                 post_tile.get("consecutive_unwatered") if isinstance(post_tile, dict) else None
             ),
+        }
+
+    if plan.kind == "collect_plant_output":
+        crop = str(plan.target["crop"])
+        x, y = (int(plan.target["tile"][0]), int(plan.target["tile"][1]))
+        p = pre_raw["player"]
+        pre_tile = pre_raw["farms"][p]["tiles"][y][x]
+        post_tile = post_raw["farms"][p]["tiles"][y][x]
+        pre_yield = int(pre_tile.get("yield_units", 0) or 0) if isinstance(pre_tile, dict) else 0
+        post_yield = int(post_tile.get("yield_units", 0) or 0) if isinstance(post_tile, dict) else 0
+        pre_owned = _owned_crop_quantity(pre_raw, crop)
+        post_owned = _owned_crop_quantity(post_raw, crop)
+        output_gain = post_owned - pre_owned
+        yield_removed = max(0, pre_yield - post_yield)
+        complete = pre_yield > 0 and yield_removed > 0 and output_gain >= yield_removed
+        return {
+            "complete": complete,
+            "status": "complete" if complete else "in_progress",
+            "crop": crop,
+            "tile": [x, y],
+            "pre_tile": copy.deepcopy(pre_tile),
+            "post_tile": copy.deepcopy(post_tile),
+            "pre_yield_units": pre_yield,
+            "post_yield_units": post_yield,
+            "yield_removed": yield_removed,
+            "pre_owned_quantity": pre_owned,
+            "post_owned_quantity": post_owned,
+            "owned_output_gain": output_gain,
         }
 
     raise NotImplementedError(plan.kind)
