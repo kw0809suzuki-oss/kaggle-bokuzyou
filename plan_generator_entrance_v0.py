@@ -22,7 +22,7 @@ from typing import Any, Mapping, Sequence
 from kaggle_environments.envs.kaggriculture.kaggriculture import CROPS
 
 SCHEMA_VERSION="official-state-snapshot-v0"
-PLAN_SCHEMA_VERSION="short-plan-candidate-v4"
+PLAN_SCHEMA_VERSION="short-plan-candidate-v5"
 REQUIRED_TOP_LEVEL=("player","day","hour","farms","private","market","town")
 
 class StateSchemaError(ValueError): pass
@@ -318,5 +318,45 @@ def generate_plans(state:StateSnapshot)->list[ShortPlanCandidate]:
                 ),
                 (("farms",p,"tiles",y,x),),
             ))
+
+    # Observed stop-state surface reuse job.
+    # Only create this job when a concrete downstream establish_plant(crop,tile)
+    # would become possible immediately after the WEED is removed:
+    # - the tile is currently WEED
+    # - the target crop seed is already present (> 0)
+    #
+    # This keeps the candidate tied to a specific next job and avoids clearing
+    # arbitrary WEED when no target planting input exists yet.
+    for crop,qty in seed_rows:
+        if qty<=0:
+            continue
+        for y,row in enumerate(tiles):
+            if not isinstance(row,Sequence) or isinstance(row,(str,bytes)):
+                continue
+            for x,tile in enumerate(row):
+                if not (isinstance(tile,Mapping) and tile.get("kind")=="WEED"):
+                    continue
+                target={
+                    "crop":crop,
+                    "tile":[x,y],
+                    "available_seed_quantity":int(qty),
+                }
+                plans.append(ShortPlanCandidate(
+                    PLAN_SCHEMA_VERSION,_candidate_id(state,"prepare_surface_for_plant",target),
+                    "prepare_surface_for_plant",target,
+                    {
+                        "observable":"Official World makes the target tile empty and the exact establish_plant(crop,tile) candidate becomes present"
+                    },
+                    (
+                        {"raw_fact":"target tile is WEED","tile":[x,y]},
+                        {"raw_fact":"private.seeds[crop] > 0","crop":crop,"quantity":int(qty)},
+                        {"official_condition":"a farmer/hand must reach the target tile and remove the WEED"},
+                    ),
+                    (
+                        "This job only reopens one observed surface for one already-seeded planting job.",
+                        "It does not claim that planting, yield, sale, or profit will follow.",
+                    ),
+                    (("farms",p,"tiles",y,x),("private","seeds",crop)),
+                ))
 
     return plans
