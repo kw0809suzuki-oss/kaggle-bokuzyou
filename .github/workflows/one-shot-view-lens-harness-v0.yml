@@ -1,0 +1,73 @@
+name: One-Shot View Lens Harness v0
+
+on:
+  push:
+    branches:
+      - "experiment/one-shot-view-lens-harness-v0-20260926"
+    paths:
+      - "one_shot_view_lenses_v0.py"
+      - "one_shot_view_lens_harness_v0.py"
+      - "run_one_shot_view_lens_acceptance_v0.py"
+      - "run_one_shot_view_lens_fresh5_v0.py"
+      - ".github/workflows/one-shot-view-lens-harness-v0.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install official Kaggle environments
+        run: python -m pip install -r requirements.txt
+      - name: Fetch pinned Seyamalam opponent
+        run: |
+          mkdir -p opponents
+          curl -fL --retry 3             -o opponents/seyamalam_v21.py             https://raw.githubusercontent.com/Seyamalam/Kaggriculture/8b8c421eb10634c756583ce10c75189f50c83a72/main.py
+      - name: Check frozen Body and distinct-object invariants
+        run: python run_one_shot_view_lens_acceptance_v0.py
+      - name: Verify Lens-disabled exact parity
+        run: python run_one_shot_view_lens_fresh5_v0.py --lens disabled --seeds 7399
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: one-shot-view-lens-acceptance-v0
+          path: |
+            one_shot_view_lens_harness_acceptance_v0.json
+            one_shot_view_lens_fresh5_disabled_v0.json
+
+  fresh5:
+    needs: acceptance
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        lens:
+          - nearby_density
+          - relationship_age
+          - exit_proximity
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install official Kaggle environments
+        run: python -m pip install -r requirements.txt
+      - name: Fetch pinned Seyamalam opponent
+        run: |
+          mkdir -p opponents
+          curl -fL --retry 3             -o opponents/seyamalam_v21.py             https://raw.githubusercontent.com/Seyamalam/Kaggriculture/8b8c421eb10634c756583ce10c75189f50c83a72/main.py
+      - name: Run paired Fresh5 World-contact screen
+        run: python run_one_shot_view_lens_fresh5_v0.py --lens "${{ matrix.lens }}" --seeds 7401,7402,7403,7404,7405
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: one-shot-view-lens-fresh5-${{ matrix.lens }}-v0
+          path: one_shot_view_lens_fresh5_${{ matrix.lens }}_v0.json
