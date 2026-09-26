@@ -1,0 +1,42 @@
+name: Deliver Plan Minimal Loop v0
+
+on:
+  push:
+    branches:
+      - "experiment/deliver-plan-loop-v0"
+    paths:
+      - "plan_generator_entrance_v0.py"
+      - "short_plan_action_projector_v0.py"
+      - "run_deliver_plan_minimal_loop_v0.py"
+      - ".github/workflows/deliver-plan-minimal-loop-v0.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: kw0809suzuki-oss/relation-flow-agent
+          ref: observer/wr02-value-carry-reanchor-v0-20260925
+          path: selfsrc
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install official Kaggle environments
+        run: python -m pip install -r requirements.txt
+      - name: Fetch pinned Seyamalam opponent
+        run: |
+          mkdir -p opponents
+          curl -fL --retry 3             -o opponents/seyamalam_v21.py             https://raw.githubusercontent.com/Seyamalam/Kaggriculture/8b8c421eb10634c756583ce10c75189f50c83a72/main.py
+      - name: Run deliver minimal loop
+        run: python run_deliver_plan_minimal_loop_v0.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: deliver-plan-minimal-loop-v0
+          path: deliver_plan_minimal_loop_v0.json
