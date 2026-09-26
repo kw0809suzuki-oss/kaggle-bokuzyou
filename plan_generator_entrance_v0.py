@@ -1,4 +1,4 @@
-"""Plan Generator entrance + explicit ShortPlan candidate space v1.
+"""Plan Generator entrance + explicit ShortPlan candidate space v2.
 
 OfficialState -> StateSnapshot -> generate_plans(state)
 
@@ -8,6 +8,8 @@ Rules:
 - It does not score, rank, select, truncate, or project ActionBundles.
 - Enumeration order is only deterministic serialization; every matching
   candidate is returned.
+- prepare_for_plant is a targeted prerequisite job: it exists only when the
+  specified establish_plant(crop,tile) lacks its required seed input.
 - No economic derived fields (productive_tiles / occupied_capacity /
   empty_capacity) are introduced here.
 """
@@ -18,7 +20,7 @@ from dataclasses import dataclass
 from typing import Any, Mapping, Sequence
 
 SCHEMA_VERSION="official-state-snapshot-v0"
-PLAN_SCHEMA_VERSION="short-plan-candidate-v1"
+PLAN_SCHEMA_VERSION="short-plan-candidate-v2"
 REQUIRED_TOP_LEVEL=("player","day","hour","farms","private","market","town")
 
 class StateSchemaError(ValueError): pass
@@ -122,11 +124,12 @@ def _raw_empty_tiles(raw):
         for x,tile in enumerate(row):
             if tile is None: yield x,y
 
-def _positive_seeds(raw):
+def _seed_rows(raw):
     seeds=raw["private"].get("seeds",{}) or {}
     for crop in sorted(seeds):
         q=seeds.get(crop,0)
-        if isinstance(q,(int,float)) and q>0: yield crop,q
+        if isinstance(q,(int,float)):
+            yield crop,q
 
 def generate_plans(state:StateSnapshot)->list[ShortPlanCandidate]:
     if not isinstance(state,StateSnapshot): raise TypeError("generate_plans expects StateSnapshot")
@@ -144,7 +147,7 @@ def generate_plans(state:StateSnapshot)->list[ShortPlanCandidate]:
                 {"official_condition":"unit must reach a shed-access position before DROP can realize"},
             ),
             (
-                "Action sequence and routing are not generated yet.",
+                "Action sequence and routing are generated only by the projector.",
                 "Realized transfer remains an Official World result.",
             ),
             (("private","inventories",unit_index),),
@@ -169,11 +172,12 @@ def generate_plans(state:StateSnapshot)->list[ShortPlanCandidate]:
             (("private","shed",item),("market","prices",item),("farms",p,"money")),
         ))
 
-    # Every (positive seed crop, raw None tile) pair remains visible.
-    # No crop/tile is hidden by first-match truncation.
-    seeds=list(_positive_seeds(raw))
     empties=list(_raw_empty_tiles(raw))
-    for crop,qty in seeds:
+    seed_rows=list(_seed_rows(raw))
+
+    # Existing seed + raw empty tile -> establish_plant.
+    for crop,qty in seed_rows:
+        if qty<=0: continue
         for x,y in empties:
             target={"crop":crop,"tile":[x,y]}
             plans.append(ShortPlanCandidate(
@@ -186,10 +190,44 @@ def generate_plans(state:StateSnapshot)->list[ShortPlanCandidate]:
                     {"official_condition":"a farmer/hand must be assigned to reach the target tile and PLANT"},
                 ),
                 (
-                    "Action sequence and unit assignment are not generated yet.",
                     "Plant establishment completes only this ShortPlan; economic recovery is not claimed.",
                 ),
                 (("private","seeds",crop),("farms",p,"tiles",y,x)),
+            ))
+
+    # Missing seed for a specific future establish_plant(crop,tile) -> targeted preparation.
+    # required seed quantity is exactly one for one target planting job.
+    for crop,current_qty in seed_rows:
+        required=1
+        missing=max(0,required-int(current_qty))
+        if missing<=0:
+            continue
+        for x,y in empties:
+            target={
+                "crop":crop,
+                "tile":[x,y],
+                "required_seed_quantity":required,
+                "current_seed_quantity":int(current_qty),
+                "missing_seed_quantity":missing,
+            }
+            plans.append(ShortPlanCandidate(
+                PLAN_SCHEMA_VERSION,_candidate_id(state,"prepare_for_plant",target),
+                "prepare_for_plant",target,
+                {
+                    "observable":"the exact establish_plant(crop,tile) candidate becomes present after Official World processing"
+                },
+                (
+                    {"raw_fact":"farms[player].tiles[y][x] is None","tile":[x,y]},
+                    {"raw_fact":"private.seeds[crop] is below one required seed","crop":crop,
+                     "current_quantity":int(current_qty),"required_quantity":required,
+                     "missing_quantity":missing},
+                    {"official_condition":"BUY_SEED must realize in Official World"},
+                ),
+                (
+                    "This preparation does not claim that planting succeeds.",
+                    "Purchase success and any cash limitation are observed from Official World, not assumed here.",
+                ),
+                (("private","seeds",crop),("farms",p,"tiles",y,x),("farms",p,"money")),
             ))
 
     return plans
