@@ -156,17 +156,32 @@ def evaluate_lens(lens_name, snapshot, candidates, baseline_selected_candidate_i
     else:
         obs, meta = _exit(snapshot, candidates)
 
-    values_by_target = {}
-    ids_by_target = defaultdict(list)
+    # Distinct counting and distinct selection subjects are not identical
+    # for every lens. nearby/age observe one World target. exit observes the
+    # relation (World target -> immediate destination). Candidate multiplicity
+    # with the same relation is still collapsed, while the same target may
+    # legitimately have different exit observables for different destinations.
+    values_by_subject = {}
+    ids_by_subject = defaultdict(list)
+    subject_by_candidate = {}
     for c in candidates:
         value = obs.get(c.candidate_id)
-        key = target_key(c)
-        if value is None or key is None:
+        target = target_key(c)
+        if value is None or target is None:
             continue
-        if key in values_by_target and values_by_target[key] != value:
-            raise LensIntegrityError("inconsistent observable for distinct target")
-        values_by_target[key] = value
-        ids_by_target[key].append(c.candidate_id)
+        if lens_name == "exit_proximity":
+            destination = _destination(c)
+            if destination is None:
+                continue
+            subject = ("target_destination", target, destination)
+        else:
+            subject = ("target", target)
+
+        subject_by_candidate[c.candidate_id] = subject
+        if subject in values_by_subject and values_by_subject[subject] != value:
+            raise LensIntegrityError("inconsistent observable for distinct lens subject")
+        values_by_subject[subject] = value
+        ids_by_subject[subject].append(c.candidate_id)
 
     base = {
         "lens_name": lens_name,
@@ -174,28 +189,29 @@ def evaluate_lens(lens_name, snapshot, candidates, baseline_selected_candidate_i
         "observable_by_candidate": obs,
         "metadata": meta,
     }
-    if len(values_by_target) < 2:
-        return {**base, "eligible": False, "reason": "fewer_than_two_distinct_targets", "selected_candidate_id": None}
+    if len(values_by_subject) < 2:
+        return {**base, "eligible": False, "reason": "fewer_than_two_distinct_subjects", "selected_candidate_id": None}
 
-    lo = min(values_by_target.values())
-    hi = max(values_by_target.values())
+    lo = min(values_by_subject.values())
+    hi = max(values_by_subject.values())
     if lo == hi:
         return {**base, "eligible": False, "reason": "no_observable_variation", "selected_candidate_id": None}
 
-    max_targets = {k for k, v in values_by_target.items() if v == hi}
-    baseline_target = target_key(baseline)
-    if baseline_target in max_targets:
-        return {**base, "eligible": False, "reason": "baseline_target_already_at_maximum", "selected_candidate_id": None}
+    max_subjects = {k for k, v in values_by_subject.items() if v == hi}
+    baseline_subject = subject_by_candidate.get(baseline.candidate_id)
+    if baseline_subject in max_subjects:
+        return {**base, "eligible": False, "reason": "baseline_subject_already_at_maximum", "selected_candidate_id": None}
 
-    selected_target = sorted(max_targets, key=_stable)[0]
-    selected_id = sorted(ids_by_target[selected_target])[0]
+    selected_subject = sorted(max_subjects, key=_stable)[0]
+    selected_id = sorted(ids_by_subject[selected_subject])[0]
+    selected_target = target_key(by_id[selected_id])
     return {
         **base,
         "eligible": True,
         "reason": "distinct_observable_replacement_available",
         "selected_candidate_id": selected_id,
         "selected_target": list(selected_target),
-        "baseline_target": list(baseline_target) if baseline_target is not None else None,
+        "baseline_target": list(target_key(baseline)) if target_key(baseline) is not None else None,
         "min_observable": lo,
         "max_observable": hi,
     }
