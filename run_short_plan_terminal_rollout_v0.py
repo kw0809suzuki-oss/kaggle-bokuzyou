@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""One full-season rollout of the current ShortPlan machine after adding targeted preparation.
+"""One full-season rollout of the current ShortPlan machine after adding plant maintenance.
 
 This is deliberately NOT a strength test. Selection is an explicit provisional
 policy:
@@ -284,6 +284,7 @@ def main():
                 "realize_shed_stock_sale",
                 "establish_plant",
                 "prepare_for_plant",
+                "maintain_plant_today",
             ],
             "missing_jobs_are_not_filled_ad_hoc":True,
         },
