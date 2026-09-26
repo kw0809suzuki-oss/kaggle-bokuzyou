@@ -1,0 +1,38 @@
+name: Yield To Cash Terminal Rerun v0
+
+on:
+  push:
+    branches:
+      - "experiment/yield-to-cash-rerun-v0"
+    paths:
+      - "plan_generator_entrance_v0.py"
+      - "short_plan_action_projector_v0.py"
+      - "run_short_plan_terminal_rollout_v0.py"
+      - ".github/workflows/yield-to-cash-terminal-rerun-v0.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  rollout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install official Kaggle environments
+        run: python -m pip install -r requirements.txt
+      - name: Fetch pinned Seyamalam opponent
+        run: |
+          mkdir -p opponents
+          curl -fL --retry 3             -o opponents/seyamalam_v21.py             https://raw.githubusercontent.com/Seyamalam/Kaggriculture/8b8c421eb10634c756583ce10c75189f50c83a72/main.py
+      - name: Run terminal rollout with output collection
+        run: python run_short_plan_terminal_rollout_v0.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: short-plan-terminal-rollout-yield-to-cash-v0
+          path: short_plan_terminal_rollout_v0.json
