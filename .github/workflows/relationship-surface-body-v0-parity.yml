@@ -1,0 +1,37 @@
+name: Relationship Surface Body v0 Parity
+
+on:
+  push:
+    branches:
+      - "body/relationship-surface-v0-20260926"
+    paths:
+      - "relationship_surface_body_v0.py"
+      - "run_relationship_surface_body_v0_parity.py"
+      - ".github/workflows/relationship-surface-body-v0-parity.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  parity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install official Kaggle environments
+        run: python -m pip install -r requirements.txt
+      - name: Fetch pinned Seyamalam opponent
+        run: |
+          mkdir -p opponents
+          curl -fL --retry 3             -o opponents/seyamalam_v21.py             https://raw.githubusercontent.com/Seyamalam/Kaggriculture/8b8c421eb10634c756583ce10c75189f50c83a72/main.py
+      - name: Verify standalone Body parity
+        run: python run_relationship_surface_body_v0_parity.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: relationship-surface-body-v0-parity
+          path: relationship_surface_body_v0_parity.json
