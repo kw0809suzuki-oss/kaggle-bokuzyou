@@ -1,0 +1,36 @@
+{
+  "schema": "seyamalam-v19-v21-holdout-v0",
+  "purpose": "Check whether the V19 self-terminal advantage observed on tuning seeds persists on untouched holdout seeds.",
+  "fixed": {
+    "source_commit": "8b8c421eb10634c756583ce10c75189f50c83a72",
+    "official_commit": "d7729da06cc1382eb742d6980dc3180aa85caa28",
+    "self_candidates": [
+      "candidate_v19_wool_floor.py",
+      "candidate_v21_capital_latch.py"
+    ],
+    "opponent": "main.py V21 from the same pinned Seyamalam commit",
+    "seat": "self seat 0",
+    "seeds": [
+      92801201,
+      92801202,
+      92801203,
+      92801204,
+      92801205
+    ]
+  },
+  "primary_judgment": {
+    "metric": "mean terminal self difference, V19 minus V21, on holdout seeds only",
+    "keep_for_next_validation_if": "mean difference > 0",
+    "do_not_mix_with_tuning": true
+  },
+  "secondary_report": [
+    "median difference",
+    "improved/equal/worse count",
+    "worst difference"
+  ],
+  "restrictions": [
+    "Do not modify V19 or V21.",
+    "Do not substitute failed seeds.",
+    "Do not use tuning results in the holdout judgment."
+  ]
+}
