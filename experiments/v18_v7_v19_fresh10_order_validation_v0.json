@@ -1,0 +1,44 @@
+{
+  "schema": "v18-v7-v19-fresh10-order-validation-v0",
+  "purpose": "Test on the same fresh unused seeds whether broad added recovery selling < no added recovery selling < selective added recovery selling in terminal self.",
+  "evidence_status": "fresh_validation",
+  "fixed": {
+    "seeds": [
+      92801501,
+      92801502,
+      92801503,
+      92801504,
+      92801505,
+      92801506,
+      92801507,
+      92801508,
+      92801509,
+      92801510
+    ],
+    "source_commit": "8b8c421eb10634c756583ce10c75189f50c83a72",
+    "v18_commit": "69c64aebfba7cf54287fb9a58f06ce1b0eff06e4",
+    "official_commit": "d7729da06cc1382eb742d6980dc3180aa85caa28",
+    "opponent": "main.py V21 at source_commit",
+    "seat": "self seat 0"
+  },
+  "primary_judgment": {
+    "support_order_if": [
+      "mean(V7 - V18) > 0",
+      "mean(V19 - V7) > 0"
+    ],
+    "target_order": "V19 > V7 > V18 by mean terminal self"
+  },
+  "secondary_report": [
+    "mean terminal self for V18 V7 V19",
+    "median pairwise differences",
+    "per-seed ordering",
+    "improved/tied/worse counts for V7-V18 and V19-V7",
+    "minimum and maximum pairwise differences"
+  ],
+  "restrictions": [
+    "Do not modify V18, V7, or V19.",
+    "Do not substitute failed seeds.",
+    "Do not mix prior seed sets into this primary judgment.",
+    "Do not infer a general law from this ten-seed validation alone."
+  ]
+}
