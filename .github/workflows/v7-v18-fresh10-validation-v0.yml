@@ -1,0 +1,56 @@
+name: V7 V18 Fresh10 Validation v0
+
+on:
+  push:
+    branches:
+      - "experiment/seyamalam-imitation-v0-20260927"
+    paths:
+      - "run_v7_v18_fresh10_validation_v0.py"
+      - "experiments/v7_v18_fresh10_validation_v0.json"
+      - ".github/workflows/v7-v18-fresh10-validation-v0.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pair:
+    strategy:
+      fail-fast: false
+      matrix:
+        seed: [92801301, 92801302, 92801303, 92801304, 92801305, 92801306, 92801307, 92801308, 92801309, 92801310]
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      SEED: ${{ matrix.seed }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install pinned Official Kaggriculture environment
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "git+https://github.com/Kaggle/kaggle-environments.git@d7729da06cc1382eb742d6980dc3180aa85caa28"
+
+      - name: Fetch exact V7, V18, and V21 opponent
+        run: |
+          mkdir -p teacher_candidates
+          base=https://raw.githubusercontent.com/Seyamalam/Kaggriculture/8b8c421eb10634c756583ce10c75189f50c83a72
+          curl -fL --retry 3 -o teacher_candidates/candidate_v7_public_v18.py "$base/agents/candidate_v7_public_v18.py"
+          curl -fL --retry 3 -o teacher_candidates/main_v21.py "$base/main.py"
+          curl -fL --retry 3             -o teacher_candidates/v18_release_main.py             https://raw.githubusercontent.com/Seyamalam/Kaggriculture/69c64aebfba7cf54287fb9a58f06ce1b0eff06e4/main.py
+          echo "3068347896710078b93f705cd2f46986033d7132fa426e68bd8cfb93756fb436  teacher_candidates/v18_release_main.py" | sha256sum -c -
+
+      - name: Run fresh V7 V18 pair
+        run: |
+          python run_v7_v18_fresh10_validation_v0.py
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v7-v18-fresh10-seed-${{ matrix.seed }}
+          path: v7_v18_fresh10_seed${{ matrix.seed }}.json
+          if-no-files-found: warn
