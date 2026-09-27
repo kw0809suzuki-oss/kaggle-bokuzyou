@@ -1,0 +1,52 @@
+{
+  "mode": "paired_terminal",
+  "seed": 92801101,
+  "turns": 719,
+  "baseline": {
+    "starting_money": 3000,
+    "terminal_self": 437,
+    "self_growth_from_start": -2563
+  },
+  "candidate": {
+    "starting_money": 3000,
+    "terminal_self": 4090,
+    "self_growth_from_start": 1090,
+    "summary": {
+      "crop": "WHEAT",
+      "target_tile": [
+        4,
+        4
+      ],
+      "max_active_plants": 1,
+      "harvest_age_days": 4,
+      "parallel_market": true,
+      "counters": {
+        "buy_seed_orders": 7,
+        "plant_actions": 7,
+        "water_actions": 35,
+        "harvest_actions": 7,
+        "drop_actions": 7,
+        "sell_orders": 7,
+        "cash_return_events": 7,
+        "realized_sold_units_observed": 28,
+        "abandon_unreachable_turns": 0,
+        "start_rejected_price": 0,
+        "start_rejected_time": 44
+      }
+    }
+  },
+  "delta_terminal_self": 3653,
+  "ran_to_terminal": true,
+  "provenance": {
+    "experiment_commit": "5278b25325d119ed71372c137e418d4a17fb37b2",
+    "baseline_commit": "b29f8b849e65ab56790f0e2352df0863b736752a",
+    "official_commit": "d7729da06cc1382eb742d6980dc3180aa85caa28",
+    "opponent_commit": "8b8c421eb10634c756583ce10c75189f50c83a72",
+    "kaggle_environments_version": "1.32.7",
+    "spec_file": "cash_return_wheat_v0_spec.json",
+    "seed_group": "tuning",
+    "shard_index": 0,
+    "shard_count": 1,
+    "completed_at_utc": "2026-09-27T03:26:42.708943+00:00"
+  }
+}
