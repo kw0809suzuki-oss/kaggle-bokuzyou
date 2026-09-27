@@ -1,0 +1,35 @@
+{
+  "experiment_id": "cash-return-wheat-v0",
+  "group": "tuning",
+  "shard_index": 0,
+  "shard_count": 1,
+  "requested_seeds": [
+    92801101
+  ],
+  "completed_seeds": [
+    92801101
+  ],
+  "aggregate": {
+    "pairs_completed": 1,
+    "improved_vs_baseline": 1,
+    "worse_vs_baseline": 0,
+    "same_vs_baseline": 0,
+    "mean_delta_terminal_self": 3653,
+    "median_delta_terminal_self": 3653,
+    "mean_candidate_growth_from_start": 1090,
+    "all_candidate_growth_positive": true,
+    "promotion_decision": null
+  },
+  "provenance": {
+    "experiment_commit": "5278b25325d119ed71372c137e418d4a17fb37b2",
+    "baseline_commit": "b29f8b849e65ab56790f0e2352df0863b736752a",
+    "official_commit": "d7729da06cc1382eb742d6980dc3180aa85caa28",
+    "opponent_commit": "8b8c421eb10634c756583ce10c75189f50c83a72",
+    "kaggle_environments_version": "1.32.7",
+    "spec_file": "cash_return_wheat_v0_spec.json",
+    "seed_group": "tuning",
+    "shard_index": 0,
+    "shard_count": 1,
+    "completed_at_utc": "2026-09-27T03:26:42.708943+00:00"
+  }
+}
