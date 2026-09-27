@@ -1,0 +1,50 @@
+name: Astra Flow Three-Model Observation v0
+
+on:
+  push:
+    branches:
+      - "experiment/astra-flow-three-model-observation-v0-20260927"
+    paths:
+      - "astra_flow_terminal_model_v1.py"
+      - "experiments/astra_flow_three_model_observation_v0.json"
+      - "run_astra_flow_three_model_observation_v0.py"
+      - ".github/workflows/astra-flow-three-model-observation-v0.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  observe:
+    strategy:
+      fail-fast: false
+      matrix:
+        seed: [92801601, 92801602, 92801603]
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      SEED: ${{ matrix.seed }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install pinned Official Kaggriculture environment
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "git+https://github.com/Kaggle/kaggle-environments.git@d7729da06cc1382eb742d6980dc3180aa85caa28"
+
+      - name: Run three-model observation with full logs
+        run: |
+          python run_astra_flow_three_model_observation_v0.py
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: astra-flow-three-model-seed-${{ matrix.seed }}
+          path: |
+            astra_flow_three_model_seed${{ matrix.seed }}.json.gz
+            astra_flow_three_model_seed${{ matrix.seed }}_summary.json
+          if-no-files-found: warn
