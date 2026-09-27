@@ -1,0 +1,28 @@
+{
+  "schema": "astra-flow-independent-distilled-v0-validation",
+  "purpose": "Check source-trace parity and observe whether the teacher-free distilled action program retains strength on fresh seeds.",
+  "fixed": {
+    "source_seed": 92801601,
+    "fresh_seeds": [
+      92801701,
+      92801702,
+      92801703
+    ],
+    "independent_commit": "eff2cf1ae6eb03809d215248f9b05b79a2b4dfe9",
+    "source_v0_commit": "55c043e034c68568a6398b11cc126e7802e5bb15",
+    "frozen_commit": "b29f8b849e65ab56790f0e2352df0863b736752a",
+    "official_commit": "d7729da06cc1382eb742d6980dc3180aa85caa28",
+    "opponent": "pinned Seyamalam V21 already vendored on branch",
+    "seat": "self seat 0"
+  },
+  "observe": [
+    "terminal self for independent, v0, frozen",
+    "first independent-v0 self-action mismatch",
+    "source-seed full action parity",
+    "719-turn completion"
+  ],
+  "restrictions": [
+    "Do not tune from these results in the same run.",
+    "Do not modify the distilled action program during validation."
+  ]
+}
