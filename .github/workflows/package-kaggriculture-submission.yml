@@ -1,0 +1,45 @@
+name: Package Kaggriculture submission
+
+on:
+  push:
+    branches:
+      - submission/package-relationship-surface-v0-20260927
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create Kaggriculture entry point
+        run: |
+          printf 'from relationship_surface_body_v0 import agent\n' > main.py
+
+      - name: Verify Python syntax
+        run: |
+          python -m py_compile \
+            main.py \
+            relationship_surface_body_v0.py \
+            current_world_relationship_lens_v0.py \
+            plan_generator_entrance_v0.py \
+            short_plan_action_projector_v0.py
+
+      - name: Build submission archive
+        run: |
+          tar -czf submission.tar.gz \
+            main.py \
+            relationship_surface_body_v0.py \
+            current_world_relationship_lens_v0.py \
+            plan_generator_entrance_v0.py \
+            short_plan_action_projector_v0.py
+          echo "Archive contents:"
+          tar -tzf submission.tar.gz
+          echo "SHA256:"
+          sha256sum submission.tar.gz
+
+      - name: Upload submission archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: kaggriculture-submission-relationship-surface-v0
+          path: submission.tar.gz
+          if-no-files-found: error
