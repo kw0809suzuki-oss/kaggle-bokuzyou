@@ -1,0 +1,56 @@
+name: Feed Reserve v0
+
+on:
+  push:
+    branches:
+      - "experiment/feed-reserve-v0-20260928"
+    paths:
+      - "independent_feed_reserve_v0.py"
+      - "run_feed_reserve_v0.py"
+      - ".github/workflows/feed-reserve-v0.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install pinned Official Kaggriculture environment
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "git+https://github.com/Kaggle/kaggle-environments.git@d7729da06cc1382eb742d6980dc3180aa85caa28"
+
+      - name: Fetch pinned Sellesta public agent
+        run: |
+          mkdir -p opponents
+          curl -L --fail --silent --show-error \
+            "https://raw.githubusercontent.com/Sellesta/Kaggriculture/0a5ce7ef83211d6df5824a4e7e17f3d4a40c22e7/main.py" \
+            -o opponents/sellesta_main_pinned.py
+          python -m py_compile opponents/sellesta_main_pinned.py
+
+      - name: Compile candidate and runner
+        run: |
+          python -m py_compile independent_feed_reserve_v0.py run_feed_reserve_v0.py
+
+      - name: Run paired six Battle test
+        run: |
+          python run_feed_reserve_v0.py
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: feed-reserve-v0
+          path: |
+            feed_reserve_v0_summary.json
+            feed_reserve_v0_*.json.gz
+          if-no-files-found: warn
