@@ -1,0 +1,20 @@
+{
+  "objective": "increase Official World terminal self",
+  "base_commit": "b29f8b849e65ab56790f0e2352df0863b736752a",
+  "harness_source_commit": "30168ec19fc0d281408d9f9e3061c1ef968fdf76",
+  "decision_point": "after ordinary fresh Selection and ordinary Body RNG consumption",
+  "trigger": "existing market-visible positive shed stock has a selectable sale candidate",
+  "eligibility": "baseline is not sale; at least two selectable candidates; projected action differs; intervention not yet used",
+  "baseline_selection": "actual unmodified Body selection",
+  "replacement_selection": "existing selectable realize_shed_stock_sale; item ascending then candidate_id ascending",
+  "action_surface": "baseline projected bundle -> existing projector SELL(item, available_quantity) bundle",
+  "hypothesis_not_evidence": "Earlier conversion of existing shed stock into cash may increase terminal self through subsequent unchanged Body behavior.",
+  "environment_seeds": [92741001,92741002,92741003,92741004,92741005,92741006,92741007,92741008,92741009,92741010,92741011,92741012,92741013,92741014,92741015,92741016,92741017,92741018,92741019,92741020],
+  "policy_seed": 20260926,
+  "self_seat": 0,
+  "opponent": "Seyamalam pinned v21",
+  "opponent_commit": "8b8c421eb10634c756583ce10c75189f50c83a72",
+  "screening": "SURVIVE iff mean delta terminal_self > 0; otherwise DISCARD",
+  "max_interventions": 1,
+  "merge_to_body": false
+}
