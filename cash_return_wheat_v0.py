@@ -227,12 +227,10 @@ class CashReturnWheatBody:
                     bundle["market"] = self._market_orders(raw, need_seed=False)
             return bundle
 
-        # If output is already in the shed, market realization can run in
-        # parallel with the next physical action.
-        if self.parallel_market:
-            bundle["market"] = self._market_orders(raw, need_seed=False)
-
         if isinstance(tile, dict) and tile.get("kind") == "PLANT" and tile.get("crop") == self.crop:
+            # Shed realization may proceed while the farmer services the live plant.
+            if self.parallel_market:
+                bundle["market"] = self._market_orders(raw, need_seed=False)
             planted_day = int(tile.get("planted_day", raw["day"]))
             age = int(raw["day"]) - planted_day
             yield_units = int(tile.get("yield_units", 0) or 0)
@@ -289,16 +287,23 @@ class CashReturnWheatBody:
                 bundle["farmer"] = ["DIG"]
             else:
                 bundle["farmer"] = _move_toward(farmer_pos, (tx, ty))
-            if self.parallel_market and start["ok"] and seeds <= 0:
-                bundle["market"] = self._market_orders(raw, need_seed=True)
+            if self.parallel_market:
+                bundle["market"] = self._market_orders(
+                    raw,
+                    need_seed=start["ok"] and seeds <= 0,
+                )
             return bundle
 
         if tile is None:
             if not start["time_ok"]:
                 self.counters["start_rejected_time"] += 1
+                if self.parallel_market:
+                    bundle["market"] = self._market_orders(raw, need_seed=False)
                 return bundle
             if not start["price_ok"]:
                 self.counters["start_rejected_price"] += 1
+                if self.parallel_market:
+                    bundle["market"] = self._market_orders(raw, need_seed=False)
                 return bundle
 
             if seeds > 0:
@@ -307,12 +312,16 @@ class CashReturnWheatBody:
                     self.counters["plant_actions"] += 1
                 else:
                     bundle["farmer"] = _move_toward(farmer_pos, (tx, ty))
+                if self.parallel_market:
+                    bundle["market"] = self._market_orders(raw, need_seed=False)
                 return bundle
 
             bundle["market"] = self._market_orders(raw, need_seed=True)
             return bundle
 
         # Do not destroy unknown/foreign structures to preserve a narrow v0.
+        if self.parallel_market:
+            bundle["market"] = self._market_orders(raw, need_seed=False)
         return bundle
 
     def summary(self):
