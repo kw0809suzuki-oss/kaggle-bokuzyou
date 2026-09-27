@@ -1,0 +1,39 @@
+{
+  "schema": "v7-v19-fresh10-validation-v0",
+  "purpose": "Test whether selective additional recovery selling in V19 beats no added recovery sweep in V7 on fresh unused seeds.",
+  "evidence_status": "fresh_validation",
+  "fixed": {
+    "seeds": [
+      92801401,
+      92801402,
+      92801403,
+      92801404,
+      92801405,
+      92801406,
+      92801407,
+      92801408,
+      92801409,
+      92801410
+    ],
+    "v7_v19_source_commit": "8b8c421eb10634c756583ce10c75189f50c83a72",
+    "official_commit": "d7729da06cc1382eb742d6980dc3180aa85caa28",
+    "opponent": "main.py V21 at 8b8c421eb10634c756583ce10c75189f50c83a72",
+    "seat": "self seat 0"
+  },
+  "primary_judgment": {
+    "metric": "mean terminal self difference V19 minus V7 on these fresh ten seeds only",
+    "keep_v19_over_v7_if": "mean difference > 0"
+  },
+  "secondary_report": [
+    "median difference",
+    "improved/tied/worse count",
+    "minimum difference",
+    "maximum difference"
+  ],
+  "restrictions": [
+    "Do not modify V7 or V19.",
+    "Do not substitute failed seeds.",
+    "Do not mix previous known-seed diagnostics into this primary judgment.",
+    "Do not infer that more selective decisions are stronger unless this comparison supports it."
+  ]
+}
