@@ -1,0 +1,33 @@
+{
+  "schema": "v18-v19-wool-sale-attribution-v0",
+  "purpose": "Attribute the already-observed V19 minus V18 terminal-self difference to exact WOOL sale requests, engine-committed units, realized revenue, and first downstream World differences.",
+  "evidence_status": "diagnostic_only_known_seeds",
+  "fixed": {
+    "seeds": [
+      92801201,
+      92801202,
+      92801203,
+      92801204,
+      92801205
+    ],
+    "v18_commit": "69c64aebfba7cf54287fb9a58f06ce1b0eff06e4",
+    "v19_v21_commit": "8b8c421eb10634c756583ce10c75189f50c83a72",
+    "official_commit": "d7729da06cc1382eb742d6980dc3180aa85caa28",
+    "opponent": "V21 main.py",
+    "seat": "self seat 0"
+  },
+  "observe": [
+    "requested WOOL SELL units by step",
+    "engine-committed WOOL SELL units and realized revenue",
+    "first self action difference",
+    "first shared market difference",
+    "first self/opponent cash difference",
+    "terminal self difference"
+  ],
+  "restrictions": [
+    "Do not modify V18 or V19.",
+    "Do not infer waiting-for-higher-price unless the World trace directly supports it.",
+    "Do not treat these already-seen seeds as fresh validation.",
+    "Do not create a new recovery policy."
+  ]
+}
