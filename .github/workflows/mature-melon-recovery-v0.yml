@@ -1,0 +1,63 @@
+name: Mature MELON Recovery v0
+
+on:
+  push:
+    branches:
+      - "experiment/mature-melon-recovery-v0-20260927"
+    paths:
+      - "mature_melon_recovery_v0.py"
+      - "run_mature_melon_recovery_v0.py"
+      - ".github/workflows/mature-melon-recovery-v0.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  compare:
+    strategy:
+      fail-fast: false
+      matrix:
+        seed: [92801801, 92801802, 92801803]
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      SEED: ${{ matrix.seed }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install pinned Official Kaggriculture environment
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "git+https://github.com/Kaggle/kaggle-environments.git@d7729da06cc1382eb742d6980dc3180aa85caa28"
+
+      - name: Fetch pinned Sellesta public agent
+        run: |
+          mkdir -p opponents
+          curl -L --fail --silent --show-error \
+            "https://raw.githubusercontent.com/Sellesta/Kaggriculture/0a5ce7ef83211d6df5824a4e7e17f3d4a40c22e7/main.py" \
+            -o opponents/sellesta_main_pinned.py
+          python -m py_compile opponents/sellesta_main_pinned.py
+
+      - name: Compile candidate and Battle runner
+        run: |
+          python -m py_compile mature_melon_recovery_v0.py
+          python -m py_compile run_mature_melon_recovery_v0.py
+
+      - name: Run full Battles then derive Views
+        run: |
+          python run_mature_melon_recovery_v0.py
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mature-melon-recovery-v0-seed-${{ matrix.seed }}
+          path: |
+            recovery_v0_seed${{ matrix.seed }}_summary.json
+            recovery_v0_${{ matrix.seed }}_*_battle.json.gz
+          if-no-files-found: error
