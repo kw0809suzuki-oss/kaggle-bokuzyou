@@ -1,0 +1,40 @@
+{
+  "schema": "v7-v18-fresh10-validation-v0",
+  "purpose": "Test whether removing the V18 recovery sweep improves terminal self on fresh unused seeds against the current V21 opponent.",
+  "evidence_status": "fresh_validation",
+  "fixed": {
+    "seeds": [
+      92801301,
+      92801302,
+      92801303,
+      92801304,
+      92801305,
+      92801306,
+      92801307,
+      92801308,
+      92801309,
+      92801310
+    ],
+    "v7_source_commit": "8b8c421eb10634c756583ce10c75189f50c83a72",
+    "v18_commit": "69c64aebfba7cf54287fb9a58f06ce1b0eff06e4",
+    "official_commit": "d7729da06cc1382eb742d6980dc3180aa85caa28",
+    "opponent": "main.py V21 at 8b8c421eb10634c756583ce10c75189f50c83a72",
+    "seat": "self seat 0"
+  },
+  "primary_judgment": {
+    "metric": "mean terminal self difference V7 minus V18 on these fresh ten seeds only",
+    "keep_for_next_if": "mean difference > 0"
+  },
+  "secondary_report": [
+    "median difference",
+    "improved/tied/worse count",
+    "minimum difference",
+    "maximum difference"
+  ],
+  "restrictions": [
+    "Do not modify V7 or V18.",
+    "Do not substitute failed seeds.",
+    "Do not mix known10 diagnostic results into the fresh10 primary judgment.",
+    "Do not promote from this ten-seed validation alone."
+  ]
+}
