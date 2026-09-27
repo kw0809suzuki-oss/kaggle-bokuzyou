@@ -1,0 +1,58 @@
+name: Seyamalam V18 V19 V21 Diagnostic v0
+
+on:
+  push:
+    branches:
+      - "experiment/seyamalam-imitation-v0-20260927"
+    paths:
+      - "run_seyamalam_v18_v19_v21_diagnostic_v0.py"
+      - "experiments/seyamalam_v18_v19_v21_diagnostic_v0.json"
+      - ".github/workflows/seyamalam-v18-v19-v21-diagnostic-v0.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  diagnostic:
+    strategy:
+      fail-fast: false
+      matrix:
+        seed: [92801201, 92801202, 92801203, 92801204, 92801205]
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      SEED: ${{ matrix.seed }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install pinned Official Kaggriculture environment
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "git+https://github.com/Kaggle/kaggle-environments.git@d7729da06cc1382eb742d6980dc3180aa85caa28"
+
+      - name: Fetch exact V18 release and pinned V19/V21
+        run: |
+          mkdir -p teacher_candidates
+          curl -fL --retry 3             -o teacher_candidates/v18_release_main.py             https://raw.githubusercontent.com/Seyamalam/Kaggriculture/69c64aebfba7cf54287fb9a58f06ce1b0eff06e4/main.py
+          echo "3068347896710078b93f705cd2f46986033d7132fa426e68bd8cfb93756fb436  teacher_candidates/v18_release_main.py" | sha256sum -c -
+
+          base=https://raw.githubusercontent.com/Seyamalam/Kaggriculture/8b8c421eb10634c756583ce10c75189f50c83a72
+          curl -fL --retry 3 -o teacher_candidates/candidate_v19_wool_floor.py "$base/agents/candidate_v19_wool_floor.py"
+          curl -fL --retry 3 -o teacher_candidates/candidate_v21_capital_latch.py "$base/agents/candidate_v21_capital_latch.py"
+          curl -fL --retry 3 -o teacher_candidates/main_v21.py "$base/main.py"
+
+      - name: Run diagnostic
+        run: |
+          python run_seyamalam_v18_v19_v21_diagnostic_v0.py
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: seyamalam-v18-v19-v21-diagnostic-seed-${{ matrix.seed }}
+          path: seyamalam_v18_v19_v21_diagnostic_seed${{ matrix.seed }}.json
+          if-no-files-found: warn
