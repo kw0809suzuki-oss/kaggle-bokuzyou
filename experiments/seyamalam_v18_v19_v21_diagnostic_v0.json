@@ -1,0 +1,32 @@
+{
+  "schema": "seyamalam-v18-v19-v21-diagnostic-v0",
+  "purpose": "Decompose the already-observed V19 minus V21 terminal-self difference through their exact common V18 release ancestor.",
+  "evidence_status": "diagnostic_only_not_fresh_holdout",
+  "fixed": {
+    "source_repo": "Seyamalam/Kaggriculture",
+    "v18_commit": "69c64aebfba7cf54287fb9a58f06ce1b0eff06e4",
+    "v18_sha256": "3068347896710078b93f705cd2f46986033d7132fa426e68bd8cfb93756fb436",
+    "v19_v21_source_commit": "8b8c421eb10634c756583ce10c75189f50c83a72",
+    "official_commit": "d7729da06cc1382eb742d6980dc3180aa85caa28",
+    "opponent": "main.py V21 from pinned source commit",
+    "seat": "self seat 0",
+    "seeds": [
+      92801201,
+      92801202,
+      92801203,
+      92801204,
+      92801205
+    ]
+  },
+  "questions": [
+    "What is terminal_self(V19) - terminal_self(V18)?",
+    "What is terminal_self(V21) - terminal_self(V18)?",
+    "Does their difference exactly account for the previously observed V19 - V21 delta?"
+  ],
+  "restrictions": [
+    "Do not modify V18, V19, or V21.",
+    "These seeds are already observed and are reused only for attribution.",
+    "Do not treat this diagnostic as a new holdout or promotion test.",
+    "Do not add a new recovery policy."
+  ]
+}
