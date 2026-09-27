@@ -1,0 +1,48 @@
+name: Seyamalam Imitation Exact Clone v0
+
+on:
+  push:
+    branches:
+      - "experiment/seyamalam-imitation-v0-20260927"
+    paths:
+      - "run_seyamalam_imitation_exact_clone_v0.py"
+      - ".github/workflows/seyamalam-imitation-exact-clone-v0.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install pinned Official Kaggriculture environment
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "git+https://github.com/Kaggle/kaggle-environments.git@d7729da06cc1382eb742d6980dc3180aa85caa28"
+
+      - name: Fetch pinned Seyamalam twice
+        run: |
+          mkdir -p opponents
+          curl -fL --retry 3 \
+            -o opponents/seyamalam_self.py \
+            https://raw.githubusercontent.com/Seyamalam/Kaggriculture/8b8c421eb10634c756583ce10c75189f50c83a72/main.py
+          cp opponents/seyamalam_self.py opponents/seyamalam_opp.py
+
+      - name: Run exact-clone imitation control
+        run: |
+          python run_seyamalam_imitation_exact_clone_v0.py
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: seyamalam-imitation-exact-clone-seed92801101
+          path: seyamalam_imitation_exact_clone_seed92801101.json
+          if-no-files-found: warn
