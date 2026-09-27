@@ -1,0 +1,38 @@
+{
+  "schema": "v7-v19-first-divergence-diagnostic-v0",
+  "purpose": "Use the same fresh10 cases to identify whether one observable state at the first V7/V19 action divergence separates V19 wins from V19 losses.",
+  "evidence_status": "diagnostic_on_already_seen_fresh10",
+  "fixed": {
+    "seeds": [
+      92801501,
+      92801502,
+      92801503,
+      92801504,
+      92801505,
+      92801506,
+      92801507,
+      92801508,
+      92801509,
+      92801510
+    ],
+    "source_commit": "8b8c421eb10634c756583ce10c75189f50c83a72",
+    "official_commit": "d7729da06cc1382eb742d6980dc3180aa85caa28",
+    "opponent": "main.py V21",
+    "seat": "self seat 0"
+  },
+  "observe": [
+    "first V7 versus V19 self-action difference",
+    "added market SELL orders by product and quantity",
+    "market prices and inventory at that step",
+    "self and opponent cash at that step",
+    "self shed inventory at that step",
+    "terminal self difference V19 minus V7"
+  ],
+  "decision_rule": "If one directly observed feature cleanly separates positive from negative terminal delta across all ten cases, retain it as the next gate candidate. Otherwise close this line without tuning.",
+  "restrictions": [
+    "Do not modify V7 or V19.",
+    "Do not add thresholds after seeing results.",
+    "Do not inspect later divergences unless first divergence is identical or absent.",
+    "Do not create a new policy in this diagnostic."
+  ]
+}
