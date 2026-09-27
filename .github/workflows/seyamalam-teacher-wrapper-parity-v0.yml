@@ -1,0 +1,48 @@
+name: Seyamalam Teacher Wrapper Parity v0
+
+on:
+  push:
+    branches:
+      - "experiment/seyamalam-imitation-v0-20260927"
+    paths:
+      - "run_seyamalam_teacher_wrapper_parity_v0.py"
+      - "seyamalam_teacher_body_v0.py"
+      - ".github/workflows/seyamalam-teacher-wrapper-parity-v0.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  parity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install pinned Official Kaggriculture environment
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "git+https://github.com/Kaggle/kaggle-environments.git@d7729da06cc1382eb742d6980dc3180aa85caa28"
+
+      - name: Fetch pinned teacher copies and WHEAT control
+        run: |
+          mkdir -p opponents
+          curl -fL --retry 3             -o opponents/seyamalam_raw.py             https://raw.githubusercontent.com/Seyamalam/Kaggriculture/8b8c421eb10634c756583ce10c75189f50c83a72/main.py
+          cp opponents/seyamalam_raw.py opponents/seyamalam_wrapped.py
+          curl -fL --retry 3             -o cash_return_wheat_v0.py             https://raw.githubusercontent.com/kw0809suzuki-oss/kaggle-bokuzyou/5278b25325d119ed71372c137e418d4a17fb37b2/cash_return_wheat_v0.py
+
+      - name: Verify wrapper parity
+        run: |
+          python run_seyamalam_teacher_wrapper_parity_v0.py
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: seyamalam-teacher-wrapper-parity-seed92801101
+          path: seyamalam_teacher_wrapper_parity_seed92801101.json
+          if-no-files-found: warn
