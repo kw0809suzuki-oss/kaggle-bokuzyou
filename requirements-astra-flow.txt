@@ -1,0 +1,2 @@
+# Rules/API pin used during implementation; no dependency change to Frozen Body.
+kaggle-environments==1.32.7
