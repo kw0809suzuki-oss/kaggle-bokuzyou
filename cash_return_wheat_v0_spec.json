@@ -1,0 +1,97 @@
+{
+  "schema_version": "cash-return-experiment-v0",
+  "experiment_id": "cash-return-wheat-v0",
+  "objective": "increase Official World terminal self",
+  "experimental_unit": "full-battle operating policy, not one-shot Selection replacement",
+  "baseline": {
+    "branch": "body/relationship-surface-v0-20260926",
+    "commit": "b29f8b849e65ab56790f0e2352df0863b736752a",
+    "class": "relationship_surface_body_v0.RelationshipSurfaceBody",
+    "policy_seed": 20260926
+  },
+  "candidate": {
+    "module": "cash_return_wheat_v0",
+    "factory": "make_candidate",
+    "kwargs": {
+      "crop": "WHEAT",
+      "max_active_plants": 1,
+      "harvest_age_days": 4,
+      "season_days": 30,
+      "turns_per_day": 24,
+      "parallel_market": true
+    }
+  },
+  "official_world": {
+    "repository": "Kaggle/kaggle-environments",
+    "commit": "d7729da06cc1382eb742d6980dc3180aa85caa28",
+    "expected_kaggle_environments_version": "1.32.7"
+  },
+  "opponent": {
+    "name": "Seyamalam pinned v21",
+    "repository": "Seyamalam/Kaggriculture",
+    "commit": "8b8c421eb10634c756583ce10c75189f50c83a72",
+    "local_path": "opponents/seyamalam_v21.py"
+  },
+  "seed_groups": {
+    "smoke": [92801001],
+    "tuning": [92801101, 92801102, 92801103, 92801104, 92801105],
+    "holdout": [92801201, 92801202, 92801203, 92801204, 92801205]
+  },
+  "official_rule_snapshot": {
+    "crop": "WHEAT",
+    "seed_cost": 10,
+    "first_yield_day": 2,
+    "max_yield_day": 4,
+    "max_yield": 6,
+    "ongoing": false,
+    "initial_market_base_price": 25,
+    "new_one_time_plant_base_yield_units": 1,
+    "watering_bonus_window_age_days": [2, 4],
+    "watering_bonus_per_day_without_fertilizer": 1,
+    "planting_day_counts_as_unwatered": true,
+    "two_consecutive_unwatered_end_of_day_refreshes_kill_plant": true,
+    "harvest_moves_output_to_unit_inventory": true,
+    "drop_at_shed_access_moves_unit_inventory_to_shed": true,
+    "market_sell_realizes_shed_stock_to_cash": true
+  },
+  "prototype_assumptions": {
+    "why_wheat": "first prototype only: low seed cost, short maturity, one-time crop, existing execution parts cover the full path",
+    "not_claimed": "WHEAT is not proven optimal",
+    "start_value_assumption": "use current observed WHEAT price as a temporary estimate of future sale price only for the start decision",
+    "target_harvest_age_days": 4,
+    "expected_yield_at_target_age_without_fertilizer_if_watered_in_bonus_window": 4,
+    "initial_base_price_gross_at_target_age": 100,
+    "initial_base_price_seed_net_before_action_opportunity_cost": 90,
+    "max_active_plants_is_test_condition_not_principle": true,
+    "continuation_is_not_absolute": "existing work is serviced only while recovery remains reachable; near terminal, already-recoverable output is harvested early"
+  },
+  "execution_policy": {
+    "target_tile": "episode initial farmer spawn, which is a shed-access tile in the Official World",
+    "parallel_actions": "legal farmer action and market orders may be emitted in the same ActionBundle",
+    "new_investment_gate": "start only when time gate passes, cash can cover seed, and current-price expected gross at target age exceeds seed cost",
+    "recovery_priority": "carried output is delivered and sellable shed stock is realized before starting physical work",
+    "no_land_purchase": true,
+    "no_hiring": true,
+    "no_animals": true,
+    "no_fertilizer": true
+  },
+  "measurement": {
+    "primary": "terminal_self",
+    "paired_delta": "candidate terminal_self - baseline terminal_self",
+    "own_growth": "candidate terminal_self - candidate starting_money",
+    "supporting": [
+      "candidate cash_return_events",
+      "candidate harvest_actions",
+      "candidate plant_actions"
+    ],
+    "promotion_rule": null,
+    "status": "pilot measurement only; no adoption decision is preregistered"
+  },
+  "persistence": {
+    "write_one_result_after_each_completed_pair": true,
+    "update_summary_after_each_completed_pair": true,
+    "never_overwrite_prior_experiment_commit_results": true,
+    "sharding_supported": true,
+    "require_no_seed_overlap_between_groups": true
+  }
+}
