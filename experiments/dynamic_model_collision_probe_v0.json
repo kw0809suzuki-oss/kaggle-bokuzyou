@@ -1,0 +1,62 @@
+{
+  "schema": "dynamic-model-collision-probe-v0-result",
+  "run_id": 36334468984,
+  "model_commit": "8136bf799412b38f612ca28c503aa77940f654f7",
+  "probe_commit": "8f02946e085a16aae87a6ff3c8b42a2b716ac02e",
+  "seeds": [
+    92802801,
+    92802802,
+    92802803
+  ],
+  "battle_count": 6,
+  "transition_count": 4314,
+  "eligible_transition_count": 4140,
+  "repeated_exact_groups": 828,
+  "collision_groups": 0,
+  "judge": "NO_COUNTEREXAMPLE_IN_EXACT_MATCHES",
+  "boundary": "Hour 23 -> day-boundary transitions excluded because official weed/shop RNG is seed-dependent.",
+  "battle_summaries": [
+    {
+      "seed": 92802801,
+      "self_seat": 0,
+      "terminal_self": 100919,
+      "terminal_opponent": 109550,
+      "margin": -8631
+    },
+    {
+      "seed": 92802801,
+      "self_seat": 1,
+      "terminal_self": 86181,
+      "terminal_opponent": 95826,
+      "margin": -9645
+    },
+    {
+      "seed": 92802802,
+      "self_seat": 0,
+      "terminal_self": 81930,
+      "terminal_opponent": 108712,
+      "margin": -26782
+    },
+    {
+      "seed": 92802802,
+      "self_seat": 1,
+      "terminal_self": 75802,
+      "terminal_opponent": 98990,
+      "margin": -23188
+    },
+    {
+      "seed": 92802803,
+      "self_seat": 0,
+      "terminal_self": 45995,
+      "terminal_opponent": 59516,
+      "margin": -13521
+    },
+    {
+      "seed": 92802803,
+      "self_seat": 1,
+      "terminal_self": 45995,
+      "terminal_opponent": 59516,
+      "margin": -13521
+    }
+  ]
+}
