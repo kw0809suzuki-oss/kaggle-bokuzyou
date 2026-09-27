@@ -1,0 +1,40 @@
+{
+  "schema": "astra-flow-three-model-observation-v0",
+  "purpose": "Observe Frozen Body, Astra Flow v1 (Frozen production + Astra recovery), and Astra Flow v0 (Teacher production + Astra recovery) under identical fresh World conditions, while preserving full turn logs for later analysis.",
+  "evidence_status": "fresh_observation_not_promotion",
+  "fixed": {
+    "seeds": [
+      92801601,
+      92801602,
+      92801603
+    ],
+    "official_commit": "d7729da06cc1382eb742d6980dc3180aa85caa28",
+    "opponent": "Seyamalam V21 pinned in astra_flow_vendor/seyamalam_v21.py",
+    "opponent_source_commit": "8b8c421eb10634c756583ce10c75189f50c83a72",
+    "seat": "self seat 0",
+    "frozen_commit": "b29f8b849e65ab56790f0e2352df0863b736752a",
+    "astra_v0_commit": "55c043e034c68568a6398b11cc126e7802e5bb15",
+    "astra_v1_commit": "35baab3fa5720e897623bb3b959926b7c9d8dbbd"
+  },
+  "models": {
+    "frozen": "relationship_surface_body_v0.py unchanged",
+    "v1": "Frozen Body production proposal + Astra Flow v0 recovery/market/terminal planning",
+    "v0": "Seyamalam-derived production proposal + Astra Flow v0 recovery/market/terminal planning"
+  },
+  "log_contract": [
+    "every turn self observation before action",
+    "every turn self action",
+    "every turn opponent action",
+    "final observation and terminal self/opponent",
+    "model/source provenance"
+  ],
+  "outputs": [
+    "gzip JSON full turn log per seed containing all three models",
+    "plain JSON summary per seed"
+  ],
+  "restrictions": [
+    "Do not tune any model from these three seeds.",
+    "Do not modify Astra Flow v0, Frozen Body, or the pinned opponent.",
+    "Treat these three seeds as observation data, not promotion evidence."
+  ]
+}
