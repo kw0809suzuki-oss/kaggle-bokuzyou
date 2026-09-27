@@ -142,7 +142,7 @@ def infer_melon_harvest_units(turn, seat):
         ):
             continue
         day = int(turn["day"])
-        planted_day = int(tile.get("planted_day", day) or day)
+        raw_planted_day = tile.get("planted_day")\n    planted_day = day if raw_planted_day is None else int(raw_planted_day)
         units = int(tile.get("yield_units", 0) or 0)
         if units > 0 and day - planted_day >= 10:
             total += units
