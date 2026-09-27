@@ -29,6 +29,14 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install "git+https://github.com/Kaggle/kaggle-environments.git@d7729da06cc1382eb742d6980dc3180aa85caa28"
 
+      - name: Fetch exact pinned Teacher and WHEAT opponent
+        run: |
+          mkdir -p opponents
+          curl -fL --retry 3             -o opponents/seyamalam_self.py             https://raw.githubusercontent.com/Seyamalam/Kaggriculture/8b8c421eb10634c756583ce10c75189f50c83a72/main.py
+          curl -fL --retry 3             -o cash_return_wheat_v0.py             https://raw.githubusercontent.com/kw0809suzuki-oss/kaggle-bokuzyou/5278b25325d119ed71372c137e418d4a17fb37b2/cash_return_wheat_v0.py
+          curl -fL --retry 3             -o plan_generator_entrance_v0.py             https://raw.githubusercontent.com/kw0809suzuki-oss/kaggle-bokuzyou/5278b25325d119ed71372c137e418d4a17fb37b2/plan_generator_entrance_v0.py
+          curl -fL --retry 3             -o short_plan_action_projector_v0.py             https://raw.githubusercontent.com/kw0809suzuki-oss/kaggle-bokuzyou/5278b25325d119ed71372c137e418d4a17fb37b2/short_plan_action_projector_v0.py
+
       - name: Run 150k course observation
         run: |
           python run_course_150k_observation_v0.py
