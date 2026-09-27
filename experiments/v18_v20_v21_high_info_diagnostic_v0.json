@@ -1,0 +1,36 @@
+{
+  "schema": "v18-v20-v21-high-info-diagnostic-v0",
+  "purpose": "Screen the exact late-abstention lever on already-observed seeds without consuming fresh holdout conditions.",
+  "evidence_status": "diagnostic_only_known_seeds",
+  "fixed": {
+    "seeds": [
+      92801101,
+      92801102,
+      92801103,
+      92801104,
+      92801105,
+      92801201,
+      92801202,
+      92801203,
+      92801204,
+      92801205
+    ],
+    "v18_commit": "69c64aebfba7cf54287fb9a58f06ce1b0eff06e4",
+    "v20_v21_source_commit": "8b8c421eb10634c756583ce10c75189f50c83a72",
+    "official_commit": "d7729da06cc1382eb742d6980dc3180aa85caa28",
+    "opponent": "main.py V21",
+    "seat": "self seat 0"
+  },
+  "observe": [
+    "terminal self for V18 V20 V21",
+    "V20 minus V18 terminal self",
+    "V21 minus V18 terminal self",
+    "public step-577 cash gap and cow/sheep counts before late divergence"
+  ],
+  "restrictions": [
+    "Do not modify V18 V20 or V21.",
+    "Do not use these known seeds as fresh validation.",
+    "Do not infer a live gate from retrospective animal counts.",
+    "Do not create a new policy in this diagnostic."
+  ]
+}
