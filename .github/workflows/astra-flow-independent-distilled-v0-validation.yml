@@ -1,0 +1,50 @@
+name: Astra Flow Independent Distilled v0 Validation
+
+on:
+  push:
+    branches:
+      - "experiment/astra-flow-independent-distilled-v0-20260927"
+    paths:
+      - "astra_flow_independent_distilled_v0.py"
+      - "experiments/astra_flow_independent_distilled_v0_validation.json"
+      - "run_astra_flow_independent_distilled_v0_validation.py"
+      - ".github/workflows/astra-flow-independent-distilled-v0-validation.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    strategy:
+      fail-fast: false
+      matrix:
+        seed: [92801601, 92801701, 92801702, 92801703]
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      SEED: ${{ matrix.seed }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install pinned Official Kaggriculture environment
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "git+https://github.com/Kaggle/kaggle-environments.git@d7729da06cc1382eb742d6980dc3180aa85caa28"
+
+      - name: Run independent distilled validation
+        run: |
+          python run_astra_flow_independent_distilled_v0_validation.py
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: astra-flow-independent-seed-${{ matrix.seed }}
+          path: |
+            astra_flow_independent_seed${{ matrix.seed }}.json.gz
+            astra_flow_independent_seed${{ matrix.seed }}_summary.json
+          if-no-files-found: warn
