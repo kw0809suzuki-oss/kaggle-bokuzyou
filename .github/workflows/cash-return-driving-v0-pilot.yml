@@ -1,0 +1,59 @@
+name: Cash Return Driving v0 Pilot
+
+on:
+  push:
+    branches:
+      - "experiment/cash-return-driving-v0-20260927"
+    paths:
+      - "cash_return_wheat_v0.py"
+      - "cash_return_wheat_v0_spec.json"
+      - "cash_return_experiment_runner_v0.py"
+      - ".github/workflows/cash-return-driving-v0-pilot.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pilot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install pinned Official Kaggriculture environment
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "git+https://github.com/Kaggle/kaggle-environments.git@d7729da06cc1382eb742d6980dc3180aa85caa28"
+
+      - name: Fetch pinned Seyamalam opponent
+        run: |
+          mkdir -p opponents
+          curl -fL --retry 3 \
+            -o opponents/seyamalam_v21.py \
+            https://raw.githubusercontent.com/Seyamalam/Kaggriculture/8b8c421eb10634c756583ce10c75189f50c83a72/main.py
+
+      - name: One-cycle cash-return smoke
+        run: |
+          python cash_return_experiment_runner_v0.py \
+            --mode smoke \
+            --spec cash_return_wheat_v0_spec.json
+
+      - name: One full 30-day paired pilot
+        run: |
+          python cash_return_experiment_runner_v0.py \
+            --mode paired \
+            --seed-group tuning \
+            --max-pairs 1 \
+            --spec cash_return_wheat_v0_spec.json
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cash-return-driving-v0-pilot-results
+          path: cash_return_results_v0/
+          if-no-files-found: warn
