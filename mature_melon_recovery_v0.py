@@ -30,7 +30,8 @@ def _harvestable_max_melon(obs, player, pos):
         return False
 
     day = int(obs.get("day", 0) or 0)
-    raw_planted_day = tile.get("planted_day")\n    planted_day = day if raw_planted_day is None else int(raw_planted_day)
+    raw_planted_day = tile.get("planted_day")
+    planted_day = day if raw_planted_day is None else int(raw_planted_day)
     return day - planted_day >= 10
 
 
