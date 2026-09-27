@@ -1,0 +1,41 @@
+name: Package Independent Distilled v0
+
+on:
+  push:
+    branches:
+      - submission/package-independent-distilled-v0-20260927
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create Kaggriculture main.py
+        run: cp astra_flow_independent_distilled_v0.py main.py
+
+      - name: Verify exact source copy
+        run: |
+          cmp -s astra_flow_independent_distilled_v0.py main.py
+          python -m py_compile main.py
+          python - <<'PY'
+          import main
+          assert callable(main.agent)
+          print("agent_callable: true")
+          PY
+
+      - name: Build submission archive
+        run: |
+          tar -czf independent-distilled-v0-submission.tar.gz main.py
+          echo "Archive contents:"
+          tar -tzf independent-distilled-v0-submission.tar.gz
+          echo "SHA256:"
+          sha256sum independent-distilled-v0-submission.tar.gz
+          echo "Source blob via git:"
+          git hash-object main.py
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kaggriculture-independent-distilled-v0-submission
+          path: independent-distilled-v0-submission.tar.gz
+          if-no-files-found: error
