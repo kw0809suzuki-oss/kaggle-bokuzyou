@@ -10,8 +10,12 @@ from __future__ import annotations
 import copy
 import gzip
 import json
+import sys
 from pathlib import Path
 from typing import Any
+
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT))
 
 from strong_model_v0_reimplementation.planner import (
     Settings,
@@ -20,7 +24,6 @@ from strong_model_v0_reimplementation.planner import (
     rollout,
 )
 
-ROOT = Path(__file__).resolve().parents[2]
 REPLAY = ROOT / "battle-results/repair-probe/repaired-92804001-seat0.replay.json.gz"
 TRACE = ROOT / "battle-results/repair-probe/repaired-92804001-seat0.trace.json"
 OUT = Path(__file__).with_name("result.json")
