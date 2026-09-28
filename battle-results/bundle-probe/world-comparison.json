@@ -1,0 +1,425 @@
+{
+  "schema": "strong-model-v0-bundle-probe-result-v0",
+  "seed": 92804001,
+  "seat_swap": true,
+  "episodes": 2,
+  "selection": {
+    "incumbent_action": {
+      "farmer": [
+        "BUILD_PASTURE"
+      ],
+      "hands": [],
+      "market": [
+        [
+          "BUY_ANIMAL",
+          "SHEEP",
+          1
+        ]
+      ]
+    },
+    "incumbent_central_estimate": 8628.0,
+    "bundle_action": {
+      "farmer": [
+        "BUILD_PASTURE"
+      ],
+      "hands": [],
+      "market": [
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "BUY_ANIMAL",
+          "COW",
+          1
+        ],
+        [
+          "BUY_SEED",
+          "MELON",
+          6
+        ],
+        [
+          "BUY_SEED",
+          "WHEAT",
+          6
+        ]
+      ]
+    },
+    "bundle_central_estimate": 13440.0,
+    "bundle_minus_incumbent_estimate": 4812.0,
+    "bundle_ranked_higher": true
+  },
+  "world": [
+    {
+      "seat": 0,
+      "control_self": 24351.0,
+      "bundle_self": 12414.0,
+      "self_delta": -11937.0,
+      "control_opponent": 169130.0,
+      "bundle_opponent": 114047.0,
+      "opponent_delta": -55083.0,
+      "control_margin": -144779.0,
+      "bundle_margin": -101633.0,
+      "margin_delta": 43146.0,
+      "bundle_status": [
+        "DONE",
+        "DONE"
+      ],
+      "steps": 719
+    },
+    {
+      "seat": 1,
+      "control_self": 22387.0,
+      "bundle_self": 21155.0,
+      "self_delta": -1232.0,
+      "control_opponent": 162178.0,
+      "bundle_opponent": 154783.0,
+      "opponent_delta": -7395.0,
+      "control_margin": -139791.0,
+      "bundle_margin": -133628.0,
+      "margin_delta": 6163.0,
+      "bundle_status": [
+        "DONE",
+        "DONE"
+      ],
+      "steps": 719
+    }
+  ],
+  "opening_throughput_first15": [
+    {
+      "seat": 0,
+      "control": {
+        "action_slots": 28,
+        "nonpass_actions": 27,
+        "production_actions": 9,
+        "movement_actions": 17,
+        "actions": {
+          "BUILD_PASTURE": 1,
+          "EAST": 3,
+          "NORTH": 5,
+          "WEST": 6,
+          "SOUTH": 3,
+          "PLANT": 4,
+          "WATER": 3,
+          "PICKUP": 1,
+          "PLACE": 1,
+          "PASS": 1
+        }
+      },
+      "bundle": {
+        "action_slots": 43,
+        "nonpass_actions": 42,
+        "production_actions": 13,
+        "movement_actions": 29,
+        "actions": {
+          "BUILD_PASTURE": 1,
+          "NORTH": 9,
+          "PASS": 1,
+          "WEST": 14,
+          "EAST": 4,
+          "PLANT": 6,
+          "SOUTH": 2,
+          "WATER": 6
+        }
+      }
+    },
+    {
+      "seat": 1,
+      "control": {
+        "action_slots": 28,
+        "nonpass_actions": 27,
+        "production_actions": 9,
+        "movement_actions": 17,
+        "actions": {
+          "BUILD_PASTURE": 1,
+          "EAST": 3,
+          "NORTH": 5,
+          "WEST": 6,
+          "SOUTH": 3,
+          "PLANT": 4,
+          "WATER": 3,
+          "PICKUP": 1,
+          "PLACE": 1,
+          "PASS": 1
+        }
+      },
+      "bundle": {
+        "action_slots": 43,
+        "nonpass_actions": 42,
+        "production_actions": 13,
+        "movement_actions": 29,
+        "actions": {
+          "BUILD_PASTURE": 1,
+          "NORTH": 9,
+          "PASS": 1,
+          "WEST": 14,
+          "EAST": 4,
+          "PLANT": 6,
+          "SOUTH": 2,
+          "WATER": 6
+        }
+      }
+    }
+  ],
+  "bundle_daily_snapshots": {
+    "0": [
+      {
+        "step": 1,
+        "self_cash": 2058.0,
+        "hands": 2,
+        "quadrants": 1,
+        "assets": {
+          "PASTURE": 1
+        }
+      },
+      {
+        "step": 2,
+        "self_cash": 558.0,
+        "hands": 2,
+        "quadrants": 2,
+        "assets": {
+          "PASTURE": 1
+        }
+      },
+      {
+        "step": 24,
+        "self_cash": 298.0,
+        "hands": 0,
+        "quadrants": 2,
+        "assets": {
+          "WHEAT": 7,
+          "STRAWBERRY": 2,
+          "MELON": 2,
+          "TOMATO": 1,
+          "PASTURE": 1,
+          "WEED": 1
+        }
+      },
+      {
+        "step": 48,
+        "self_cash": 6.0,
+        "hands": 0,
+        "quadrants": 2,
+        "assets": {
+          "STRAWBERRY": 3,
+          "TOMATO": 4,
+          "MELON": 5,
+          "WHEAT": 7,
+          "WEED": 3,
+          "PASTURE": 1
+        }
+      },
+      {
+        "step": 120,
+        "self_cash": 6.0,
+        "hands": 0,
+        "quadrants": 2,
+        "assets": {
+          "STRAWBERRY": 2,
+          "WEED": 14,
+          "MELON": 6,
+          "PASTURE": 1
+        }
+      },
+      {
+        "step": 192,
+        "self_cash": 43.0,
+        "hands": 0,
+        "quadrants": 2,
+        "assets": {
+          "STRAWBERRY": 2,
+          "TOMATO": 1,
+          "WEED": 15,
+          "WHEAT": 1,
+          "MELON": 6,
+          "PASTURE": 1
+        }
+      },
+      {
+        "step": 336,
+        "self_cash": 4894.0,
+        "hands": 0,
+        "quadrants": 2,
+        "assets": {
+          "WEED": 22,
+          "MELON": 1,
+          "STRAWBERRY": 3,
+          "TOMATO": 1,
+          "PASTURE": 1
+        }
+      },
+      {
+        "step": 504,
+        "self_cash": 4982.0,
+        "hands": 0,
+        "quadrants": 2,
+        "assets": {
+          "WEED": 16,
+          "WHEAT": 5,
+          "PASTURE": 1,
+          "CARROT": 2,
+          "MELON": 8,
+          "STRAWBERRY": 2,
+          "SHEEP": 1,
+          "TOMATO": 1
+        }
+      },
+      {
+        "step": 696,
+        "self_cash": 11791.0,
+        "hands": 0,
+        "quadrants": 2,
+        "assets": {
+          "WEED": 20,
+          "PASTURE": 2,
+          "MELON": 2,
+          "STRAWBERRY": 2
+        }
+      },
+      {
+        "step": 719,
+        "self_cash": 12414.0,
+        "hands": 1,
+        "quadrants": 2,
+        "assets": {
+          "WEED": 20,
+          "PASTURE": 2,
+          "STRAWBERRY": 2
+        }
+      }
+    ],
+    "1": [
+      {
+        "step": 1,
+        "self_cash": 2058.0,
+        "hands": 2,
+        "quadrants": 1,
+        "assets": {
+          "PASTURE": 1
+        }
+      },
+      {
+        "step": 2,
+        "self_cash": 558.0,
+        "hands": 2,
+        "quadrants": 2,
+        "assets": {
+          "PASTURE": 1
+        }
+      },
+      {
+        "step": 24,
+        "self_cash": 298.0,
+        "hands": 0,
+        "quadrants": 2,
+        "assets": {
+          "WHEAT": 7,
+          "STRAWBERRY": 2,
+          "MELON": 2,
+          "TOMATO": 1,
+          "WEED": 1,
+          "PASTURE": 1
+        }
+      },
+      {
+        "step": 48,
+        "self_cash": 26.0,
+        "hands": 0,
+        "quadrants": 2,
+        "assets": {
+          "WEED": 3,
+          "WHEAT": 9,
+          "MELON": 6,
+          "TOMATO": 2,
+          "STRAWBERRY": 3,
+          "PASTURE": 1
+        }
+      },
+      {
+        "step": 120,
+        "self_cash": 6.0,
+        "hands": 0,
+        "quadrants": 2,
+        "assets": {
+          "WEED": 12,
+          "WHEAT": 3,
+          "MELON": 7,
+          "TOMATO": 2,
+          "STRAWBERRY": 2,
+          "PASTURE": 1
+        }
+      },
+      {
+        "step": 192,
+        "self_cash": 5.0,
+        "hands": 0,
+        "quadrants": 2,
+        "assets": {
+          "WEED": 11,
+          "WHEAT": 2,
+          "STRAWBERRY": 1,
+          "MELON": 7,
+          "TOMATO": 1,
+          "PASTURE": 1
+        }
+      },
+      {
+        "step": 336,
+        "self_cash": 5828.0,
+        "hands": 0,
+        "quadrants": 2,
+        "assets": {
+          "WEED": 11,
+          "WHEAT": 3,
+          "STRAWBERRY": 1,
+          "MELON": 6,
+          "PASTURE": 1,
+          "COW": 2,
+          "COOP": 1
+        }
+      },
+      {
+        "step": 504,
+        "self_cash": 12081.0,
+        "hands": 0,
+        "quadrants": 2,
+        "assets": {
+          "WEED": 15,
+          "PASTURE": 1,
+          "MELON": 5,
+          "TOMATO": 1,
+          "COW": 2,
+          "COOP": 1
+        }
+      },
+      {
+        "step": 696,
+        "self_cash": 20116.0,
+        "hands": 0,
+        "quadrants": 2,
+        "assets": {
+          "WEED": 16,
+          "PASTURE": 1,
+          "COW": 2,
+          "WHEAT": 2,
+          "COOP": 1
+        }
+      },
+      {
+        "step": 719,
+        "self_cash": 21155.0,
+        "hands": 0,
+        "quadrants": 2,
+        "assets": {
+          "WEED": 16,
+          "PASTURE": 1,
+          "COW": 2,
+          "COOP": 1
+        }
+      }
+    ]
+  },
+  "boundary": "One seed with two seat placements. The existing control artifacts were run at the same seed, seats, Official rules, opponent and core source hashes. This is not an independent-seed strength benchmark. The forecast omits automatic future rehire/reinvestment. No model tuning followed the terminal observations."
+}

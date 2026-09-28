@@ -1,0 +1,76 @@
+{
+  "model": "Strong with one diagnostic initial bundle",
+  "seed": 92804001,
+  "seat": 0,
+  "self_cash": 12414.0,
+  "opponent_cash": 114047.0,
+  "margin": -101633.0,
+  "statuses": [
+    "DONE",
+    "DONE"
+  ],
+  "steps": 719,
+  "injected": [
+    {
+      "step": 0,
+      "action": {
+        "farmer": [
+          "BUILD_PASTURE"
+        ],
+        "hands": [],
+        "market": [
+          [
+            "HIRE"
+          ],
+          [
+            "HIRE"
+          ],
+          [
+            "BUY_ANIMAL",
+            "COW",
+            1
+          ],
+          [
+            "BUY_SEED",
+            "MELON",
+            6
+          ],
+          [
+            "BUY_SEED",
+            "WHEAT",
+            6
+          ]
+        ]
+      },
+      "cash_before": 3000.0
+    }
+  ],
+  "farmer_and_hand_actions": {
+    "BUILD_PASTURE": 2,
+    "NORTH": 145,
+    "PASS": 134,
+    "WEST": 250,
+    "EAST": 174,
+    "PLANT": 54,
+    "SOUTH": 75,
+    "WATER": 209,
+    "DIG": 15,
+    "HARVEST": 36,
+    "DROP": 25,
+    "PICKUP": 9,
+    "PLACE": 1,
+    "FEED": 6,
+    "CARE": 5
+  },
+  "mean_decision_seconds": 0.5378188114854019,
+  "max_decision_seconds": 1.4485464829999728,
+  "remaining_overage": 58.546365,
+  "source_sha256": {
+    "strong_model_v0_reimplementation/agent.py": "ec818185babc2c0ba8a784d41b029ccf495a3445da3dc2583f4b526eb60bd13e",
+    "strong_model_v0_reimplementation/jobs.py": "f9da3e34af3e21172893145156bda258e4184eb20a9d0fd1499396aa1b574913",
+    "strong_model_v0_reimplementation/planner.py": "d42b70521236316351276067675eb7a2b0234e30686074207fcb35459e7f6163",
+    "strong_model_v0_bundle_probe.py": "38111be9efb42ee15bef887e53c0fc8b9e42f9b7f45a811169592168a439a0c6"
+  },
+  "official_rules_sha256": "bc8a54879ef02c7ea64b8b333d6a976f0ea65c4949149d01f463f23bccee653e",
+  "opponent_sha256": "0cd14b653102d276c4f902fa3b8c6bd81d869b8ab64c422cb881b9d2346ec639"
+}
