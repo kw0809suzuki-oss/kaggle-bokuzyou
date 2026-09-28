@@ -259,11 +259,32 @@ def fresh_jobs(raw:dict[str,Any],episode_steps:int,turns_per_day:int,board_size:
             jobs.append(Job(key,"establish_animal",category,{"tile":list(xy),"animal":animal},central,-purchase-lc-feed_cost))
 
     shed=raw["private"].get("shed",{}) or {}
+    params=(raw.get("market",{}) or {}).get("params")
     for item in PRODUCTS:
         q=int(shed.get(item,0) or 0)
-        if q>0:
-            jobs.append(Job(f"sell:{item}:{q}","sell_stock","trade",{"item":item,"qty":q},
-                            q*float(prices[item]),q*float(rules.PRICE_FLOOR),False,True))
+        if q<=0: continue
+
+        # "Partial sale" candidates are placed at actual marginal-price block
+        # boundaries of the Official rounded price curve, plus 1 and all stock.
+        # No arbitrary half/percentage quantity is introduced.
+        level=int(raw["market"]["inventory"][item])
+        last_price=None
+        revenue=0.0
+        candidates={1,q}
+        revenues={}
+        for n in range(1,q+1):
+            price=float(rules.market_price(item,level,params))
+            if last_price is not None and price!=last_price:
+                candidates.add(n-1)
+            revenue+=price
+            revenues[n]=revenue
+            if price>rules.PRICE_FLOOR: level+=1
+            last_price=price
+
+        for n in sorted(candidates):
+            key=f"sell:{item}:{n}"
+            jobs.append(Job(key,"sell_stock","trade",{"item":item,"qty":n},
+                            float(revenues[n]),n*float(rules.PRICE_FLOOR),False,True))
     return jobs
 
 
