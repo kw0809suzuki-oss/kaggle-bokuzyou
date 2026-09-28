@@ -2,7 +2,7 @@
 
 ## 目的と候補
 
-親目的はStrong Modelを強くすること。このProbeでは、現行比較に労働・資産・実行をまとめた初期運転を一件加えたときのSelectionとWorldの応答を観測した。Independentは候補内容の参照にだけ使用。候補束はstep 0で HIRE×2、COW×1、MELON seed×6、WHEAT seed×6、Pasture建設とし、12作物仕事・COW配置仕事を運転予定に含めた。以後は既存Strongが毎turn再計画した。
+親目的はStrong Modelを強くすること。このProbeでは、労働・資産・実行をまとめた初期運転を既存Strongの選択結果とshadow比較し、World応答を観測した。診断BundleはStrongの `choose()` 候補一覧には追加していない。Independentは候補内容の参照にだけ使用。候補束はstep 0で HIRE×2、COW×1、MELON seed×6、WHEAT seed×6、Pasture建設とし、12作物仕事・COW配置仕事を運転予定に含めた。Worldではこの初手を一度だけ注入し、step 1から既存Strongが毎turn再計画した。
 
 ## Selection｜同じstep 0 State
 
@@ -11,7 +11,7 @@
 | 現行Strongの選択 | 8,628 | BUILD_PASTURE、BUY_ANIMAL SHEEP×1 |
 | 診断Bundle | 13,440 | BUILD_PASTURE、HIRE×2、BUY_ANIMAL COW×1、MELON/WHEAT seed各6 |
 
-Bundleは現行選択より4,812高く評価され、現行候補を残した比較で上位になった。初手後は市場処理され、step 1の観測Cash2,058、雇用Hands2、COW在庫1、MELON/WHEAT seed各6、Pasture1面を確認。
+Bundleのshadow評価は現行Strongの選択結果より4,812高かった。これは同じ評価器を使った別計算との比較であり、Strong自身の選択器がBundleを選んだ結果ではない。初手後は市場処理され、step 1の観測Cash2,058、雇用Hands2、COW在庫1、MELON/WHEAT seed各6、Pasture1面を確認。
 
 ## World｜同seed・席入替
 
@@ -22,13 +22,15 @@ Bundleは現行選択より4,812高く評価され、現行候補を残した比
 
 両席ともDONE、719行動で終了。Bundleは両席でself Cashが下がり、marginは両席で改善した。改善を勝利とは扱えない。どちらのmarginも負のまま。Selection上位とWorldのself方向は一致しなかった。
 
-step 0〜14の実行記録では、席0の非PASS行動枠は対照27からBundle42、生産系行動は9から13へ変化。診断Bundle後も、step 1に既存StrongはBUY_LANDとSHEEP購入を発行し、step 2時点で2面目が解放されていた。初期Bundleが実行されたことと、以後の運転全体がBundleに置き換わったことは同じではない。
+step 0〜14の実行記録では、席0の非PASS行動枠は対照27からBundle42、生産系行動は9から13へ変化。診断Bundle後も、step 1に既存StrongはBUY_LANDとSHEEP購入を発行し、step 2時点で2面目が解放されていた。これは初手だけを変えたWorld介入であり、30日間のBundle方策を評価したものではない。
 
 ## このEvidenceの境界
 
-確認できたのは、一件の候補束が同一Stateの比較に入り、中央見積り上位となったこと、初手の購入・雇用・建設が成立したこと、席入替二戦の終端応答。selfとmarginは異なる向きに動いた。
+確認できたのは、一件の診断束を同一Stateでshadow評価したところ、現行選択結果より中央見積りが高かったこと、初手の購入・雇用・建設が成立したこと、席入替二戦の終端応答。selfとmarginは異なる向きに動いた。
 
-一seed二席なので一般的な強さは未確定。bundle評価は将来の自動再雇用・再投資を含まない。候補の各要素が結果へ与えた寄与や、途中のどの差が終端差を作ったかはこのProbeでは判定していない。結果を見てモデルや候補を追加修正していない。
+一seed二席なので一般的な強さは未確定。Bundle評価は将来の自動再雇用・再投資を含まない。候補の各要素が結果へ与えた寄与や、途中のどの差が終端差を作ったかはこのProbeでは判定していない。結果を見てモデルや候補を追加修正していない。
+
+今回のProbeで確認できたのは、Bundleの別計算上の評価値と、step 0だけを注入した二つのWorld応答。native選択器への統合効果や、Bundle運転を継続した場合の強さは未検証。
 
 ## 成果物
 
