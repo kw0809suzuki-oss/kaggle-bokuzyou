@@ -47,7 +47,7 @@ def feed_purpose_check():
     raw["farms"][p]["farmer"]=[4,4]
     raw["private"]["inventories"]=[{}]
 
-    key="feed:0:0:0:COW"
+    key="ext:feed:0:0:0:COW"
     job=Job(key,"feed_animal","maintenance",{"tile":[0,0],"animal":"COW","day":0},1000,0,True,False)
     a,_=unit_action(job,raw,0,10)
     assert a==["PICKUP","WHEAT",1],a
@@ -75,7 +75,7 @@ def continuation_value_check():
     cow["fed_today"]=False
     raw["farms"][p]["tiles"][0][0]=cow
     raw["private"]["shed"]["WHEAT"]=1
-    key="feed:0:0:0:COW"
+    key="ext:feed:0:0:0:COW"
     spec={"key":key,"kind":"feed_animal","category":"maintenance","target":{"tile":[0,0],"animal":"COW","day":0}}
     chosen,_,active,continuation=choose(raw,Settings(),{key:spec})
     row=[j for j in active if j.key==key]
@@ -103,8 +103,8 @@ def parallel_bundle_check():
     raw["farms"][p]["tiles"][1][0]=animal
 
     jobs=fresh_jobs(raw,720,24,10)
-    water=next(j for j in jobs if j.kind=="water_plant" and j.target["tile"]==[0,0])
-    harvest=next(j for j in jobs if j.kind=="harvest" and j.target["tile"]==[0,1])
+    water=next(j for j in jobs if j.kind=="maintain_plant_today" and j.target["tile"]==[0,0])
+    harvest=next(j for j in jobs if j.kind=="harvest_animal" and j.target["tile"]==[0,1])
     action,scheduled=schedule(raw,Settings(),[water,harvest],{water.key,harvest.key})
     unit_actions=[action["farmer"],*action["hands"]]
     nonpass=sum(1 for a in unit_actions if a!=["PASS"])
@@ -118,16 +118,29 @@ def timing_not_fixed_day_check():
     raw["day"]=27
     raw["hour"]=0
     jobs=fresh_jobs(raw,720,24,10)
-    crops={j.target.get("crop") for j in jobs if j.kind=="establish_crop" and j.category=="production_start"}
-    assert "WHEAT" in crops,crops
+    wheat27=[j for j in jobs if j.target.get("crop")=="WHEAT" and j.category=="production_start"]
+    assert wheat27 and max(j.central_delta for j in wheat27)>0,wheat27
 
     raw2=copy.deepcopy(raw)
     raw2["step"]=28*24
     raw2["day"]=28
     jobs2=fresh_jobs(raw2,720,24,10)
-    crops2={j.target.get("crop") for j in jobs2 if j.kind=="establish_crop" and j.category=="production_start"}
-    assert "WHEAT" not in crops2,crops2
-    return {"day27":sorted(crops),"day28":sorted(crops2)}
+    wheat28=[j for j in jobs2 if j.target.get("crop")=="WHEAT" and j.category=="production_start"]
+    assert wheat28 and max(j.central_delta for j in wheat28)<=0,wheat28
+    return {
+        "day27_best_wheat":max(j.central_delta for j in wheat27),
+        "day28_best_wheat":max(j.central_delta for j in wheat28),
+    }
+
+
+def existing_shortplan_bridge_check():
+    raw=initial_raw()
+    raw["step"]=0
+    jobs=fresh_jobs(raw,720,24,10)
+    base=[j for j in jobs if j.base_plan is not None]
+    assert base, "existing ShortPlan candidates were not reused"
+    assert any(j.base_plan.kind=="prepare_for_plant" for j in base),[j.kind for j in base]
+    return {"base_jobs":len(base),"kinds":sorted({j.base_plan.kind for j in base})}
 
 
 def envelope_check():
@@ -163,6 +176,7 @@ def main():
         "continuation_value":continuation_value_check(),
         "parallel_bundle":parallel_bundle_check(),
         "terminal_timing":timing_not_fixed_day_check(),
+        "shortplan_bridge":existing_shortplan_bridge_check(),
         "envelope":envelope_check(),
         "runtime_smoke":runtime_smoke(),
     }
