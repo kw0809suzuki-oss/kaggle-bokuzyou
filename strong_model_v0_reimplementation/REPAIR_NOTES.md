@@ -32,7 +32,7 @@
 
 既存Contractは8群、48turnのRuntimeまで通過。これらは収益比較の実装確認であり勝率確認ではない。結果JSONは `battle-results/repair-probe/`。
 
-30日対戦は同一seed・席・相手で修理前、修理候補、Independentを比較中。中断前の記憶上の数字は今回の実測として掲載しない。結果の確定後にこの節を更新する。
+30日対戦の実測結果と次に見るEvidenceは、ルートの `STRONG_MODEL_V0_REPAIR_RESULT.md` に記載。中断前の記憶上の数字は今回の実測として掲載しない。
 
 ## 再現
 
@@ -49,3 +49,5 @@ python run_strong_model_v0_repair_probe.py --source-root /path/to/6dcfcb8 --labe
 ```
 
 対戦runnerは公式 `env.run` と既存の制限時間を使用し、終端・行動数・所要時間・コードhash・生Replayを保存する。OpponentはRepo内の `astra_flow_vendor/seyamalam_v21.py`。主目的のself Cashと、相手Cash/marginを分けて記録する。
+
+修理コードcommit `0ba1f3f` のGitHub Contractも成功（Run 36425971886）。

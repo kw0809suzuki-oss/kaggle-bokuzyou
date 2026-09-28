@@ -1,0 +1,2400 @@
+{
+  "scope": "One seed, both seats; not independent seeds or adoption benchmark",
+  "seed": 92804001,
+  "implementation_commit": "0ba1f3f2eb2c5bf85376ec86f257769b20699880",
+  "baseline_commit": "6dcfcb8280027e4b086ba5bca845c5e49382ab83",
+  "official_commit": "d7729da06cc1382eb742d6980dc3180aa85caa28",
+  "independent_source_sha256": "cef4f939cd731f525a72da080d3faa503fcf74af3fb2226e6b9cb541bc16d627",
+  "rows": [
+    {
+      "label": "before",
+      "seed": 92804001,
+      "seat": 0,
+      "self_cash": 2050.0,
+      "opponent_cash": 135081.0,
+      "margin": -133031.0,
+      "statuses": [
+        "DONE",
+        "DONE"
+      ],
+      "steps": 719,
+      "mean_seconds": 0.08725340351042944,
+      "max_seconds": 0.2715365380000776,
+      "remaining_overage": 60
+    },
+    {
+      "label": "before",
+      "seed": 92804001,
+      "seat": 1,
+      "self_cash": 2218.0,
+      "opponent_cash": 182054.0,
+      "margin": -179836.0,
+      "statuses": [
+        "DONE",
+        "DONE"
+      ],
+      "steps": 719,
+      "mean_seconds": 0.07821249022531326,
+      "max_seconds": 0.29709009500004413,
+      "remaining_overage": 60
+    },
+    {
+      "label": "independent",
+      "seed": 92804001,
+      "seat": 0,
+      "self_cash": 77184.0,
+      "opponent_cash": 83398.0,
+      "margin": -6214.0,
+      "statuses": [
+        "DONE",
+        "DONE"
+      ],
+      "steps": 719,
+      "mean_seconds": 2.9622940194217153e-05,
+      "max_seconds": 0.0006724480000457334,
+      "remaining_overage": 60
+    },
+    {
+      "label": "independent",
+      "seed": 92804001,
+      "seat": 1,
+      "self_cash": 77027.0,
+      "opponent_cash": 83555.0,
+      "margin": -6528.0,
+      "statuses": [
+        "DONE",
+        "DONE"
+      ],
+      "steps": 719,
+      "mean_seconds": 2.1338922115243396e-05,
+      "max_seconds": 0.00020424000001639797,
+      "remaining_overage": 60
+    },
+    {
+      "label": "repaired",
+      "seed": 92804001,
+      "seat": 0,
+      "self_cash": 24351.0,
+      "opponent_cash": 169130.0,
+      "margin": -144779.0,
+      "statuses": [
+        "DONE",
+        "DONE"
+      ],
+      "steps": 719,
+      "mean_seconds": 0.4849189549332382,
+      "max_seconds": 1.3859149319999915,
+      "remaining_overage": 58.400605000000006
+    },
+    {
+      "label": "repaired",
+      "seed": 92804001,
+      "seat": 1,
+      "self_cash": 22387.0,
+      "opponent_cash": 162178.0,
+      "margin": -139791.0,
+      "statuses": [
+        "DONE",
+        "DONE"
+      ],
+      "steps": 719,
+      "mean_seconds": 0.5195981852072288,
+      "max_seconds": 1.5884573539999565,
+      "remaining_overage": 52.61425800000002
+    }
+  ],
+  "trajectories": {
+    "before-seat0": {
+      "orders_requested": {
+        "BUY_SEED": 20
+      },
+      "farmer_actions": {
+        "PASS": 641,
+        "NORTH": 31,
+        "PLANT": 16,
+        "SOUTH": 10,
+        "WATER": 6,
+        "WEST": 15
+      },
+      "hand_actions": {},
+      "snapshots": [
+        {
+          "step": 0,
+          "cash": 3000.0,
+          "assets": {},
+          "quadrants": 1
+        },
+        {
+          "step": 24,
+          "cash": 2740.0,
+          "assets": {},
+          "quadrants": 1
+        },
+        {
+          "step": 48,
+          "cash": 2740.0,
+          "assets": {},
+          "quadrants": 1
+        },
+        {
+          "step": 72,
+          "cash": 2740.0,
+          "assets": {
+            "WEED": 1
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 96,
+          "cash": 2740.0,
+          "assets": {
+            "WEED": 1
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 120,
+          "cash": 2740.0,
+          "assets": {
+            "WEED": 1
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 144,
+          "cash": 2740.0,
+          "assets": {
+            "WEED": 1
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 168,
+          "cash": 2740.0,
+          "assets": {
+            "WEED": 1
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 192,
+          "cash": 2740.0,
+          "assets": {
+            "WEED": 1
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 216,
+          "cash": 2740.0,
+          "assets": {
+            "WEED": 1
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 240,
+          "cash": 2740.0,
+          "assets": {
+            "WEED": 1
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 264,
+          "cash": 2740.0,
+          "assets": {
+            "WEED": 1
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 288,
+          "cash": 2740.0,
+          "assets": {
+            "WEED": 1
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 312,
+          "cash": 2740.0,
+          "assets": {
+            "WEED": 1
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 336,
+          "cash": 2540.0,
+          "assets": {
+            "WEED": 4
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 360,
+          "cash": 2540.0,
+          "assets": {
+            "WEED": 4
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 384,
+          "cash": 2540.0,
+          "assets": {
+            "STRAWBERRY": 1,
+            "WEED": 4
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 408,
+          "cash": 2430.0,
+          "assets": {
+            "STRAWBERRY": 1,
+            "WEED": 4,
+            "WHEAT": 1
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 432,
+          "cash": 2260.0,
+          "assets": {
+            "WEED": 8,
+            "WHEAT": 1
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 456,
+          "cash": 2160.0,
+          "assets": {
+            "WEED": 10,
+            "TOMATO": 1
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 480,
+          "cash": 2160.0,
+          "assets": {
+            "WEED": 10,
+            "TOMATO": 1
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 504,
+          "cash": 2090.0,
+          "assets": {
+            "WEED": 14
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 528,
+          "cash": 2080.0,
+          "assets": {
+            "WEED": 14,
+            "WHEAT": 1
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 552,
+          "cash": 2080.0,
+          "assets": {
+            "WEED": 14,
+            "WHEAT": 1
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 576,
+          "cash": 2080.0,
+          "assets": {
+            "WEED": 15
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 600,
+          "cash": 2080.0,
+          "assets": {
+            "WEED": 15
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 624,
+          "cash": 2070.0,
+          "assets": {
+            "WEED": 15,
+            "WHEAT": 1
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 648,
+          "cash": 2070.0,
+          "assets": {
+            "CARROT": 1,
+            "WEED": 15,
+            "WHEAT": 1
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 672,
+          "cash": 2050.0,
+          "assets": {
+            "CARROT": 1,
+            "WEED": 17
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 696,
+          "cash": 2050.0,
+          "assets": {
+            "WEED": 18
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 719,
+          "cash": 2050.0,
+          "assets": {
+            "WEED": 18
+          },
+          "quadrants": 1
+        }
+      ]
+    },
+    "before-seat1": {
+      "orders_requested": {
+        "BUY_SEED": 20,
+        "SELL": 1
+      },
+      "farmer_actions": {
+        "PASS": 621,
+        "NORTH": 34,
+        "PLANT": 18,
+        "SOUTH": 13,
+        "WEST": 25,
+        "EAST": 2,
+        "WATER": 5,
+        "HARVEST": 1
+      },
+      "hand_actions": {},
+      "snapshots": [
+        {
+          "step": 0,
+          "cash": 3000.0,
+          "assets": {},
+          "quadrants": 1
+        },
+        {
+          "step": 24,
+          "cash": 2740.0,
+          "assets": {},
+          "quadrants": 1
+        },
+        {
+          "step": 48,
+          "cash": 2740.0,
+          "assets": {
+            "WEED": 1
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 72,
+          "cash": 2740.0,
+          "assets": {
+            "WEED": 2
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 96,
+          "cash": 2740.0,
+          "assets": {
+            "WEED": 2
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 120,
+          "cash": 2740.0,
+          "assets": {
+            "WEED": 2
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 144,
+          "cash": 2740.0,
+          "assets": {
+            "WEED": 2
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 168,
+          "cash": 2740.0,
+          "assets": {
+            "WEED": 2
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 192,
+          "cash": 2740.0,
+          "assets": {
+            "WEED": 2
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 216,
+          "cash": 2740.0,
+          "assets": {
+            "WEED": 2
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 240,
+          "cash": 2740.0,
+          "assets": {
+            "WEED": 2
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 264,
+          "cash": 2740.0,
+          "assets": {
+            "WEED": 2
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 288,
+          "cash": 2740.0,
+          "assets": {
+            "WEED": 2
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 312,
+          "cash": 2740.0,
+          "assets": {
+            "WEED": 2
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 336,
+          "cash": 2540.0,
+          "assets": {
+            "WEED": 5
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 360,
+          "cash": 2540.0,
+          "assets": {
+            "WEED": 5
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 384,
+          "cash": 2440.0,
+          "assets": {
+            "WEED": 6
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 408,
+          "cash": 2380.0,
+          "assets": {
+            "WEED": 8
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 432,
+          "cash": 2380.0,
+          "assets": {
+            "MELON": 1,
+            "WEED": 9
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 456,
+          "cash": 2240.0,
+          "assets": {
+            "MELON": 1,
+            "WEED": 9,
+            "TOMATO": 1
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 480,
+          "cash": 2240.0,
+          "assets": {
+            "WEED": 11,
+            "TOMATO": 1
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 504,
+          "cash": 2180.0,
+          "assets": {
+            "WEED": 16
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 528,
+          "cash": 2170.0,
+          "assets": {
+            "WEED": 18
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 552,
+          "cash": 2160.0,
+          "assets": {
+            "WEED": 18
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 576,
+          "cash": 2160.0,
+          "assets": {
+            "WEED": 18
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 600,
+          "cash": 2160.0,
+          "assets": {
+            "WEED": 18
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 624,
+          "cash": 2150.0,
+          "assets": {
+            "WEED": 18,
+            "WHEAT": 1
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 648,
+          "cash": 2150.0,
+          "assets": {
+            "WEED": 18,
+            "WHEAT": 1
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 672,
+          "cash": 2120.0,
+          "assets": {
+            "WEED": 20,
+            "WHEAT": 1
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 696,
+          "cash": 2218.0,
+          "assets": {
+            "WEED": 20,
+            "WHEAT": 1
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 719,
+          "cash": 2218.0,
+          "assets": {
+            "WEED": 20,
+            "WHEAT": 1
+          },
+          "quadrants": 1
+        }
+      ]
+    },
+    "independent-seat0": {
+      "orders_requested": {
+        "HIRE": 306,
+        "BUY_ANIMAL": 14,
+        "BUY_SEED": 54,
+        "SELL": 355,
+        "BUY_PRODUCT": 279,
+        "BUY_LAND": 2
+      },
+      "farmer_actions": {
+        "PASS": 45,
+        "BUILD_PASTURE": 3,
+        "PICKUP": 177,
+        "PLACE": 3,
+        "FEED": 112,
+        "NORTH": 81,
+        "CARE": 8,
+        "WEST": 85,
+        "PLANT": 7,
+        "WATER": 32,
+        "SOUTH": 56,
+        "EAST": 78,
+        "COLLECT_FERTILIZER": 10,
+        "HARVEST": 15,
+        "DROP": 3,
+        "FERTILIZE": 4
+      },
+      "hand_actions": {
+        "WEST": 1013,
+        "NORTH": 1155,
+        "BUILD_PASTURE": 11,
+        "SOUTH": 873,
+        "PICKUP": 162,
+        "EAST": 779,
+        "CARE": 300,
+        "PLANT": 124,
+        "PASS": 332,
+        "PLACE": 23,
+        "WATER": 819,
+        "FEED": 207,
+        "COLLECT_FERTILIZER": 308,
+        "DROP": 78,
+        "HARVEST": 323,
+        "DIG": 25,
+        "FERTILIZE": 103
+      },
+      "snapshots": [
+        {
+          "step": 0,
+          "cash": 3000.0,
+          "assets": {},
+          "quadrants": 1
+        },
+        {
+          "step": 24,
+          "cash": 47.0,
+          "assets": {
+            "MELON": 7,
+            "WHEAT": 10,
+            "SHEEP": 1,
+            "COW": 3
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 48,
+          "cash": 140.0,
+          "assets": {
+            "MELON": 7,
+            "WHEAT": 11,
+            "SHEEP": 1,
+            "COW": 3
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 72,
+          "cash": 216.0,
+          "assets": {
+            "MELON": 8,
+            "WHEAT": 11,
+            "SHEEP": 1,
+            "COW": 3
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 96,
+          "cash": 788.0,
+          "assets": {
+            "MELON": 8,
+            "WHEAT": 11,
+            "SHEEP": 1,
+            "COW": 3
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 120,
+          "cash": 621.0,
+          "assets": {
+            "MELON": 10,
+            "WHEAT": 7,
+            "STRAWBERRY": 2,
+            "SHEEP": 1,
+            "COW": 3
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 144,
+          "cash": 636.0,
+          "assets": {
+            "MELON": 10,
+            "WHEAT": 6,
+            "STRAWBERRY": 2,
+            "SHEEP": 2,
+            "COW": 4
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 168,
+          "cash": 1604.0,
+          "assets": {
+            "MELON": 10,
+            "WHEAT": 6,
+            "STRAWBERRY": 2,
+            "PASTURE": 1,
+            "SHEEP": 2,
+            "COW": 4
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 192,
+          "cash": 801.0,
+          "assets": {
+            "MELON": 11,
+            "STRAWBERRY": 6,
+            "WHEAT": 10,
+            "COW": 5,
+            "SHEEP": 2
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 216,
+          "cash": 1223.0,
+          "assets": {
+            "MELON": 11,
+            "STRAWBERRY": 12,
+            "WHEAT": 7,
+            "COW": 5,
+            "SHEEP": 6,
+            "WEED": 2
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 240,
+          "cash": 1049.0,
+          "assets": {
+            "MELON": 11,
+            "STRAWBERRY": 17,
+            "WHEAT": 7,
+            "COW": 6,
+            "SHEEP": 6
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 264,
+          "cash": 2793.0,
+          "assets": {
+            "STRAWBERRY": 21,
+            "WHEAT": 8,
+            "MELON": 4,
+            "COW": 6,
+            "PASTURE": 2,
+            "SHEEP": 6
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 288,
+          "cash": 7242.0,
+          "assets": {
+            "STRAWBERRY": 27,
+            "WHEAT": 6,
+            "MELON": 6,
+            "COW": 8,
+            "SHEEP": 6
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 312,
+          "cash": 12232.0,
+          "assets": {
+            "STRAWBERRY": 33,
+            "WHEAT": 4,
+            "MELON": 6,
+            "COW": 8,
+            "SHEEP": 6,
+            "WEED": 2
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 336,
+          "cash": 12241.0,
+          "assets": {
+            "STRAWBERRY": 38,
+            "WHEAT": 4,
+            "MELON": 9,
+            "COW": 8,
+            "SHEEP": 6,
+            "WEED": 1
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 360,
+          "cash": 16306.0,
+          "assets": {
+            "STRAWBERRY": 40,
+            "WHEAT": 4,
+            "WEED": 1,
+            "MELON": 8,
+            "COW": 8,
+            "SHEEP": 6
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 384,
+          "cash": 19455.0,
+          "assets": {
+            "STRAWBERRY": 40,
+            "MELON": 10,
+            "WHEAT": 3,
+            "COW": 8,
+            "SHEEP": 6,
+            "WEED": 1
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 408,
+          "cash": 21287.0,
+          "assets": {
+            "STRAWBERRY": 40,
+            "MELON": 10,
+            "WHEAT": 4,
+            "COW": 8,
+            "SHEEP": 6
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 432,
+          "cash": 27243.0,
+          "assets": {
+            "STRAWBERRY": 40,
+            "MELON": 9,
+            "WHEAT": 5,
+            "COW": 8,
+            "SHEEP": 6
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 456,
+          "cash": 30267.0,
+          "assets": {
+            "STRAWBERRY": 40,
+            "MELON": 9,
+            "WHEAT": 4,
+            "COW": 8,
+            "SHEEP": 6
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 480,
+          "cash": 36078.0,
+          "assets": {
+            "STRAWBERRY": 40,
+            "MELON": 9,
+            "COW": 8,
+            "SHEEP": 6,
+            "WHEAT": 3
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 504,
+          "cash": 43736.0,
+          "assets": {
+            "STRAWBERRY": 40,
+            "MELON": 9,
+            "COW": 8,
+            "SHEEP": 6,
+            "WHEAT": 1
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 528,
+          "cash": 47780.0,
+          "assets": {
+            "STRAWBERRY": 38,
+            "MELON": 8,
+            "COW": 8,
+            "SHEEP": 6
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 552,
+          "cash": 54636.0,
+          "assets": {
+            "STRAWBERRY": 38,
+            "MELON": 7,
+            "COW": 8,
+            "SHEEP": 6
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 576,
+          "cash": 61686.0,
+          "assets": {
+            "STRAWBERRY": 38,
+            "MELON": 6,
+            "COW": 8,
+            "SHEEP": 6
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 600,
+          "cash": 67332.0,
+          "assets": {
+            "STRAWBERRY": 34,
+            "MELON": 5,
+            "COW": 8,
+            "SHEEP": 6
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 624,
+          "cash": 68465.0,
+          "assets": {
+            "STRAWBERRY": 28,
+            "MELON": 3,
+            "COW": 8,
+            "WEED": 2,
+            "SHEEP": 6
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 648,
+          "cash": 69290.0,
+          "assets": {
+            "STRAWBERRY": 22,
+            "WHEAT": 30,
+            "MELON": 2,
+            "COW": 8,
+            "WEED": 4,
+            "SHEEP": 6
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 672,
+          "cash": 69679.0,
+          "assets": {
+            "WEED": 11,
+            "STRAWBERRY": 15,
+            "WHEAT": 31,
+            "COW": 8,
+            "SHEEP": 6
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 696,
+          "cash": 70033.0,
+          "assets": {
+            "WEED": 14,
+            "WHEAT": 23,
+            "COW": 8,
+            "PASTURE": 1,
+            "STRAWBERRY": 12,
+            "SHEEP": 5
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 719,
+          "cash": 77184.0,
+          "assets": {
+            "WEED": 20,
+            "COW": 8,
+            "PASTURE": 1,
+            "STRAWBERRY": 6,
+            "SHEEP": 5,
+            "WHEAT": 1
+          },
+          "quadrants": 3
+        }
+      ]
+    },
+    "independent-seat1": {
+      "orders_requested": {
+        "HIRE": 306,
+        "BUY_ANIMAL": 14,
+        "BUY_SEED": 54,
+        "SELL": 355,
+        "BUY_PRODUCT": 279,
+        "BUY_LAND": 2
+      },
+      "farmer_actions": {
+        "PASS": 45,
+        "BUILD_PASTURE": 3,
+        "PICKUP": 177,
+        "PLACE": 3,
+        "FEED": 112,
+        "NORTH": 81,
+        "CARE": 8,
+        "WEST": 85,
+        "PLANT": 7,
+        "WATER": 32,
+        "SOUTH": 56,
+        "EAST": 78,
+        "COLLECT_FERTILIZER": 10,
+        "HARVEST": 15,
+        "DROP": 3,
+        "FERTILIZE": 4
+      },
+      "hand_actions": {
+        "WEST": 1013,
+        "NORTH": 1155,
+        "BUILD_PASTURE": 11,
+        "SOUTH": 873,
+        "PICKUP": 162,
+        "EAST": 779,
+        "CARE": 300,
+        "PLANT": 124,
+        "PASS": 332,
+        "PLACE": 23,
+        "WATER": 819,
+        "FEED": 207,
+        "COLLECT_FERTILIZER": 308,
+        "DROP": 78,
+        "HARVEST": 323,
+        "DIG": 25,
+        "FERTILIZE": 103
+      },
+      "snapshots": [
+        {
+          "step": 0,
+          "cash": 3000.0,
+          "assets": {},
+          "quadrants": 1
+        },
+        {
+          "step": 24,
+          "cash": 47.0,
+          "assets": {
+            "MELON": 7,
+            "WHEAT": 10,
+            "SHEEP": 1,
+            "COW": 3
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 48,
+          "cash": 140.0,
+          "assets": {
+            "MELON": 7,
+            "WHEAT": 11,
+            "SHEEP": 1,
+            "COW": 3
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 72,
+          "cash": 216.0,
+          "assets": {
+            "MELON": 8,
+            "WHEAT": 11,
+            "SHEEP": 1,
+            "COW": 3
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 96,
+          "cash": 788.0,
+          "assets": {
+            "MELON": 8,
+            "WHEAT": 11,
+            "SHEEP": 1,
+            "COW": 3
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 120,
+          "cash": 621.0,
+          "assets": {
+            "MELON": 10,
+            "WHEAT": 7,
+            "STRAWBERRY": 2,
+            "SHEEP": 1,
+            "COW": 3
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 144,
+          "cash": 636.0,
+          "assets": {
+            "MELON": 10,
+            "WHEAT": 6,
+            "STRAWBERRY": 2,
+            "SHEEP": 2,
+            "COW": 4
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 168,
+          "cash": 1604.0,
+          "assets": {
+            "MELON": 10,
+            "WHEAT": 6,
+            "STRAWBERRY": 2,
+            "PASTURE": 1,
+            "SHEEP": 2,
+            "COW": 4
+          },
+          "quadrants": 1
+        },
+        {
+          "step": 192,
+          "cash": 801.0,
+          "assets": {
+            "MELON": 11,
+            "STRAWBERRY": 6,
+            "WHEAT": 10,
+            "COW": 5,
+            "SHEEP": 2
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 216,
+          "cash": 1223.0,
+          "assets": {
+            "MELON": 11,
+            "STRAWBERRY": 12,
+            "WHEAT": 7,
+            "COW": 5,
+            "SHEEP": 6,
+            "WEED": 2
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 240,
+          "cash": 1049.0,
+          "assets": {
+            "MELON": 11,
+            "STRAWBERRY": 17,
+            "WHEAT": 7,
+            "COW": 6,
+            "SHEEP": 6
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 264,
+          "cash": 2793.0,
+          "assets": {
+            "STRAWBERRY": 21,
+            "WHEAT": 8,
+            "MELON": 4,
+            "COW": 6,
+            "PASTURE": 2,
+            "SHEEP": 6
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 288,
+          "cash": 7242.0,
+          "assets": {
+            "STRAWBERRY": 27,
+            "WHEAT": 6,
+            "MELON": 6,
+            "COW": 8,
+            "SHEEP": 6
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 312,
+          "cash": 12232.0,
+          "assets": {
+            "STRAWBERRY": 33,
+            "WHEAT": 4,
+            "MELON": 6,
+            "COW": 8,
+            "SHEEP": 6,
+            "WEED": 2
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 336,
+          "cash": 12241.0,
+          "assets": {
+            "STRAWBERRY": 38,
+            "WHEAT": 4,
+            "MELON": 9,
+            "COW": 8,
+            "SHEEP": 6,
+            "WEED": 2
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 360,
+          "cash": 16306.0,
+          "assets": {
+            "STRAWBERRY": 40,
+            "WHEAT": 4,
+            "WEED": 2,
+            "MELON": 8,
+            "COW": 8,
+            "SHEEP": 6
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 384,
+          "cash": 19455.0,
+          "assets": {
+            "STRAWBERRY": 40,
+            "MELON": 10,
+            "WHEAT": 3,
+            "COW": 8,
+            "SHEEP": 6,
+            "WEED": 1
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 408,
+          "cash": 21287.0,
+          "assets": {
+            "STRAWBERRY": 40,
+            "MELON": 10,
+            "WHEAT": 4,
+            "COW": 8,
+            "SHEEP": 6
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 432,
+          "cash": 27243.0,
+          "assets": {
+            "STRAWBERRY": 40,
+            "MELON": 9,
+            "WHEAT": 5,
+            "COW": 8,
+            "SHEEP": 6
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 456,
+          "cash": 30267.0,
+          "assets": {
+            "STRAWBERRY": 40,
+            "MELON": 9,
+            "WHEAT": 4,
+            "COW": 8,
+            "SHEEP": 6
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 480,
+          "cash": 36078.0,
+          "assets": {
+            "STRAWBERRY": 40,
+            "MELON": 9,
+            "COW": 8,
+            "SHEEP": 6,
+            "WHEAT": 3
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 504,
+          "cash": 43736.0,
+          "assets": {
+            "STRAWBERRY": 40,
+            "MELON": 9,
+            "COW": 8,
+            "SHEEP": 6,
+            "WHEAT": 1
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 528,
+          "cash": 47780.0,
+          "assets": {
+            "STRAWBERRY": 38,
+            "MELON": 8,
+            "COW": 8,
+            "SHEEP": 6
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 552,
+          "cash": 54636.0,
+          "assets": {
+            "STRAWBERRY": 38,
+            "MELON": 7,
+            "COW": 8,
+            "SHEEP": 6
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 576,
+          "cash": 61686.0,
+          "assets": {
+            "STRAWBERRY": 38,
+            "MELON": 6,
+            "COW": 8,
+            "SHEEP": 6
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 600,
+          "cash": 67332.0,
+          "assets": {
+            "STRAWBERRY": 34,
+            "MELON": 5,
+            "COW": 8,
+            "SHEEP": 6,
+            "WEED": 1
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 624,
+          "cash": 68465.0,
+          "assets": {
+            "STRAWBERRY": 28,
+            "MELON": 3,
+            "COW": 8,
+            "WEED": 2,
+            "SHEEP": 6
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 648,
+          "cash": 69290.0,
+          "assets": {
+            "STRAWBERRY": 22,
+            "WHEAT": 30,
+            "MELON": 2,
+            "COW": 8,
+            "SHEEP": 6,
+            "WEED": 4
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 672,
+          "cash": 69679.0,
+          "assets": {
+            "WEED": 11,
+            "STRAWBERRY": 15,
+            "WHEAT": 31,
+            "COW": 8,
+            "SHEEP": 6
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 696,
+          "cash": 70055.0,
+          "assets": {
+            "WEED": 14,
+            "WHEAT": 23,
+            "COW": 8,
+            "PASTURE": 1,
+            "STRAWBERRY": 12,
+            "SHEEP": 5
+          },
+          "quadrants": 3
+        },
+        {
+          "step": 719,
+          "cash": 77027.0,
+          "assets": {
+            "WEED": 20,
+            "COW": 8,
+            "PASTURE": 1,
+            "STRAWBERRY": 6,
+            "SHEEP": 5,
+            "WHEAT": 1
+          },
+          "quadrants": 3
+        }
+      ]
+    },
+    "repaired-seat0": {
+      "orders_requested": {
+        "BUY_ANIMAL": 15,
+        "BUY_LAND": 43,
+        "BUY_SEED": 71,
+        "HIRE": 28,
+        "BUY_PRODUCT": 60,
+        "SELL": 40
+      },
+      "farmer_actions": {
+        "BUILD_PASTURE": 1,
+        "EAST": 88,
+        "NORTH": 76,
+        "WEST": 119,
+        "SOUTH": 64,
+        "PLANT": 21,
+        "WATER": 110,
+        "PICKUP": 37,
+        "FEED": 33,
+        "CARE": 33,
+        "HARVEST": 28,
+        "PASS": 79,
+        "DROP": 24,
+        "DIG": 5,
+        "PLACE": 1
+      },
+      "hand_actions": {
+        "WEST": 104,
+        "EAST": 67,
+        "PICKUP": 15,
+        "PLACE": 2,
+        "NORTH": 49,
+        "PASS": 70,
+        "WATER": 50,
+        "PLANT": 17,
+        "SOUTH": 35,
+        "FEED": 12,
+        "CARE": 11,
+        "BUILD_PASTURE": 1,
+        "HARVEST": 11,
+        "DROP": 11,
+        "DIG": 6,
+        "BUILD_COOP": 1
+      },
+      "snapshots": [
+        {
+          "step": 0,
+          "cash": 3000.0,
+          "assets": {},
+          "quadrants": 1
+        },
+        {
+          "step": 24,
+          "cash": 463.0,
+          "assets": {
+            "CARROT": 2,
+            "WHEAT": 1,
+            "MELON": 3,
+            "WEED": 1,
+            "SHEEP": 1,
+            "PASTURE": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 48,
+          "cash": 142.0,
+          "assets": {
+            "MELON": 5,
+            "STRAWBERRY": 1,
+            "WEED": 3,
+            "CARROT": 2,
+            "WHEAT": 1,
+            "SHEEP": 1,
+            "PASTURE": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 72,
+          "cash": 111.0,
+          "assets": {
+            "WEED": 4,
+            "MELON": 5,
+            "WHEAT": 2,
+            "STRAWBERRY": 1,
+            "CARROT": 2,
+            "SHEEP": 1,
+            "PASTURE": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 96,
+          "cash": 51.0,
+          "assets": {
+            "WEED": 4,
+            "CARROT": 2,
+            "MELON": 6,
+            "WHEAT": 4,
+            "STRAWBERRY": 1,
+            "SHEEP": 1,
+            "PASTURE": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 120,
+          "cash": 75.0,
+          "assets": {
+            "WEED": 5,
+            "CARROT": 2,
+            "MELON": 7,
+            "STRAWBERRY": 1,
+            "WHEAT": 3,
+            "SHEEP": 1,
+            "PASTURE": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 144,
+          "cash": 43.0,
+          "assets": {
+            "WEED": 11,
+            "MELON": 7,
+            "SHEEP": 1,
+            "PASTURE": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 168,
+          "cash": 294.0,
+          "assets": {
+            "WEED": 8,
+            "MELON": 8,
+            "STRAWBERRY": 3,
+            "SHEEP": 1,
+            "PASTURE": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 192,
+          "cash": 263.0,
+          "assets": {
+            "WEED": 8,
+            "MELON": 8,
+            "STRAWBERRY": 3,
+            "SHEEP": 1,
+            "PASTURE": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 216,
+          "cash": 69.0,
+          "assets": {
+            "WEED": 7,
+            "MELON": 10,
+            "STRAWBERRY": 3,
+            "SHEEP": 1,
+            "PASTURE": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 240,
+          "cash": 904.0,
+          "assets": {
+            "WEED": 7,
+            "MELON": 10,
+            "STRAWBERRY": 3,
+            "SHEEP": 1,
+            "PASTURE": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 264,
+          "cash": 854.0,
+          "assets": {
+            "WEED": 5,
+            "MELON": 11,
+            "STRAWBERRY": 3,
+            "WHEAT": 1,
+            "SHEEP": 1,
+            "PASTURE": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 288,
+          "cash": 818.0,
+          "assets": {
+            "WEED": 5,
+            "MELON": 11,
+            "STRAWBERRY": 3,
+            "WHEAT": 1,
+            "SHEEP": 1,
+            "PASTURE": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 312,
+          "cash": 4379.0,
+          "assets": {
+            "WEED": 11,
+            "MELON": 7,
+            "STRAWBERRY": 1,
+            "SHEEP": 1,
+            "PASTURE": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 336,
+          "cash": 7967.0,
+          "assets": {
+            "WEED": 9,
+            "STRAWBERRY": 3,
+            "TOMATO": 2,
+            "WHEAT": 3,
+            "MELON": 6,
+            "CARROT": 1,
+            "SHEEP": 1,
+            "COW": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 360,
+          "cash": 7917.0,
+          "assets": {
+            "WEED": 9,
+            "STRAWBERRY": 3,
+            "TOMATO": 2,
+            "WHEAT": 3,
+            "MELON": 6,
+            "CARROT": 1,
+            "SHEEP": 1,
+            "COW": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 384,
+          "cash": 9798.0,
+          "assets": {
+            "WEED": 15,
+            "STRAWBERRY": 3,
+            "MELON": 5,
+            "SHEEP": 1,
+            "COW": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 408,
+          "cash": 10872.0,
+          "assets": {
+            "WEED": 15,
+            "STRAWBERRY": 3,
+            "MELON": 4,
+            "SHEEP": 1,
+            "COW": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 432,
+          "cash": 10787.0,
+          "assets": {
+            "WEED": 15,
+            "STRAWBERRY": 3,
+            "MELON": 4,
+            "SHEEP": 1,
+            "COW": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 456,
+          "cash": 12724.0,
+          "assets": {
+            "WEED": 14,
+            "STRAWBERRY": 3,
+            "MELON": 3,
+            "WHEAT": 1,
+            "SHEEP": 1,
+            "COW": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 480,
+          "cash": 12635.0,
+          "assets": {
+            "WEED": 15,
+            "STRAWBERRY": 3,
+            "MELON": 3,
+            "WHEAT": 1,
+            "SHEEP": 1,
+            "COW": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 504,
+          "cash": 13564.0,
+          "assets": {
+            "WEED": 15,
+            "STRAWBERRY": 3,
+            "MELON": 2,
+            "WHEAT": 1,
+            "SHEEP": 1,
+            "COW": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 528,
+          "cash": 15752.0,
+          "assets": {
+            "WEED": 15,
+            "STRAWBERRY": 3,
+            "MELON": 2,
+            "WHEAT": 1,
+            "SHEEP": 1,
+            "COW": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 552,
+          "cash": 16093.0,
+          "assets": {
+            "WEED": 15,
+            "STRAWBERRY": 3,
+            "MELON": 2,
+            "SHEEP": 1,
+            "COW": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 576,
+          "cash": 16909.0,
+          "assets": {
+            "WEED": 15,
+            "STRAWBERRY": 3,
+            "MELON": 2,
+            "SHEEP": 1,
+            "COW": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 600,
+          "cash": 18807.0,
+          "assets": {
+            "WEED": 15,
+            "STRAWBERRY": 3,
+            "MELON": 1,
+            "SHEEP": 1,
+            "COW": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 624,
+          "cash": 20709.0,
+          "assets": {
+            "WEED": 16,
+            "STRAWBERRY": 3,
+            "GOOSE": 1,
+            "SHEEP": 1,
+            "COW": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 648,
+          "cash": 20800.0,
+          "assets": {
+            "WEED": 16,
+            "STRAWBERRY": 3,
+            "GOOSE": 1,
+            "SHEEP": 1,
+            "COW": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 672,
+          "cash": 22618.0,
+          "assets": {
+            "WEED": 16,
+            "STRAWBERRY": 3,
+            "GOOSE": 1,
+            "SHEEP": 1,
+            "COW": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 696,
+          "cash": 23048.0,
+          "assets": {
+            "WEED": 16,
+            "STRAWBERRY": 3,
+            "GOOSE": 1,
+            "PASTURE": 1,
+            "COW": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 719,
+          "cash": 24351.0,
+          "assets": {
+            "WEED": 17,
+            "STRAWBERRY": 2,
+            "GOOSE": 1,
+            "PASTURE": 1,
+            "COW": 1
+          },
+          "quadrants": 2
+        }
+      ]
+    },
+    "repaired-seat1": {
+      "orders_requested": {
+        "BUY_ANIMAL": 32,
+        "BUY_LAND": 22,
+        "BUY_SEED": 64,
+        "HIRE": 26,
+        "BUY_PRODUCT": 53,
+        "SELL": 45
+      },
+      "farmer_actions": {
+        "BUILD_PASTURE": 2,
+        "EAST": 98,
+        "NORTH": 83,
+        "WEST": 106,
+        "SOUTH": 68,
+        "PLANT": 20,
+        "WATER": 98,
+        "PICKUP": 39,
+        "FEED": 35,
+        "CARE": 28,
+        "DIG": 3,
+        "HARVEST": 36,
+        "DROP": 32,
+        "PASS": 70,
+        "BUILD_COOP": 1
+      },
+      "hand_actions": {
+        "WEST": 86,
+        "EAST": 69,
+        "PICKUP": 24,
+        "PLACE": 4,
+        "NORTH": 39,
+        "PASS": 78,
+        "WATER": 41,
+        "PLANT": 8,
+        "SOUTH": 25,
+        "FEED": 16,
+        "CARE": 18,
+        "BUILD_PASTURE": 1,
+        "HARVEST": 9,
+        "DROP": 7,
+        "DIG": 1
+      },
+      "snapshots": [
+        {
+          "step": 0,
+          "cash": 3000.0,
+          "assets": {},
+          "quadrants": 1
+        },
+        {
+          "step": 24,
+          "cash": 463.0,
+          "assets": {
+            "WEED": 1,
+            "CARROT": 2,
+            "WHEAT": 1,
+            "MELON": 3,
+            "SHEEP": 1,
+            "PASTURE": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 48,
+          "cash": 153.0,
+          "assets": {
+            "MELON": 5,
+            "WHEAT": 2,
+            "STRAWBERRY": 1,
+            "WEED": 3,
+            "CARROT": 2,
+            "SHEEP": 1,
+            "PASTURE": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 72,
+          "cash": 31.0,
+          "assets": {
+            "WEED": 3,
+            "MELON": 6,
+            "CARROT": 3,
+            "WHEAT": 3,
+            "STRAWBERRY": 1,
+            "SHEEP": 1,
+            "PASTURE": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 96,
+          "cash": 108.0,
+          "assets": {
+            "WEED": 3,
+            "MELON": 6,
+            "CARROT": 2,
+            "WHEAT": 3,
+            "STRAWBERRY": 1,
+            "SHEEP": 1,
+            "PASTURE": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 120,
+          "cash": 17.0,
+          "assets": {
+            "WEED": 5,
+            "MELON": 7,
+            "WHEAT": 2,
+            "STRAWBERRY": 1,
+            "SHEEP": 1,
+            "PASTURE": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 144,
+          "cash": 67.0,
+          "assets": {
+            "WEED": 6,
+            "MELON": 8,
+            "STRAWBERRY": 1,
+            "WHEAT": 1,
+            "SHEEP": 1,
+            "PASTURE": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 168,
+          "cash": 1040.0,
+          "assets": {
+            "WEED": 6,
+            "MELON": 8,
+            "STRAWBERRY": 1,
+            "WHEAT": 1,
+            "COOP": 1,
+            "SHEEP": 1,
+            "PASTURE": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 192,
+          "cash": 290.0,
+          "assets": {
+            "WEED": 8,
+            "MELON": 9,
+            "STRAWBERRY": 2,
+            "COOP": 1,
+            "SHEEP": 1,
+            "COW": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 216,
+          "cash": 210.0,
+          "assets": {
+            "WEED": 8,
+            "MELON": 9,
+            "STRAWBERRY": 2,
+            "COOP": 1,
+            "SHEEP": 1,
+            "COW": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 240,
+          "cash": 210.0,
+          "assets": {
+            "WEED": 8,
+            "MELON": 9,
+            "STRAWBERRY": 2,
+            "COOP": 1,
+            "SHEEP": 1,
+            "COW": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 264,
+          "cash": 732.0,
+          "assets": {
+            "WEED": 8,
+            "MELON": 9,
+            "STRAWBERRY": 2,
+            "COOP": 1,
+            "SHEEP": 1,
+            "COW": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 288,
+          "cash": 150.0,
+          "assets": {
+            "WEED": 8,
+            "MELON": 8,
+            "STRAWBERRY": 2,
+            "COOP": 1,
+            "SHEEP": 1,
+            "COW": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 312,
+          "cash": 4911.0,
+          "assets": {
+            "WEED": 8,
+            "MELON": 6,
+            "STRAWBERRY": 3,
+            "COOP": 1,
+            "COW": 2,
+            "SHEEP": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 336,
+          "cash": 7012.0,
+          "assets": {
+            "WEED": 11,
+            "MELON": 5,
+            "COOP": 1,
+            "STRAWBERRY": 1,
+            "COW": 2,
+            "SHEEP": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 360,
+          "cash": 6883.0,
+          "assets": {
+            "WEED": 11,
+            "COOP": 1,
+            "STRAWBERRY": 1,
+            "COW": 2,
+            "MELON": 4,
+            "SHEEP": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 384,
+          "cash": 9003.0,
+          "assets": {
+            "WEED": 10,
+            "MELON": 5,
+            "COOP": 1,
+            "STRAWBERRY": 1,
+            "COW": 2,
+            "SHEEP": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 408,
+          "cash": 10042.0,
+          "assets": {
+            "WEED": 10,
+            "MELON": 4,
+            "COOP": 1,
+            "STRAWBERRY": 1,
+            "COW": 2,
+            "PASTURE": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 432,
+          "cash": 11560.0,
+          "assets": {
+            "WEED": 9,
+            "TOMATO": 1,
+            "MELON": 4,
+            "COOP": 1,
+            "STRAWBERRY": 1,
+            "COW": 2,
+            "WHEAT": 1,
+            "PASTURE": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 456,
+          "cash": 11417.0,
+          "assets": {
+            "WEED": 8,
+            "TOMATO": 2,
+            "MELON": 4,
+            "COOP": 1,
+            "STRAWBERRY": 1,
+            "COW": 2,
+            "WHEAT": 1,
+            "PASTURE": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 480,
+          "cash": 12751.0,
+          "assets": {
+            "WEED": 11,
+            "MELON": 3,
+            "COOP": 1,
+            "STRAWBERRY": 1,
+            "COW": 2,
+            "PASTURE": 1,
+            "TOMATO": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 504,
+          "cash": 13707.0,
+          "assets": {
+            "WEED": 11,
+            "CARROT": 1,
+            "MELON": 3,
+            "COOP": 1,
+            "STRAWBERRY": 1,
+            "COW": 2,
+            "PASTURE": 1,
+            "TOMATO": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 528,
+          "cash": 13609.0,
+          "assets": {
+            "WEED": 11,
+            "CARROT": 1,
+            "MELON": 3,
+            "COOP": 1,
+            "STRAWBERRY": 1,
+            "COW": 2,
+            "PASTURE": 1,
+            "TOMATO": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 552,
+          "cash": 14856.0,
+          "assets": {
+            "WEED": 11,
+            "CARROT": 1,
+            "MELON": 3,
+            "COOP": 1,
+            "STRAWBERRY": 1,
+            "COW": 2,
+            "PASTURE": 1,
+            "TOMATO": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 576,
+          "cash": 15503.0,
+          "assets": {
+            "WEED": 11,
+            "MELON": 3,
+            "GOOSE": 1,
+            "STRAWBERRY": 1,
+            "COW": 2,
+            "PASTURE": 1,
+            "TOMATO": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 600,
+          "cash": 16340.0,
+          "assets": {
+            "WEED": 12,
+            "MELON": 3,
+            "GOOSE": 1,
+            "STRAWBERRY": 1,
+            "COW": 2,
+            "PASTURE": 1,
+            "TOMATO": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 624,
+          "cash": 17569.0,
+          "assets": {
+            "WEED": 12,
+            "MELON": 2,
+            "GOOSE": 1,
+            "STRAWBERRY": 1,
+            "COW": 2,
+            "PASTURE": 1,
+            "TOMATO": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 648,
+          "cash": 18974.0,
+          "assets": {
+            "WEED": 12,
+            "GOOSE": 1,
+            "STRAWBERRY": 1,
+            "COW": 2,
+            "MELON": 1,
+            "PASTURE": 1,
+            "TOMATO": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 672,
+          "cash": 20109.0,
+          "assets": {
+            "WEED": 12,
+            "GOOSE": 1,
+            "STRAWBERRY": 1,
+            "COW": 2,
+            "CARROT": 1,
+            "PASTURE": 1,
+            "TOMATO": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 696,
+          "cash": 21191.0,
+          "assets": {
+            "WEED": 12,
+            "GOOSE": 1,
+            "STRAWBERRY": 1,
+            "COW": 2,
+            "CARROT": 1,
+            "PASTURE": 1,
+            "TOMATO": 1
+          },
+          "quadrants": 2
+        },
+        {
+          "step": 719,
+          "cash": 22387.0,
+          "assets": {
+            "WEED": 13,
+            "GOOSE": 1,
+            "COW": 2,
+            "PASTURE": 1,
+            "TOMATO": 1
+          },
+          "quadrants": 2
+        }
+      ]
+    }
+  },
+  "files_sha256": {
+    "before-92804001-seat0.replay.json.gz": "6c5042adc185710af6a66bf38e41876e0550d99601d4c2ca954efb7f6c6116a8",
+    "before-92804001-seat0.summary.json": "8681b6bb32cad1b9e77549a34996bb1914e1919835673415e1285e0143319927",
+    "before-92804001-seat0.trace.json": "6045901b0c30c120ae2d85b57d7a5c622291f9ba176c1e87ed26145ccdb24986",
+    "before-92804001-seat1.replay.json.gz": "cbfb09024772d48d478ac7b5c26a587460a494e06fe99a0e944d0f3ca5fc2f49",
+    "before-92804001-seat1.summary.json": "de2ada221ff788024a7dddfdde729f68ab5b973b27e3e133e7b115d17770a0e6",
+    "before-92804001-seat1.trace.json": "5f5e30a7471ef5cded23126000f9d3603c547854cafa7fbeb3922e889a7ac117",
+    "independent-92804001-seat0.replay.json.gz": "b6640e4037ea6664bed0661a40ef647e0450127206f2f5ff11b219d16389519c",
+    "independent-92804001-seat0.summary.json": "85732eb359289d1831e8fa28cb80f999152d32a5a9c96e576e5871ecf512736b",
+    "independent-92804001-seat0.trace.json": "b402dcb65bca2c2dc23a3ef043657dc4c6154432decaea7bef4bb083881b3f71",
+    "independent-92804001-seat1.replay.json.gz": "de7081a625009293372b14e4d64b7cc51f0d3ceb4f400cc5beff9b6d01b7ae97",
+    "independent-92804001-seat1.summary.json": "e1bdce7295275e62cab44b7086252be7757f6c01a3224cfac6ed052fe7cf12bd",
+    "independent-92804001-seat1.trace.json": "9a13a34afb2f5fbd570aa076f23ff64f1a4873e9c7a294be06b8277288cd7a0d",
+    "repaired-92804001-seat0.replay.json.gz": "c2e46f16c8ff5fc1c5d86d974764937cd911f6a6fa1c5737d2f575839a547c71",
+    "repaired-92804001-seat0.summary.json": "8d0c586d083b15e825eecdc423dcd7f0b92b1b85e78a4cab26450613569ae024",
+    "repaired-92804001-seat0.trace.json": "6d4dc1a20d54e2f8170f97baf4c6727e48987499966398b8d736bb4848bb0b31",
+    "repaired-92804001-seat1.replay.json.gz": "40ede6901d8902e59b0978dbc826805b42169e55e008b99a9456561c8b1f4b06",
+    "repaired-92804001-seat1.summary.json": "ada470d988cb15a993b44bbc2debbceca2fe132f22b5ea4b4645de9955a5e884",
+    "repaired-92804001-seat1.trace.json": "3e5044820399f5c439f5f72b3274bc4c302b7ed98031352b131e4d94b8c66730"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "label": "before",
+  "model": "strong",
+  "seed": 92804001,
+  "seat": 0,
+  "self_cash": 2050.0,
+  "opponent_cash": 135081.0,
+  "margin": -133031.0,
+  "statuses": [
+    "DONE",
+    "DONE"
+  ],
+  "steps": 719,
+  "farmer_actions": {
+    "PASS": 641,
+    "NORTH": 31,
+    "PLANT": 16,
+    "SOUTH": 10,
+    "WATER": 6,
+    "WEST": 15
+  },
+  "mean_seconds": 0.08725340351042944,
+  "max_seconds": 0.2715365380000776,
+  "remaining_overage": 60,
+  "source_hashes": {
+    "strong_model_v0_reimplementation/__init__.py": "e8a5a1335401a48ea475c1c683a45e671fbd3acf2eb20b67a52bb2cdda8fa3bc",
+    "strong_model_v0_reimplementation/jobs.py": "eaa6b783128c5cb05d3f1c95eaecd2e4536ac72e6b3528793898b7036bb2bc71",
+    "strong_model_v0_reimplementation/agent.py": "cb5fc4019e34b3c326d9b3712d9ca01c0d531432c12f0acb272537812ed397cd",
+    "strong_model_v0_reimplementation/planner.py": "a9574c38f7fa39d0808b8491a302408e188b022f46591945cfedeaf1a912ae67",
+    "strong_model_v0_reimplementation/run_battle_smoke.py": "28dae66a99870fa720596fac44e91533040b34a818b0eef1377694867ef32106"
+  },
+  "official_rules_sha256": "bc8a54879ef02c7ea64b8b333d6a976f0ea65c4949149d01f463f23bccee653e",
+  "opponent_sha256": "0cd14b653102d276c4f902fa3b8c6bd81d869b8ab64c422cb881b9d2346ec639"
+}

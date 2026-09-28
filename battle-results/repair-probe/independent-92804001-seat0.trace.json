@@ -1,0 +1,1549 @@
+[
+  {
+    "step": 0,
+    "cash": 3000.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": [
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "BUY_ANIMAL",
+          "COW",
+          1
+        ],
+        [
+          "BUY_SEED",
+          "MELON",
+          6
+        ],
+        [
+          "BUY_SEED",
+          "WHEAT",
+          6
+        ],
+        [
+          "SELL",
+          "WHEAT",
+          1
+        ],
+        [
+          "SELL",
+          "WHEAT",
+          3
+        ],
+        [
+          "SELL",
+          "WHEAT",
+          1
+        ]
+      ]
+    },
+    "seconds": 2.515699998184573e-05
+  },
+  {
+    "step": 1,
+    "cash": 2058.0,
+    "action": {
+      "farmer": [
+        "BUILD_PASTURE"
+      ],
+      "hands": [
+        [
+          "WEST"
+        ],
+        [
+          "NORTH"
+        ]
+      ],
+      "market": [
+        [
+          "BUY_PRODUCT",
+          "WHEAT",
+          6
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "BUY_ANIMAL",
+          "COW",
+          1
+        ],
+        [
+          "BUY_SEED",
+          "WHEAT",
+          5
+        ]
+      ]
+    },
+    "seconds": 1.8095999962497444e-05
+  },
+  {
+    "step": 2,
+    "cash": 1442.0,
+    "action": {
+      "farmer": [
+        "PICKUP",
+        "COW",
+        1
+      ],
+      "hands": [
+        [
+          "NORTH"
+        ],
+        [
+          "NORTH"
+        ],
+        [
+          "WEST"
+        ]
+      ],
+      "market": [
+        [
+          "BUY_PRODUCT",
+          "WHEAT",
+          2
+        ],
+        [
+          "BUY_ANIMAL",
+          "COW",
+          1
+        ]
+      ]
+    },
+    "seconds": 1.665499996761355e-05
+  },
+  {
+    "step": 3,
+    "cash": 984.0,
+    "action": {
+      "farmer": [
+        "PLACE",
+        "COW"
+      ],
+      "hands": [
+        [
+          "BUILD_PASTURE"
+        ],
+        [
+          "NORTH"
+        ],
+        [
+          "WEST"
+        ]
+      ],
+      "market": [
+        [
+          "BUY_PRODUCT",
+          "WHEAT",
+          2
+        ],
+        [
+          "BUY_ANIMAL",
+          "SHEEP",
+          1
+        ]
+      ]
+    },
+    "seconds": 1.4471999975285144e-05
+  },
+  {
+    "step": 4,
+    "cash": 426.0,
+    "action": {
+      "farmer": [
+        "PICKUP",
+        "WHEAT",
+        2
+      ],
+      "hands": [
+        [
+          "SOUTH"
+        ],
+        [
+          "BUILD_PASTURE"
+        ],
+        [
+          "BUILD_PASTURE"
+        ]
+      ],
+      "market": [
+        [
+          "BUY_PRODUCT",
+          "WHEAT",
+          3
+        ],
+        [
+          "HIRE"
+        ]
+      ]
+    },
+    "seconds": 1.5112000028238981e-05
+  },
+  {
+    "step": 5,
+    "cash": 333.0,
+    "action": {
+      "farmer": [
+        "FEED"
+      ],
+      "hands": [
+        [
+          "PICKUP",
+          "COW",
+          2
+        ],
+        [
+          "NORTH"
+        ],
+        [
+          "EAST"
+        ],
+        [
+          "WEST"
+        ]
+      ],
+      "market": [
+        [
+          "BUY_PRODUCT",
+          "WHEAT",
+          1
+        ],
+        [
+          "SELL",
+          "WHEAT",
+          1
+        ]
+      ]
+    },
+    "seconds": 1.4581999948859448e-05
+  },
+  {
+    "step": 6,
+    "cash": 333.0,
+    "action": {
+      "farmer": [
+        "PICKUP",
+        "SHEEP",
+        1
+      ],
+      "hands": [
+        [
+          "CARE"
+        ],
+        [
+          "NORTH"
+        ],
+        [
+          "CARE"
+        ],
+        [
+          "CARE"
+        ]
+      ],
+      "market": [
+        [
+          "BUY_PRODUCT",
+          "WHEAT",
+          6
+        ]
+      ]
+    },
+    "seconds": 1.3168999998924846e-05
+  },
+  {
+    "step": 7,
+    "cash": 149.0,
+    "action": {
+      "farmer": [
+        "NORTH"
+      ],
+      "hands": [
+        [
+          "NORTH"
+        ],
+        [
+          "PLANT",
+          "MELON"
+        ],
+        [
+          "NORTH"
+        ],
+        [
+          "PASS"
+        ]
+      ],
+      "market": []
+    },
+    "seconds": 1.1486999937915243e-05
+  },
+  {
+    "step": 8,
+    "cash": 149.0,
+    "action": {
+      "farmer": [
+        "NORTH"
+      ],
+      "hands": [
+        [
+          "PLACE",
+          "COW"
+        ],
+        [
+          "WATER"
+        ],
+        [
+          "NORTH"
+        ],
+        [
+          "PASS"
+        ]
+      ],
+      "market": [
+        [
+          "BUY_PRODUCT",
+          "WHEAT",
+          2
+        ],
+        [
+          "BUY_SEED",
+          "MELON",
+          1
+        ]
+      ]
+    },
+    "seconds": 5.707399998300389e-05
+  },
+  {
+    "step": 9,
+    "cash": 7.0,
+    "action": {
+      "farmer": [
+        "PLACE",
+        "SHEEP"
+      ],
+      "hands": [
+        [
+          "CARE"
+        ],
+        [
+          "WEST"
+        ],
+        [
+          "SOUTH"
+        ],
+        [
+          "PASS"
+        ]
+      ],
+      "market": [
+        [
+          "SELL",
+          "WHEAT",
+          2
+        ],
+        [
+          "BUY_PRODUCT",
+          "WHEAT",
+          3
+        ]
+      ]
+    },
+    "seconds": 1.527200004147744e-05
+  },
+  {
+    "step": 10,
+    "cash": 8.0,
+    "action": {
+      "farmer": [
+        "FEED"
+      ],
+      "hands": [
+        [
+          "SOUTH"
+        ],
+        [
+          "PLANT",
+          "MELON"
+        ],
+        [
+          "NORTH"
+        ],
+        [
+          "NORTH"
+        ]
+      ],
+      "market": [
+        [
+          "SELL",
+          "WHEAT",
+          1
+        ],
+        [
+          "BUY_PRODUCT",
+          "WHEAT",
+          2
+        ],
+        [
+          "SELL",
+          "WHEAT",
+          2
+        ]
+      ]
+    },
+    "seconds": 1.8808000049830298e-05
+  },
+  {
+    "step": 11,
+    "cash": 72.0,
+    "action": {
+      "farmer": [
+        "CARE"
+      ],
+      "hands": [
+        [
+          "PICKUP",
+          "WHEAT",
+          2
+        ],
+        [
+          "WATER"
+        ],
+        [
+          "NORTH"
+        ],
+        [
+          "SOUTH"
+        ]
+      ],
+      "market": [
+        [
+          "BUY_PRODUCT",
+          "WHEAT",
+          2
+        ]
+      ]
+    },
+    "seconds": 2.0930999994561716e-05
+  },
+  {
+    "step": 12,
+    "cash": 10.0,
+    "action": {
+      "farmer": [
+        "WEST"
+      ],
+      "hands": [
+        [
+          "NORTH"
+        ],
+        [
+          "WEST"
+        ],
+        [
+          "WEST"
+        ],
+        [
+          "PASS"
+        ]
+      ],
+      "market": [
+        [
+          "BUY_PRODUCT",
+          "WHEAT",
+          2
+        ],
+        [
+          "SELL",
+          "WHEAT",
+          1
+        ]
+      ]
+    },
+    "seconds": 3.168599994296528e-05
+  },
+  {
+    "step": 13,
+    "cash": 42.0,
+    "action": {
+      "farmer": [
+        "PLANT",
+        "WHEAT"
+      ],
+      "hands": [
+        [
+          "FEED"
+        ],
+        [
+          "PLANT",
+          "MELON"
+        ],
+        [
+          "PLANT",
+          "MELON"
+        ],
+        [
+          "NORTH"
+        ]
+      ],
+      "market": []
+    },
+    "seconds": 1.221800005168916e-05
+  },
+  {
+    "step": 14,
+    "cash": 42.0,
+    "action": {
+      "farmer": [
+        "WATER"
+      ],
+      "hands": [
+        [
+          "SOUTH"
+        ],
+        [
+          "WATER"
+        ],
+        [
+          "WATER"
+        ],
+        [
+          "WEST"
+        ]
+      ],
+      "market": [
+        [
+          "BUY_PRODUCT",
+          "WHEAT",
+          3
+        ],
+        [
+          "SELL",
+          "WHEAT",
+          1
+        ]
+      ]
+    },
+    "seconds": 1.3749999993706297e-05
+  },
+  {
+    "step": 24,
+    "cash": 47.0,
+    "action": {
+      "farmer": [
+        "PICKUP",
+        "WHEAT",
+        2
+      ],
+      "hands": [],
+      "market": [
+        [
+          "BUY_PRODUCT",
+          "WHEAT",
+          4
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ]
+      ]
+    },
+    "seconds": 1.2918999914290907e-05
+  },
+  {
+    "step": 48,
+    "cash": 140.0,
+    "action": {
+      "farmer": [
+        "PICKUP",
+        "WHEAT",
+        2
+      ],
+      "hands": [],
+      "market": [
+        [
+          "SELL",
+          "FERTILIZER",
+          2
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ]
+      ]
+    },
+    "seconds": 1.2047999916831031e-05
+  },
+  {
+    "step": 72,
+    "cash": 216.0,
+    "action": {
+      "farmer": [
+        "PICKUP",
+        "WHEAT",
+        2
+      ],
+      "hands": [],
+      "market": [
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ]
+      ]
+    },
+    "seconds": 1.5142000052037474e-05
+  },
+  {
+    "step": 96,
+    "cash": 788.0,
+    "action": {
+      "farmer": [
+        "PICKUP",
+        "WHEAT",
+        2
+      ],
+      "hands": [],
+      "market": [
+        [
+          "SELL",
+          "FERTILIZER",
+          1
+        ],
+        [
+          "SELL",
+          "WHEAT",
+          4
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ]
+      ]
+    },
+    "seconds": 1.319900002272334e-05
+  },
+  {
+    "step": 120,
+    "cash": 621.0,
+    "action": {
+      "farmer": [
+        "PICKUP",
+        "WHEAT",
+        2
+      ],
+      "hands": [],
+      "market": [
+        [
+          "SELL",
+          "WHEAT",
+          31
+        ],
+        [
+          "SELL",
+          "FERTILIZER",
+          2
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ]
+      ]
+    },
+    "seconds": 1.4952000015000522e-05
+  },
+  {
+    "step": 144,
+    "cash": 636.0,
+    "action": {
+      "farmer": [
+        "PICKUP",
+        "WHEAT",
+        2
+      ],
+      "hands": [],
+      "market": [
+        [
+          "SELL",
+          "WHEAT",
+          6
+        ],
+        [
+          "SELL",
+          "FERTILIZER",
+          2
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ]
+      ]
+    },
+    "seconds": 1.2497999932747916e-05
+  },
+  {
+    "step": 168,
+    "cash": 1604.0,
+    "action": {
+      "farmer": [
+        "PICKUP",
+        "WHEAT",
+        2
+      ],
+      "hands": [],
+      "market": [
+        [
+          "SELL",
+          "FERTILIZER",
+          3
+        ],
+        [
+          "BUY_PRODUCT",
+          "WHEAT",
+          1
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ]
+      ]
+    },
+    "seconds": 0.0006724480000457334
+  },
+  {
+    "step": 192,
+    "cash": 801.0,
+    "action": {
+      "farmer": [
+        "PICKUP",
+        "WHEAT",
+        2
+      ],
+      "hands": [],
+      "market": [
+        [
+          "SELL",
+          "FERTILIZER",
+          3
+        ],
+        [
+          "BUY_PRODUCT",
+          "WHEAT",
+          1
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ]
+      ]
+    },
+    "seconds": 2.071000005798851e-05
+  },
+  {
+    "step": 216,
+    "cash": 1223.0,
+    "action": {
+      "farmer": [
+        "PICKUP",
+        "WHEAT",
+        2
+      ],
+      "hands": [],
+      "market": [
+        [
+          "SELL",
+          "WHEAT",
+          17
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "BUY_SEED",
+          "STRAWBERRY",
+          2
+        ]
+      ]
+    },
+    "seconds": 2.064000000245869e-05
+  },
+  {
+    "step": 240,
+    "cash": 1049.0,
+    "action": {
+      "farmer": [
+        "PICKUP",
+        "WHEAT",
+        2
+      ],
+      "hands": [],
+      "market": [
+        [
+          "SELL",
+          "FERTILIZER",
+          7
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ]
+      ]
+    },
+    "seconds": 1.7316000025857647e-05
+  },
+  {
+    "step": 264,
+    "cash": 2793.0,
+    "action": {
+      "farmer": [
+        "PICKUP",
+        "WHEAT",
+        2
+      ],
+      "hands": [],
+      "market": [
+        [
+          "SELL",
+          "MELON",
+          18
+        ],
+        [
+          "SELL",
+          "FERTILIZER",
+          12
+        ],
+        [
+          "BUY_PRODUCT",
+          "WHEAT",
+          2
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ]
+      ]
+    },
+    "seconds": 2.3123999994822952e-05
+  },
+  {
+    "step": 288,
+    "cash": 7242.0,
+    "action": {
+      "farmer": [
+        "PICKUP",
+        "WHEAT",
+        2
+      ],
+      "hands": [],
+      "market": [
+        [
+          "SELL",
+          "FERTILIZER",
+          15
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ]
+      ]
+    },
+    "seconds": 1.29690000676419e-05
+  },
+  {
+    "step": 312,
+    "cash": 12232.0,
+    "action": {
+      "farmer": [
+        "PICKUP",
+        "WHEAT",
+        2
+      ],
+      "hands": [],
+      "market": [
+        [
+          "SELL",
+          "FERTILIZER",
+          11
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "BUY_SEED",
+          "STRAWBERRY",
+          2
+        ],
+        [
+          "BUY_PRODUCT",
+          "WHEAT",
+          10
+        ]
+      ]
+    },
+    "seconds": 1.7726000010043208e-05
+  },
+  {
+    "step": 336,
+    "cash": 12241.0,
+    "action": {
+      "farmer": [
+        "PICKUP",
+        "WHEAT",
+        2
+      ],
+      "hands": [],
+      "market": [
+        [
+          "SELL",
+          "FERTILIZER",
+          10
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "BUY_PRODUCT",
+          "WHEAT",
+          4
+        ]
+      ]
+    },
+    "seconds": 2.128100004483713e-05
+  },
+  {
+    "step": 360,
+    "cash": 16306.0,
+    "action": {
+      "farmer": [
+        "PICKUP",
+        "WHEAT",
+        2
+      ],
+      "hands": [],
+      "market": [
+        [
+          "SELL",
+          "MELON",
+          10
+        ],
+        [
+          "SELL",
+          "FERTILIZER",
+          20
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "SELL",
+          "WOOL",
+          3
+        ]
+      ]
+    },
+    "seconds": 2.367399997638131e-05
+  },
+  {
+    "step": 384,
+    "cash": 19455.0,
+    "action": {
+      "farmer": [
+        "PICKUP",
+        "WHEAT",
+        2
+      ],
+      "hands": [],
+      "market": [
+        [
+          "SELL",
+          "WOOL",
+          4
+        ],
+        [
+          "SELL",
+          "FERTILIZER",
+          10
+        ],
+        [
+          "SELL",
+          "FERTILIZER",
+          3
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ]
+      ]
+    },
+    "seconds": 1.560300006531179e-05
+  },
+  {
+    "step": 408,
+    "cash": 21287.0,
+    "action": {
+      "farmer": [
+        "PICKUP",
+        "WHEAT",
+        2
+      ],
+      "hands": [],
+      "market": [
+        [
+          "SELL",
+          "MILK",
+          9
+        ],
+        [
+          "SELL",
+          "FERTILIZER",
+          8
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ]
+      ]
+    },
+    "seconds": 2.0750000089719833e-05
+  },
+  {
+    "step": 432,
+    "cash": 27243.0,
+    "action": {
+      "farmer": [
+        "PICKUP",
+        "WHEAT",
+        2
+      ],
+      "hands": [],
+      "market": [
+        [
+          "SELL",
+          "FERTILIZER",
+          3
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "SELL",
+          "WOOL",
+          4
+        ]
+      ]
+    },
+    "seconds": 1.5782999980729073e-05
+  },
+  {
+    "step": 456,
+    "cash": 30267.0,
+    "action": {
+      "farmer": [
+        "PICKUP",
+        "WHEAT",
+        2
+      ],
+      "hands": [],
+      "market": [
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "SELL",
+          "WOOL",
+          1
+        ]
+      ]
+    },
+    "seconds": 1.559199995426752e-05
+  },
+  {
+    "step": 480,
+    "cash": 36078.0,
+    "action": {
+      "farmer": [
+        "PICKUP",
+        "WHEAT",
+        2
+      ],
+      "hands": [],
+      "market": [
+        [
+          "SELL",
+          "FERTILIZER",
+          7
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ]
+      ]
+    },
+    "seconds": 2.0099000039408565e-05
+  },
+  {
+    "step": 504,
+    "cash": 43736.0,
+    "action": {
+      "farmer": [
+        "PICKUP",
+        "WHEAT",
+        2
+      ],
+      "hands": [],
+      "market": [
+        [
+          "SELL",
+          "STRAWBERRY",
+          14
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "SELL",
+          "WOOL",
+          8
+        ]
+      ]
+    },
+    "seconds": 4.076999994140351e-05
+  },
+  {
+    "step": 528,
+    "cash": 47780.0,
+    "action": {
+      "farmer": [
+        "PICKUP",
+        "WHEAT",
+        2
+      ],
+      "hands": [],
+      "market": [
+        [
+          "SELL",
+          "STRAWBERRY",
+          14
+        ],
+        [
+          "SELL",
+          "FERTILIZER",
+          3
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "SELL",
+          "MELON",
+          6
+        ]
+      ]
+    },
+    "seconds": 2.0399999925757584e-05
+  },
+  {
+    "step": 552,
+    "cash": 54636.0,
+    "action": {
+      "farmer": [
+        "PICKUP",
+        "WHEAT",
+        2
+      ],
+      "hands": [],
+      "market": [
+        [
+          "SELL",
+          "FERTILIZER",
+          2
+        ],
+        [
+          "SELL",
+          "FERTILIZER",
+          1
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ]
+      ]
+    },
+    "seconds": 4.8822000053405645e-05
+  },
+  {
+    "step": 576,
+    "cash": 61686.0,
+    "action": {
+      "farmer": [
+        "PICKUP",
+        "WHEAT",
+        2
+      ],
+      "hands": [],
+      "market": [
+        [
+          "SELL",
+          "STRAWBERRY",
+          27
+        ],
+        [
+          "SELL",
+          "MELON",
+          6
+        ],
+        [
+          "SELL",
+          "FERTILIZER",
+          7
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "BUY_PRODUCT",
+          "WHEAT",
+          1
+        ],
+        [
+          "SELL",
+          "WOOL",
+          4
+        ]
+      ]
+    },
+    "seconds": 2.5207000021509884e-05
+  },
+  {
+    "step": 600,
+    "cash": 67332.0,
+    "action": {
+      "farmer": [
+        "PICKUP",
+        "WHEAT",
+        2
+      ],
+      "hands": [],
+      "market": [
+        [
+          "SELL",
+          "STRAWBERRY",
+          20
+        ],
+        [
+          "SELL",
+          "FERTILIZER",
+          10
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "BUY_PRODUCT",
+          "WHEAT",
+          2
+        ]
+      ]
+    },
+    "seconds": 2.4496000037288468e-05
+  },
+  {
+    "step": 624,
+    "cash": 68465.0,
+    "action": {
+      "farmer": [
+        "PICKUP",
+        "WHEAT",
+        8
+      ],
+      "hands": [],
+      "market": [
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ]
+      ]
+    },
+    "seconds": 1.9248000057814352e-05
+  },
+  {
+    "step": 648,
+    "cash": 69290.0,
+    "action": {
+      "farmer": [
+        "PICKUP",
+        "WHEAT",
+        8
+      ],
+      "hands": [],
+      "market": [
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ]
+      ]
+    },
+    "seconds": 1.7795999951886188e-05
+  },
+  {
+    "step": 672,
+    "cash": 69679.0,
+    "action": {
+      "farmer": [
+        "PICKUP",
+        "WHEAT",
+        8
+      ],
+      "hands": [],
+      "market": [
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ]
+      ]
+    },
+    "seconds": 2.4776000032034062e-05
+  },
+  {
+    "step": 696,
+    "cash": 70033.0,
+    "action": {
+      "farmer": [
+        "COLLECT_FERTILIZER"
+      ],
+      "hands": [],
+      "market": [
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ],
+        [
+          "HIRE"
+        ]
+      ]
+    },
+    "seconds": 1.7675999970379053e-05
+  }
+]

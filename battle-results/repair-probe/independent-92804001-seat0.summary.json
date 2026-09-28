@@ -1,0 +1,44 @@
+{
+  "label": "independent",
+  "model": "independent",
+  "seed": 92804001,
+  "seat": 0,
+  "self_cash": 77184.0,
+  "opponent_cash": 83398.0,
+  "margin": -6214.0,
+  "statuses": [
+    "DONE",
+    "DONE"
+  ],
+  "steps": 719,
+  "farmer_actions": {
+    "PASS": 45,
+    "BUILD_PASTURE": 3,
+    "PICKUP": 177,
+    "PLACE": 3,
+    "FEED": 112,
+    "NORTH": 81,
+    "CARE": 8,
+    "WEST": 85,
+    "PLANT": 7,
+    "WATER": 32,
+    "SOUTH": 56,
+    "EAST": 78,
+    "COLLECT_FERTILIZER": 10,
+    "HARVEST": 15,
+    "DROP": 3,
+    "FERTILIZE": 4
+  },
+  "mean_seconds": 2.9622940194217153e-05,
+  "max_seconds": 0.0006724480000457334,
+  "remaining_overage": 60,
+  "source_hashes": {
+    "strong_model_v0_reimplementation/__init__.py": "e8a5a1335401a48ea475c1c683a45e671fbd3acf2eb20b67a52bb2cdda8fa3bc",
+    "strong_model_v0_reimplementation/jobs.py": "f9da3e34af3e21172893145156bda258e4184eb20a9d0fd1499396aa1b574913",
+    "strong_model_v0_reimplementation/agent.py": "ec818185babc2c0ba8a784d41b029ccf495a3445da3dc2583f4b526eb60bd13e",
+    "strong_model_v0_reimplementation/planner.py": "d42b70521236316351276067675eb7a2b0234e30686074207fcb35459e7f6163",
+    "strong_model_v0_reimplementation/run_battle_smoke.py": "16ea58007cb6d8ad4ba260b641f9312b0351057a55927713ccd642e7d7d3c12a"
+  },
+  "official_rules_sha256": "bc8a54879ef02c7ea64b8b333d6a976f0ea65c4949149d01f463f23bccee653e",
+  "opponent_sha256": "0cd14b653102d276c4f902fa3b8c6bd81d869b8ab64c422cb881b9d2346ec639"
+}

@@ -1,0 +1,1781 @@
+[
+  {
+    "step": 0,
+    "cash": 3000.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": [
+        [
+          "BUY_SEED",
+          "WHEAT",
+          1
+        ]
+      ]
+    },
+    "seconds": 0.03936582400001498,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 0,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 3000.0,
+          "central_terminal_cash": 3000.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2990.0,
+          "central_terminal_cash": 3089.0,
+          "scheduled": [
+            "base:prepare_for_plant:WHEAT:4:4"
+          ],
+          "representative": {
+            "key": "base:prepare_for_plant:WHEAT:4:4",
+            "kind": "prepare_for_plant",
+            "category": "production_start",
+            "target": {
+              "crop": "WHEAT",
+              "tile": [
+                4,
+                4
+              ],
+              "required_seed_quantity": 1,
+              "current_seed_quantity": 0,
+              "missing_seed_quantity": 1
+            },
+            "base_kind": "prepare_for_plant",
+            "base_target": {
+              "crop": "WHEAT",
+              "tile": [
+                4,
+                4
+              ],
+              "required_seed_quantity": 1,
+              "current_seed_quantity": 0,
+              "missing_seed_quantity": 1
+            }
+          }
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 1,
+    "cash": 2990.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": [
+        [
+          "BUY_SEED",
+          "CARROT",
+          1
+        ]
+      ]
+    },
+    "seconds": 0.03956371399999625,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 1,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2990.0,
+          "central_terminal_cash": 3089.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2970.0,
+          "central_terminal_cash": 3173.0,
+          "scheduled": [
+            "base:prepare_for_plant:CARROT:4:4"
+          ],
+          "representative": {
+            "key": "base:prepare_for_plant:CARROT:4:4",
+            "kind": "prepare_for_plant",
+            "category": "production_start",
+            "target": {
+              "crop": "CARROT",
+              "tile": [
+                4,
+                4
+              ],
+              "required_seed_quantity": 1,
+              "current_seed_quantity": 0,
+              "missing_seed_quantity": 1
+            },
+            "base_kind": "prepare_for_plant",
+            "base_target": {
+              "crop": "CARROT",
+              "tile": [
+                4,
+                4
+              ],
+              "required_seed_quantity": 1,
+              "current_seed_quantity": 0,
+              "missing_seed_quantity": 1
+            }
+          }
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 2,
+    "cash": 2970.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": [
+        [
+          "BUY_SEED",
+          "TOMATO",
+          1
+        ]
+      ]
+    },
+    "seconds": 0.03990260800003398,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 2,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2970.0,
+          "central_terminal_cash": 3183.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2920.0,
+          "central_terminal_cash": 3366.0,
+          "scheduled": [
+            "base:prepare_for_plant:TOMATO:4:4"
+          ],
+          "representative": {
+            "key": "base:prepare_for_plant:TOMATO:4:4",
+            "kind": "prepare_for_plant",
+            "category": "production_start",
+            "target": {
+              "crop": "TOMATO",
+              "tile": [
+                4,
+                4
+              ],
+              "required_seed_quantity": 1,
+              "current_seed_quantity": 0,
+              "missing_seed_quantity": 1
+            },
+            "base_kind": "prepare_for_plant",
+            "base_target": {
+              "crop": "TOMATO",
+              "tile": [
+                4,
+                4
+              ],
+              "required_seed_quantity": 1,
+              "current_seed_quantity": 0,
+              "missing_seed_quantity": 1
+            }
+          }
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 3,
+    "cash": 2920.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": [
+        [
+          "BUY_SEED",
+          "MELON",
+          1
+        ]
+      ]
+    },
+    "seconds": 0.0405012030000762,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 3,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2920.0,
+          "central_terminal_cash": 3368.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2840.0,
+          "central_terminal_cash": 4794.0,
+          "scheduled": [
+            "base:prepare_for_plant:MELON:4:4"
+          ],
+          "representative": {
+            "key": "base:prepare_for_plant:MELON:4:4",
+            "kind": "prepare_for_plant",
+            "category": "production_start",
+            "target": {
+              "crop": "MELON",
+              "tile": [
+                4,
+                4
+              ],
+              "required_seed_quantity": 1,
+              "current_seed_quantity": 0,
+              "missing_seed_quantity": 1
+            },
+            "base_kind": "prepare_for_plant",
+            "base_target": {
+              "crop": "MELON",
+              "tile": [
+                4,
+                4
+              ],
+              "required_seed_quantity": 1,
+              "current_seed_quantity": 0,
+              "missing_seed_quantity": 1
+            }
+          }
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 4,
+    "cash": 2840.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": [
+        [
+          "BUY_SEED",
+          "STRAWBERRY",
+          1
+        ]
+      ]
+    },
+    "seconds": 0.03943596700003127,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 4,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2840.0,
+          "central_terminal_cash": 4795.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5177.0,
+          "scheduled": [
+            "base:prepare_for_plant:STRAWBERRY:4:4"
+          ],
+          "representative": {
+            "key": "base:prepare_for_plant:STRAWBERRY:4:4",
+            "kind": "prepare_for_plant",
+            "category": "production_start",
+            "target": {
+              "crop": "STRAWBERRY",
+              "tile": [
+                4,
+                4
+              ],
+              "required_seed_quantity": 1,
+              "current_seed_quantity": 0,
+              "missing_seed_quantity": 1
+            },
+            "base_kind": "prepare_for_plant",
+            "base_target": {
+              "crop": "STRAWBERRY",
+              "tile": [
+                4,
+                4
+              ],
+              "required_seed_quantity": 1,
+              "current_seed_quantity": 0,
+              "missing_seed_quantity": 1
+            }
+          }
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 5,
+    "cash": 2740.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.04477626900006726,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 5,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5179.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5179.0,
+          "scheduled": [],
+          "representative": null
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 6,
+    "cash": 2740.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.042235784000013155,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 6,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5179.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5179.0,
+          "scheduled": [],
+          "representative": null
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 7,
+    "cash": 2740.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.043836255999963214,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 7,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5181.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5181.0,
+          "scheduled": [],
+          "representative": null
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 8,
+    "cash": 2740.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.11694252199993116,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 8,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5181.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5181.0,
+          "scheduled": [],
+          "representative": null
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 9,
+    "cash": 2740.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.057252463999930114,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 9,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5183.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5183.0,
+          "scheduled": [],
+          "representative": null
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 10,
+    "cash": 2740.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.052680421000104616,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 10,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5183.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5183.0,
+          "scheduled": [],
+          "representative": null
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 11,
+    "cash": 2740.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.0490296830000716,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 11,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5181.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5181.0,
+          "scheduled": [],
+          "representative": null
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 12,
+    "cash": 2740.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.047586141000010684,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 12,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5183.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5183.0,
+          "scheduled": [],
+          "representative": null
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 13,
+    "cash": 2740.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.048459794999985206,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 13,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5182.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5182.0,
+          "scheduled": [],
+          "representative": null
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 14,
+    "cash": 2740.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.08076283299999432,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 14,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5182.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5182.0,
+          "scheduled": [],
+          "representative": null
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 24,
+    "cash": 2740.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.06702329099994131,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 24,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5214.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5214.0,
+          "scheduled": [],
+          "representative": null
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 48,
+    "cash": 2740.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.10304174199995941,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 48,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5248.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5248.0,
+          "scheduled": [],
+          "representative": null
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 72,
+    "cash": 2740.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.10156606099997134,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 72,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5280.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5280.0,
+          "scheduled": [],
+          "representative": null
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 96,
+    "cash": 2740.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.06026188800001364,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 96,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5314.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5314.0,
+          "scheduled": [],
+          "representative": null
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 120,
+    "cash": 2740.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.09947782199992616,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 120,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5346.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5346.0,
+          "scheduled": [],
+          "representative": null
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 144,
+    "cash": 2740.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.0747515809999868,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 144,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5375.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5375.0,
+          "scheduled": [],
+          "representative": null
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 168,
+    "cash": 2740.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.1022523670000055,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 168,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5430.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5430.0,
+          "scheduled": [],
+          "representative": null
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 192,
+    "cash": 2740.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.11307498100006796,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 192,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5475.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5475.0,
+          "scheduled": [],
+          "representative": null
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 216,
+    "cash": 2740.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.10132102699992629,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 216,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5520.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5520.0,
+          "scheduled": [],
+          "representative": null
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 240,
+    "cash": 2740.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.08207023800002844,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 240,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5569.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5569.0,
+          "scheduled": [],
+          "representative": null
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 264,
+    "cash": 2740.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.08988656999997602,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 264,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5483.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5483.0,
+          "scheduled": [],
+          "representative": null
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 288,
+    "cash": 2740.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.1309837769999831,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 288,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5476.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5476.0,
+          "scheduled": [],
+          "representative": null
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 312,
+    "cash": 2740.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.09683148900001015,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 312,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5506.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2740.0,
+          "central_terminal_cash": 5506.0,
+          "scheduled": [],
+          "representative": null
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 336,
+    "cash": 2540.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.14441524699998354,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 336,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2540.0,
+          "central_terminal_cash": 5147.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2540.0,
+          "central_terminal_cash": 5147.0,
+          "scheduled": [],
+          "representative": null
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 360,
+    "cash": 2540.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.08742118899999696,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 360,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2540.0,
+          "central_terminal_cash": 5149.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2540.0,
+          "central_terminal_cash": 5149.0,
+          "scheduled": [],
+          "representative": null
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 384,
+    "cash": 2540.0,
+    "action": {
+      "farmer": [
+        "NORTH"
+      ],
+      "hands": [],
+      "market": [
+        [
+          "BUY_SEED",
+          "STRAWBERRY",
+          1
+        ]
+      ]
+    },
+    "seconds": 0.13397071300005337,
+    "debug": {
+      "active_jobs": {
+        "base:establish_plant:WHEAT:4:1": {
+          "key": "base:establish_plant:WHEAT:4:1",
+          "kind": "establish_plant",
+          "category": "production_start",
+          "target": {
+            "crop": "WHEAT",
+            "tile": [
+              4,
+              1
+            ]
+          },
+          "base_kind": "establish_plant",
+          "base_target": {
+            "crop": "WHEAT",
+            "tile": [
+              4,
+              1
+            ]
+          }
+        }
+      },
+      "last_choice": {
+        "step": 384,
+        "active_before": [
+          "base:establish_plant:WHEAT:4:1"
+        ],
+        "continuation": {
+          "strict_terminal_cash": 2540.0,
+          "central_terminal_cash": 5159.0,
+          "scheduled": [
+            "base:establish_plant:WHEAT:4:1"
+          ]
+        },
+        "chosen": {
+          "strict_terminal_cash": 2440.0,
+          "central_terminal_cash": 5483.0,
+          "scheduled": [
+            "base:prepare_for_plant:STRAWBERRY:4:4",
+            "base:establish_plant:WHEAT:4:1"
+          ],
+          "representative": {
+            "key": "base:prepare_for_plant:STRAWBERRY:4:4",
+            "kind": "prepare_for_plant",
+            "category": "production_start",
+            "target": {
+              "crop": "STRAWBERRY",
+              "tile": [
+                4,
+                4
+              ],
+              "required_seed_quantity": 1,
+              "current_seed_quantity": 0,
+              "missing_seed_quantity": 1
+            },
+            "base_kind": "prepare_for_plant",
+            "base_target": {
+              "crop": "STRAWBERRY",
+              "tile": [
+                4,
+                4
+              ],
+              "required_seed_quantity": 1,
+              "current_seed_quantity": 0,
+              "missing_seed_quantity": 1
+            }
+          }
+        },
+        "active_after": {
+          "base:establish_plant:WHEAT:4:1": {
+            "key": "base:establish_plant:WHEAT:4:1",
+            "kind": "establish_plant",
+            "category": "production_start",
+            "target": {
+              "crop": "WHEAT",
+              "tile": [
+                4,
+                1
+              ]
+            },
+            "base_kind": "establish_plant",
+            "base_target": {
+              "crop": "WHEAT",
+              "tile": [
+                4,
+                1
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "step": 408,
+    "cash": 2430.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.08845307399997182,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 408,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2430.0,
+          "central_terminal_cash": 5705.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2430.0,
+          "central_terminal_cash": 5705.0,
+          "scheduled": [],
+          "representative": null
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 432,
+    "cash": 2260.0,
+    "action": {
+      "farmer": [
+        "WEST"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.07790561899992099,
+    "debug": {
+      "active_jobs": {
+        "base:establish_plant:TOMATO:3:4": {
+          "key": "base:establish_plant:TOMATO:3:4",
+          "kind": "establish_plant",
+          "category": "production_start",
+          "target": {
+            "crop": "TOMATO",
+            "tile": [
+              3,
+              4
+            ]
+          },
+          "base_kind": "establish_plant",
+          "base_target": {
+            "crop": "TOMATO",
+            "tile": [
+              3,
+              4
+            ]
+          }
+        }
+      },
+      "last_choice": {
+        "step": 432,
+        "active_before": [
+          "base:establish_plant:TOMATO:3:4"
+        ],
+        "continuation": {
+          "strict_terminal_cash": 2260.0,
+          "central_terminal_cash": 3495.0,
+          "scheduled": [
+            "base:establish_plant:TOMATO:3:4"
+          ]
+        },
+        "chosen": {
+          "strict_terminal_cash": 2260.0,
+          "central_terminal_cash": 3495.0,
+          "scheduled": [
+            "base:establish_plant:TOMATO:3:4"
+          ],
+          "representative": null
+        },
+        "active_after": {
+          "base:establish_plant:TOMATO:3:4": {
+            "key": "base:establish_plant:TOMATO:3:4",
+            "kind": "establish_plant",
+            "category": "production_start",
+            "target": {
+              "crop": "TOMATO",
+              "tile": [
+                3,
+                4
+              ]
+            },
+            "base_kind": "establish_plant",
+            "base_target": {
+              "crop": "TOMATO",
+              "tile": [
+                3,
+                4
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "step": 456,
+    "cash": 2160.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.06896644699997978,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 456,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2160.0,
+          "central_terminal_cash": 3460.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2160.0,
+          "central_terminal_cash": 3460.0,
+          "scheduled": [],
+          "representative": null
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 480,
+    "cash": 2160.0,
+    "action": {
+      "farmer": [
+        "WEST"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.0845009580000351,
+    "debug": {
+      "active_jobs": {
+        "base:establish_plant:WHEAT:3:0": {
+          "key": "base:establish_plant:WHEAT:3:0",
+          "kind": "establish_plant",
+          "category": "production_start",
+          "target": {
+            "crop": "WHEAT",
+            "tile": [
+              3,
+              0
+            ]
+          },
+          "base_kind": "establish_plant",
+          "base_target": {
+            "crop": "WHEAT",
+            "tile": [
+              3,
+              0
+            ]
+          }
+        },
+        "base:establish_plant:TOMATO:2:4": {
+          "key": "base:establish_plant:TOMATO:2:4",
+          "kind": "establish_plant",
+          "category": "production_start",
+          "target": {
+            "crop": "TOMATO",
+            "tile": [
+              2,
+              4
+            ]
+          },
+          "base_kind": "establish_plant",
+          "base_target": {
+            "crop": "TOMATO",
+            "tile": [
+              2,
+              4
+            ]
+          }
+        }
+      },
+      "last_choice": {
+        "step": 480,
+        "active_before": [
+          "base:establish_plant:WHEAT:3:0",
+          "base:establish_plant:TOMATO:2:4"
+        ],
+        "continuation": {
+          "strict_terminal_cash": 2160.0,
+          "central_terminal_cash": 2934.0,
+          "scheduled": [
+            "base:establish_plant:WHEAT:3:0"
+          ]
+        },
+        "chosen": {
+          "strict_terminal_cash": 2160.0,
+          "central_terminal_cash": 2934.0,
+          "scheduled": [
+            "base:establish_plant:WHEAT:3:0"
+          ],
+          "representative": null
+        },
+        "active_after": {
+          "base:establish_plant:WHEAT:3:0": {
+            "key": "base:establish_plant:WHEAT:3:0",
+            "kind": "establish_plant",
+            "category": "production_start",
+            "target": {
+              "crop": "WHEAT",
+              "tile": [
+                3,
+                0
+              ]
+            },
+            "base_kind": "establish_plant",
+            "base_target": {
+              "crop": "WHEAT",
+              "tile": [
+                3,
+                0
+              ]
+            }
+          },
+          "base:establish_plant:TOMATO:2:4": {
+            "key": "base:establish_plant:TOMATO:2:4",
+            "kind": "establish_plant",
+            "category": "production_start",
+            "target": {
+              "crop": "TOMATO",
+              "tile": [
+                2,
+                4
+              ]
+            },
+            "base_kind": "establish_plant",
+            "base_target": {
+              "crop": "TOMATO",
+              "tile": [
+                2,
+                4
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "step": 504,
+    "cash": 2090.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.05485887499992259,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 504,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2090.0,
+          "central_terminal_cash": 2481.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2090.0,
+          "central_terminal_cash": 2481.0,
+          "scheduled": [],
+          "representative": null
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 528,
+    "cash": 2080.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.05228978899992853,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 528,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2080.0,
+          "central_terminal_cash": 2592.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2080.0,
+          "central_terminal_cash": 2592.0,
+          "scheduled": [],
+          "representative": null
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 552,
+    "cash": 2080.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.046242686999903526,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 552,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2080.0,
+          "central_terminal_cash": 2611.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2080.0,
+          "central_terminal_cash": 2611.0,
+          "scheduled": [],
+          "representative": null
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 576,
+    "cash": 2080.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.07455028800006858,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 576,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2080.0,
+          "central_terminal_cash": 2407.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2080.0,
+          "central_terminal_cash": 2407.0,
+          "scheduled": [],
+          "representative": null
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 600,
+    "cash": 2080.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.043462855000029776,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 600,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2080.0,
+          "central_terminal_cash": 2415.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2080.0,
+          "central_terminal_cash": 2415.0,
+          "scheduled": [],
+          "representative": null
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 624,
+    "cash": 2070.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.03919899400000304,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 624,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2070.0,
+          "central_terminal_cash": 2469.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2070.0,
+          "central_terminal_cash": 2469.0,
+          "scheduled": [],
+          "representative": null
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 648,
+    "cash": 2070.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": [
+        [
+          "BUY_SEED",
+          "CARROT",
+          1
+        ]
+      ]
+    },
+    "seconds": 0.05883284599997296,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 648,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2070.0,
+          "central_terminal_cash": 2477.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2050.0,
+          "central_terminal_cash": 2501.0,
+          "scheduled": [
+            "base:prepare_for_plant:CARROT:1:4"
+          ],
+          "representative": {
+            "key": "base:prepare_for_plant:CARROT:1:4",
+            "kind": "prepare_for_plant",
+            "category": "production_start",
+            "target": {
+              "crop": "CARROT",
+              "tile": [
+                1,
+                4
+              ],
+              "required_seed_quantity": 1,
+              "current_seed_quantity": 0,
+              "missing_seed_quantity": 1
+            },
+            "base_kind": "prepare_for_plant",
+            "base_target": {
+              "crop": "CARROT",
+              "tile": [
+                1,
+                4
+              ],
+              "required_seed_quantity": 1,
+              "current_seed_quantity": 0,
+              "missing_seed_quantity": 1
+            }
+          }
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 672,
+    "cash": 2050.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.058143563999919934,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 672,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2050.0,
+          "central_terminal_cash": 2185.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2050.0,
+          "central_terminal_cash": 2185.0,
+          "scheduled": [],
+          "representative": null
+        },
+        "active_after": {}
+      }
+    }
+  },
+  {
+    "step": 696,
+    "cash": 2050.0,
+    "action": {
+      "farmer": [
+        "PASS"
+      ],
+      "hands": [],
+      "market": []
+    },
+    "seconds": 0.030052783000087402,
+    "debug": {
+      "active_jobs": {},
+      "last_choice": {
+        "step": 696,
+        "active_before": [],
+        "continuation": {
+          "strict_terminal_cash": 2050.0,
+          "central_terminal_cash": 2050.0,
+          "scheduled": []
+        },
+        "chosen": {
+          "strict_terminal_cash": 2050.0,
+          "central_terminal_cash": 2050.0,
+          "scheduled": [],
+          "representative": null
+        },
+        "active_after": {}
+      }
+    }
+  }
+]

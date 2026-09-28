@@ -25,6 +25,8 @@ def main():
     orders={o[0] for a in trace for o in a['action']['market']}
     assert {'PLANT','WATER','HARVEST'}<=actions, actions
     assert {'BUY_SEED','SELL'}<=orders,orders
+    assert sum(row['action']['farmer'][0]=='PLANT' for row in trace)==1
+    assert sum(o[0]=='BUY_SEED' for row in trace for o in row['action']['market'])==1
     for row in trace:
         assert row['step']==len(env.steps)-1
         env.step([row['action'],{'farmer':['PASS'],'hands':[],'market':[]}])

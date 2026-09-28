@@ -1,0 +1,85 @@
+{
+  "source": "before-92804001-seat0.replay.json.gz",
+  "step": 5,
+  "cash": 2740.0,
+  "purpose": "Confirm the repaired evaluator distinguishes taking executable work from holding seeds; not a strength ranking.",
+  "rows": [
+    {
+      "crop": null,
+      "action": {
+        "farmer": [
+          "PASS"
+        ],
+        "hands": [],
+        "market": []
+      },
+      "central": 2740.0,
+      "stress_diagnostic": 2740.0
+    },
+    {
+      "crop": "WHEAT",
+      "action": {
+        "farmer": [
+          "PLANT",
+          "WHEAT"
+        ],
+        "hands": [],
+        "market": []
+      },
+      "central": 2856.0,
+      "stress_diagnostic": 2856.0
+    },
+    {
+      "crop": "CARROT",
+      "action": {
+        "farmer": [
+          "PLANT",
+          "CARROT"
+        ],
+        "hands": [],
+        "market": []
+      },
+      "central": 2845.0,
+      "stress_diagnostic": 2845.0
+    },
+    {
+      "crop": "TOMATO",
+      "action": {
+        "farmer": [
+          "PLANT",
+          "TOMATO"
+        ],
+        "hands": [],
+        "market": []
+      },
+      "central": 2984.0,
+      "stress_diagnostic": 2984.0
+    },
+    {
+      "crop": "STRAWBERRY",
+      "action": {
+        "farmer": [
+          "PLANT",
+          "STRAWBERRY"
+        ],
+        "hands": [],
+        "market": []
+      },
+      "central": 3338.0,
+      "stress_diagnostic": 3338.0
+    },
+    {
+      "crop": "MELON",
+      "action": {
+        "farmer": [
+          "PLANT",
+          "MELON"
+        ],
+        "hands": [],
+        "market": []
+      },
+      "central": 4367.0,
+      "stress_diagnostic": 4367.0
+    }
+  ]
+}
