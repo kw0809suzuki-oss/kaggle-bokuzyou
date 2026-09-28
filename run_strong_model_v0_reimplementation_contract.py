@@ -18,7 +18,7 @@ from strong_model_v0_reimplementation.agent import agent, reset_agent, debug_sta
 from strong_model_v0_reimplementation.jobs import (
     Job,fresh_jobs,materialize_active,preferred_units,unit_action,
 )
-from strong_model_v0_reimplementation.planner import Settings,choose,schedule,terminal_envelope
+from strong_model_v0_reimplementation.planner import Settings,choose,schedule,terminal_envelope,plan_bundle
 
 
 def plain(v):
@@ -143,6 +143,57 @@ def existing_shortplan_bridge_check():
     return {"base_jobs":len(base),"kinds":sorted({j.base_plan.kind for j in base})}
 
 
+def initial_choice_probe():
+    raw=initial_raw(92804001)
+    raw["step"]=0
+    cfg=Settings()
+    jobs=fresh_jobs(raw,cfg.episodeSteps,cfg.turnsPerDay,cfg.boardSize)
+    prep=[j for j in jobs if j.kind=="prepare_for_plant"]
+    assert prep, "no prepare_for_plant candidates"
+
+    continuation=plan_bundle(raw,cfg,[])
+    rows=[]
+    for j in prep:
+        b=plan_bundle(raw,cfg,[j],{j.key})
+        rows.append({
+            "key":j.key,
+            "crop":j.target.get("crop"),
+            "tile":j.target.get("tile"),
+            "job_central_delta":j.central_delta,
+            "job_strict_delta":j.strict_delta,
+            "action":plain(b.action),
+            "scheduled":list(b.scheduled),
+            "strict_terminal_cash":b.envelope.strict_cash,
+            "central_terminal_cash":b.envelope.central_cash,
+            "immediate_cash":b.immediate_cash,
+        })
+    best=max(rows,key=lambda r:(r["strict_terminal_cash"],r["central_terminal_cash"],r["immediate_cash"],r["key"]))
+    chosen,chosen_rep,active,choose_continuation=choose(raw,cfg,{})
+    return {
+        "prepare_candidate_count":len(prep),
+        "continuation":{
+            "action":plain(continuation.action),
+            "strict_terminal_cash":continuation.envelope.strict_cash,
+            "central_terminal_cash":continuation.envelope.central_cash,
+            "immediate_cash":continuation.immediate_cash,
+        },
+        "best_prepare_for_plant":best,
+        "choose_result":{
+            "action":plain(chosen.action),
+            "scheduled":list(chosen.scheduled),
+            "strict_terminal_cash":chosen.envelope.strict_cash,
+            "central_terminal_cash":chosen.envelope.central_cash,
+            "representative":None if chosen_rep is None else chosen_rep.spec(),
+            "active_count":len(active),
+        },
+        "prepare_beats_continuation":{
+            "strict":best["strict_terminal_cash"]>continuation.envelope.strict_cash,
+            "central":best["central_terminal_cash"]>continuation.envelope.central_cash,
+            "immediate":best["immediate_cash"]>continuation.immediate_cash,
+        },
+    }
+
+
 def envelope_check():
     raw=initial_raw()
     raw["step"]=0
@@ -189,6 +240,7 @@ def main():
         "parallel_bundle":parallel_bundle_check(),
         "terminal_timing":timing_not_fixed_day_check(),
         "shortplan_bridge":existing_shortplan_bridge_check(),
+        "initial_choice_probe":initial_choice_probe(),
         "envelope":envelope_check(),
         "runtime_smoke":runtime_smoke(),
     }
