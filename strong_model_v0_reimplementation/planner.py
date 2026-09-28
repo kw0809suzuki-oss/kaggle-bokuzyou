@@ -118,11 +118,11 @@ def schedule(raw:dict[str,Any],cfg:Settings,jobs:list[Job],forced:set[str]|None=
         )
 
     for job in sorted(jobs,key=rank):
-        if job.kind in ("sell_stock","hire"):
-            orders=market_only(job)
-            if len(action["market"])+len(orders)>cfg.maxMarketOrdersPerTurn: continue
-            if _opposite_product_conflict(action["market"],orders): continue
-            action["market"].extend(copy.deepcopy(orders))
+        direct_orders=market_only(job)
+        if direct_orders and (job.one_turn or job.kind=="hire"):
+            if len(action["market"])+len(direct_orders)>cfg.maxMarketOrdersPerTurn: continue
+            if _opposite_product_conflict(action["market"],direct_orders): continue
+            action["market"].extend(copy.deepcopy(direct_orders))
             scheduled.append(job.key)
             continue
 
@@ -387,4 +387,3 @@ def choose(raw:dict[str,Any],cfg:Settings,active_specs:dict[str,dict[str,Any]])-
         "" if row[0] is None else row[0].key,
     ))
     return chosen,chosen_job,active,continuation
-
