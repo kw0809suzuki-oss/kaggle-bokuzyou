@@ -37,17 +37,7 @@ class Runtime:
 
         chosen,chosen_rep,active_jobs,continuation=choose(raw,self.cfg,self.active)
 
-        # Persist the purpose of every newly scheduled multi-turn job.  The next
-        # turn does not infer purpose from inventory/action shape; it reopens the
-        # same semantic job against the new Official State.
-        current=fresh_jobs(raw,self.cfg.episodeSteps,self.cfg.turnsPerDay,self.cfg.boardSize)
-        current_map={j.key:j for j in current}
-        for key in chosen.scheduled:
-            if key in self.active:
-                continue
-            job=current_map.get(key)
-            if job is not None and not job.one_turn:
-                self.active[key]=job.spec()
+        self.active={spec["key"]:spec for spec in chosen.commitments}
 
         self.last_choice={
             "step":step,

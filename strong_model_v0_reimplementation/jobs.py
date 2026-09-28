@@ -305,9 +305,18 @@ def still_needed(spec:dict[str,Any],raw:dict[str,Any])->bool:
         return False
 
     kind=str(spec["kind"]); target=spec["target"]
-    if kind=="hire": return False
+    if kind in ("hire","sell"): return False
+    if kind=="deliver":
+        idx=int(target["unit_index"])
+        return idx<len(inventories(raw)) and any(inventories(raw)[idx].values())
     xy=tuple(target.get("tile",()))
     tile=tile_at(raw,xy)
+    if kind=="plant_crop":
+        return tile is None or (isinstance(tile,dict) and tile.get("kind")=="WEED")
+    if kind=="water":
+        return isinstance(tile,dict) and tile.get("crop")==target["crop"] and not tile.get("watered_today")
+    if kind=="harvest":
+        return isinstance(tile,dict) and tile.get("crop")==target["crop"] and tile.get("yield_units",0)>0
     if kind=="feed_animal":
         return int(raw["day"])==int(target["day"]) and isinstance(tile,dict) and str(tile.get("animal"))==str(target["animal"]) and not bool(tile.get("fed_today",False))
     if kind=="care_animal":
@@ -339,8 +348,8 @@ def materialize_active(spec:dict[str,Any],raw:dict[str,Any])->Job|None:
 
 def preferred_units(job:Job,raw:dict[str,Any],free:set[int],board_size:int)->list[int]:
     pos=positions(raw); invs=inventories(raw)
-    if job.base_plan is not None and job.base_plan.kind=="deliver_carried_to_shed":
-        idx=int(job.base_plan.target["unit_index"])
+    if job.kind=="deliver" or (job.base_plan is not None and job.base_plan.kind=="deliver_carried_to_shed"):
+        idx=int(job.target["unit_index"])
         return [idx] if idx in free and idx<len(pos) else []
 
     xy=tuple(job.target.get("tile",()))
@@ -380,6 +389,19 @@ def unit_action(job:Job,raw:dict[str,Any],idx:int,board_size:int)->tuple[list[An
         return (["PASS"],[])
 
     kind=job.kind; xy=tuple(job.target.get("tile",()))
+    if kind=="deliver":
+        access=nearest_shed(pos,board_size)
+        return (["DROP"] if tuple(pos)==access else move_toward(pos,access),[])
+    if kind=="water": return (["WATER"] if tuple(pos)==xy else move_toward(pos,xy),[])
+    if kind=="harvest": return (["HARVEST"] if tuple(pos)==xy else move_toward(pos,xy),[])
+    if kind=="plant_crop":
+        crop=str(job.target["crop"]); tile=tile_at(raw,xy)
+        orders=[]
+        if int(raw["private"]["seeds"].get(crop,0))<=0:
+            orders.append(["BUY_SEED",crop,1])
+        if tuple(pos)!=xy: return move_toward(pos,xy),orders
+        if isinstance(tile,dict) and tile.get("kind")=="WEED": return ["DIG"],orders
+        return (["PLANT",crop] if not orders else ["PASS"]),orders
     if kind=="care_animal": return (["CARE"] if tuple(pos)==xy else move_toward(pos,xy),[])
     if kind=="harvest_animal": return (["HARVEST"] if tuple(pos)==xy else move_toward(pos,xy),[])
     if kind=="feed_animal":
@@ -427,5 +449,6 @@ def market_only(job:Job)->list[list[Any]]:
             return [["SELL",str(job.base_plan.target["item"]),int(job.base_plan.target["available_quantity"])]]
         if job.base_plan.kind=="prepare_for_plant":
             return [["BUY_SEED",str(job.base_plan.target["crop"]),int(job.base_plan.target["missing_seed_quantity"])]]
+    if job.kind=="sell": return [["SELL",job.target["item"],job.target["quantity"]]]
     if job.kind=="hire": return [["HIRE"]]
     return []

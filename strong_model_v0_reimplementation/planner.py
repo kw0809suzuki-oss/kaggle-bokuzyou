@@ -1,14 +1,4 @@
-"""Bundle formation and terminal-Cash comparison for Strong Model v0.
-
-The planner compares:
-- continuation: currently active work only
-- one minimal new job from each available category
-- one combined bundle containing those category representatives
-
-Every bundle is projected for exactly one turn using Official actor/market/town
-processing with no guessed opponent action.  The post-state is then evaluated
-under the same terminal-Cash assumptions.
-"""
+"""Executable cash recovery forecast; approximations are documented in REPAIR_NOTES.md."""
 from __future__ import annotations
 
 import copy
@@ -21,7 +11,7 @@ from kaggle_environments.envs.kaggriculture import kaggriculture as rules
 from .jobs import (
     ANIMALS,CROPS,PRODUCTS,Job,all_tiles,animal_future_units,crop_future_units,
     distance,fresh_jobs,inventories,land_cost,market_only,materialize_active,
-    nearest_shed,positions,preferred_units,unit_action,
+    nearest_shed,positions,preferred_units,unit_action,still_needed,
 )
 
 
@@ -81,87 +71,75 @@ def set_unit(action:dict[str,Any],idx:int,a:list[Any])->None:
     else: action["hands"][idx-1]=a
 
 
-def _opposite_product_conflict(existing:list[list[Any]],orders:list[list[Any]])->bool:
-    sells={str(o[1]) for o in existing if len(o)>=2 and o[0]=="SELL"}
-    buys={str(o[1]) for o in existing if len(o)>=2 and o[0]=="BUY_PRODUCT"}
-    for o in orders:
-        if len(o)<2: continue
-        item=str(o[1])
-        if o[0]=="SELL" and item in buys:return True
-        if o[0]=="BUY_PRODUCT" and item in sells:return True
-    return False
-
-
-def schedule(raw:dict[str,Any],cfg:Settings,jobs:list[Job],forced:set[str]|None=None)->tuple[dict[str,Any],list[str]]:
-    """Compose simultaneous work without fixed job-type priority.
-
-    Ordering is by terminal-Cash hint.  Active work wins only exact ties.
-    A forced alternative is merely guaranteed consideration before the
-    continuation work; the whole bundle is still rejected later if its
-    terminal envelope is worse.
-    """
-    forced=forced or set()
-    action=empty_action(raw)
-    free=set(range(len(positions(raw))))
-    scheduled=[]
-    seed_claims={c:0 for c in CROPS}
-    land_order_present=False
-
-    def rank(j:Job):
-        # New work never receives priority merely because it is the alternative
-        # being tested. Cash consequence orders the work; active work wins ties.
-        return (
-            -float(j.central_delta),
-            -float(j.strict_delta),
-            0 if j.active else 1,
-            j.key,
-        )
-
-    for job in sorted(jobs,key=rank):
-        direct_orders=market_only(job)
-        if direct_orders and (job.one_turn or job.kind=="hire"):
-            if len(action["market"])+len(direct_orders)>cfg.maxMarketOrdersPerTurn: continue
-            if _opposite_product_conflict(action["market"],direct_orders): continue
-            action["market"].extend(copy.deepcopy(direct_orders))
-            scheduled.append(job.key)
+def schedule(raw, cfg, jobs, forced=None):
+    """Hints order scarce workers; terminal rollouts decide the proposal."""
+    forced = forced or set()
+    action = empty_action(raw)
+    free = set(range(len(positions(raw))))
+    scheduled, chosen, tiles = [], {}, set()
+    def rank(j):
+        xy = j.target.get("tile")
+        d = min(distance(pos, xy) for pos in positions(raw)) if xy else 0
+        return (j.key in forced, j.central_delta / (d + 1), j.active, j.key)
+    for job in sorted(jobs, key=rank, reverse=True):
+        orders = market_only(job)
+        if orders and (job.one_turn or job.kind == "hire"):
+            if len(action["market"]) + len(orders) <= cfg.maxMarketOrdersPerTurn:
+                action["market"].extend(copy.deepcopy(orders))
+                scheduled.append(job.key)
             continue
+        xy = tuple(job.target.get("tile", ()))
+        if xy and xy in tiles:
+            continue
+        units = preferred_units(job, raw, free, cfg.boardSize)
+        if not units:
+            continue
+        idx = units[0]
+        a, orders = unit_action(job, raw, idx, cfg.boardSize)
+        chosen[idx] = (job, a, orders)
+        free.remove(idx)
+        if xy:
+            tiles.add(xy)
+    seeds = dict(raw["private"].get("seeds", {}))
+    pickups = dict(raw["private"].get("shed", {}))
+    requested, land = set(), False
+    for idx, (job, a, orders) in sorted(chosen.items()):
+        if a[0] == "PLANT":
+            item = a[1]
+            if seeds.get(item, 0) <= 0:
+                a = ["PASS"]
+            else:
+                seeds[item] -= 1
+        if a[0] == "PICKUP":
+            item, qty = a[1], int(a[2])
+            qty = min(qty, int(pickups.get(item, 0)))
+            a = ["PICKUP", item, qty] if qty else ["PASS"]
+            pickups[item] = pickups.get(item, 0) - qty
+        for order in orders:
+            if order[0] == "BUY_SEED":
+                if order[1] in requested:
+                    continue
+                requested.add(order[1])
+            if order[0] == "BUY_LAND":
+                if land:
+                    continue
+                land = True
+            action["market"].append(order)
+        set_unit(action, idx, a)
+        scheduled.append(job.key)
+    orders = action["market"]
+    action["market"] = ([o for o in orders if o[0] == "SELL"] +
+                        [o for o in orders if o[0] != "SELL"])[:cfg.maxMarketOrdersPerTurn]
+    return action, scheduled
 
-        candidates=preferred_units(job,raw,free,cfg.boardSize)
-        if not candidates: continue
-        for idx in candidates:
-            a,orders=unit_action(job,raw,idx,cfg.boardSize)
-            if len(action["market"])+len(orders)>cfg.maxMarketOrdersPerTurn: continue
-            if _opposite_product_conflict(action["market"],orders): continue
-            if any(o and o[0]=="BUY_LAND" for o in orders) and land_order_present: continue
-            if a and a[0]=="PLANT":
-                crop=str(a[1])
-                available=int((raw["private"].get("seeds",{}) or {}).get(crop,0) or 0)
-                if seed_claims[crop]+1>available: continue
 
-            set_unit(action,idx,a)
-            action["market"].extend(copy.deepcopy(orders))
-            if any(o and o[0]=="BUY_LAND" for o in orders): land_order_present=True
-            if a and a[0]=="PLANT": seed_claims[str(a[1])]+=1
-            free.remove(idx)
-            scheduled.append(job.key)
-            break
-
-    # Same-turn sales are permitted to fund later fixed-cost purchases.
-    # Preserve relative order within SELL and non-SELL groups. Same-item
-    # BUY_PRODUCT/SELL pairs were excluded above.
-    sells=[o for o in action["market"] if o and o[0]=="SELL"]
-    other=[o for o in action["market"] if not o or o[0]!="SELL"]
-    action["market"]=(sells+other)[:cfg.maxMarketOrdersPerTurn]
-    return action,scheduled
-
-
-def _project_one_turn(raw:dict[str,Any],action:dict[str,Any],cfg:Settings)->dict[str,Any]:
+def _project_one_turn(raw:dict[str,Any],action:dict[str,Any],cfg:Settings,in_place:bool=False)->dict[str,Any]:
     """Official one-turn self projection; opponent future action is left unknown."""
-    out=copy.deepcopy(raw); p=int(raw["player"])
-    farms=copy.deepcopy(raw["farms"])
-    private=copy.deepcopy(raw["private"])
-    market=copy.deepcopy(raw["market"])
-    town=copy.deepcopy(raw["town"])
+    out=raw if in_place else copy.deepcopy(raw); p=int(raw["player"])
+    farms=out["farms"]
+    private=out["private"]
+    market=out["market"]
+    town=out["town"]
     day=int(raw["day"]); step=step_of(raw,cfg)
 
     acts=[action.get("farmer",["PASS"]),*list(action.get("hands",[]) or [])]
@@ -188,8 +166,10 @@ def _project_one_turn(raw:dict[str,Any],action:dict[str,Any],cfg:Settings)->dict
         townShopSellInterval=cfg.townShopSellInterval,
         townCenterSellInterval=cfg.townCenterSellInterval,
     ))
-    rules._process_market(states,env)
-    rules._town_consume(env,states,step)
+    if action.get("market"):
+        rules._process_market(states,env)
+    if step%max(1,cfg.townShopSellInterval)==0 or step%max(1,cfg.townCenterSellInterval)==0:
+        rules._town_consume(env,states,step)
     rules._decay_plants(farms[p],step)
 
     if (step+1)%cfg.turnsPerDay==0:
@@ -208,182 +188,199 @@ def _project_one_turn(raw:dict[str,Any],action:dict[str,Any],cfg:Settings)->dict
     return out
 
 
-def _marginal_sale(item:str,qty:int,inventory:int,params:dict[str,Any]|None)->float:
-    level=int(inventory); total=0.0
-    for _ in range(max(0,int(qty))):
-        price=float(rules.market_price(item,level,params))
-        total+=price
-        if price>rules.PRICE_FLOOR: level+=1
-    return total
+def operating_jobs(raw, cfg, harvest_now=False):
+    """Generate maintenance and recovery work without enumerating investments."""
+    day = int(raw['day'])
+    final_day = (cfg.episodeSteps - 2) // cfg.turnsPerDay
+    prices = raw['market']['prices']
+    jobs = []
+    for xy, t in all_tiles(raw):
+        if not isinstance(t, dict):
+            continue
+        if t.get('kind') == 'PLANT':
+            crop = t['crop']; spec = rules.CROPS[crop]
+            age = day - int(t['planted_day']); units = int(t.get('yield_units', 0))
+            future = crop_future_units(crop, int(t['planted_day']), day, final_day, t)
+            growth = (not spec['ongoing'] and (int(spec['max_yield_day'])+1)//2 <= age <= int(spec['max_yield_day']) and units < int(spec['max_yield']))
+            survival = int(t.get('consecutive_unwatered', 0)) >= 1
+            target = {'tile':list(xy), 'crop':crop}
+            if not t.get('watered_today') and (survival or growth) and future > 0:
+                value = (max(units, future) if survival else 1) * prices[crop]
+                jobs.append(Job(f'water:{xy}', 'water', 'maintenance', target, value, 0))
+            if age >= int(spec['first_yield_day']) and units > 0 and (harvest_now or spec['ongoing'] or age >= int(spec['max_yield_day']) or day >= final_day):
+                if harvest_now or not (growth and not t.get('watered_today')):
+                    jobs.append(Job(f'harvest:{xy}', 'harvest', 'recovery', target, units*prices[crop], 0))
+        elif t.get('animal'):
+            animal = t['animal']; product = rules.ANIMALS[animal]['product']
+            future = animal_future_units(animal, int(t['placed_day']), day, final_day)
+            target = {'tile':list(xy), 'animal':animal, 'day':day}
+            if not t.get('fed_today') and future > 0:
+                value = prices[product] * (max(1, future) if t.get('consecutive_unfed', 0)>=1 else 1)
+                jobs.append(Job(f'feed:{xy}:{day}', 'feed_animal', 'maintenance', target, value, 0))
+            if t.get('fed_today') and not t.get('cared_today') and future > 0:
+                jobs.append(Job(f'care:{xy}:{day}', 'care_animal', 'maintenance', target, prices[product], 0))
+            if t.get('yield_units', 0)>0:
+                jobs.append(Job(f'animal_harvest:{xy}', 'harvest_animal', 'recovery', target, t['yield_units']*prices[product], 0))
+    for idx, inv in enumerate(inventories(raw)):
+        value = sum(q*prices.get(item, 0) for item,q in inv.items() if item in PRODUCTS)
+        if value>0:
+            jobs.append(Job(f'deliver:{idx}', 'deliver', 'recovery', {'unit_index':idx}, value, 0))
+    return jobs
 
 
-def terminal_envelope(raw:dict[str,Any],cfg:Settings)->Envelope:
-    """Common terminal-Cash range used for every bundle.
-
-    Strict: current Cash plus already-owned sellable products at Official price
-    floor when carried stock can still physically reach shed access.
-
-    Central: current Cash plus current public-price marginal value of sellable
-    stock and Official-timing future output from assets/seeds that can still
-    mature. Future random shops and opponent actions are not predicted.
-    """
-    p=int(raw["player"]); farm=raw["farms"][p]; private=raw["private"]
-    step=step_of(raw,cfg); final_action=cfg.episodeSteps-2
-    final_day=final_action//cfg.turnsPerDay
-    cash=float(farm.get("money",0) or 0)
-    prices=raw["market"]["prices"]; market_inv=raw["market"]["inventory"]
-    params=(raw.get("market",{}) or {}).get("params")
-
-    strict_qty={item:int((private.get("shed",{}) or {}).get(item,0) or 0) for item in PRODUCTS}
-    for pos,inv in zip(positions(raw),inventories(raw)):
-        if step+distance(pos,nearest_shed(pos,cfg.boardSize))<=final_action:
-            for item in PRODUCTS: strict_qty[item]+=int(inv.get(item,0) or 0)
-    strict=cash+sum(strict_qty.values())*float(rules.PRICE_FLOOR)
-
-    qty={item:strict_qty[item] for item in PRODUCTS}
-    day=int(raw["day"])
-    feed_days=0
-
+def investment_jobs(raw, cfg, fresh):
+    result = {}
+    for j in fresh:
+        if j.kind in ('prepare_for_plant','establish_plant','prepare_surface_for_plant'):
+            crop = j.target['crop']; x,y = j.target['tile']
+            job = Job(f'plant:{crop}:{x}:{y}', 'plant_crop', 'production_start', {'tile':[x,y], 'crop':crop}, j.central_delta, j.strict_delta)
+            result[job.key] = job
+        elif j.kind in ('establish_animal','expand_crop','expand_animal'):
+            result[j.key] = j
     for xy,t in all_tiles(raw):
-        if not isinstance(t,dict): continue
-        if t.get("kind")=="PLANT":
-            crop=str(t["crop"])
-            future=crop_future_units(crop,int(t.get("planted_day",day)),day,final_day,t)
-            # Current carried/shed does not include standing yield; future is the
-            # whole remaining plant output under successful required maintenance.
-            qty[crop]+=max(0,int(future))
-        elif t.get("animal"):
-            animal=str(t["animal"]); product=str(rules.ANIMALS[animal]["product"])
-            units=animal_future_units(animal,int(t.get("placed_day",day)),day,final_day)
-            qty[product]+=max(0,int(units))
-            if units>0: feed_days+=max(0,final_day-day+(0 if bool(t.get("fed_today",False)) else 1))
-
-    # Seeds receive no mark-to-market value. They contribute only when a concrete
-    # observed empty tile exists and Official timing allows maturity.
-    empty=[xy for xy,t in all_tiles(raw) if t is None]
-    seeds=private.get("seeds",{}) or {}
-    seed_rows=[]
-    for crop in CROPS:
-        seed_rows.extend([crop]*int(seeds.get(crop,0) or 0))
-    for crop,xy in zip(seed_rows,empty):
-        d=min(distance(pos,xy) for pos in positions(raw))
-        plant_day=(step+d)//cfg.turnsPerDay
-        qty[crop]+=crop_future_units(crop,plant_day,day,final_day,None)
-
-    central=cash
-    for item in PRODUCTS:
-        central+=_marginal_sale(item,qty[item],int(market_inv[item]),params)
-
-    # Feed is an opportunity cost. Current public WHEAT price is the common
-    # central assumption; no future price path is invented.
-    central-=feed_days*float(prices["WHEAT"])
-    return Envelope(float(strict),float(central))
+        if isinstance(t,dict) and t.get('kind')=='WEED':
+            for crop in CROPS:
+                value = crop_future_units(crop, raw['day'], raw['day'], (cfg.episodeSteps-2)//cfg.turnsPerDay)*raw['market']['prices'][crop]-rules.CROPS[crop]['seed']
+                j = Job(f'plant:{crop}:{xy[0]}:{xy[1]}', 'plant_crop', 'production_start', {'tile':list(xy),'crop':crop}, value, -rules.CROPS[crop]['seed'])
+                result[j.key] = j
+    return list(result.values())
 
 
-def plan_bundle(raw:dict[str,Any],cfg:Settings,jobs:list[Job],forced:set[str]|None=None)->Bundle:
-    action,scheduled=schedule(raw,cfg,jobs,forced)
-    projected=_project_one_turn(raw,action,cfg)
-    env=terminal_envelope(projected,cfg)
-    p=int(projected["player"])
-    return Bundle(action,scheduled,projected,env,float(projected["farms"][p].get("money",0) or 0))
+def _service_action(raw, cfg, commitments, forced=None, harvest_now=False):
+    live = [j for j in commitments if still_needed(j.spec(),raw)]
+    keys = {j.key for j in live}
+    jobs = [j for j in operating_jobs(raw,cfg,harvest_now) if j.key not in keys]
+    required = set()
+    for j in live+jobs:
+        if j.kind=='feed_animal': required.add('WHEAT')
+        if j.kind in ('establish_animal','expand_animal'): required.add(j.target['animal'])
+    reserved = {i for i,inv in enumerate(inventories(raw)) if any(inv.get(item,0)>0 for item in required)}
+    jobs = [j for j in jobs if not (j.kind=='deliver' and j.target['unit_index'] in reserved)]
+    action, scheduled = schedule(raw,cfg,live+jobs,forced)
+    private = raw['private']
+    acts = [action['farmer'], *action['hands']]
+    if any(a[0] in ('DROP','PICKUP') for a in acts):
+        private = copy.deepcopy(private)
+        for idx,a in enumerate(acts):
+            if a[0] in ('DROP','PICKUP'):
+                rules._apply_unit_action(raw['farms'][raw['player']],private,idx,a,cfg.boardSize,raw['day'],cfg.turnsPerDay,cfg.shedCapacity)
+    feed_need = sum(j.kind=='feed_animal' for j in live+jobs)
+    sales = []
+    for item,q in private.get('shed',{}).items():
+        if item in PRODUCTS:
+            q = int(q)-(feed_need if item=='WHEAT' else 0)
+            if q>0: sales.append(['SELL',item,q])
+    action['market'] = (sales+action['market'])[:cfg.maxMarketOrdersPerTurn]
+    return action,scheduled,live,jobs
 
 
-def better(candidate:Bundle,base:Bundle,minimal_commitment:bool=True)->bool:
-    if candidate.envelope.strict_cash>base.envelope.strict_cash:return True
-    if minimal_commitment and candidate.envelope.central_cash>base.envelope.central_cash:return True
-    if candidate.envelope.strict_cash==base.envelope.strict_cash and candidate.envelope.central_cash==base.envelope.central_cash:
-        return candidate.immediate_cash>base.immediate_cash
-    return False
+def rollout(raw, cfg, commitments=(), first_action=None, harvest_now=False, stress=False, trace=False):
+    world = copy.deepcopy(raw)
+    records = []; first = True
+    final_action = cfg.episodeSteps-2
+    if stress:
+        # One adverse supply shock from visible opponent yield, not a lower bound.
+        for seat,farm in enumerate(world['farms']):
+            if seat==world['player']: continue
+            for row in farm['tiles']:
+                for tile in row:
+                    if not isinstance(tile,dict): continue
+                    item = tile.get('crop') or (rules.ANIMALS[tile['animal']]['product'] if tile.get('animal') else None)
+                    if item in PRODUCTS:
+                        world['market']['inventory'][item] += int(tile.get('yield_units',0))
+        for item in PRODUCTS:
+            world['market']['prices'][item] = rules.market_price(item,world['market']['inventory'][item],world['market'].get('params'))
+    while step_of(world,cfg)<=final_action:
+        action,_,live,jobs = _service_action(world,cfg,commitments,harvest_now=harvest_now)
+        commitments = live
+        if first and first_action is not None: action = copy.deepcopy(first_action)
+        if first and stress:
+            action['farmer']=['PASS']; action['hands']=[['PASS'] for _ in action['hands']]
+        first = False
+        if trace: records.append({'step':step_of(world,cfg),'cash':world['farms'][world['player']]['money'],'action':copy.deepcopy(action)})
+        _project_one_turn(world,action,cfg,in_place=True)
+        if not live and not jobs and not any(world['private'].get('shed',{}).values()) and not any(any(inv.values()) for inv in inventories(world)):
+            if not any(isinstance(t,dict) and (t.get('kind')=='PLANT' or t.get('animal')) for _,t in all_tiles(world)):
+                break
+            # A new day creates new work. Never skip it at the boundary itself.
+            if world['hour']==0: continue
+            while world['hour']!=0 and step_of(world,cfg)<=final_action:
+                action=empty_action(world)
+                if trace: records.append({'step':step_of(world,cfg),'cash':world['farms'][world['player']]['money'],'action':action})
+                _project_one_turn(world,action,cfg,in_place=True)
+    return float(world['farms'][world['player']]['money']),records
 
-def choose(raw:dict[str,Any],cfg:Settings,active_specs:dict[str,dict[str,Any]])->tuple[Bundle,Job|None,list[Job],Bundle]:
-    all_fresh=fresh_jobs(raw,cfg.episodeSteps,cfg.turnsPerDay,cfg.boardSize)
-    fresh_map={j.key:j for j in all_fresh}
 
-    active=[]
+def terminal_envelope(raw,cfg):
+    central,_ = rollout(raw,cfg)
+    stress,_ = rollout(raw,cfg,stress=True)
+    return Envelope(stress,central)
+
+
+def plan_bundle(raw,cfg,jobs,forced=None):
+    investments = investment_jobs(raw,cfg,jobs)
+    commitments = investments+[j for j in jobs if j.category not in ('production_start','expansion')]
+    action,scheduled,_,_ = _service_action(raw,cfg,commitments,forced)
+    projected = _project_one_turn(raw,action,cfg)
+    central,_ = rollout(raw,cfg,commitments,first_action=action)
+    strict,_ = rollout(raw,cfg,commitments,first_action=action,stress=True)
+    return Bundle(action,scheduled,projected,Envelope(strict,central),float(projected['farms'][raw['player']]['money']))
+
+
+def better(candidate,base,minimal_commitment=True):
+    return candidate.envelope.central_cash>base.envelope.central_cash
+
+
+def choose(raw,cfg,active_specs):
+    fresh = fresh_jobs(raw,cfg.episodeSteps,cfg.turnsPerDay,cfg.boardSize)
+    investments = investment_jobs(raw,cfg,fresh)
+    lookup = {j.key:j for j in investments+fresh+operating_jobs(raw,cfg)}
+    active = []
     for key,spec in active_specs.items():
-        if key in fresh_map:
-            j=fresh_map.pop(key); j.active=True; active.append(j)
-        else:
-            j=materialize_active(spec,raw)
-            if j is not None: active.append(j)
-    fresh=list(fresh_map.values())
-
-    positive_units=[j for j in active+fresh if j.kind not in ("sell_stock","hire") and j.central_delta>0]
-    if len(positive_units)>len(positions(raw)) and int(raw["hour"])<cfg.turnsPerDay-1:
-        p=int(raw["player"]); n=int(raw["farms"][p].get("hires_today",0) or 0)
-        cost=float(rules._hire_cost(n,cfg.farmHandCostMult))
-        enabled=sorted(positive_units,key=lambda j:(-j.central_delta,-j.strict_delta,j.key))[len(positions(raw))]
-        fresh.append(Job("hire:one","hire","workforce",{},enabled.central_delta-cost,enabled.strict_delta-cost,False,True))
-
-    continuation=plan_bundle(raw,cfg,active)
-    alternatives=[]  # (representative, bundle, minimal_commitment)
-    combined_fresh=[]
-
-    # Current-asset work can be bundled in parallel; it is not a new capital
-    # commitment. Scheduler keeps the more valuable continuation work when unit
-    # capacity is tight.
-    for category in ("maintenance","recovery"):
-        rows=[j for j in fresh if j.category==category]
-        if rows:
-            b=plan_bundle(raw,cfg,active+rows)
-            alternatives.append((None,b,True))
-            combined_fresh.extend(rows)
-
-    # Trade: compare each economically distinct partial quantity, then keep one
-    # quantity per product for the combined whole-farm alternative.
-    trade=[j for j in fresh if j.category=="trade"]
-    by_item={}
-    for j in trade: by_item.setdefault(str(j.target["item"]),[]).append(j)
-    for item,rows in sorted(by_item.items()):
-        scored=[(j,plan_bundle(raw,cfg,active+[j])) for j in rows]
-        j,b=max(scored,key=lambda row:(row[1].envelope.strict_cash,row[1].envelope.central_cash,row[1].immediate_cash,row[0].key))
-        alternatives.append((j,b,True))
-        combined_fresh.append(j)
-
-    # Production start: crop and animal are separate concurrent cycles. Compare
-    # every concrete asset alternative before selecting at most one of each for
-    # the combined bundle.
-    starts=[j for j in fresh if j.category=="production_start"]
-    for kind in ("prepare_for_plant","establish_plant","establish_animal"):
-        rows=[j for j in starts if j.kind==kind]
-        if rows:
-            scored=[(j,plan_bundle(raw,cfg,active+[j],{j.key})) for j in rows]
-            j,b=max(scored,key=lambda row:(row[1].envelope.strict_cash,row[1].envelope.central_cash,row[1].immediate_cash,row[0].key))
-            alternatives.append((j,b,True))
-            combined_fresh.append(j)
-
-    # One BUY_LAND is one atomic expansion commitment. Every crop/animal option
-    # is compared; only the best realized bundle is carried into the combined
-    # alternative.
-    expansion=[j for j in fresh if j.category=="expansion"]
-    if expansion:
-        scored=[(j,plan_bundle(raw,cfg,active+[j])) for j in expansion]
-        j,b=max(scored,key=lambda row:(row[1].envelope.strict_cash,row[1].envelope.central_cash,row[1].immediate_cash,row[0].key))
-        alternatives.append((j,b,True))
-        combined_fresh.append(j)
-
-    workforce=[j for j in fresh if j.category=="workforce"]
-    for j in workforce:
-        b=plan_bundle(raw,cfg,active+[j])
-        alternatives.append((j,b,True))
-        combined_fresh.append(j)
-
-    # Simultaneous whole-farm alternative. If it contains more than one new
-    # capital commitment, central-only upside is not enough; the design says to
-    # compare a smaller commitment when the strict estimate falls below
-    # continuation.
-    if combined_fresh:
-        b=plan_bundle(raw,cfg,active+combined_fresh)
-        capital=sum(1 for j in combined_fresh if j.category in ("production_start","expansion","workforce"))
-        alternatives.append((None,b,capital<=1))
-
-    eligible=[row for row in alternatives if better(row[1],continuation,row[2])]
-    if not eligible:return continuation,None,active,continuation
-
-    chosen_job,chosen,_=max(eligible,key=lambda row:(
-        row[1].envelope.strict_cash,
-        row[1].envelope.central_cash,
-        row[1].immediate_cash,
-        "" if row[0] is None else row[0].key,
-    ))
-    return chosen,chosen_job,active,continuation
+        if not still_needed(spec,raw): continue
+        j = lookup.get(key) or materialize_active(spec,raw)
+        if j is not None:
+            j.active=True; active.append(j)
+    action,scheduled,_,_ = _service_action(raw,cfg,active)
+    candidates = [(None,active,action,scheduled,False)]
+    if active:
+        a,s,_,_ = _service_action(raw,cfg,[])
+        candidates.append((None,[],a,s,False))
+    active_keys={j.key for j in active}
+    occupied={tuple(j.target['tile']) for j in active if 'tile' in j.target}
+    groups={}
+    for j in investments:
+        if j.key in active_keys or tuple(j.target['tile']) in occupied: continue
+        groups.setdefault((j.kind,j.target.get('crop',j.target.get('animal'))),[]).append(j)
+    for rows in groups.values():
+        j=min(rows,key=lambda j:(min(distance(pos,j.target['tile']) for pos in positions(raw)),j.key))
+        planned=active+[j]
+        a,s,_,_=_service_action(raw,cfg,planned,{j.key})
+        candidates.append((j,planned,a,s,False))
+    a,s,_,_=_service_action(raw,cfg,active,harvest_now=True)
+    candidates.append((None,active,a,s,True))
+    if raw['hour']<cfg.turnsPerDay-1 and (active or operating_jobs(raw,cfg)) and len(action['market'])<cfg.maxMarketOrdersPerTurn:
+        a=copy.deepcopy(action); a['market'].append(['HIRE'])
+        candidates.append((None,active,a,scheduled,False))
+    for idx,order in enumerate(action['market']):
+        if order[0]=='SELL':
+            a=copy.deepcopy(action); a['market'].pop(idx)
+            candidates.append((None,active,a,scheduled,False))
+    scored=[]; seen=set()
+    for representative,planned,a,s,early in candidates:
+        key=(repr(a),tuple(j.key for j in planned),early)
+        if key in seen: continue
+        seen.add(key)
+        value,_=rollout(raw,cfg,planned,first_action=a,harvest_now=early)
+        projected=_project_one_turn(raw,a,cfg)
+        b=Bundle(a,s,projected,Envelope(value,value),float(projected['farms'][raw['player']]['money']))
+        b.commitments=[j.spec() for j in planned]
+        keys={j.key for j in planned}
+        b.commitments.extend(j.spec() for j in operating_jobs(raw,cfg,True) if j.key in s and j.key not in keys)
+        scored.append((b,representative,planned,early))
+    chosen=max(scored,key=lambda row:row[0].envelope.central_cash)
+    for row in (scored[0],chosen):
+        b,_,planned,early=row
+        strict,_=rollout(raw,cfg,planned,first_action=b.action,harvest_now=early,stress=True)
+        b.envelope=Envelope(strict,b.envelope.central_cash)
+    return chosen[0],chosen[1],active,scored[0][0]

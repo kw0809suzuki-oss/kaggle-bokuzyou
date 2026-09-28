@@ -26,7 +26,7 @@ from strong_model_v0_reimplementation.agent import agent as strong_agent, reset_
 import astra_flow_independent_distilled_v0 as independent
 
 SEEDS=[92804001,92804002,92804003]
-OPPONENT_PATH=ROOT/"opponents"/"seyamalam_v21.py"
+OPPONENT_PATH=ROOT/"astra_flow_vendor"/"seyamalam_v21.py"
 OUT=Path(__file__).with_name("battle_smoke_result.json")
 
 

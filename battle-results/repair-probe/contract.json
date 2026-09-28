@@ -1,0 +1,2592 @@
+{
+  "feed_purpose": {
+    "pickup": [
+      "PICKUP",
+      "WHEAT",
+      1
+    ],
+    "next": [
+      "WEST"
+    ]
+  },
+  "continuation_value": {
+    "active_value": 1760.0,
+    "continuation_scheduled": [
+      "ext:feed:0:0:0:COW"
+    ],
+    "chosen_scheduled": [
+      "ext:establish_animal:SHEEP:4:4"
+    ]
+  },
+  "parallel_bundle": {
+    "scheduled": [
+      "base:maintain_plant_today:WHEAT:0:0",
+      "ext:harvest_animal:0:1:GOOSE"
+    ],
+    "actions": [
+      [
+        "WEST"
+      ],
+      [
+        "WEST"
+      ]
+    ]
+  },
+  "terminal_timing": {
+    "day27_best_wheat": 15.0,
+    "day28_best_wheat": -10.0
+  },
+  "shortplan_bridge": {
+    "base_jobs": 125,
+    "kinds": [
+      "prepare_for_plant"
+    ]
+  },
+  "initial_choice_probe": {
+    "prepare_candidate_count": 125,
+    "continuation": {
+      "action": {
+        "farmer": [
+          "PASS"
+        ],
+        "hands": [],
+        "market": []
+      },
+      "strict_terminal_cash": 3000.0,
+      "central_terminal_cash": 3000.0,
+      "immediate_cash": 3000.0
+    },
+    "best_prepare_for_plant": {
+      "key": "base:prepare_for_plant:MELON:4:4",
+      "crop": "MELON",
+      "tile": [
+        4,
+        4
+      ],
+      "job_central_delta": 1420.0,
+      "job_strict_delta": -80.0,
+      "action": {
+        "farmer": [
+          "PASS"
+        ],
+        "hands": [],
+        "market": [
+          [
+            "BUY_SEED",
+            "MELON",
+            1
+          ]
+        ]
+      },
+      "scheduled": [
+        "plant:MELON:4:4"
+      ],
+      "strict_terminal_cash": 4547.0,
+      "central_terminal_cash": 4547.0,
+      "immediate_cash": 2920.0
+    },
+    "choose_result": {
+      "action": {
+        "farmer": [
+          "BUILD_PASTURE"
+        ],
+        "hands": [],
+        "market": [
+          [
+            "BUY_ANIMAL",
+            "SHEEP",
+            1
+          ]
+        ]
+      },
+      "scheduled": [
+        "ext:establish_animal:SHEEP:4:4"
+      ],
+      "strict_terminal_cash": 8628.0,
+      "central_terminal_cash": 8628.0,
+      "representative": {
+        "key": "ext:establish_animal:SHEEP:4:4",
+        "kind": "establish_animal",
+        "category": "production_start",
+        "target": {
+          "tile": [
+            4,
+            4
+          ],
+          "animal": "SHEEP"
+        },
+        "base_kind": null,
+        "base_target": null
+      },
+      "active_count": 0
+    },
+    "prepare_beats_continuation": {
+      "strict": true,
+      "central": true,
+      "immediate": false
+    }
+  },
+  "envelope": {
+    "strict": 3049.0,
+    "central": 3049.0
+  },
+  "runtime_smoke": {
+    "turns": 48,
+    "cash": 112.0,
+    "first12": [
+      {
+        "turn": 0,
+        "pre_cash": 3000.0,
+        "action": {
+          "farmer": [
+            "BUILD_PASTURE"
+          ],
+          "hands": [],
+          "market": [
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ]
+          ]
+        },
+        "post_cash": 2500.0,
+        "debug": {
+          "active_jobs": {
+            "ext:establish_animal:SHEEP:4:4": {
+              "key": "ext:establish_animal:SHEEP:4:4",
+              "kind": "establish_animal",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  4,
+                  4
+                ],
+                "animal": "SHEEP"
+              },
+              "base_kind": null,
+              "base_target": null
+            }
+          },
+          "last_choice": {
+            "step": 0,
+            "active_before": [],
+            "continuation": {
+              "strict_terminal_cash": 3000.0,
+              "central_terminal_cash": 3000.0,
+              "scheduled": []
+            },
+            "chosen": {
+              "strict_terminal_cash": 8628.0,
+              "central_terminal_cash": 8628.0,
+              "scheduled": [
+                "ext:establish_animal:SHEEP:4:4"
+              ],
+              "representative": {
+                "key": "ext:establish_animal:SHEEP:4:4",
+                "kind": "establish_animal",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    4,
+                    4
+                  ],
+                  "animal": "SHEEP"
+                },
+                "base_kind": null,
+                "base_target": null
+              }
+            },
+            "active_after": {
+              "ext:establish_animal:SHEEP:4:4": {
+                "key": "ext:establish_animal:SHEEP:4:4",
+                "kind": "establish_animal",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    4,
+                    4
+                  ],
+                  "animal": "SHEEP"
+                },
+                "base_kind": null,
+                "base_target": null
+              }
+            }
+          }
+        }
+      },
+      {
+        "turn": 1,
+        "pre_cash": 2500.0,
+        "action": {
+          "farmer": [
+            "EAST"
+          ],
+          "hands": [],
+          "market": [
+            [
+              "BUY_LAND"
+            ],
+            [
+              "BUY_ANIMAL",
+              "COW",
+              1
+            ]
+          ]
+        },
+        "post_cash": 1100.0,
+        "debug": {
+          "active_jobs": {
+            "ext:establish_animal:SHEEP:4:4": {
+              "key": "ext:establish_animal:SHEEP:4:4",
+              "kind": "establish_animal",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  4,
+                  4
+                ],
+                "animal": "SHEEP"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "ext:expand_animal:COW:5:4": {
+              "key": "ext:expand_animal:COW:5:4",
+              "kind": "expand_animal",
+              "category": "expansion",
+              "target": {
+                "tile": [
+                  5,
+                  4
+                ],
+                "animal": "COW"
+              },
+              "base_kind": null,
+              "base_target": null
+            }
+          },
+          "last_choice": {
+            "step": 1,
+            "active_before": [
+              "ext:establish_animal:SHEEP:4:4"
+            ],
+            "continuation": {
+              "strict_terminal_cash": 8628.0,
+              "central_terminal_cash": 8628.0,
+              "scheduled": [
+                "ext:establish_animal:SHEEP:4:4"
+              ]
+            },
+            "chosen": {
+              "strict_terminal_cash": 12248.0,
+              "central_terminal_cash": 12248.0,
+              "scheduled": [
+                "ext:expand_animal:COW:5:4"
+              ],
+              "representative": {
+                "key": "ext:expand_animal:COW:5:4",
+                "kind": "expand_animal",
+                "category": "expansion",
+                "target": {
+                  "tile": [
+                    5,
+                    4
+                  ],
+                  "animal": "COW"
+                },
+                "base_kind": null,
+                "base_target": null
+              }
+            },
+            "active_after": {
+              "ext:establish_animal:SHEEP:4:4": {
+                "key": "ext:establish_animal:SHEEP:4:4",
+                "kind": "establish_animal",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    4,
+                    4
+                  ],
+                  "animal": "SHEEP"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "ext:expand_animal:COW:5:4": {
+                "key": "ext:expand_animal:COW:5:4",
+                "kind": "expand_animal",
+                "category": "expansion",
+                "target": {
+                  "tile": [
+                    5,
+                    4
+                  ],
+                  "animal": "COW"
+                },
+                "base_kind": null,
+                "base_target": null
+              }
+            }
+          }
+        }
+      },
+      {
+        "turn": 2,
+        "pre_cash": 1100.0,
+        "action": {
+          "farmer": [
+            "NORTH"
+          ],
+          "hands": [],
+          "market": [
+            [
+              "BUY_SEED",
+              "MELON",
+              1
+            ]
+          ]
+        },
+        "post_cash": 1020.0,
+        "debug": {
+          "active_jobs": {
+            "ext:establish_animal:SHEEP:4:4": {
+              "key": "ext:establish_animal:SHEEP:4:4",
+              "kind": "establish_animal",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  4,
+                  4
+                ],
+                "animal": "SHEEP"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "ext:expand_animal:COW:5:4": {
+              "key": "ext:expand_animal:COW:5:4",
+              "kind": "expand_animal",
+              "category": "expansion",
+              "target": {
+                "tile": [
+                  5,
+                  4
+                ],
+                "animal": "COW"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "plant:MELON:5:3": {
+              "key": "plant:MELON:5:3",
+              "kind": "plant_crop",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  5,
+                  3
+                ],
+                "crop": "MELON"
+              },
+              "base_kind": null,
+              "base_target": null
+            }
+          },
+          "last_choice": {
+            "step": 2,
+            "active_before": [
+              "ext:establish_animal:SHEEP:4:4",
+              "ext:expand_animal:COW:5:4"
+            ],
+            "continuation": {
+              "strict_terminal_cash": 12248.0,
+              "central_terminal_cash": 12248.0,
+              "scheduled": [
+                "ext:establish_animal:SHEEP:4:4"
+              ]
+            },
+            "chosen": {
+              "strict_terminal_cash": 13795.0,
+              "central_terminal_cash": 13795.0,
+              "scheduled": [
+                "plant:MELON:5:3"
+              ],
+              "representative": {
+                "key": "plant:MELON:5:3",
+                "kind": "plant_crop",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    5,
+                    3
+                  ],
+                  "crop": "MELON"
+                },
+                "base_kind": null,
+                "base_target": null
+              }
+            },
+            "active_after": {
+              "ext:establish_animal:SHEEP:4:4": {
+                "key": "ext:establish_animal:SHEEP:4:4",
+                "kind": "establish_animal",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    4,
+                    4
+                  ],
+                  "animal": "SHEEP"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "ext:expand_animal:COW:5:4": {
+                "key": "ext:expand_animal:COW:5:4",
+                "kind": "expand_animal",
+                "category": "expansion",
+                "target": {
+                  "tile": [
+                    5,
+                    4
+                  ],
+                  "animal": "COW"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "plant:MELON:5:3": {
+                "key": "plant:MELON:5:3",
+                "kind": "plant_crop",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    5,
+                    3
+                  ],
+                  "crop": "MELON"
+                },
+                "base_kind": null,
+                "base_target": null
+              }
+            }
+          }
+        }
+      },
+      {
+        "turn": 3,
+        "pre_cash": 1020.0,
+        "action": {
+          "farmer": [
+            "WEST"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "post_cash": 1020.0,
+        "debug": {
+          "active_jobs": {
+            "ext:establish_animal:SHEEP:4:4": {
+              "key": "ext:establish_animal:SHEEP:4:4",
+              "kind": "establish_animal",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  4,
+                  4
+                ],
+                "animal": "SHEEP"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "ext:expand_animal:COW:5:4": {
+              "key": "ext:expand_animal:COW:5:4",
+              "kind": "expand_animal",
+              "category": "expansion",
+              "target": {
+                "tile": [
+                  5,
+                  4
+                ],
+                "animal": "COW"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "plant:MELON:5:3": {
+              "key": "plant:MELON:5:3",
+              "kind": "plant_crop",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  5,
+                  3
+                ],
+                "crop": "MELON"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "plant:MELON:4:3": {
+              "key": "plant:MELON:4:3",
+              "kind": "plant_crop",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  4,
+                  3
+                ],
+                "crop": "MELON"
+              },
+              "base_kind": null,
+              "base_target": null
+            }
+          },
+          "last_choice": {
+            "step": 3,
+            "active_before": [
+              "ext:establish_animal:SHEEP:4:4",
+              "ext:expand_animal:COW:5:4",
+              "plant:MELON:5:3"
+            ],
+            "continuation": {
+              "strict_terminal_cash": 13795.0,
+              "central_terminal_cash": 13795.0,
+              "scheduled": [
+                "plant:MELON:5:3"
+              ]
+            },
+            "chosen": {
+              "strict_terminal_cash": 15302.0,
+              "central_terminal_cash": 15302.0,
+              "scheduled": [
+                "plant:MELON:4:3"
+              ],
+              "representative": {
+                "key": "plant:MELON:4:3",
+                "kind": "plant_crop",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    4,
+                    3
+                  ],
+                  "crop": "MELON"
+                },
+                "base_kind": null,
+                "base_target": null
+              }
+            },
+            "active_after": {
+              "ext:establish_animal:SHEEP:4:4": {
+                "key": "ext:establish_animal:SHEEP:4:4",
+                "kind": "establish_animal",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    4,
+                    4
+                  ],
+                  "animal": "SHEEP"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "ext:expand_animal:COW:5:4": {
+                "key": "ext:expand_animal:COW:5:4",
+                "kind": "expand_animal",
+                "category": "expansion",
+                "target": {
+                  "tile": [
+                    5,
+                    4
+                  ],
+                  "animal": "COW"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "plant:MELON:5:3": {
+                "key": "plant:MELON:5:3",
+                "kind": "plant_crop",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    5,
+                    3
+                  ],
+                  "crop": "MELON"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "plant:MELON:4:3": {
+                "key": "plant:MELON:4:3",
+                "kind": "plant_crop",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    4,
+                    3
+                  ],
+                  "crop": "MELON"
+                },
+                "base_kind": null,
+                "base_target": null
+              }
+            }
+          }
+        }
+      },
+      {
+        "turn": 4,
+        "pre_cash": 1020.0,
+        "action": {
+          "farmer": [
+            "SOUTH"
+          ],
+          "hands": [],
+          "market": [
+            [
+              "BUY_LAND"
+            ]
+          ]
+        },
+        "post_cash": 1020.0,
+        "debug": {
+          "active_jobs": {
+            "ext:establish_animal:SHEEP:4:4": {
+              "key": "ext:establish_animal:SHEEP:4:4",
+              "kind": "establish_animal",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  4,
+                  4
+                ],
+                "animal": "SHEEP"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "ext:expand_animal:COW:5:4": {
+              "key": "ext:expand_animal:COW:5:4",
+              "kind": "expand_animal",
+              "category": "expansion",
+              "target": {
+                "tile": [
+                  5,
+                  4
+                ],
+                "animal": "COW"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "plant:MELON:5:3": {
+              "key": "plant:MELON:5:3",
+              "kind": "plant_crop",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  5,
+                  3
+                ],
+                "crop": "MELON"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "plant:MELON:4:3": {
+              "key": "plant:MELON:4:3",
+              "kind": "plant_crop",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  4,
+                  3
+                ],
+                "crop": "MELON"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "ext:expand_animal:SHEEP:4:5": {
+              "key": "ext:expand_animal:SHEEP:4:5",
+              "kind": "expand_animal",
+              "category": "expansion",
+              "target": {
+                "tile": [
+                  4,
+                  5
+                ],
+                "animal": "SHEEP"
+              },
+              "base_kind": null,
+              "base_target": null
+            }
+          },
+          "last_choice": {
+            "step": 4,
+            "active_before": [
+              "ext:establish_animal:SHEEP:4:4",
+              "ext:expand_animal:COW:5:4",
+              "plant:MELON:5:3",
+              "plant:MELON:4:3"
+            ],
+            "continuation": {
+              "strict_terminal_cash": 15331.0,
+              "central_terminal_cash": 15302.0,
+              "scheduled": [
+                "plant:MELON:4:3"
+              ]
+            },
+            "chosen": {
+              "strict_terminal_cash": 16424.0,
+              "central_terminal_cash": 16424.0,
+              "scheduled": [
+                "ext:expand_animal:SHEEP:4:5"
+              ],
+              "representative": {
+                "key": "ext:expand_animal:SHEEP:4:5",
+                "kind": "expand_animal",
+                "category": "expansion",
+                "target": {
+                  "tile": [
+                    4,
+                    5
+                  ],
+                  "animal": "SHEEP"
+                },
+                "base_kind": null,
+                "base_target": null
+              }
+            },
+            "active_after": {
+              "ext:establish_animal:SHEEP:4:4": {
+                "key": "ext:establish_animal:SHEEP:4:4",
+                "kind": "establish_animal",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    4,
+                    4
+                  ],
+                  "animal": "SHEEP"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "ext:expand_animal:COW:5:4": {
+                "key": "ext:expand_animal:COW:5:4",
+                "kind": "expand_animal",
+                "category": "expansion",
+                "target": {
+                  "tile": [
+                    5,
+                    4
+                  ],
+                  "animal": "COW"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "plant:MELON:5:3": {
+                "key": "plant:MELON:5:3",
+                "kind": "plant_crop",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    5,
+                    3
+                  ],
+                  "crop": "MELON"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "plant:MELON:4:3": {
+                "key": "plant:MELON:4:3",
+                "kind": "plant_crop",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    4,
+                    3
+                  ],
+                  "crop": "MELON"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "ext:expand_animal:SHEEP:4:5": {
+                "key": "ext:expand_animal:SHEEP:4:5",
+                "kind": "expand_animal",
+                "category": "expansion",
+                "target": {
+                  "tile": [
+                    4,
+                    5
+                  ],
+                  "animal": "SHEEP"
+                },
+                "base_kind": null,
+                "base_target": null
+              }
+            }
+          }
+        }
+      },
+      {
+        "turn": 5,
+        "pre_cash": 1020.0,
+        "action": {
+          "farmer": [
+            "WEST"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "post_cash": 1020.0,
+        "debug": {
+          "active_jobs": {
+            "ext:establish_animal:SHEEP:4:4": {
+              "key": "ext:establish_animal:SHEEP:4:4",
+              "kind": "establish_animal",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  4,
+                  4
+                ],
+                "animal": "SHEEP"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "ext:expand_animal:COW:5:4": {
+              "key": "ext:expand_animal:COW:5:4",
+              "kind": "expand_animal",
+              "category": "expansion",
+              "target": {
+                "tile": [
+                  5,
+                  4
+                ],
+                "animal": "COW"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "plant:MELON:5:3": {
+              "key": "plant:MELON:5:3",
+              "kind": "plant_crop",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  5,
+                  3
+                ],
+                "crop": "MELON"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "plant:MELON:4:3": {
+              "key": "plant:MELON:4:3",
+              "kind": "plant_crop",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  4,
+                  3
+                ],
+                "crop": "MELON"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "ext:expand_animal:SHEEP:4:5": {
+              "key": "ext:expand_animal:SHEEP:4:5",
+              "kind": "expand_animal",
+              "category": "expansion",
+              "target": {
+                "tile": [
+                  4,
+                  5
+                ],
+                "animal": "SHEEP"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "plant:MELON:3:4": {
+              "key": "plant:MELON:3:4",
+              "kind": "plant_crop",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  3,
+                  4
+                ],
+                "crop": "MELON"
+              },
+              "base_kind": null,
+              "base_target": null
+            }
+          },
+          "last_choice": {
+            "step": 5,
+            "active_before": [
+              "ext:establish_animal:SHEEP:4:4",
+              "ext:expand_animal:COW:5:4",
+              "plant:MELON:5:3",
+              "plant:MELON:4:3",
+              "ext:expand_animal:SHEEP:4:5"
+            ],
+            "continuation": {
+              "strict_terminal_cash": 16424.0,
+              "central_terminal_cash": 16424.0,
+              "scheduled": [
+                "ext:establish_animal:SHEEP:4:4"
+              ]
+            },
+            "chosen": {
+              "strict_terminal_cash": 17189.0,
+              "central_terminal_cash": 17189.0,
+              "scheduled": [
+                "plant:MELON:3:4"
+              ],
+              "representative": {
+                "key": "plant:MELON:3:4",
+                "kind": "plant_crop",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    3,
+                    4
+                  ],
+                  "crop": "MELON"
+                },
+                "base_kind": null,
+                "base_target": null
+              }
+            },
+            "active_after": {
+              "ext:establish_animal:SHEEP:4:4": {
+                "key": "ext:establish_animal:SHEEP:4:4",
+                "kind": "establish_animal",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    4,
+                    4
+                  ],
+                  "animal": "SHEEP"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "ext:expand_animal:COW:5:4": {
+                "key": "ext:expand_animal:COW:5:4",
+                "kind": "expand_animal",
+                "category": "expansion",
+                "target": {
+                  "tile": [
+                    5,
+                    4
+                  ],
+                  "animal": "COW"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "plant:MELON:5:3": {
+                "key": "plant:MELON:5:3",
+                "kind": "plant_crop",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    5,
+                    3
+                  ],
+                  "crop": "MELON"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "plant:MELON:4:3": {
+                "key": "plant:MELON:4:3",
+                "kind": "plant_crop",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    4,
+                    3
+                  ],
+                  "crop": "MELON"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "ext:expand_animal:SHEEP:4:5": {
+                "key": "ext:expand_animal:SHEEP:4:5",
+                "kind": "expand_animal",
+                "category": "expansion",
+                "target": {
+                  "tile": [
+                    4,
+                    5
+                  ],
+                  "animal": "SHEEP"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "plant:MELON:3:4": {
+                "key": "plant:MELON:3:4",
+                "kind": "plant_crop",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    3,
+                    4
+                  ],
+                  "crop": "MELON"
+                },
+                "base_kind": null,
+                "base_target": null
+              }
+            }
+          }
+        }
+      },
+      {
+        "turn": 6,
+        "pre_cash": 1020.0,
+        "action": {
+          "farmer": [
+            "PLANT",
+            "MELON"
+          ],
+          "hands": [],
+          "market": [
+            [
+              "HIRE"
+            ]
+          ]
+        },
+        "post_cash": 1019.0,
+        "debug": {
+          "active_jobs": {
+            "ext:establish_animal:SHEEP:4:4": {
+              "key": "ext:establish_animal:SHEEP:4:4",
+              "kind": "establish_animal",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  4,
+                  4
+                ],
+                "animal": "SHEEP"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "ext:expand_animal:COW:5:4": {
+              "key": "ext:expand_animal:COW:5:4",
+              "kind": "expand_animal",
+              "category": "expansion",
+              "target": {
+                "tile": [
+                  5,
+                  4
+                ],
+                "animal": "COW"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "plant:MELON:5:3": {
+              "key": "plant:MELON:5:3",
+              "kind": "plant_crop",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  5,
+                  3
+                ],
+                "crop": "MELON"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "plant:MELON:4:3": {
+              "key": "plant:MELON:4:3",
+              "kind": "plant_crop",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  4,
+                  3
+                ],
+                "crop": "MELON"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "ext:expand_animal:SHEEP:4:5": {
+              "key": "ext:expand_animal:SHEEP:4:5",
+              "kind": "expand_animal",
+              "category": "expansion",
+              "target": {
+                "tile": [
+                  4,
+                  5
+                ],
+                "animal": "SHEEP"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "plant:MELON:3:4": {
+              "key": "plant:MELON:3:4",
+              "kind": "plant_crop",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  3,
+                  4
+                ],
+                "crop": "MELON"
+              },
+              "base_kind": null,
+              "base_target": null
+            }
+          },
+          "last_choice": {
+            "step": 6,
+            "active_before": [
+              "ext:establish_animal:SHEEP:4:4",
+              "ext:expand_animal:COW:5:4",
+              "plant:MELON:5:3",
+              "plant:MELON:4:3",
+              "ext:expand_animal:SHEEP:4:5",
+              "plant:MELON:3:4"
+            ],
+            "continuation": {
+              "strict_terminal_cash": 15639.0,
+              "central_terminal_cash": 15639.0,
+              "scheduled": [
+                "plant:MELON:3:4"
+              ]
+            },
+            "chosen": {
+              "strict_terminal_cash": 17652.0,
+              "central_terminal_cash": 17652.0,
+              "scheduled": [
+                "plant:MELON:3:4"
+              ],
+              "representative": null
+            },
+            "active_after": {
+              "ext:establish_animal:SHEEP:4:4": {
+                "key": "ext:establish_animal:SHEEP:4:4",
+                "kind": "establish_animal",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    4,
+                    4
+                  ],
+                  "animal": "SHEEP"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "ext:expand_animal:COW:5:4": {
+                "key": "ext:expand_animal:COW:5:4",
+                "kind": "expand_animal",
+                "category": "expansion",
+                "target": {
+                  "tile": [
+                    5,
+                    4
+                  ],
+                  "animal": "COW"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "plant:MELON:5:3": {
+                "key": "plant:MELON:5:3",
+                "kind": "plant_crop",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    5,
+                    3
+                  ],
+                  "crop": "MELON"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "plant:MELON:4:3": {
+                "key": "plant:MELON:4:3",
+                "kind": "plant_crop",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    4,
+                    3
+                  ],
+                  "crop": "MELON"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "ext:expand_animal:SHEEP:4:5": {
+                "key": "ext:expand_animal:SHEEP:4:5",
+                "kind": "expand_animal",
+                "category": "expansion",
+                "target": {
+                  "tile": [
+                    4,
+                    5
+                  ],
+                  "animal": "SHEEP"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "plant:MELON:3:4": {
+                "key": "plant:MELON:3:4",
+                "kind": "plant_crop",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    3,
+                    4
+                  ],
+                  "crop": "MELON"
+                },
+                "base_kind": null,
+                "base_target": null
+              }
+            }
+          }
+        }
+      },
+      {
+        "turn": 7,
+        "pre_cash": 1019.0,
+        "action": {
+          "farmer": [
+            "WEST"
+          ],
+          "hands": [
+            [
+              "WEST"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_SEED",
+              "MELON",
+              1
+            ]
+          ]
+        },
+        "post_cash": 939.0,
+        "debug": {
+          "active_jobs": {
+            "ext:establish_animal:SHEEP:4:4": {
+              "key": "ext:establish_animal:SHEEP:4:4",
+              "kind": "establish_animal",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  4,
+                  4
+                ],
+                "animal": "SHEEP"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "ext:expand_animal:COW:5:4": {
+              "key": "ext:expand_animal:COW:5:4",
+              "kind": "expand_animal",
+              "category": "expansion",
+              "target": {
+                "tile": [
+                  5,
+                  4
+                ],
+                "animal": "COW"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "plant:MELON:5:3": {
+              "key": "plant:MELON:5:3",
+              "kind": "plant_crop",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  5,
+                  3
+                ],
+                "crop": "MELON"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "plant:MELON:4:3": {
+              "key": "plant:MELON:4:3",
+              "kind": "plant_crop",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  4,
+                  3
+                ],
+                "crop": "MELON"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "ext:expand_animal:SHEEP:4:5": {
+              "key": "ext:expand_animal:SHEEP:4:5",
+              "kind": "expand_animal",
+              "category": "expansion",
+              "target": {
+                "tile": [
+                  4,
+                  5
+                ],
+                "animal": "SHEEP"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "plant:MELON:2:4": {
+              "key": "plant:MELON:2:4",
+              "kind": "plant_crop",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  2,
+                  4
+                ],
+                "crop": "MELON"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "water:(3, 4)": {
+              "key": "water:(3, 4)",
+              "kind": "water",
+              "category": "maintenance",
+              "target": {
+                "tile": [
+                  3,
+                  4
+                ],
+                "crop": "MELON"
+              },
+              "base_kind": null,
+              "base_target": null
+            }
+          },
+          "last_choice": {
+            "step": 7,
+            "active_before": [
+              "ext:establish_animal:SHEEP:4:4",
+              "ext:expand_animal:COW:5:4",
+              "plant:MELON:5:3",
+              "plant:MELON:4:3",
+              "ext:expand_animal:SHEEP:4:5"
+            ],
+            "continuation": {
+              "strict_terminal_cash": 17652.0,
+              "central_terminal_cash": 17652.0,
+              "scheduled": [
+                "water:(3, 4)",
+                "ext:establish_animal:SHEEP:4:4"
+              ]
+            },
+            "chosen": {
+              "strict_terminal_cash": 18508.0,
+              "central_terminal_cash": 18508.0,
+              "scheduled": [
+                "plant:MELON:2:4",
+                "water:(3, 4)"
+              ],
+              "representative": {
+                "key": "plant:MELON:2:4",
+                "kind": "plant_crop",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    2,
+                    4
+                  ],
+                  "crop": "MELON"
+                },
+                "base_kind": null,
+                "base_target": null
+              }
+            },
+            "active_after": {
+              "ext:establish_animal:SHEEP:4:4": {
+                "key": "ext:establish_animal:SHEEP:4:4",
+                "kind": "establish_animal",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    4,
+                    4
+                  ],
+                  "animal": "SHEEP"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "ext:expand_animal:COW:5:4": {
+                "key": "ext:expand_animal:COW:5:4",
+                "kind": "expand_animal",
+                "category": "expansion",
+                "target": {
+                  "tile": [
+                    5,
+                    4
+                  ],
+                  "animal": "COW"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "plant:MELON:5:3": {
+                "key": "plant:MELON:5:3",
+                "kind": "plant_crop",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    5,
+                    3
+                  ],
+                  "crop": "MELON"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "plant:MELON:4:3": {
+                "key": "plant:MELON:4:3",
+                "kind": "plant_crop",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    4,
+                    3
+                  ],
+                  "crop": "MELON"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "ext:expand_animal:SHEEP:4:5": {
+                "key": "ext:expand_animal:SHEEP:4:5",
+                "kind": "expand_animal",
+                "category": "expansion",
+                "target": {
+                  "tile": [
+                    4,
+                    5
+                  ],
+                  "animal": "SHEEP"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "plant:MELON:2:4": {
+                "key": "plant:MELON:2:4",
+                "kind": "plant_crop",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    2,
+                    4
+                  ],
+                  "crop": "MELON"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "water:(3, 4)": {
+                "key": "water:(3, 4)",
+                "kind": "water",
+                "category": "maintenance",
+                "target": {
+                  "tile": [
+                    3,
+                    4
+                  ],
+                  "crop": "MELON"
+                },
+                "base_kind": null,
+                "base_target": null
+              }
+            }
+          }
+        }
+      },
+      {
+        "turn": 8,
+        "pre_cash": 939.0,
+        "action": {
+          "farmer": [
+            "EAST"
+          ],
+          "hands": [
+            [
+              "WEST"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_LAND"
+            ]
+          ]
+        },
+        "post_cash": 939.0,
+        "debug": {
+          "active_jobs": {
+            "ext:establish_animal:SHEEP:4:4": {
+              "key": "ext:establish_animal:SHEEP:4:4",
+              "kind": "establish_animal",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  4,
+                  4
+                ],
+                "animal": "SHEEP"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "ext:expand_animal:COW:5:4": {
+              "key": "ext:expand_animal:COW:5:4",
+              "kind": "expand_animal",
+              "category": "expansion",
+              "target": {
+                "tile": [
+                  5,
+                  4
+                ],
+                "animal": "COW"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "plant:MELON:5:3": {
+              "key": "plant:MELON:5:3",
+              "kind": "plant_crop",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  5,
+                  3
+                ],
+                "crop": "MELON"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "plant:MELON:4:3": {
+              "key": "plant:MELON:4:3",
+              "kind": "plant_crop",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  4,
+                  3
+                ],
+                "crop": "MELON"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "ext:expand_animal:SHEEP:4:5": {
+              "key": "ext:expand_animal:SHEEP:4:5",
+              "kind": "expand_animal",
+              "category": "expansion",
+              "target": {
+                "tile": [
+                  4,
+                  5
+                ],
+                "animal": "SHEEP"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "plant:MELON:2:4": {
+              "key": "plant:MELON:2:4",
+              "kind": "plant_crop",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  2,
+                  4
+                ],
+                "crop": "MELON"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "water:(3, 4)": {
+              "key": "water:(3, 4)",
+              "kind": "water",
+              "category": "maintenance",
+              "target": {
+                "tile": [
+                  3,
+                  4
+                ],
+                "crop": "MELON"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "ext:expand_animal:COW:2:5": {
+              "key": "ext:expand_animal:COW:2:5",
+              "kind": "expand_animal",
+              "category": "expansion",
+              "target": {
+                "tile": [
+                  2,
+                  5
+                ],
+                "animal": "COW"
+              },
+              "base_kind": null,
+              "base_target": null
+            }
+          },
+          "last_choice": {
+            "step": 8,
+            "active_before": [
+              "ext:establish_animal:SHEEP:4:4",
+              "ext:expand_animal:COW:5:4",
+              "plant:MELON:5:3",
+              "plant:MELON:4:3",
+              "ext:expand_animal:SHEEP:4:5",
+              "plant:MELON:2:4",
+              "water:(3, 4)"
+            ],
+            "continuation": {
+              "strict_terminal_cash": 18508.0,
+              "central_terminal_cash": 18508.0,
+              "scheduled": [
+                "plant:MELON:2:4",
+                "water:(3, 4)"
+              ]
+            },
+            "chosen": {
+              "strict_terminal_cash": 19065.0,
+              "central_terminal_cash": 19065.0,
+              "scheduled": [
+                "water:(3, 4)",
+                "ext:expand_animal:COW:2:5"
+              ],
+              "representative": {
+                "key": "ext:expand_animal:COW:2:5",
+                "kind": "expand_animal",
+                "category": "expansion",
+                "target": {
+                  "tile": [
+                    2,
+                    5
+                  ],
+                  "animal": "COW"
+                },
+                "base_kind": null,
+                "base_target": null
+              }
+            },
+            "active_after": {
+              "ext:establish_animal:SHEEP:4:4": {
+                "key": "ext:establish_animal:SHEEP:4:4",
+                "kind": "establish_animal",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    4,
+                    4
+                  ],
+                  "animal": "SHEEP"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "ext:expand_animal:COW:5:4": {
+                "key": "ext:expand_animal:COW:5:4",
+                "kind": "expand_animal",
+                "category": "expansion",
+                "target": {
+                  "tile": [
+                    5,
+                    4
+                  ],
+                  "animal": "COW"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "plant:MELON:5:3": {
+                "key": "plant:MELON:5:3",
+                "kind": "plant_crop",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    5,
+                    3
+                  ],
+                  "crop": "MELON"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "plant:MELON:4:3": {
+                "key": "plant:MELON:4:3",
+                "kind": "plant_crop",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    4,
+                    3
+                  ],
+                  "crop": "MELON"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "ext:expand_animal:SHEEP:4:5": {
+                "key": "ext:expand_animal:SHEEP:4:5",
+                "kind": "expand_animal",
+                "category": "expansion",
+                "target": {
+                  "tile": [
+                    4,
+                    5
+                  ],
+                  "animal": "SHEEP"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "plant:MELON:2:4": {
+                "key": "plant:MELON:2:4",
+                "kind": "plant_crop",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    2,
+                    4
+                  ],
+                  "crop": "MELON"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "water:(3, 4)": {
+                "key": "water:(3, 4)",
+                "kind": "water",
+                "category": "maintenance",
+                "target": {
+                  "tile": [
+                    3,
+                    4
+                  ],
+                  "crop": "MELON"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "ext:expand_animal:COW:2:5": {
+                "key": "ext:expand_animal:COW:2:5",
+                "kind": "expand_animal",
+                "category": "expansion",
+                "target": {
+                  "tile": [
+                    2,
+                    5
+                  ],
+                  "animal": "COW"
+                },
+                "base_kind": null,
+                "base_target": null
+              }
+            }
+          }
+        }
+      },
+      {
+        "turn": 9,
+        "pre_cash": 939.0,
+        "action": {
+          "farmer": [
+            "WATER"
+          ],
+          "hands": [
+            [
+              "PLANT",
+              "MELON"
+            ]
+          ],
+          "market": []
+        },
+        "post_cash": 939.0,
+        "debug": {
+          "active_jobs": {
+            "ext:establish_animal:SHEEP:4:4": {
+              "key": "ext:establish_animal:SHEEP:4:4",
+              "kind": "establish_animal",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  4,
+                  4
+                ],
+                "animal": "SHEEP"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "ext:expand_animal:COW:5:4": {
+              "key": "ext:expand_animal:COW:5:4",
+              "kind": "expand_animal",
+              "category": "expansion",
+              "target": {
+                "tile": [
+                  5,
+                  4
+                ],
+                "animal": "COW"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "plant:MELON:5:3": {
+              "key": "plant:MELON:5:3",
+              "kind": "plant_crop",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  5,
+                  3
+                ],
+                "crop": "MELON"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "plant:MELON:4:3": {
+              "key": "plant:MELON:4:3",
+              "kind": "plant_crop",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  4,
+                  3
+                ],
+                "crop": "MELON"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "ext:expand_animal:SHEEP:4:5": {
+              "key": "ext:expand_animal:SHEEP:4:5",
+              "kind": "expand_animal",
+              "category": "expansion",
+              "target": {
+                "tile": [
+                  4,
+                  5
+                ],
+                "animal": "SHEEP"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "plant:MELON:2:4": {
+              "key": "plant:MELON:2:4",
+              "kind": "plant_crop",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  2,
+                  4
+                ],
+                "crop": "MELON"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "water:(3, 4)": {
+              "key": "water:(3, 4)",
+              "kind": "water",
+              "category": "maintenance",
+              "target": {
+                "tile": [
+                  3,
+                  4
+                ],
+                "crop": "MELON"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "ext:expand_animal:COW:2:5": {
+              "key": "ext:expand_animal:COW:2:5",
+              "kind": "expand_animal",
+              "category": "expansion",
+              "target": {
+                "tile": [
+                  2,
+                  5
+                ],
+                "animal": "COW"
+              },
+              "base_kind": null,
+              "base_target": null
+            }
+          },
+          "last_choice": {
+            "step": 9,
+            "active_before": [
+              "ext:establish_animal:SHEEP:4:4",
+              "ext:expand_animal:COW:5:4",
+              "plant:MELON:5:3",
+              "plant:MELON:4:3",
+              "ext:expand_animal:SHEEP:4:5",
+              "plant:MELON:2:4",
+              "water:(3, 4)",
+              "ext:expand_animal:COW:2:5"
+            ],
+            "continuation": {
+              "strict_terminal_cash": 15385.0,
+              "central_terminal_cash": 19065.0,
+              "scheduled": [
+                "water:(3, 4)",
+                "plant:MELON:2:4"
+              ]
+            },
+            "chosen": {
+              "strict_terminal_cash": 15385.0,
+              "central_terminal_cash": 19065.0,
+              "scheduled": [
+                "water:(3, 4)",
+                "plant:MELON:2:4"
+              ],
+              "representative": null
+            },
+            "active_after": {
+              "ext:establish_animal:SHEEP:4:4": {
+                "key": "ext:establish_animal:SHEEP:4:4",
+                "kind": "establish_animal",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    4,
+                    4
+                  ],
+                  "animal": "SHEEP"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "ext:expand_animal:COW:5:4": {
+                "key": "ext:expand_animal:COW:5:4",
+                "kind": "expand_animal",
+                "category": "expansion",
+                "target": {
+                  "tile": [
+                    5,
+                    4
+                  ],
+                  "animal": "COW"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "plant:MELON:5:3": {
+                "key": "plant:MELON:5:3",
+                "kind": "plant_crop",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    5,
+                    3
+                  ],
+                  "crop": "MELON"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "plant:MELON:4:3": {
+                "key": "plant:MELON:4:3",
+                "kind": "plant_crop",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    4,
+                    3
+                  ],
+                  "crop": "MELON"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "ext:expand_animal:SHEEP:4:5": {
+                "key": "ext:expand_animal:SHEEP:4:5",
+                "kind": "expand_animal",
+                "category": "expansion",
+                "target": {
+                  "tile": [
+                    4,
+                    5
+                  ],
+                  "animal": "SHEEP"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "plant:MELON:2:4": {
+                "key": "plant:MELON:2:4",
+                "kind": "plant_crop",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    2,
+                    4
+                  ],
+                  "crop": "MELON"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "water:(3, 4)": {
+                "key": "water:(3, 4)",
+                "kind": "water",
+                "category": "maintenance",
+                "target": {
+                  "tile": [
+                    3,
+                    4
+                  ],
+                  "crop": "MELON"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "ext:expand_animal:COW:2:5": {
+                "key": "ext:expand_animal:COW:2:5",
+                "kind": "expand_animal",
+                "category": "expansion",
+                "target": {
+                  "tile": [
+                    2,
+                    5
+                  ],
+                  "animal": "COW"
+                },
+                "base_kind": null,
+                "base_target": null
+              }
+            }
+          }
+        }
+      },
+      {
+        "turn": 10,
+        "pre_cash": 939.0,
+        "action": {
+          "farmer": [
+            "EAST"
+          ],
+          "hands": [
+            [
+              "WATER"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_SEED",
+              "MELON",
+              1
+            ]
+          ]
+        },
+        "post_cash": 859.0,
+        "debug": {
+          "active_jobs": {
+            "ext:establish_animal:SHEEP:4:4": {
+              "key": "ext:establish_animal:SHEEP:4:4",
+              "kind": "establish_animal",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  4,
+                  4
+                ],
+                "animal": "SHEEP"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "ext:expand_animal:COW:5:4": {
+              "key": "ext:expand_animal:COW:5:4",
+              "kind": "expand_animal",
+              "category": "expansion",
+              "target": {
+                "tile": [
+                  5,
+                  4
+                ],
+                "animal": "COW"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "plant:MELON:5:3": {
+              "key": "plant:MELON:5:3",
+              "kind": "plant_crop",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  5,
+                  3
+                ],
+                "crop": "MELON"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "plant:MELON:4:3": {
+              "key": "plant:MELON:4:3",
+              "kind": "plant_crop",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  4,
+                  3
+                ],
+                "crop": "MELON"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "ext:expand_animal:SHEEP:4:5": {
+              "key": "ext:expand_animal:SHEEP:4:5",
+              "kind": "expand_animal",
+              "category": "expansion",
+              "target": {
+                "tile": [
+                  4,
+                  5
+                ],
+                "animal": "SHEEP"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "ext:expand_animal:COW:2:5": {
+              "key": "ext:expand_animal:COW:2:5",
+              "kind": "expand_animal",
+              "category": "expansion",
+              "target": {
+                "tile": [
+                  2,
+                  5
+                ],
+                "animal": "COW"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "water:(2, 4)": {
+              "key": "water:(2, 4)",
+              "kind": "water",
+              "category": "maintenance",
+              "target": {
+                "tile": [
+                  2,
+                  4
+                ],
+                "crop": "MELON"
+              },
+              "base_kind": null,
+              "base_target": null
+            }
+          },
+          "last_choice": {
+            "step": 10,
+            "active_before": [
+              "ext:establish_animal:SHEEP:4:4",
+              "ext:expand_animal:COW:5:4",
+              "plant:MELON:5:3",
+              "plant:MELON:4:3",
+              "ext:expand_animal:SHEEP:4:5",
+              "ext:expand_animal:COW:2:5"
+            ],
+            "continuation": {
+              "strict_terminal_cash": 15385.0,
+              "central_terminal_cash": 19065.0,
+              "scheduled": [
+                "plant:MELON:4:3",
+                "water:(2, 4)"
+              ]
+            },
+            "chosen": {
+              "strict_terminal_cash": 15385.0,
+              "central_terminal_cash": 19065.0,
+              "scheduled": [
+                "plant:MELON:4:3",
+                "water:(2, 4)"
+              ],
+              "representative": null
+            },
+            "active_after": {
+              "ext:establish_animal:SHEEP:4:4": {
+                "key": "ext:establish_animal:SHEEP:4:4",
+                "kind": "establish_animal",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    4,
+                    4
+                  ],
+                  "animal": "SHEEP"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "ext:expand_animal:COW:5:4": {
+                "key": "ext:expand_animal:COW:5:4",
+                "kind": "expand_animal",
+                "category": "expansion",
+                "target": {
+                  "tile": [
+                    5,
+                    4
+                  ],
+                  "animal": "COW"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "plant:MELON:5:3": {
+                "key": "plant:MELON:5:3",
+                "kind": "plant_crop",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    5,
+                    3
+                  ],
+                  "crop": "MELON"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "plant:MELON:4:3": {
+                "key": "plant:MELON:4:3",
+                "kind": "plant_crop",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    4,
+                    3
+                  ],
+                  "crop": "MELON"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "ext:expand_animal:SHEEP:4:5": {
+                "key": "ext:expand_animal:SHEEP:4:5",
+                "kind": "expand_animal",
+                "category": "expansion",
+                "target": {
+                  "tile": [
+                    4,
+                    5
+                  ],
+                  "animal": "SHEEP"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "ext:expand_animal:COW:2:5": {
+                "key": "ext:expand_animal:COW:2:5",
+                "kind": "expand_animal",
+                "category": "expansion",
+                "target": {
+                  "tile": [
+                    2,
+                    5
+                  ],
+                  "animal": "COW"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "water:(2, 4)": {
+                "key": "water:(2, 4)",
+                "kind": "water",
+                "category": "maintenance",
+                "target": {
+                  "tile": [
+                    2,
+                    4
+                  ],
+                  "crop": "MELON"
+                },
+                "base_kind": null,
+                "base_target": null
+              }
+            }
+          }
+        }
+      },
+      {
+        "turn": 11,
+        "pre_cash": 859.0,
+        "action": {
+          "farmer": [
+            "PICKUP",
+            "SHEEP",
+            1
+          ],
+          "hands": [
+            [
+              "EAST"
+            ]
+          ],
+          "market": []
+        },
+        "post_cash": 859.0,
+        "debug": {
+          "active_jobs": {
+            "ext:establish_animal:SHEEP:4:4": {
+              "key": "ext:establish_animal:SHEEP:4:4",
+              "kind": "establish_animal",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  4,
+                  4
+                ],
+                "animal": "SHEEP"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "ext:expand_animal:COW:5:4": {
+              "key": "ext:expand_animal:COW:5:4",
+              "kind": "expand_animal",
+              "category": "expansion",
+              "target": {
+                "tile": [
+                  5,
+                  4
+                ],
+                "animal": "COW"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "plant:MELON:5:3": {
+              "key": "plant:MELON:5:3",
+              "kind": "plant_crop",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  5,
+                  3
+                ],
+                "crop": "MELON"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "plant:MELON:4:3": {
+              "key": "plant:MELON:4:3",
+              "kind": "plant_crop",
+              "category": "production_start",
+              "target": {
+                "tile": [
+                  4,
+                  3
+                ],
+                "crop": "MELON"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "ext:expand_animal:SHEEP:4:5": {
+              "key": "ext:expand_animal:SHEEP:4:5",
+              "kind": "expand_animal",
+              "category": "expansion",
+              "target": {
+                "tile": [
+                  4,
+                  5
+                ],
+                "animal": "SHEEP"
+              },
+              "base_kind": null,
+              "base_target": null
+            },
+            "ext:expand_animal:COW:2:5": {
+              "key": "ext:expand_animal:COW:2:5",
+              "kind": "expand_animal",
+              "category": "expansion",
+              "target": {
+                "tile": [
+                  2,
+                  5
+                ],
+                "animal": "COW"
+              },
+              "base_kind": null,
+              "base_target": null
+            }
+          },
+          "last_choice": {
+            "step": 11,
+            "active_before": [
+              "ext:establish_animal:SHEEP:4:4",
+              "ext:expand_animal:COW:5:4",
+              "plant:MELON:5:3",
+              "plant:MELON:4:3",
+              "ext:expand_animal:SHEEP:4:5",
+              "ext:expand_animal:COW:2:5"
+            ],
+            "continuation": {
+              "strict_terminal_cash": 15385.0,
+              "central_terminal_cash": 19065.0,
+              "scheduled": [
+                "ext:establish_animal:SHEEP:4:4",
+                "plant:MELON:4:3"
+              ]
+            },
+            "chosen": {
+              "strict_terminal_cash": 15385.0,
+              "central_terminal_cash": 19065.0,
+              "scheduled": [
+                "ext:establish_animal:SHEEP:4:4",
+                "plant:MELON:4:3"
+              ],
+              "representative": null
+            },
+            "active_after": {
+              "ext:establish_animal:SHEEP:4:4": {
+                "key": "ext:establish_animal:SHEEP:4:4",
+                "kind": "establish_animal",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    4,
+                    4
+                  ],
+                  "animal": "SHEEP"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "ext:expand_animal:COW:5:4": {
+                "key": "ext:expand_animal:COW:5:4",
+                "kind": "expand_animal",
+                "category": "expansion",
+                "target": {
+                  "tile": [
+                    5,
+                    4
+                  ],
+                  "animal": "COW"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "plant:MELON:5:3": {
+                "key": "plant:MELON:5:3",
+                "kind": "plant_crop",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    5,
+                    3
+                  ],
+                  "crop": "MELON"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "plant:MELON:4:3": {
+                "key": "plant:MELON:4:3",
+                "kind": "plant_crop",
+                "category": "production_start",
+                "target": {
+                  "tile": [
+                    4,
+                    3
+                  ],
+                  "crop": "MELON"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "ext:expand_animal:SHEEP:4:5": {
+                "key": "ext:expand_animal:SHEEP:4:5",
+                "kind": "expand_animal",
+                "category": "expansion",
+                "target": {
+                  "tile": [
+                    4,
+                    5
+                  ],
+                  "animal": "SHEEP"
+                },
+                "base_kind": null,
+                "base_target": null
+              },
+              "ext:expand_animal:COW:2:5": {
+                "key": "ext:expand_animal:COW:2:5",
+                "kind": "expand_animal",
+                "category": "expansion",
+                "target": {
+                  "tile": [
+                    2,
+                    5
+                  ],
+                  "animal": "COW"
+                },
+                "base_kind": null,
+                "base_target": null
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}
