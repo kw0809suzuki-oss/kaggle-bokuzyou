@@ -17,6 +17,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
+from strong_model_v0_reimplementation.jobs import Job
 from strong_model_v0_reimplementation.planner import (
     Settings,
     _project_one_turn,
@@ -99,10 +100,10 @@ def run() -> dict[str, Any]:
     baseline_world = _project_one_turn(obs, chosen.action, cfg)
     hire_world = _project_one_turn(obs, variant, cfg)
     baseline_end, baseline_trace = rollout(
-        obs, cfg, chosen.commitments, first_action=chosen.action, trace=True
+        obs, cfg, chosen_jobs, first_action=chosen.action, trace=True
     )
     hire_end, hire_trace = rollout(
-        obs, cfg, chosen.commitments, first_action=variant, trace=True
+        obs, cfg, chosen_jobs, first_action=variant, trace=True
     )
 
     player = int(obs["player"])
