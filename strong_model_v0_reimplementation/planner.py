@@ -296,14 +296,20 @@ def better(candidate:Bundle,base:Bundle)->bool:
 
 
 def choose(raw:dict[str,Any],cfg:Settings,active_specs:dict[str,dict[str,Any]])->tuple[Bundle,Job|None,list[Job],Bundle]:
-    active=[]
-    for spec in active_specs.values():
-        j=materialize_active(spec,raw)
-        if j is not None: active.append(j)
+    all_fresh=fresh_jobs(raw,cfg.episodeSteps,cfg.turnsPerDay,cfg.boardSize)
+    fresh_map={j.key:j for j in all_fresh}
 
-    fresh=fresh_jobs(raw,cfg.episodeSteps,cfg.turnsPerDay,cfg.boardSize)
-    active_keys={j.key for j in active}
-    fresh=[j for j in fresh if j.key not in active_keys]
+    active=[]
+    for key,spec in active_specs.items():
+        if key in fresh_map:
+            j=fresh_map.pop(key)
+            j.active=True
+            active.append(j)
+        else:
+            j=materialize_active(spec,raw)
+            if j is not None: active.append(j)
+
+    fresh=list(fresh_map.values())
 
     # One HIRE is a minimal candidate only when a concrete positive unit job is
     # currently blocked by unit count. No fixed worker cap is introduced.
