@@ -14,7 +14,7 @@ import json
 from kaggle_environments import make
 from kaggle_environments.envs.kaggriculture import kaggriculture as rules
 
-from strong_model_v0_reimplementation.agent import agent, reset_agent
+from strong_model_v0_reimplementation.agent import agent, reset_agent, debug_state
 from strong_model_v0_reimplementation.jobs import (
     Job,fresh_jobs,materialize_active,preferred_units,unit_action,
 )
@@ -157,17 +157,29 @@ def runtime_smoke():
     env=make("kaggriculture",configuration={"seed":92809902},debug=False)
     env.reset(num_agents=2)
     turns=0
+    trace=[]
     while not env.done and turns<48:
         s0=env._Environment__get_shared_state(0)
         obs0=s0["observation"]
+        pre_cash=float(obs0["farms"][0]["money"])
         a0=agent(obs0,env.configuration)
+        dbg=debug_state(0)
         hands=len(obs0["farms"][0].get("hands",[]) or [])
         assert isinstance(a0,dict)
         assert len(a0.get("hands",[]))==hands,(turns,hands,a0)
         env.step([plain(a0),{"farmer":["PASS"],"hands":[],"market":[]}])
+        post_cash=float(env.state[0].observation.farms[0]["money"])
+        if turns<12:
+            trace.append({
+                "turn":turns,
+                "pre_cash":pre_cash,
+                "action":plain(a0),
+                "post_cash":post_cash,
+                "debug":plain(dbg),
+            })
         turns+=1
     assert turns==48,turns
-    return {"turns":turns,"cash":float(env.state[0].observation.farms[0]["money"])}
+    return {"turns":turns,"cash":float(env.state[0].observation.farms[0]["money"]),"first12":trace}
 
 
 def main():
