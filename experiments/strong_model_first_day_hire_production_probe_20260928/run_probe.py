@@ -17,7 +17,6 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
-from strong_model_v0_reimplementation.jobs import Job
 from strong_model_v0_reimplementation.planner import (
     Settings,
     _project_one_turn,
@@ -88,6 +87,15 @@ def run() -> dict[str, Any]:
         "Current source did not reproduce the saved decision.",
         chosen.action,
         trace_row["action"],
+    )
+
+    chosen_jobs = list(active_jobs)
+    if representative is not None:
+        chosen_jobs.append(representative)
+    assert {job.key for job in chosen_jobs} == set(decision["active_after"]), (
+        "The selected jobs do not reconstruct the recorded active set.",
+        [job.key for job in chosen_jobs],
+        list(decision["active_after"]),
     )
 
     # Add one hire to the actual current production-start choice. This isolates
