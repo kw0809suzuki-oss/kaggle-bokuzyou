@@ -1,0 +1,37 @@
+name: Strong Model v0 Trajectory Probe
+
+on:
+  push:
+    branches:
+      - "experiment/strong-model-v0-20260928"
+    paths:
+      - "strong_model_v0/run_trajectory_probe.py"
+      - ".github/workflows/strong-model-v0-trajectory-probe.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install official Kaggle environments
+        run: python -m pip install -r requirements.txt
+      - name: Fetch pinned Seyamalam opponent
+        run: |
+          mkdir -p opponents
+          curl -fL --retry 3             -o opponents/seyamalam_v21.py             https://raw.githubusercontent.com/Seyamalam/Kaggriculture/8b8c421eb10634c756583ce10c75189f50c83a72/main.py
+      - name: Run trajectory probe
+        run: python strong_model_v0/run_trajectory_probe.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: strong-model-v0-trajectory-probe
+          path: strong_model_v0/trajectory_probe_result.json
+          if-no-files-found: warn
