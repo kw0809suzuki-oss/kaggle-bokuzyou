@@ -77,7 +77,7 @@ def run() -> dict[str, Any]:
     )
 
     decision = trace_row["debug"]["last_choice"]
-    after = trace_row["debug"]["active"]
+    after = decision["active_after"]
     before_keys = set(decision["active_before"])
     active_specs = {key: spec for key, spec in after.items() if key in before_keys}
 
