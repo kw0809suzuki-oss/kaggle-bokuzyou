@@ -381,8 +381,6 @@ def choose(raw,cfg,active_specs):
         b.commitments.extend(j.spec() for j in operating_jobs(raw,cfg,True) if j.key in s and j.key not in keys)
         scored.append((b,representative,planned,early))
     chosen=max(scored,key=lambda row:row[0].envelope.central_cash)
-    for row in (scored[0],chosen):
-        b,_,planned,early=row
-        strict,_=rollout(raw,cfg,planned,first_action=b.action,harvest_now=early,stress=True)
-        b.envelope=Envelope(strict,b.envelope.central_cash)
+    # Submission runtime: post-selection stress rollouts do not affect which
+    # candidate/action was chosen, so skip them.
     return chosen[0],chosen[1],active,scored[0][0]
