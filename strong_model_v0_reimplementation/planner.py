@@ -331,7 +331,7 @@ def better(candidate,base,minimal_commitment=True):
     return candidate.envelope.central_cash>base.envelope.central_cash
 
 
-def choose(raw,cfg,active_specs):
+def choose(raw,cfg,active_specs,variant=None):
     fresh = fresh_jobs(raw,cfg.episodeSteps,cfg.turnsPerDay,cfg.boardSize)
     investments = investment_jobs(raw,cfg,fresh)
     lookup = {j.key:j for j in investments+fresh+operating_jobs(raw,cfg)}
@@ -366,6 +366,36 @@ def choose(raw,cfg,active_specs):
         if order[0]=='SELL':
             a=copy.deepcopy(action); a['market'].pop(idx)
             candidates.append((None,active,a,scheduled,False))
+    if variant is not None:
+        # Keep the original candidate construction and _service_action path intact;
+        # variants only select a planned-commitment delta before rollout scoring.
+        def is_investment(row):
+            return row[1] is not active and row[2] is not None
+        def is_animal(row):
+            rep=row[1]
+            return rep is not None and rep.kind in ('establish_animal','expand_animal')
+        def is_remove(row):
+            return row[1] == []
+        def is_recover(row):
+            return bool(row[3])
+        def is_hire(row):
+            return bool(row[2].get('market')) and any(o[0] == 'HIRE' for o in row[2].get('market',[]))
+        def is_sell_trim(row):
+            return bool(row[2].get('market')) and not any(o[0] == 'HIRE' for o in row[2].get('market',[]))
+        predicates = {
+            'activate': is_animal,
+            'add': is_investment,
+            'shrink': is_remove,
+            'recover': is_recover,
+            'rebalance': lambda row: is_hire(row) or is_sell_trim(row),
+        }
+        pred = predicates.get(str(variant))
+        if pred is not None:
+            selected = [row for row in candidates if pred(row)]
+            if selected:
+                # Always retain the current active plan as the comparison anchor.
+                anchor = candidates[0]
+                candidates = [anchor] + [row for row in selected if row is not anchor]
     scored=[]; seen=set()
     for representative,planned,a,s,early in candidates:
         key=(repr(a),tuple(j.key for j in planned),early)
