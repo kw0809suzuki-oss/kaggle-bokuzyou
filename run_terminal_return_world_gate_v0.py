@@ -272,18 +272,20 @@ def _apply_native_postprocess(action: dict[str, Any], extra: dict[str, Any] | No
 
 
 class RecoveryOneRuntime:
-    """One allocation change: add one recovery commitment before Action generation."""
+    """Single-shot allocation change: inject one scheduled recovery commitment once."""
 
     def __init__(self, cfg: Any):
         self.cfg = cfg
         self.active: dict[str, dict[str, Any]] = {}
         self.last_step = -1
         self.last_allocation: dict[str, Any] | None = None
+        self.intervened = False
 
     def reset(self) -> None:
         self.active = {}
         self.last_step = -1
         self.last_allocation = None
+        self.intervened = False
 
     def act(self, obs: Any) -> dict[str, Any]:
         snapshot = bind_official_state(obs)
@@ -313,8 +315,8 @@ class RecoveryOneRuntime:
         ]
         added = None
         forced = set(selection["forced"])
-        if recovery:
-            # Deterministic: largest visible recovery value, then stable key.
+        if recovery and not self.intervened:
+            # Single-shot probe: inject only until the first recovery job is actually scheduled.
             added = max(recovery, key=lambda j: (float(j.central_delta), j.key))
             planned.append(added)
             forced.add(added.key)
@@ -328,10 +330,13 @@ class RecoveryOneRuntime:
         )
         action = _apply_native_postprocess(action, selection["extra"])
 
-        # Preserve Strong's selected commitments and carry only the added job.
+        recovery_scheduled = added is not None and added.key in scheduled
+        if recovery_scheduled:
+            self.intervened = True
+
+        # Single-shot boundary: after this Action, return to ordinary Strong commitments.
+        # Do not carry the injected recovery job into the next turn.
         next_specs = list(base_specs)
-        if added is not None and added.key not in base_keys:
-            next_specs.append(added.spec())
         self.active = {
             str(spec["key"]): copy.deepcopy(spec)
             for spec in next_specs
@@ -345,7 +350,8 @@ class RecoveryOneRuntime:
             "base_commitments": [s["key"] for s in base_specs],
             "added_recovery": None if added is None else added.spec(),
             "scheduled": list(scheduled),
-            "recovery_scheduled": added is not None and added.key in scheduled,
+            "recovery_scheduled": recovery_scheduled,
+            "single_shot_already_fired": self.intervened,
             "native_postprocess": selection["extra"],
             "chosen_action_before_intervention": selection["chosen_action"],
         }
@@ -533,8 +539,8 @@ def main() -> None:
             "official_world_commit": "d7729da06cc1382eb742d6980dc3180aa85caa28",
             "baseline": "Strong Model v0 reimplementation",
             "variant": (
-                "ordinary Strong planned commitments + at most one recovery "
-                "commitment before _service_action()"
+                "ordinary Strong planned commitments + one single-shot recovery "
+                "commitment before _service_action(); never carried into the next turn"
             ),
             "no_post_action_replacement": True,
         },
