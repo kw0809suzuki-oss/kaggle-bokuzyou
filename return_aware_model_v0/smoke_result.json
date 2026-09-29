@@ -1,0 +1,3335 @@
+{
+  "schema": "return-aware-model-v0-paired-run",
+  "model_sources_sha256": {
+    "return_aware_model_v0/run.py": "31e2060abbae3d67fca6517d6da5174bd4c372da38396646f3498edb11141f05",
+    "return_aware_model_v0/agent.py": "3389b8e3f414b22b6a0aa56cb888547431b27ef6f1578cbea5a713fc0c93b361",
+    "return_aware_model_v0/model.py": "ea39382345b1e61d0ed9d081fd9d47bfd63edeecc49d2180c4884e9c8565c64f",
+    "strong_model_v0_reimplementation/planner.py": "d42b70521236316351276067675eb7a2b0234e30686074207fcb35459e7f6163",
+    "strong_model_v0_reimplementation/jobs.py": "f9da3e34af3e21172893145156bda258e4184eb20a9d0fd1499396aa1b574913",
+    "astra_flow_vendor/seyamalam_v21.py": "0cd14b653102d276c4f902fa3b8c6bd81d869b8ab64c422cb881b9d2346ec639"
+  },
+  "world_source_sha256": "bc8a54879ef02c7ea64b8b333d6a976f0ea65c4949149d01f463f23bccee653e",
+  "opponent": "Seyamalam v21",
+  "max_extra_candidates": 6,
+  "summary": {
+    "seed": 92804001,
+    "seat": 0,
+    "steps": 24,
+    "generated_count": 26,
+    "evaluated_count": 26,
+    "selected_count": 0,
+    "first_action_difference": null,
+    "first_world_difference": null,
+    "terminal_reached": false,
+    "terminal_self_delta": null,
+    "terminal_margin_delta": null
+  },
+  "boundary": "Short runs verify execution only; forecast cash is not observed terminal cash. No adoption claim.",
+  "baseline": {
+    "model": "strong",
+    "seed": 92804001,
+    "seat": 0,
+    "steps": 24,
+    "statuses": [
+      "ACTIVE",
+      "ACTIVE"
+    ],
+    "terminal_reached": false,
+    "observed_self_cash": 463.0,
+    "terminal_self": null,
+    "terminal_margin": null,
+    "mean_decision_seconds": 0.5492947190416354,
+    "max_decision_seconds": 0.947476743000152,
+    "records": [
+      {
+        "step": 0,
+        "self_action": {
+          "farmer": [
+            "BUILD_PASTURE"
+          ],
+          "hands": [],
+          "market": [
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ]
+          ]
+        },
+        "world_hash": "7ca6037f3d7998be9c7454f388c81dd931ff23f45b4909eb31bb7ada9b098c04",
+        "self_cash": 2500.0,
+        "decision": null
+      },
+      {
+        "step": 1,
+        "self_action": {
+          "farmer": [
+            "EAST"
+          ],
+          "hands": [],
+          "market": [
+            [
+              "BUY_LAND"
+            ],
+            [
+              "BUY_ANIMAL",
+              "COW",
+              1
+            ]
+          ]
+        },
+        "world_hash": "88b7ec7b2f9138b95669bf4297ca860e479a16696bad69976f52fc724c231878",
+        "self_cash": 1100.0,
+        "decision": null
+      },
+      {
+        "step": 2,
+        "self_action": {
+          "farmer": [
+            "NORTH"
+          ],
+          "hands": [],
+          "market": [
+            [
+              "BUY_SEED",
+              "MELON",
+              1
+            ]
+          ]
+        },
+        "world_hash": "779b24808ecd29fb585d8f3a7df1b9a2173b27085e817caa927247b94cb12173",
+        "self_cash": 1020.0,
+        "decision": null
+      },
+      {
+        "step": 3,
+        "self_action": {
+          "farmer": [
+            "WEST"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_hash": "3ddf1d6d13ab8dcecd851d5a40924c3c9521cb1cf4623faa93bc2d4337ca5541",
+        "self_cash": 1020.0,
+        "decision": null
+      },
+      {
+        "step": 4,
+        "self_action": {
+          "farmer": [
+            "SOUTH"
+          ],
+          "hands": [],
+          "market": [
+            [
+              "BUY_LAND"
+            ]
+          ]
+        },
+        "world_hash": "e5db548f565b0cfb878e0e3f25b1559be627f326c0d3fc81fcb8a879452513fc",
+        "self_cash": 1020.0,
+        "decision": null
+      },
+      {
+        "step": 5,
+        "self_action": {
+          "farmer": [
+            "WEST"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_hash": "2220bf99448edefb516d53f0e6c51c84fe240ba17f9230cd99ce78fdac3097f7",
+        "self_cash": 1020.0,
+        "decision": null
+      },
+      {
+        "step": 6,
+        "self_action": {
+          "farmer": [
+            "PLANT",
+            "MELON"
+          ],
+          "hands": [],
+          "market": [
+            [
+              "HIRE"
+            ]
+          ]
+        },
+        "world_hash": "ab572683fb6847a6229bbdba61878f90761abdb558db451a38d65a2a4897e8ac",
+        "self_cash": 1019.0,
+        "decision": null
+      },
+      {
+        "step": 7,
+        "self_action": {
+          "farmer": [
+            "WATER"
+          ],
+          "hands": [
+            [
+              "WEST"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_LAND"
+            ]
+          ]
+        },
+        "world_hash": "bde8d432415a5b178c954ce4227f13e5f19d268b6c7e9b409236fef90145b973",
+        "self_cash": 1019.0,
+        "decision": null
+      },
+      {
+        "step": 8,
+        "self_action": {
+          "farmer": [
+            "EAST"
+          ],
+          "hands": [
+            [
+              "EAST"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_SEED",
+              "MELON",
+              1
+            ]
+          ]
+        },
+        "world_hash": "386a1780af0683b50916a820b3b88d9d1e34f454fc8af4796c95d1eb8eff354c",
+        "self_cash": 939.0,
+        "decision": null
+      },
+      {
+        "step": 9,
+        "self_action": {
+          "farmer": [
+            "NORTH"
+          ],
+          "hands": [
+            [
+              "PICKUP",
+              "SHEEP",
+              1
+            ]
+          ],
+          "market": [
+            [
+              "HIRE"
+            ]
+          ]
+        },
+        "world_hash": "ee851e3ba0df0598f7df48a855a6c560f7b4557acee3d722b0c87356cd498bc9",
+        "self_cash": 938.0,
+        "decision": null
+      },
+      {
+        "step": 10,
+        "self_action": {
+          "farmer": [
+            "PLANT",
+            "MELON"
+          ],
+          "hands": [
+            [
+              "PLACE",
+              "SHEEP",
+              1
+            ],
+            [
+              "NORTH"
+            ]
+          ],
+          "market": []
+        },
+        "world_hash": "805e7693d8cddedd1add36af1cc7d5a0206adc1e45de29475b77994f9d2260e1",
+        "self_cash": 938.0,
+        "decision": null
+      },
+      {
+        "step": 11,
+        "self_action": {
+          "farmer": [
+            "WEST"
+          ],
+          "hands": [
+            [
+              "NORTH"
+            ],
+            [
+              "PASS"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_SEED",
+              "WHEAT",
+              1
+            ],
+            [
+              "BUY_SEED",
+              "MELON",
+              1
+            ]
+          ]
+        },
+        "world_hash": "4aefd79e592f6079f080d59475ce64ba5ac3e0ddf159c1cdb06c1698d78e8c1d",
+        "self_cash": 848.0,
+        "decision": null
+      },
+      {
+        "step": 12,
+        "self_action": {
+          "farmer": [
+            "WEST"
+          ],
+          "hands": [
+            [
+              "WATER"
+            ],
+            [
+              "PLANT",
+              "MELON"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_SEED",
+              "CARROT",
+              1
+            ]
+          ]
+        },
+        "world_hash": "bfabc2637a4dbe101d2ed5e4b2f661c3ae2aab908898f833ef43f4c851cd83de",
+        "self_cash": 828.0,
+        "decision": null
+      },
+      {
+        "step": 13,
+        "self_action": {
+          "farmer": [
+            "SOUTH"
+          ],
+          "hands": [
+            [
+              "WEST"
+            ],
+            [
+              "WATER"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_LAND"
+            ],
+            [
+              "BUY_ANIMAL",
+              "GOOSE",
+              1
+            ]
+          ]
+        },
+        "world_hash": "78123f0b73ef13c507e744dc53976853041a5bfb4126382a612390f86e506edb",
+        "self_cash": 528.0,
+        "decision": null
+      },
+      {
+        "step": 14,
+        "self_action": {
+          "farmer": [
+            "NORTH"
+          ],
+          "hands": [
+            [
+              "PLANT",
+              "WHEAT"
+            ],
+            [
+              "SOUTH"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_PRODUCT",
+              "WHEAT",
+              1
+            ]
+          ]
+        },
+        "world_hash": "37a5dcef1ae8e8dec87828ca8dd83019b940f31916144d1da5393641374c2cdc",
+        "self_cash": 498.0,
+        "decision": null
+      },
+      {
+        "step": 15,
+        "self_action": {
+          "farmer": [
+            "PLANT",
+            "CARROT"
+          ],
+          "hands": [
+            [
+              "WATER"
+            ],
+            [
+              "PICKUP",
+              "WHEAT",
+              1
+            ]
+          ],
+          "market": []
+        },
+        "world_hash": "f3a7edbbe4c29078d76e43747bac553e431213888bbcdfdfcf8f71a14e7aa2fe",
+        "self_cash": 498.0,
+        "decision": null
+      },
+      {
+        "step": 16,
+        "self_action": {
+          "farmer": [
+            "WATER"
+          ],
+          "hands": [
+            [
+              "EAST"
+            ],
+            [
+              "WEST"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_LAND"
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ]
+          ]
+        },
+        "world_hash": "be7e45e390220c4a4a35ca819f79d52233f99a0c67e896d57a57b1d73da5d5f8",
+        "self_cash": 498.0,
+        "decision": null
+      },
+      {
+        "step": 17,
+        "self_action": {
+          "farmer": [
+            "EAST"
+          ],
+          "hands": [
+            [
+              "WEST"
+            ],
+            [
+              "FEED"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_LAND"
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ],
+            [
+              "HIRE"
+            ]
+          ]
+        },
+        "world_hash": "0b9c13207abd764f99456454b4d6595233b827db484f78e7c06d31008b9fd252",
+        "self_cash": 496.0,
+        "decision": null
+      },
+      {
+        "step": 18,
+        "self_action": {
+          "farmer": [
+            "SOUTH"
+          ],
+          "hands": [
+            [
+              "EAST"
+            ],
+            [
+              "CARE"
+            ],
+            [
+              "WEST"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_LAND"
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ]
+          ]
+        },
+        "world_hash": "b71477d350804e6af374905804c50c05a380996feb2ad243957806339be9b95b",
+        "self_cash": 496.0,
+        "decision": null
+      },
+      {
+        "step": 19,
+        "self_action": {
+          "farmer": [
+            "WEST"
+          ],
+          "hands": [
+            [
+              "EAST"
+            ],
+            [
+              "SOUTH"
+            ],
+            [
+              "WEST"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_SEED",
+              "CARROT",
+              1
+            ],
+            [
+              "BUY_LAND"
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ]
+          ]
+        },
+        "world_hash": "acb36bc9165d26fbb4f5798460ab64eee1e4d7e48e3469b27e4c6b85d6144dd2",
+        "self_cash": 476.0,
+        "decision": null
+      },
+      {
+        "step": 20,
+        "self_action": {
+          "farmer": [
+            "PLANT",
+            "CARROT"
+          ],
+          "hands": [
+            [
+              "WEST"
+            ],
+            [
+              "WEST"
+            ],
+            [
+              "EAST"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_LAND"
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ],
+            [
+              "HIRE"
+            ]
+          ]
+        },
+        "world_hash": "2ca7ede94c832c774ab0b1a7caf135baa82205519253c96a2b72dbfc7b7512bf",
+        "self_cash": 473.0,
+        "decision": null
+      },
+      {
+        "step": 21,
+        "self_action": {
+          "farmer": [
+            "WATER"
+          ],
+          "hands": [
+            [
+              "WEST"
+            ],
+            [
+              "EAST"
+            ],
+            [
+              "WEST"
+            ],
+            [
+              "BUILD_PASTURE"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_LAND"
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ]
+          ]
+        },
+        "world_hash": "8f9ca5db002d0e9b4ddecac0dd96c724c3ffaf98bc49fb8b38edbff5995d0f1a",
+        "self_cash": 473.0,
+        "decision": null
+      },
+      {
+        "step": 22,
+        "self_action": {
+          "farmer": [
+            "EAST"
+          ],
+          "hands": [
+            [
+              "PASS"
+            ],
+            [
+              "WEST"
+            ],
+            [
+              "EAST"
+            ],
+            [
+              "WEST"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_LAND"
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ]
+          ]
+        },
+        "world_hash": "621f20d38c4f0cacaf8d17aa90de9efe70239299f7a0f93182a98e270619180b",
+        "self_cash": 473.0,
+        "decision": null
+      },
+      {
+        "step": 23,
+        "self_action": {
+          "farmer": [
+            "SOUTH"
+          ],
+          "hands": [
+            [
+              "NORTH"
+            ],
+            [
+              "EAST"
+            ],
+            [
+              "WEST"
+            ],
+            [
+              "PICKUP",
+              "COW",
+              1
+            ]
+          ],
+          "market": [
+            [
+              "BUY_LAND"
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ],
+            [
+              "BUY_SEED",
+              "WHEAT",
+              1
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ]
+          ]
+        },
+        "world_hash": "53c3affed30ea8ab6989cf26cfe7834d7d979381c80b2f4e66deb74063b9be60",
+        "self_cash": 463.0,
+        "decision": null
+      }
+    ]
+  },
+  "candidate": {
+    "model": "return_aware",
+    "seed": 92804001,
+    "seat": 0,
+    "steps": 24,
+    "statuses": [
+      "ACTIVE",
+      "ACTIVE"
+    ],
+    "terminal_reached": false,
+    "observed_self_cash": 463.0,
+    "terminal_self": null,
+    "terminal_margin": null,
+    "mean_decision_seconds": 0.5536614783333107,
+    "max_decision_seconds": 0.8455261839999366,
+    "records": [
+      {
+        "step": 0,
+        "self_action": {
+          "farmer": [
+            "BUILD_PASTURE"
+          ],
+          "hands": [],
+          "market": [
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ]
+          ]
+        },
+        "world_hash": "7ca6037f3d7998be9c7454f388c81dd931ff23f45b4909eb31bb7ada9b098c04",
+        "self_cash": 2500.0,
+        "decision": {
+          "step": 0,
+          "remaining_actions": 719,
+          "generated_count": 1,
+          "evaluated_count": 1,
+          "baseline_terminal_cash": 8628.0,
+          "chosen_terminal_cash": 8628.0,
+          "stress_terminal_cash": 8628.0,
+          "chosen_family": "strong",
+          "extension_selected": false,
+          "action_changed": false,
+          "commitments_changed": false,
+          "baseline_action": {
+            "farmer": [
+              "BUILD_PASTURE"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "BUY_ANIMAL",
+                "SHEEP",
+                1
+              ]
+            ]
+          },
+          "chosen_action": {
+            "farmer": [
+              "BUILD_PASTURE"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "BUY_ANIMAL",
+                "SHEEP",
+                1
+              ]
+            ]
+          },
+          "candidates": [
+            {
+              "family": "hold_investment",
+              "terminal_cash": 3000.0,
+              "forced": [],
+              "scheduled": [],
+              "commitment_keys": [],
+              "action": {
+                "farmer": [
+                  "PASS"
+                ],
+                "hands": [],
+                "market": []
+              }
+            }
+          ],
+          "forecast_kind": "existing_strong_self_projection"
+        }
+      },
+      {
+        "step": 1,
+        "self_action": {
+          "farmer": [
+            "EAST"
+          ],
+          "hands": [],
+          "market": [
+            [
+              "BUY_LAND"
+            ],
+            [
+              "BUY_ANIMAL",
+              "COW",
+              1
+            ]
+          ]
+        },
+        "world_hash": "88b7ec7b2f9138b95669bf4297ca860e479a16696bad69976f52fc724c231878",
+        "self_cash": 1100.0,
+        "decision": {
+          "step": 1,
+          "remaining_actions": 718,
+          "generated_count": 1,
+          "evaluated_count": 1,
+          "baseline_terminal_cash": 12248.0,
+          "chosen_terminal_cash": 12248.0,
+          "stress_terminal_cash": 12248.0,
+          "chosen_family": "strong",
+          "extension_selected": false,
+          "action_changed": false,
+          "commitments_changed": false,
+          "baseline_action": {
+            "farmer": [
+              "EAST"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "BUY_LAND"
+              ],
+              [
+                "BUY_ANIMAL",
+                "COW",
+                1
+              ]
+            ]
+          },
+          "chosen_action": {
+            "farmer": [
+              "EAST"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "BUY_LAND"
+              ],
+              [
+                "BUY_ANIMAL",
+                "COW",
+                1
+              ]
+            ]
+          },
+          "candidates": [
+            {
+              "family": "hold_investment",
+              "terminal_cash": 2500.0,
+              "forced": [],
+              "scheduled": [],
+              "commitment_keys": [],
+              "action": {
+                "farmer": [
+                  "PASS"
+                ],
+                "hands": [],
+                "market": []
+              }
+            }
+          ],
+          "forecast_kind": "existing_strong_self_projection"
+        }
+      },
+      {
+        "step": 2,
+        "self_action": {
+          "farmer": [
+            "NORTH"
+          ],
+          "hands": [],
+          "market": [
+            [
+              "BUY_SEED",
+              "MELON",
+              1
+            ]
+          ]
+        },
+        "world_hash": "779b24808ecd29fb585d8f3a7df1b9a2173b27085e817caa927247b94cb12173",
+        "self_cash": 1020.0,
+        "decision": {
+          "step": 2,
+          "remaining_actions": 717,
+          "generated_count": 1,
+          "evaluated_count": 1,
+          "baseline_terminal_cash": 13765.0,
+          "chosen_terminal_cash": 13765.0,
+          "stress_terminal_cash": 13765.0,
+          "chosen_family": "strong",
+          "extension_selected": false,
+          "action_changed": false,
+          "commitments_changed": false,
+          "baseline_action": {
+            "farmer": [
+              "NORTH"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "BUY_SEED",
+                "MELON",
+                1
+              ]
+            ]
+          },
+          "chosen_action": {
+            "farmer": [
+              "NORTH"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "BUY_SEED",
+                "MELON",
+                1
+              ]
+            ]
+          },
+          "candidates": [
+            {
+              "family": "hold_investment",
+              "terminal_cash": 1100.0,
+              "forced": [],
+              "scheduled": [],
+              "commitment_keys": [],
+              "action": {
+                "farmer": [
+                  "PASS"
+                ],
+                "hands": [],
+                "market": []
+              }
+            }
+          ],
+          "forecast_kind": "existing_strong_self_projection"
+        }
+      },
+      {
+        "step": 3,
+        "self_action": {
+          "farmer": [
+            "WEST"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_hash": "3ddf1d6d13ab8dcecd851d5a40924c3c9521cb1cf4623faa93bc2d4337ca5541",
+        "self_cash": 1020.0,
+        "decision": {
+          "step": 3,
+          "remaining_actions": 716,
+          "generated_count": 1,
+          "evaluated_count": 1,
+          "baseline_terminal_cash": 15263.0,
+          "chosen_terminal_cash": 15263.0,
+          "stress_terminal_cash": 15263.0,
+          "chosen_family": "strong",
+          "extension_selected": false,
+          "action_changed": false,
+          "commitments_changed": false,
+          "baseline_action": {
+            "farmer": [
+              "WEST"
+            ],
+            "hands": [],
+            "market": []
+          },
+          "chosen_action": {
+            "farmer": [
+              "WEST"
+            ],
+            "hands": [],
+            "market": []
+          },
+          "candidates": [
+            {
+              "family": "hold_investment",
+              "terminal_cash": 1020.0,
+              "forced": [],
+              "scheduled": [],
+              "commitment_keys": [],
+              "action": {
+                "farmer": [
+                  "PASS"
+                ],
+                "hands": [],
+                "market": []
+              }
+            }
+          ],
+          "forecast_kind": "existing_strong_self_projection"
+        }
+      },
+      {
+        "step": 4,
+        "self_action": {
+          "farmer": [
+            "SOUTH"
+          ],
+          "hands": [],
+          "market": [
+            [
+              "BUY_LAND"
+            ]
+          ]
+        },
+        "world_hash": "e5db548f565b0cfb878e0e3f25b1559be627f326c0d3fc81fcb8a879452513fc",
+        "self_cash": 1020.0,
+        "decision": {
+          "step": 4,
+          "remaining_actions": 715,
+          "generated_count": 1,
+          "evaluated_count": 1,
+          "baseline_terminal_cash": 16365.0,
+          "chosen_terminal_cash": 16365.0,
+          "stress_terminal_cash": 16365.0,
+          "chosen_family": "strong",
+          "extension_selected": false,
+          "action_changed": false,
+          "commitments_changed": false,
+          "baseline_action": {
+            "farmer": [
+              "SOUTH"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "BUY_LAND"
+              ]
+            ]
+          },
+          "chosen_action": {
+            "farmer": [
+              "SOUTH"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "BUY_LAND"
+              ]
+            ]
+          },
+          "candidates": [
+            {
+              "family": "hold_investment",
+              "terminal_cash": 1020.0,
+              "forced": [],
+              "scheduled": [],
+              "commitment_keys": [],
+              "action": {
+                "farmer": [
+                  "PASS"
+                ],
+                "hands": [],
+                "market": []
+              }
+            }
+          ],
+          "forecast_kind": "existing_strong_self_projection"
+        }
+      },
+      {
+        "step": 5,
+        "self_action": {
+          "farmer": [
+            "WEST"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_hash": "2220bf99448edefb516d53f0e6c51c84fe240ba17f9230cd99ce78fdac3097f7",
+        "self_cash": 1020.0,
+        "decision": {
+          "step": 5,
+          "remaining_actions": 714,
+          "generated_count": 1,
+          "evaluated_count": 1,
+          "baseline_terminal_cash": 17119.0,
+          "chosen_terminal_cash": 17119.0,
+          "stress_terminal_cash": 17119.0,
+          "chosen_family": "strong",
+          "extension_selected": false,
+          "action_changed": false,
+          "commitments_changed": false,
+          "baseline_action": {
+            "farmer": [
+              "WEST"
+            ],
+            "hands": [],
+            "market": []
+          },
+          "chosen_action": {
+            "farmer": [
+              "WEST"
+            ],
+            "hands": [],
+            "market": []
+          },
+          "candidates": [
+            {
+              "family": "hold_investment",
+              "terminal_cash": 1020.0,
+              "forced": [],
+              "scheduled": [],
+              "commitment_keys": [],
+              "action": {
+                "farmer": [
+                  "PASS"
+                ],
+                "hands": [],
+                "market": []
+              }
+            }
+          ],
+          "forecast_kind": "existing_strong_self_projection"
+        }
+      },
+      {
+        "step": 6,
+        "self_action": {
+          "farmer": [
+            "PLANT",
+            "MELON"
+          ],
+          "hands": [],
+          "market": [
+            [
+              "HIRE"
+            ]
+          ]
+        },
+        "world_hash": "ab572683fb6847a6229bbdba61878f90761abdb558db451a38d65a2a4897e8ac",
+        "self_cash": 1019.0,
+        "decision": {
+          "step": 6,
+          "remaining_actions": 713,
+          "generated_count": 1,
+          "evaluated_count": 1,
+          "baseline_terminal_cash": 17578.0,
+          "chosen_terminal_cash": 17578.0,
+          "stress_terminal_cash": 17578.0,
+          "chosen_family": "strong",
+          "extension_selected": false,
+          "action_changed": false,
+          "commitments_changed": false,
+          "baseline_action": {
+            "farmer": [
+              "PLANT",
+              "MELON"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "chosen_action": {
+            "farmer": [
+              "PLANT",
+              "MELON"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "candidates": [
+            {
+              "family": "hold_investment",
+              "terminal_cash": 1020.0,
+              "forced": [],
+              "scheduled": [],
+              "commitment_keys": [],
+              "action": {
+                "farmer": [
+                  "PASS"
+                ],
+                "hands": [],
+                "market": []
+              }
+            }
+          ],
+          "forecast_kind": "existing_strong_self_projection"
+        }
+      },
+      {
+        "step": 7,
+        "self_action": {
+          "farmer": [
+            "WATER"
+          ],
+          "hands": [
+            [
+              "WEST"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_LAND"
+            ]
+          ]
+        },
+        "world_hash": "bde8d432415a5b178c954ce4227f13e5f19d268b6c7e9b409236fef90145b973",
+        "self_cash": 1019.0,
+        "decision": {
+          "step": 7,
+          "remaining_actions": 712,
+          "generated_count": 1,
+          "evaluated_count": 1,
+          "baseline_terminal_cash": 18096.0,
+          "chosen_terminal_cash": 18096.0,
+          "stress_terminal_cash": 18096.0,
+          "chosen_family": "strong",
+          "extension_selected": false,
+          "action_changed": false,
+          "commitments_changed": false,
+          "baseline_action": {
+            "farmer": [
+              "WATER"
+            ],
+            "hands": [
+              [
+                "WEST"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_LAND"
+              ]
+            ]
+          },
+          "chosen_action": {
+            "farmer": [
+              "WATER"
+            ],
+            "hands": [
+              [
+                "WEST"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_LAND"
+              ]
+            ]
+          },
+          "candidates": [
+            {
+              "family": "hold_investment",
+              "terminal_cash": 2646.0,
+              "forced": [],
+              "scheduled": [
+                "water:(3, 4)"
+              ],
+              "commitment_keys": [
+                "water:(3, 4)"
+              ],
+              "action": {
+                "farmer": [
+                  "WATER"
+                ],
+                "hands": [
+                  [
+                    "PASS"
+                  ]
+                ],
+                "market": []
+              }
+            }
+          ],
+          "forecast_kind": "existing_strong_self_projection"
+        }
+      },
+      {
+        "step": 8,
+        "self_action": {
+          "farmer": [
+            "EAST"
+          ],
+          "hands": [
+            [
+              "EAST"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_SEED",
+              "MELON",
+              1
+            ]
+          ]
+        },
+        "world_hash": "386a1780af0683b50916a820b3b88d9d1e34f454fc8af4796c95d1eb8eff354c",
+        "self_cash": 939.0,
+        "decision": {
+          "step": 8,
+          "remaining_actions": 711,
+          "generated_count": 1,
+          "evaluated_count": 1,
+          "baseline_terminal_cash": 18096.0,
+          "chosen_terminal_cash": 18096.0,
+          "stress_terminal_cash": 18073.0,
+          "chosen_family": "strong",
+          "extension_selected": false,
+          "action_changed": false,
+          "commitments_changed": false,
+          "baseline_action": {
+            "farmer": [
+              "EAST"
+            ],
+            "hands": [
+              [
+                "EAST"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_SEED",
+                "MELON",
+                1
+              ]
+            ]
+          },
+          "chosen_action": {
+            "farmer": [
+              "EAST"
+            ],
+            "hands": [
+              [
+                "EAST"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_SEED",
+                "MELON",
+                1
+              ]
+            ]
+          },
+          "candidates": [
+            {
+              "family": "hold_investment",
+              "terminal_cash": 2646.0,
+              "forced": [],
+              "scheduled": [],
+              "commitment_keys": [],
+              "action": {
+                "farmer": [
+                  "PASS"
+                ],
+                "hands": [
+                  [
+                    "PASS"
+                  ]
+                ],
+                "market": []
+              }
+            }
+          ],
+          "forecast_kind": "existing_strong_self_projection"
+        }
+      },
+      {
+        "step": 9,
+        "self_action": {
+          "farmer": [
+            "NORTH"
+          ],
+          "hands": [
+            [
+              "PICKUP",
+              "SHEEP",
+              1
+            ]
+          ],
+          "market": [
+            [
+              "HIRE"
+            ]
+          ]
+        },
+        "world_hash": "ee851e3ba0df0598f7df48a855a6c560f7b4557acee3d722b0c87356cd498bc9",
+        "self_cash": 938.0,
+        "decision": {
+          "step": 9,
+          "remaining_actions": 710,
+          "generated_count": 1,
+          "evaluated_count": 1,
+          "baseline_terminal_cash": 18156.0,
+          "chosen_terminal_cash": 18156.0,
+          "stress_terminal_cash": 18133.0,
+          "chosen_family": "strong",
+          "extension_selected": false,
+          "action_changed": false,
+          "commitments_changed": false,
+          "baseline_action": {
+            "farmer": [
+              "NORTH"
+            ],
+            "hands": [
+              [
+                "PICKUP",
+                "SHEEP",
+                1
+              ]
+            ],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "chosen_action": {
+            "farmer": [
+              "NORTH"
+            ],
+            "hands": [
+              [
+                "PICKUP",
+                "SHEEP",
+                1
+              ]
+            ],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "candidates": [
+            {
+              "family": "hold_investment",
+              "terminal_cash": 2566.0,
+              "forced": [],
+              "scheduled": [],
+              "commitment_keys": [],
+              "action": {
+                "farmer": [
+                  "PASS"
+                ],
+                "hands": [
+                  [
+                    "PASS"
+                  ]
+                ],
+                "market": []
+              }
+            }
+          ],
+          "forecast_kind": "existing_strong_self_projection"
+        }
+      },
+      {
+        "step": 10,
+        "self_action": {
+          "farmer": [
+            "PLANT",
+            "MELON"
+          ],
+          "hands": [
+            [
+              "PLACE",
+              "SHEEP",
+              1
+            ],
+            [
+              "NORTH"
+            ]
+          ],
+          "market": []
+        },
+        "world_hash": "805e7693d8cddedd1add36af1cc7d5a0206adc1e45de29475b77994f9d2260e1",
+        "self_cash": 938.0,
+        "decision": {
+          "step": 10,
+          "remaining_actions": 709,
+          "generated_count": 1,
+          "evaluated_count": 1,
+          "baseline_terminal_cash": 18156.0,
+          "chosen_terminal_cash": 18156.0,
+          "stress_terminal_cash": 18133.0,
+          "chosen_family": "strong",
+          "extension_selected": false,
+          "action_changed": false,
+          "commitments_changed": false,
+          "baseline_action": {
+            "farmer": [
+              "PLANT",
+              "MELON"
+            ],
+            "hands": [
+              [
+                "PLACE",
+                "SHEEP",
+                1
+              ],
+              [
+                "NORTH"
+              ]
+            ],
+            "market": []
+          },
+          "chosen_action": {
+            "farmer": [
+              "PLANT",
+              "MELON"
+            ],
+            "hands": [
+              [
+                "PLACE",
+                "SHEEP",
+                1
+              ],
+              [
+                "NORTH"
+              ]
+            ],
+            "market": []
+          },
+          "candidates": [
+            {
+              "family": "hold_investment",
+              "terminal_cash": 2565.0,
+              "forced": [],
+              "scheduled": [],
+              "commitment_keys": [],
+              "action": {
+                "farmer": [
+                  "PASS"
+                ],
+                "hands": [
+                  [
+                    "PASS"
+                  ],
+                  [
+                    "PASS"
+                  ]
+                ],
+                "market": []
+              }
+            }
+          ],
+          "forecast_kind": "existing_strong_self_projection"
+        }
+      },
+      {
+        "step": 11,
+        "self_action": {
+          "farmer": [
+            "WEST"
+          ],
+          "hands": [
+            [
+              "NORTH"
+            ],
+            [
+              "PASS"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_SEED",
+              "WHEAT",
+              1
+            ],
+            [
+              "BUY_SEED",
+              "MELON",
+              1
+            ]
+          ]
+        },
+        "world_hash": "4aefd79e592f6079f080d59475ce64ba5ac3e0ddf159c1cdb06c1698d78e8c1d",
+        "self_cash": 848.0,
+        "decision": {
+          "step": 11,
+          "remaining_actions": 708,
+          "generated_count": 1,
+          "evaluated_count": 1,
+          "baseline_terminal_cash": 18260.0,
+          "chosen_terminal_cash": 18260.0,
+          "stress_terminal_cash": 15482.0,
+          "chosen_family": "strong",
+          "extension_selected": false,
+          "action_changed": false,
+          "commitments_changed": false,
+          "baseline_action": {
+            "farmer": [
+              "WEST"
+            ],
+            "hands": [
+              [
+                "NORTH"
+              ],
+              [
+                "PASS"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_SEED",
+                "WHEAT",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "MELON",
+                1
+              ]
+            ]
+          },
+          "chosen_action": {
+            "farmer": [
+              "WEST"
+            ],
+            "hands": [
+              [
+                "NORTH"
+              ],
+              [
+                "PASS"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_SEED",
+                "WHEAT",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "MELON",
+                1
+              ]
+            ]
+          },
+          "candidates": [
+            {
+              "family": "hold_investment",
+              "terminal_cash": 10231.0,
+              "forced": [],
+              "scheduled": [
+                "water:(4, 3)",
+                "feed:(4, 4):0"
+              ],
+              "commitment_keys": [
+                "water:(4, 3)"
+              ],
+              "action": {
+                "farmer": [
+                  "WATER"
+                ],
+                "hands": [
+                  [
+                    "PASS"
+                  ],
+                  [
+                    "PASS"
+                  ]
+                ],
+                "market": [
+                  [
+                    "BUY_PRODUCT",
+                    "WHEAT",
+                    1
+                  ]
+                ]
+              }
+            }
+          ],
+          "forecast_kind": "existing_strong_self_projection"
+        }
+      },
+      {
+        "step": 12,
+        "self_action": {
+          "farmer": [
+            "WEST"
+          ],
+          "hands": [
+            [
+              "WATER"
+            ],
+            [
+              "PLANT",
+              "MELON"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_SEED",
+              "CARROT",
+              1
+            ]
+          ]
+        },
+        "world_hash": "bfabc2637a4dbe101d2ed5e4b2f661c3ae2aab908898f833ef43f4c851cd83de",
+        "self_cash": 828.0,
+        "decision": {
+          "step": 12,
+          "remaining_actions": 707,
+          "generated_count": 1,
+          "evaluated_count": 1,
+          "baseline_terminal_cash": 18304.0,
+          "chosen_terminal_cash": 18304.0,
+          "stress_terminal_cash": 18259.0,
+          "chosen_family": "strong",
+          "extension_selected": false,
+          "action_changed": false,
+          "commitments_changed": false,
+          "baseline_action": {
+            "farmer": [
+              "WEST"
+            ],
+            "hands": [
+              [
+                "WATER"
+              ],
+              [
+                "PLANT",
+                "MELON"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_SEED",
+                "CARROT",
+                1
+              ]
+            ]
+          },
+          "chosen_action": {
+            "farmer": [
+              "WEST"
+            ],
+            "hands": [
+              [
+                "WATER"
+              ],
+              [
+                "PLANT",
+                "MELON"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_SEED",
+                "CARROT",
+                1
+              ]
+            ]
+          },
+          "candidates": [
+            {
+              "family": "hold_investment",
+              "terminal_cash": 10137.0,
+              "forced": [],
+              "scheduled": [
+                "water:(4, 3)",
+                "feed:(4, 4):0"
+              ],
+              "commitment_keys": [
+                "water:(4, 3)"
+              ],
+              "action": {
+                "farmer": [
+                  "PASS"
+                ],
+                "hands": [
+                  [
+                    "WATER"
+                  ],
+                  [
+                    "SOUTH"
+                  ]
+                ],
+                "market": [
+                  [
+                    "BUY_PRODUCT",
+                    "WHEAT",
+                    1
+                  ]
+                ]
+              }
+            }
+          ],
+          "forecast_kind": "existing_strong_self_projection"
+        }
+      },
+      {
+        "step": 13,
+        "self_action": {
+          "farmer": [
+            "SOUTH"
+          ],
+          "hands": [
+            [
+              "WEST"
+            ],
+            [
+              "WATER"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_LAND"
+            ],
+            [
+              "BUY_ANIMAL",
+              "GOOSE",
+              1
+            ]
+          ]
+        },
+        "world_hash": "78123f0b73ef13c507e744dc53976853041a5bfb4126382a612390f86e506edb",
+        "self_cash": 528.0,
+        "decision": {
+          "step": 13,
+          "remaining_actions": 706,
+          "generated_count": 1,
+          "evaluated_count": 1,
+          "baseline_terminal_cash": 18006.0,
+          "chosen_terminal_cash": 18006.0,
+          "stress_terminal_cash": 11372.0,
+          "chosen_family": "strong",
+          "extension_selected": false,
+          "action_changed": false,
+          "commitments_changed": false,
+          "baseline_action": {
+            "farmer": [
+              "SOUTH"
+            ],
+            "hands": [
+              [
+                "WEST"
+              ],
+              [
+                "WATER"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_LAND"
+              ],
+              [
+                "BUY_ANIMAL",
+                "GOOSE",
+                1
+              ]
+            ]
+          },
+          "chosen_action": {
+            "farmer": [
+              "SOUTH"
+            ],
+            "hands": [
+              [
+                "WEST"
+              ],
+              [
+                "WATER"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_LAND"
+              ],
+              [
+                "BUY_ANIMAL",
+                "GOOSE",
+                1
+              ]
+            ]
+          },
+          "candidates": [
+            {
+              "family": "hold_investment",
+              "terminal_cash": 11624.0,
+              "forced": [],
+              "scheduled": [
+                "feed:(4, 4):0",
+                "water:(5, 3)"
+              ],
+              "commitment_keys": [
+                "water:(5, 3)"
+              ],
+              "action": {
+                "farmer": [
+                  "PASS"
+                ],
+                "hands": [
+                  [
+                    "SOUTH"
+                  ],
+                  [
+                    "WATER"
+                  ]
+                ],
+                "market": [
+                  [
+                    "BUY_PRODUCT",
+                    "WHEAT",
+                    1
+                  ]
+                ]
+              }
+            }
+          ],
+          "forecast_kind": "existing_strong_self_projection"
+        }
+      },
+      {
+        "step": 14,
+        "self_action": {
+          "farmer": [
+            "NORTH"
+          ],
+          "hands": [
+            [
+              "PLANT",
+              "WHEAT"
+            ],
+            [
+              "SOUTH"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_PRODUCT",
+              "WHEAT",
+              1
+            ]
+          ]
+        },
+        "world_hash": "37a5dcef1ae8e8dec87828ca8dd83019b940f31916144d1da5393641374c2cdc",
+        "self_cash": 498.0,
+        "decision": {
+          "step": 14,
+          "remaining_actions": 705,
+          "generated_count": 1,
+          "evaluated_count": 1,
+          "baseline_terminal_cash": 18006.0,
+          "chosen_terminal_cash": 18006.0,
+          "stress_terminal_cash": 17923.0,
+          "chosen_family": "strong",
+          "extension_selected": false,
+          "action_changed": false,
+          "commitments_changed": false,
+          "baseline_action": {
+            "farmer": [
+              "NORTH"
+            ],
+            "hands": [
+              [
+                "PLANT",
+                "WHEAT"
+              ],
+              [
+                "SOUTH"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_PRODUCT",
+                "WHEAT",
+                1
+              ]
+            ]
+          },
+          "chosen_action": {
+            "farmer": [
+              "NORTH"
+            ],
+            "hands": [
+              [
+                "PLANT",
+                "WHEAT"
+              ],
+              [
+                "SOUTH"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_PRODUCT",
+                "WHEAT",
+                1
+              ]
+            ]
+          },
+          "candidates": [
+            {
+              "family": "hold_investment",
+              "terminal_cash": 11324.0,
+              "forced": [],
+              "scheduled": [
+                "feed:(4, 4):0"
+              ],
+              "commitment_keys": [
+                "feed:(4, 4):0"
+              ],
+              "action": {
+                "farmer": [
+                  "PASS"
+                ],
+                "hands": [
+                  [
+                    "PASS"
+                  ],
+                  [
+                    "SOUTH"
+                  ]
+                ],
+                "market": [
+                  [
+                    "BUY_PRODUCT",
+                    "WHEAT",
+                    1
+                  ]
+                ]
+              }
+            }
+          ],
+          "forecast_kind": "existing_strong_self_projection"
+        }
+      },
+      {
+        "step": 15,
+        "self_action": {
+          "farmer": [
+            "PLANT",
+            "CARROT"
+          ],
+          "hands": [
+            [
+              "WATER"
+            ],
+            [
+              "PICKUP",
+              "WHEAT",
+              1
+            ]
+          ],
+          "market": []
+        },
+        "world_hash": "f3a7edbbe4c29078d76e43747bac553e431213888bbcdfdfcf8f71a14e7aa2fe",
+        "self_cash": 498.0,
+        "decision": {
+          "step": 15,
+          "remaining_actions": 704,
+          "generated_count": 1,
+          "evaluated_count": 1,
+          "baseline_terminal_cash": 18006.0,
+          "chosen_terminal_cash": 18006.0,
+          "stress_terminal_cash": 17923.0,
+          "chosen_family": "strong",
+          "extension_selected": false,
+          "action_changed": false,
+          "commitments_changed": false,
+          "baseline_action": {
+            "farmer": [
+              "PLANT",
+              "CARROT"
+            ],
+            "hands": [
+              [
+                "WATER"
+              ],
+              [
+                "PICKUP",
+                "WHEAT",
+                1
+              ]
+            ],
+            "market": []
+          },
+          "chosen_action": {
+            "farmer": [
+              "PLANT",
+              "CARROT"
+            ],
+            "hands": [
+              [
+                "WATER"
+              ],
+              [
+                "PICKUP",
+                "WHEAT",
+                1
+              ]
+            ],
+            "market": []
+          },
+          "candidates": [
+            {
+              "family": "hold_investment",
+              "terminal_cash": 11452.0,
+              "forced": [],
+              "scheduled": [
+                "water:(3, 3)",
+                "feed:(4, 4):0"
+              ],
+              "commitment_keys": [
+                "feed:(4, 4):0",
+                "water:(3, 3)"
+              ],
+              "action": {
+                "farmer": [
+                  "PASS"
+                ],
+                "hands": [
+                  [
+                    "WATER"
+                  ],
+                  [
+                    "PICKUP",
+                    "WHEAT",
+                    1
+                  ]
+                ],
+                "market": []
+              }
+            }
+          ],
+          "forecast_kind": "existing_strong_self_projection"
+        }
+      },
+      {
+        "step": 16,
+        "self_action": {
+          "farmer": [
+            "WATER"
+          ],
+          "hands": [
+            [
+              "EAST"
+            ],
+            [
+              "WEST"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_LAND"
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ]
+          ]
+        },
+        "world_hash": "be7e45e390220c4a4a35ca819f79d52233f99a0c67e896d57a57b1d73da5d5f8",
+        "self_cash": 498.0,
+        "decision": {
+          "step": 16,
+          "remaining_actions": 703,
+          "generated_count": 2,
+          "evaluated_count": 2,
+          "baseline_terminal_cash": 18006.0,
+          "chosen_terminal_cash": 18006.0,
+          "stress_terminal_cash": 17923.0,
+          "chosen_family": "strong",
+          "extension_selected": false,
+          "action_changed": false,
+          "commitments_changed": false,
+          "baseline_action": {
+            "farmer": [
+              "WATER"
+            ],
+            "hands": [
+              [
+                "EAST"
+              ],
+              [
+                "WEST"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_LAND"
+              ],
+              [
+                "BUY_ANIMAL",
+                "SHEEP",
+                1
+              ]
+            ]
+          },
+          "chosen_action": {
+            "farmer": [
+              "WATER"
+            ],
+            "hands": [
+              [
+                "EAST"
+              ],
+              [
+                "WEST"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_LAND"
+              ],
+              [
+                "BUY_ANIMAL",
+                "SHEEP",
+                1
+              ]
+            ]
+          },
+          "candidates": [
+            {
+              "family": "hold_investment",
+              "terminal_cash": 11557.0,
+              "forced": [],
+              "scheduled": [
+                "water:(2, 3)",
+                "feed:(4, 4):0"
+              ],
+              "commitment_keys": [
+                "feed:(4, 4):0",
+                "water:(2, 3)"
+              ],
+              "action": {
+                "farmer": [
+                  "WATER"
+                ],
+                "hands": [
+                  [
+                    "PASS"
+                  ],
+                  [
+                    "WEST"
+                  ]
+                ],
+                "market": []
+              }
+            },
+            {
+              "family": "carry_to_shed",
+              "terminal_cash": 11417.0,
+              "forced": [
+                "deliver:2"
+              ],
+              "scheduled": [
+                "water:(2, 3)",
+                "feed:(4, 4):0",
+                "deliver:2"
+              ],
+              "commitment_keys": [
+                "ext:expand_animal:COW:5:4",
+                "ext:expand_animal:SHEEP:4:5",
+                "ext:expand_animal:SHEEP:3:5",
+                "ext:expand_animal:GOOSE:2:5",
+                "feed:(4, 4):0",
+                "water:(2, 3)",
+                "deliver:2"
+              ],
+              "action": {
+                "farmer": [
+                  "WATER"
+                ],
+                "hands": [
+                  [
+                    "EAST"
+                  ],
+                  [
+                    "DROP"
+                  ]
+                ],
+                "market": [
+                  [
+                    "BUY_PRODUCT",
+                    "WHEAT",
+                    1
+                  ]
+                ]
+              }
+            }
+          ],
+          "forecast_kind": "existing_strong_self_projection"
+        }
+      },
+      {
+        "step": 17,
+        "self_action": {
+          "farmer": [
+            "EAST"
+          ],
+          "hands": [
+            [
+              "WEST"
+            ],
+            [
+              "FEED"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_LAND"
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ],
+            [
+              "HIRE"
+            ]
+          ]
+        },
+        "world_hash": "0b9c13207abd764f99456454b4d6595233b827db484f78e7c06d31008b9fd252",
+        "self_cash": 496.0,
+        "decision": {
+          "step": 17,
+          "remaining_actions": 702,
+          "generated_count": 2,
+          "evaluated_count": 2,
+          "baseline_terminal_cash": 17942.0,
+          "chosen_terminal_cash": 17942.0,
+          "stress_terminal_cash": 9039.0,
+          "chosen_family": "strong",
+          "extension_selected": false,
+          "action_changed": false,
+          "commitments_changed": false,
+          "baseline_action": {
+            "farmer": [
+              "EAST"
+            ],
+            "hands": [
+              [
+                "WEST"
+              ],
+              [
+                "FEED"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_LAND"
+              ],
+              [
+                "BUY_ANIMAL",
+                "SHEEP",
+                1
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "chosen_action": {
+            "farmer": [
+              "EAST"
+            ],
+            "hands": [
+              [
+                "WEST"
+              ],
+              [
+                "FEED"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_LAND"
+              ],
+              [
+                "BUY_ANIMAL",
+                "SHEEP",
+                1
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "candidates": [
+            {
+              "family": "hold_investment",
+              "terminal_cash": 11560.0,
+              "forced": [],
+              "scheduled": [
+                "feed:(4, 4):0"
+              ],
+              "commitment_keys": [
+                "feed:(4, 4):0"
+              ],
+              "action": {
+                "farmer": [
+                  "PASS"
+                ],
+                "hands": [
+                  [
+                    "PASS"
+                  ],
+                  [
+                    "FEED"
+                  ]
+                ],
+                "market": []
+              }
+            },
+            {
+              "family": "carry_to_shed",
+              "terminal_cash": 9162.0,
+              "forced": [
+                "deliver:2"
+              ],
+              "scheduled": [
+                "ext:expand_animal:SHEEP:3:5",
+                "feed:(4, 4):0",
+                "deliver:2"
+              ],
+              "commitment_keys": [
+                "ext:expand_animal:COW:5:4",
+                "ext:expand_animal:SHEEP:4:5",
+                "ext:expand_animal:SHEEP:3:5",
+                "ext:expand_animal:GOOSE:2:5",
+                "feed:(4, 4):0",
+                "deliver:2"
+              ],
+              "action": {
+                "farmer": [
+                  "EAST"
+                ],
+                "hands": [
+                  [
+                    "SOUTH"
+                  ],
+                  [
+                    "DROP"
+                  ]
+                ],
+                "market": [
+                  [
+                    "BUY_LAND"
+                  ],
+                  [
+                    "BUY_ANIMAL",
+                    "SHEEP",
+                    1
+                  ],
+                  [
+                    "BUY_PRODUCT",
+                    "WHEAT",
+                    1
+                  ]
+                ]
+              }
+            }
+          ],
+          "forecast_kind": "existing_strong_self_projection"
+        }
+      },
+      {
+        "step": 18,
+        "self_action": {
+          "farmer": [
+            "SOUTH"
+          ],
+          "hands": [
+            [
+              "EAST"
+            ],
+            [
+              "CARE"
+            ],
+            [
+              "WEST"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_LAND"
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ]
+          ]
+        },
+        "world_hash": "b71477d350804e6af374905804c50c05a380996feb2ad243957806339be9b95b",
+        "self_cash": 496.0,
+        "decision": {
+          "step": 18,
+          "remaining_actions": 701,
+          "generated_count": 1,
+          "evaluated_count": 1,
+          "baseline_terminal_cash": 17942.0,
+          "chosen_terminal_cash": 17942.0,
+          "stress_terminal_cash": 17824.0,
+          "chosen_family": "strong",
+          "extension_selected": false,
+          "action_changed": false,
+          "commitments_changed": false,
+          "baseline_action": {
+            "farmer": [
+              "SOUTH"
+            ],
+            "hands": [
+              [
+                "EAST"
+              ],
+              [
+                "CARE"
+              ],
+              [
+                "WEST"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_LAND"
+              ],
+              [
+                "BUY_ANIMAL",
+                "SHEEP",
+                1
+              ]
+            ]
+          },
+          "chosen_action": {
+            "farmer": [
+              "SOUTH"
+            ],
+            "hands": [
+              [
+                "EAST"
+              ],
+              [
+                "CARE"
+              ],
+              [
+                "WEST"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_LAND"
+              ],
+              [
+                "BUY_ANIMAL",
+                "SHEEP",
+                1
+              ]
+            ]
+          },
+          "candidates": [
+            {
+              "family": "hold_investment",
+              "terminal_cash": 11558.0,
+              "forced": [],
+              "scheduled": [
+                "care:(4, 4):0"
+              ],
+              "commitment_keys": [
+                "care:(4, 4):0"
+              ],
+              "action": {
+                "farmer": [
+                  "PASS"
+                ],
+                "hands": [
+                  [
+                    "PASS"
+                  ],
+                  [
+                    "CARE"
+                  ],
+                  [
+                    "PASS"
+                  ]
+                ],
+                "market": []
+              }
+            }
+          ],
+          "forecast_kind": "existing_strong_self_projection"
+        }
+      },
+      {
+        "step": 19,
+        "self_action": {
+          "farmer": [
+            "WEST"
+          ],
+          "hands": [
+            [
+              "EAST"
+            ],
+            [
+              "SOUTH"
+            ],
+            [
+              "WEST"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_SEED",
+              "CARROT",
+              1
+            ],
+            [
+              "BUY_LAND"
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ]
+          ]
+        },
+        "world_hash": "acb36bc9165d26fbb4f5798460ab64eee1e4d7e48e3469b27e4c6b85d6144dd2",
+        "self_cash": 476.0,
+        "decision": {
+          "step": 19,
+          "remaining_actions": 700,
+          "generated_count": 1,
+          "evaluated_count": 1,
+          "baseline_terminal_cash": 15897.0,
+          "chosen_terminal_cash": 15897.0,
+          "stress_terminal_cash": 15782.0,
+          "chosen_family": "strong",
+          "extension_selected": false,
+          "action_changed": false,
+          "commitments_changed": false,
+          "baseline_action": {
+            "farmer": [
+              "WEST"
+            ],
+            "hands": [
+              [
+                "EAST"
+              ],
+              [
+                "SOUTH"
+              ],
+              [
+                "WEST"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_SEED",
+                "CARROT",
+                1
+              ],
+              [
+                "BUY_LAND"
+              ],
+              [
+                "BUY_ANIMAL",
+                "SHEEP",
+                1
+              ]
+            ]
+          },
+          "chosen_action": {
+            "farmer": [
+              "WEST"
+            ],
+            "hands": [
+              [
+                "EAST"
+              ],
+              [
+                "SOUTH"
+              ],
+              [
+                "WEST"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_SEED",
+                "CARROT",
+                1
+              ],
+              [
+                "BUY_LAND"
+              ],
+              [
+                "BUY_ANIMAL",
+                "SHEEP",
+                1
+              ]
+            ]
+          },
+          "candidates": [
+            {
+              "family": "hold_investment",
+              "terminal_cash": 11558.0,
+              "forced": [],
+              "scheduled": [],
+              "commitment_keys": [],
+              "action": {
+                "farmer": [
+                  "PASS"
+                ],
+                "hands": [
+                  [
+                    "PASS"
+                  ],
+                  [
+                    "PASS"
+                  ],
+                  [
+                    "PASS"
+                  ]
+                ],
+                "market": []
+              }
+            }
+          ],
+          "forecast_kind": "existing_strong_self_projection"
+        }
+      },
+      {
+        "step": 20,
+        "self_action": {
+          "farmer": [
+            "PLANT",
+            "CARROT"
+          ],
+          "hands": [
+            [
+              "WEST"
+            ],
+            [
+              "WEST"
+            ],
+            [
+              "EAST"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_LAND"
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ],
+            [
+              "HIRE"
+            ]
+          ]
+        },
+        "world_hash": "2ca7ede94c832c774ab0b1a7caf135baa82205519253c96a2b72dbfc7b7512bf",
+        "self_cash": 473.0,
+        "decision": {
+          "step": 20,
+          "remaining_actions": 699,
+          "generated_count": 1,
+          "evaluated_count": 1,
+          "baseline_terminal_cash": 17922.0,
+          "chosen_terminal_cash": 17922.0,
+          "stress_terminal_cash": 15218.0,
+          "chosen_family": "strong",
+          "extension_selected": false,
+          "action_changed": false,
+          "commitments_changed": false,
+          "baseline_action": {
+            "farmer": [
+              "PLANT",
+              "CARROT"
+            ],
+            "hands": [
+              [
+                "WEST"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "EAST"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_LAND"
+              ],
+              [
+                "BUY_ANIMAL",
+                "SHEEP",
+                1
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "chosen_action": {
+            "farmer": [
+              "PLANT",
+              "CARROT"
+            ],
+            "hands": [
+              [
+                "WEST"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "EAST"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_LAND"
+              ],
+              [
+                "BUY_ANIMAL",
+                "SHEEP",
+                1
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "candidates": [
+            {
+              "family": "hold_investment",
+              "terminal_cash": 11538.0,
+              "forced": [],
+              "scheduled": [],
+              "commitment_keys": [],
+              "action": {
+                "farmer": [
+                  "PASS"
+                ],
+                "hands": [
+                  [
+                    "PASS"
+                  ],
+                  [
+                    "PASS"
+                  ],
+                  [
+                    "PASS"
+                  ]
+                ],
+                "market": []
+              }
+            }
+          ],
+          "forecast_kind": "existing_strong_self_projection"
+        }
+      },
+      {
+        "step": 21,
+        "self_action": {
+          "farmer": [
+            "WATER"
+          ],
+          "hands": [
+            [
+              "WEST"
+            ],
+            [
+              "EAST"
+            ],
+            [
+              "WEST"
+            ],
+            [
+              "BUILD_PASTURE"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_LAND"
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ]
+          ]
+        },
+        "world_hash": "8f9ca5db002d0e9b4ddecac0dd96c724c3ffaf98bc49fb8b38edbff5995d0f1a",
+        "self_cash": 473.0,
+        "decision": {
+          "step": 21,
+          "remaining_actions": 698,
+          "generated_count": 1,
+          "evaluated_count": 1,
+          "baseline_terminal_cash": 14912.0,
+          "chosen_terminal_cash": 14912.0,
+          "stress_terminal_cash": 14791.0,
+          "chosen_family": "strong",
+          "extension_selected": false,
+          "action_changed": false,
+          "commitments_changed": false,
+          "baseline_action": {
+            "farmer": [
+              "WATER"
+            ],
+            "hands": [
+              [
+                "WEST"
+              ],
+              [
+                "EAST"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "BUILD_PASTURE"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_LAND"
+              ],
+              [
+                "BUY_ANIMAL",
+                "SHEEP",
+                1
+              ],
+              [
+                "BUY_ANIMAL",
+                "SHEEP",
+                1
+              ]
+            ]
+          },
+          "chosen_action": {
+            "farmer": [
+              "WATER"
+            ],
+            "hands": [
+              [
+                "WEST"
+              ],
+              [
+                "EAST"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "BUILD_PASTURE"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_LAND"
+              ],
+              [
+                "BUY_ANIMAL",
+                "SHEEP",
+                1
+              ],
+              [
+                "BUY_ANIMAL",
+                "SHEEP",
+                1
+              ]
+            ]
+          },
+          "candidates": [
+            {
+              "family": "hold_investment",
+              "terminal_cash": 11639.0,
+              "forced": [],
+              "scheduled": [
+                "water:(2, 4)"
+              ],
+              "commitment_keys": [
+                "water:(2, 4)"
+              ],
+              "action": {
+                "farmer": [
+                  "WATER"
+                ],
+                "hands": [
+                  [
+                    "PASS"
+                  ],
+                  [
+                    "PASS"
+                  ],
+                  [
+                    "PASS"
+                  ],
+                  [
+                    "PASS"
+                  ]
+                ],
+                "market": []
+              }
+            }
+          ],
+          "forecast_kind": "existing_strong_self_projection"
+        }
+      },
+      {
+        "step": 22,
+        "self_action": {
+          "farmer": [
+            "EAST"
+          ],
+          "hands": [
+            [
+              "PASS"
+            ],
+            [
+              "WEST"
+            ],
+            [
+              "EAST"
+            ],
+            [
+              "WEST"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_LAND"
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ]
+          ]
+        },
+        "world_hash": "621f20d38c4f0cacaf8d17aa90de9efe70239299f7a0f93182a98e270619180b",
+        "self_cash": 473.0,
+        "decision": {
+          "step": 22,
+          "remaining_actions": 697,
+          "generated_count": 1,
+          "evaluated_count": 1,
+          "baseline_terminal_cash": 15339.0,
+          "chosen_terminal_cash": 15339.0,
+          "stress_terminal_cash": 15218.0,
+          "chosen_family": "strong",
+          "extension_selected": false,
+          "action_changed": false,
+          "commitments_changed": false,
+          "baseline_action": {
+            "farmer": [
+              "EAST"
+            ],
+            "hands": [
+              [
+                "PASS"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "EAST"
+              ],
+              [
+                "WEST"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_LAND"
+              ],
+              [
+                "BUY_ANIMAL",
+                "SHEEP",
+                1
+              ],
+              [
+                "BUY_ANIMAL",
+                "SHEEP",
+                1
+              ]
+            ]
+          },
+          "chosen_action": {
+            "farmer": [
+              "EAST"
+            ],
+            "hands": [
+              [
+                "PASS"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "EAST"
+              ],
+              [
+                "WEST"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_LAND"
+              ],
+              [
+                "BUY_ANIMAL",
+                "SHEEP",
+                1
+              ],
+              [
+                "BUY_ANIMAL",
+                "SHEEP",
+                1
+              ]
+            ]
+          },
+          "candidates": [
+            {
+              "family": "hold_investment",
+              "terminal_cash": 11639.0,
+              "forced": [],
+              "scheduled": [],
+              "commitment_keys": [],
+              "action": {
+                "farmer": [
+                  "PASS"
+                ],
+                "hands": [
+                  [
+                    "PASS"
+                  ],
+                  [
+                    "PASS"
+                  ],
+                  [
+                    "PASS"
+                  ],
+                  [
+                    "PASS"
+                  ]
+                ],
+                "market": []
+              }
+            }
+          ],
+          "forecast_kind": "existing_strong_self_projection"
+        }
+      },
+      {
+        "step": 23,
+        "self_action": {
+          "farmer": [
+            "SOUTH"
+          ],
+          "hands": [
+            [
+              "NORTH"
+            ],
+            [
+              "EAST"
+            ],
+            [
+              "WEST"
+            ],
+            [
+              "PICKUP",
+              "COW",
+              1
+            ]
+          ],
+          "market": [
+            [
+              "BUY_LAND"
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ],
+            [
+              "BUY_SEED",
+              "WHEAT",
+              1
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ]
+          ]
+        },
+        "world_hash": "53c3affed30ea8ab6989cf26cfe7834d7d979381c80b2f4e66deb74063b9be60",
+        "self_cash": 463.0,
+        "decision": {
+          "step": 23,
+          "remaining_actions": 696,
+          "generated_count": 1,
+          "evaluated_count": 1,
+          "baseline_terminal_cash": 14625.0,
+          "chosen_terminal_cash": 14625.0,
+          "stress_terminal_cash": 14514.0,
+          "chosen_family": "strong",
+          "extension_selected": false,
+          "action_changed": false,
+          "commitments_changed": false,
+          "baseline_action": {
+            "farmer": [
+              "SOUTH"
+            ],
+            "hands": [
+              [
+                "NORTH"
+              ],
+              [
+                "EAST"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "PICKUP",
+                "COW",
+                1
+              ]
+            ],
+            "market": [
+              [
+                "BUY_LAND"
+              ],
+              [
+                "BUY_ANIMAL",
+                "SHEEP",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "WHEAT",
+                1
+              ],
+              [
+                "BUY_ANIMAL",
+                "SHEEP",
+                1
+              ]
+            ]
+          },
+          "chosen_action": {
+            "farmer": [
+              "SOUTH"
+            ],
+            "hands": [
+              [
+                "NORTH"
+              ],
+              [
+                "EAST"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "PICKUP",
+                "COW",
+                1
+              ]
+            ],
+            "market": [
+              [
+                "BUY_LAND"
+              ],
+              [
+                "BUY_ANIMAL",
+                "SHEEP",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "WHEAT",
+                1
+              ],
+              [
+                "BUY_ANIMAL",
+                "SHEEP",
+                1
+              ]
+            ]
+          },
+          "candidates": [
+            {
+              "family": "hold_investment",
+              "terminal_cash": 11633.0,
+              "forced": [],
+              "scheduled": [],
+              "commitment_keys": [],
+              "action": {
+                "farmer": [
+                  "PASS"
+                ],
+                "hands": [
+                  [
+                    "PASS"
+                  ],
+                  [
+                    "PASS"
+                  ],
+                  [
+                    "PASS"
+                  ],
+                  [
+                    "PASS"
+                  ]
+                ],
+                "market": []
+              }
+            }
+          ],
+          "forecast_kind": "existing_strong_self_projection"
+        }
+      }
+    ]
+  }
+}
