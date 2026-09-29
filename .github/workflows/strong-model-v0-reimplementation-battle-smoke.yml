@@ -1,11 +1,11 @@
-name: Strong Model v0 Reimplementation Battle Smoke
+name: Strong Initial HIRE2 v0
 
 on:
   push:
     branches:
-      - "experiment/strong-model-v0-reimplementation-20260928"
+      - "experiment/strong-initial-hire2-v0-20260929"
     paths:
-      - "strong_model_v0_reimplementation/**"
+      - "strong_model_v0_reimplementation/run_initial_hire2_v0.py"
       - ".github/workflows/strong-model-v0-reimplementation-battle-smoke.yml"
   workflow_dispatch:
 
@@ -13,36 +13,25 @@ permissions:
   contents: read
 
 jobs:
-  battle-smoke:
+  battle:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-
       - name: Install pinned Official Kaggriculture World
         run: |
           python -m pip install --upgrade pip
           python -m pip install "git+https://github.com/Kaggle/kaggle-environments.git@d7729da06cc1382eb742d6980dc3180aa85caa28"
-
-      - name: Fetch pinned Seyamalam opponent
-        run: |
-          mkdir -p opponents
-          curl -fL --retry 3             -o opponents/seyamalam_v21.py             https://raw.githubusercontent.com/Seyamalam/Kaggriculture/8b8c421eb10634c756583ce10c75189f50c83a72/main.py
-
       - name: Syntax check
-        run: |
-          python -m py_compile             strong_model_v0_reimplementation/jobs.py             strong_model_v0_reimplementation/planner.py             strong_model_v0_reimplementation/agent.py             strong_model_v0_reimplementation/run_battle_smoke.py
-
-      - name: Run candidate battle smoke
-        run: python strong_model_v0_reimplementation/run_battle_smoke.py
-
+        run: python -m py_compile strong_model_v0_reimplementation/run_initial_hire2_v0.py
+      - name: Run direct HIRE2 Battle
+        run: python strong_model_v0_reimplementation/run_initial_hire2_v0.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: strong-model-v0-reimplementation-battle-smoke
-          path: strong_model_v0_reimplementation/battle_smoke_result.json
+          name: strong-initial-hire2-v0
+          path: strong_model_v0_reimplementation/initial_hire2_v0_result.json
           if-no-files-found: warn
