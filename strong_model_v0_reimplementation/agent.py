@@ -53,6 +53,8 @@ class Runtime:
                 "scheduled":list(chosen.scheduled),
                 "representative":None if chosen_rep is None else chosen_rep.spec(),
             },
+            "candidate_scores":copy.deepcopy(getattr(chosen,"candidate_scores",[])),
+            "chosen_candidate_rank":getattr(chosen,"chosen_candidate_rank",None),
             "active_after":copy.deepcopy(self.active),
         }
         self.last_step=step
