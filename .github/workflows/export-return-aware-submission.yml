@@ -1,0 +1,30 @@
+name: Export Return-Aware Kaggle Submission
+
+on:
+  push:
+    branches:
+      - submission/return-aware-v0-kaggle-20260929
+    paths:
+      - .github/workflows/export-return-aware-submission.yml
+  workflow_dispatch:
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify submission file
+        run: |
+          test -f kaggle_submission_return_aware_v0/submission.py
+          python -m py_compile kaggle_submission_return_aware_v0/submission.py
+          sha1sum kaggle_submission_return_aware_v0/submission.py
+      - name: Stage exact submission
+        run: |
+          mkdir -p artifact
+          cp kaggle_submission_return_aware_v0/submission.py artifact/submission.py
+      - name: Upload submission artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: return-aware-kaggle-submission
+          path: artifact/submission.py
+          if-no-files-found: error
