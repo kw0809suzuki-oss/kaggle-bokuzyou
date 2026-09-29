@@ -2,6 +2,7 @@
 from kaggle_environments import make
 
 from strong_model_v0_reimplementation.agent import agent, debug_state, reset_agent
+from strong_model_v0_reimplementation.planner import choose, settings_from
 
 
 def plain(v):
@@ -21,6 +22,16 @@ def main():
     env = make("kaggriculture", configuration={"seed": 92804001}, debug=False)
     env.reset(num_agents=2)
     obs = env._Environment__get_shared_state(0)["observation"]
+
+    raw = plain(obs)
+    cfg = settings_from(env.configuration)
+    silent, _, _, _ = choose(raw, cfg, {}, diagnostics=False)
+    assert not hasattr(silent, "candidate_scores")
+    assert not hasattr(silent, "decision_inputs")
+
+    diagnostic, _, _, _ = choose(raw, cfg, {}, diagnostics=True)
+    assert hasattr(diagnostic, "candidate_scores")
+    assert hasattr(diagnostic, "decision_inputs")
 
     action = agent(obs, env.configuration)
     dbg = debug_state(0)
