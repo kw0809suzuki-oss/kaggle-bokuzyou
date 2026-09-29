@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Trigger state-effect divergence probe.
 import importlib.util, json, os, sys
 from pathlib import Path
 from kaggle_environments import make
