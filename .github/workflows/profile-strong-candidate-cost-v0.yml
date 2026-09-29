@@ -25,7 +25,8 @@ jobs:
           from collections import defaultdict
           from kaggle_environments import make
           import strong_model_v0_reimplementation.planner as sp
-          import strong_model_v0_reimplementation.agent as sa
+          import importlib
+          sa=importlib.import_module('strong_model_v0_reimplementation.agent')
           from return_aware_model_v0.run import _opponent
 
           stats=defaultdict(lambda: {"generated":0,"selected":0,"seconds":0.0})
@@ -120,7 +121,7 @@ jobs:
               statuses=[str(s.status) for s in env.state]
               if any(s not in ("ACTIVE","DONE") for s in statuses):
                   print("WORLD_REJECTED",step,statuses,logs)
-                  break
+                  raise RuntimeError(f"World rejected diagnostic at step {step}: {statuses}")
 
           out={
               "steps":len(turn_rows),
