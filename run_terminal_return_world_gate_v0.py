@@ -7,10 +7,9 @@ Baseline:
     ordinary Strong Model v0 reimplementation for steps 0..23.
 
 Variant:
-    use ordinary Strong `choose()` only to obtain the current planned
-    commitments, then add at most ONE currently executable recovery job
-    (harvest / animal harvest / carried delivery) before the existing
-    `_service_action()` generates the Action.
+    capture the exact selected Strong choice state (representative, forced,
+    harvest-now, and native post-processing mode), add at most ONE currently
+    executable recovery job, then generate the Action through `_service_action()`.
 
 No Action is patched after generation.
 
@@ -39,11 +38,7 @@ sys.path.insert(0, str(ROOT))
 from plan_generator_entrance_v0 import bind_official_state
 from importlib import import_module
 strong_module = import_module("strong_model_v0_reimplementation.agent")
-from strong_model_v0_reimplementation.jobs import (
-    fresh_jobs,
-    materialize_active,
-    still_needed,
-)
+from strong_model_v0_reimplementation.jobs import still_needed
 from strong_model_v0_reimplementation.planner import (
     _service_action,
     choose,
@@ -120,10 +115,6 @@ def _metrics(obs: dict[str, Any]) -> dict[str, Any]:
                 animals += 1
             yield_units += int(tile.get("yield_units", 0) or 0)
 
-    products = set()
-    # Product names are discoverable from market prices; exclude known crops only
-    # is not safe here, so count all positive carried/shed item quantities separately
-    # and retain the per-item maps in the trace.
     carried_maps = [dict(v or {}) for v in (obs["private"].get("inventories", []) or [])]
     shed = dict(obs["private"].get("shed", {}) or {})
     carried_total = sum(int(q or 0) for inv in carried_maps for q in inv.values())
@@ -180,20 +171,104 @@ def _diff_paths(a: Any, b: Any, path: str = "", limit: int = 80) -> list[dict[st
     return out
 
 
-def _materialize_specs(raw: dict[str, Any], cfg: Any, specs: list[dict[str, Any]]):
-    fresh = fresh_jobs(raw, cfg.episodeSteps, cfg.turnsPerDay, cfg.boardSize)
-    investments = investment_jobs(raw, cfg, fresh)
-    lookup = {j.key: j for j in investments + fresh + operating_jobs(raw, cfg)}
-    jobs = []
-    for spec in specs:
-        if not still_needed(spec, raw):
-            continue
-        key = str(spec["key"])
-        job = lookup.get(key) or materialize_active(spec, raw)
-        if job is not None:
-            job.active = True
-            jobs.append(job)
-    return jobs
+def _same(a: Any, b: Any) -> bool:
+    return _canonical(a) == _canonical(b)
+
+
+def _capture_selected_state(raw: dict[str, Any], cfg: Any, active_specs: dict[str, Any]):
+    """Return Strong's selected branch, including the mode needed to replay it."""
+    chosen, representative, active, _ = choose(raw, cfg, active_specs)
+    target = chosen.action
+    candidates: list[dict[str, Any]] = []
+
+    def add(mode, planned, action, scheduled, forced=None, harvest_now=False, extra=None):
+        candidates.append({
+            "mode": mode,
+            "planned": planned,
+            "action": action,
+            "scheduled": list(scheduled),
+            "forced": set(forced or []),
+            "harvest_now": bool(harvest_now),
+            "extra": extra,
+        })
+
+    action, scheduled, _, _ = _service_action(raw, cfg, active)
+    add("active", active, action, scheduled)
+    if active:
+        action_empty, scheduled_empty, _, _ = _service_action(raw, cfg, [])
+        add("empty", [], action_empty, scheduled_empty)
+    if representative is not None:
+        planned = active + [representative]
+        action_rep, scheduled_rep, _, _ = _service_action(
+            raw, cfg, planned, {representative.key}
+        )
+        add("representative", planned, action_rep, scheduled_rep, {representative.key})
+
+    action_harvest, scheduled_harvest, _, _ = _service_action(
+        raw, cfg, active, harvest_now=True
+    )
+    add("harvest_now", active, action_harvest, scheduled_harvest, harvest_now=True)
+
+    if (
+        raw["hour"] < cfg.turnsPerDay - 1
+        and (active or operating_jobs(raw, cfg))
+        and len(action["market"]) < cfg.maxMarketOrdersPerTurn
+    ):
+        action_hire = copy.deepcopy(action)
+        action_hire["market"].append(["HIRE"])
+        add("hire_postprocess", active, action_hire, scheduled,
+            extra={"postprocess": "append_hire"})
+
+    for idx, order in enumerate(action["market"]):
+        if order[0] == "SELL":
+            action_no_sell = copy.deepcopy(action)
+            removed = action_no_sell["market"].pop(idx)
+            add("remove_sell_postprocess", active, action_no_sell, scheduled,
+                extra={"postprocess": "remove_sell", "index": idx, "removed": removed})
+
+    matches = [row for row in candidates if _same(row["action"], target)]
+    if not matches:
+        raise RuntimeError("selected Strong Action has no reconstructable selection state")
+    priority = {
+        "representative": 0,
+        "harvest_now": 1,
+        "hire_postprocess": 2,
+        "remove_sell_postprocess": 3,
+        "empty": 4,
+        "active": 5,
+    }
+    selected = min(matches, key=lambda row: priority[row["mode"]])
+    replay, replay_scheduled, _, _ = _service_action(
+        raw,
+        cfg,
+        selected["planned"],
+        forced=selected["forced"] or None,
+        harvest_now=selected["harvest_now"],
+    )
+    replay = _apply_native_postprocess(replay, selected["extra"])
+    if not _same(replay, target):
+        raise RuntimeError("captured Strong selection state failed Action parity")
+    selected["scheduled"] = replay_scheduled
+    selected["chosen_action"] = copy.deepcopy(target)
+    selected["matching_modes"] = [row["mode"] for row in matches]
+    selected["base_commitments"] = copy.deepcopy(chosen.commitments)
+    return chosen, selected
+
+
+def _apply_native_postprocess(action: dict[str, Any], extra: dict[str, Any] | None):
+    """Reapply a native Strong choice mode, not a probe-specific Action patch."""
+    out = copy.deepcopy(action)
+    if not extra:
+        return out
+    if extra["postprocess"] == "append_hire":
+        out["market"].append(["HIRE"])
+    elif extra["postprocess"] == "remove_sell":
+        target = extra["removed"]
+        matches = [i for i, order in enumerate(out["market"]) if order == target]
+        if len(matches) != 1:
+            raise RuntimeError("native SELL-removal selection could not be replayed after allocation")
+        out["market"].pop(matches[0])
+    return out
 
 
 class RecoveryOneRuntime:
@@ -224,23 +299,22 @@ class RecoveryOneRuntime:
             if still_needed(spec, raw)
         }
 
-        # Keep Strong's ordinary planning result as the reference allocation.
-        chosen, _, _, _ = choose(raw, self.cfg, self.active)
-        base_specs = [copy.deepcopy(s) for s in chosen.commitments]
-        planned = _materialize_specs(raw, self.cfg, base_specs)
-        planned_keys = {j.key for j in planned}
+        # Capture and replay the exact Strong selection branch before intervention.
+        chosen, selection = _capture_selected_state(raw, self.cfg, self.active)
+        planned = list(selection["planned"])
+        base_specs = copy.deepcopy(chosen.commitments)
+        base_keys = {str(spec["key"]) for spec in base_specs}
 
-        # Add only one recovery job. No coordinate-specific rule, no Action patch.
+        # Add one currently executable recovery allocation to that same branch.
         recovery = [
             j
             for j in operating_jobs(raw, self.cfg, harvest_now=True)
-            if j.category == "recovery" and j.key not in planned_keys
+            if j.category == "recovery" and j.key not in base_keys
         ]
         added = None
-        forced = set()
+        forced = set(selection["forced"])
         if recovery:
-            # Deterministic: prefer larger immediately visible recovery value,
-            # then stable key order.
+            # Deterministic: largest visible recovery value, then stable key.
             added = max(recovery, key=lambda j: (float(j.central_delta), j.key))
             planned.append(added)
             forced.add(added.key)
@@ -249,17 +323,31 @@ class RecoveryOneRuntime:
             raw,
             self.cfg,
             planned,
-            forced=forced,
-            harvest_now=False,
+            forced=forced or None,
+            harvest_now=selection["harvest_now"],
         )
+        action = _apply_native_postprocess(action, selection["extra"])
 
-        # Persist the actual planned commitments, not an Action-level override.
-        self.active = {j.key: j.spec() for j in live}
+        # Preserve Strong's selected commitments and carry only the added job.
+        next_specs = list(base_specs)
+        if added is not None and added.key not in base_keys:
+            next_specs.append(added.spec())
+        self.active = {
+            str(spec["key"]): copy.deepcopy(spec)
+            for spec in next_specs
+            if still_needed(spec, raw)
+        }
         self.last_allocation = {
             "step": step,
+            "selection_state_reconstructed": True,
+            "selection_mode": selection["mode"],
+            "matching_modes": selection["matching_modes"],
             "base_commitments": [s["key"] for s in base_specs],
             "added_recovery": None if added is None else added.spec(),
             "scheduled": list(scheduled),
+            "recovery_scheduled": added is not None and added.key in scheduled,
+            "native_postprocess": selection["extra"],
+            "chosen_action_before_intervention": selection["chosen_action"],
         }
         self.last_step = step
         return copy.deepcopy(action)
@@ -271,6 +359,7 @@ def _run(label: str, variant: bool) -> dict[str, Any]:
     strong_module.reset_agent()
 
     runtime_holder: dict[str, Any] = {"runtime": None}
+    baseline_holder: dict[str, Any] = {"active": {}, "last_step": -1}
     trace: list[dict[str, Any]] = []
 
     def self_agent(obs: Any, configuration: Any):
@@ -299,8 +388,28 @@ def _run(label: str, variant: bool) -> dict[str, Any]:
             action = rt.act(obs)
             allocation = copy.deepcopy(rt.last_allocation)
         else:
-            action = strong_module.agent(obs, configuration)
-            allocation = copy.deepcopy(strong_module.debug_state(SEAT))
+            cfg = settings_from(configuration)
+            baseline = baseline_holder
+            if step <= baseline["last_step"]:
+                baseline["active"] = {}
+            raw = bind_official_state(obs).raw()
+            raw["step"] = step_of(raw, cfg)
+            baseline["active"] = {
+                key: spec for key, spec in baseline["active"].items()
+                if still_needed(spec, raw)
+            }
+            chosen, selection = _capture_selected_state(raw, cfg, baseline["active"])
+            baseline["active"] = {
+                str(spec["key"]): copy.deepcopy(spec) for spec in chosen.commitments
+            }
+            baseline["last_step"] = step
+            action = copy.deepcopy(chosen.action)
+            allocation = {
+                "selection_state_reconstructed": True,
+                "selection_mode": selection["mode"],
+                "matching_modes": selection["matching_modes"],
+                "base_commitments": [s["key"] for s in chosen.commitments],
+            }
 
         trace.append({
             "step": step,
@@ -310,6 +419,10 @@ def _run(label: str, variant: bool) -> dict[str, Any]:
             "world_digest": _digest(_world_signature(raw_obs)),
             "action": copy.deepcopy(action),
             "allocation": allocation,
+            "sell_orders": [
+                copy.deepcopy(order) for order in action.get("market", [])
+                if order and order[0] == "SELL"
+            ],
         })
         return action
 
@@ -370,11 +483,31 @@ def _compare(baseline: dict[str, Any], variant: dict[str, Any]) -> dict[str, Any
         numeric_delta[key] = v_gate[key] - b_gate[key]
 
     return {
+        "recovery_candidate_steps": [
+            int(r["step"]) for r in variant["trace"]
+            if r.get("phase") == "decision" and r.get("allocation", {}).get("added_recovery")
+        ],
+        "recovery_scheduled_steps": [
+            int(r["step"]) for r in variant["trace"]
+            if r.get("phase") == "decision" and r.get("allocation", {}).get("recovery_scheduled")
+        ],
+        "intervention_count": sum(
+            bool(r.get("allocation", {}).get("added_recovery"))
+            for r in variant["trace"] if r.get("phase") == "decision"
+        ),
+        "scheduled_intervention_count": sum(
+            bool(r.get("allocation", {}).get("recovery_scheduled"))
+            for r in variant["trace"] if r.get("phase") == "decision"
+        ),
         "first_action_divergence_step": first_action,
         "first_world_divergence_step": first_world,
         "first_world_divergence_paths": world_diffs,
         "gate_metric_delta_variant_minus_baseline": numeric_delta,
-        "world_gate_pass": first_world is not None and first_world <= GATE_ACTIONS,
+        "world_gate_pass": (
+            first_world is not None and first_world <= GATE_ACTIONS
+            and any(r.get("allocation", {}).get("recovery_scheduled")
+                    for r in variant["trace"] if r.get("phase") == "decision")
+        ),
         "interpretation_boundary": (
             "PASS means only that the one-allocation recovery variant changed the "
             "observed World within 24 actions. It is not a strength or terminal verdict."
@@ -418,6 +551,8 @@ def main() -> None:
     OUT.write_text(json.dumps(result, ensure_ascii=False, indent=2, default=str) + "\n", encoding="utf-8")
     print(json.dumps({
         "world_gate_pass": comparison["world_gate_pass"],
+        "intervention_count": comparison["intervention_count"],
+        "scheduled_intervention_count": comparison["scheduled_intervention_count"],
         "first_action_divergence_step": comparison["first_action_divergence_step"],
         "first_world_divergence_step": comparison["first_world_divergence_step"],
         "gate_metric_delta": comparison["gate_metric_delta_variant_minus_baseline"],
