@@ -1,0 +1,53 @@
+name: Recovery Single Shot Terminal v0
+
+on:
+  push:
+    branches:
+      - "experiment/recovery-single-shot-world-gate-v0-20260929"
+    paths:
+      - "run_recovery_single_shot_terminal_v0.py"
+      - ".github/workflows/recovery-single-shot-terminal-v0.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  terminal:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install pinned Official Kaggriculture World
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "git+https://github.com/Kaggle/kaggle-environments.git@d7729da06cc1382eb742d6980dc3180aa85caa28"
+
+      - name: Syntax check
+        run: |
+          python -m py_compile run_terminal_return_world_gate_v0.py run_recovery_single_shot_terminal_v0.py
+
+      - name: Run terminal probe
+        run: python run_recovery_single_shot_terminal_v0.py
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: recovery-single-shot-terminal-v0
+          path: recovery_single_shot_terminal_v0_result.json
+          if-no-files-found: warn
+
+      - name: Commit terminal result
+        if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add recovery_single_shot_terminal_v0_result.json
+          git diff --cached --quiet && exit 0
+          git commit -m "result: recovery single-shot terminal"
+          git push
