@@ -37,7 +37,8 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 
 from plan_generator_entrance_v0 import bind_official_state
-import strong_model_v0_reimplementation.agent as strong_module
+from importlib import import_module
+strong_module = import_module("strong_model_v0_reimplementation.agent")
 from strong_model_v0_reimplementation.jobs import (
     fresh_jobs,
     materialize_active,
