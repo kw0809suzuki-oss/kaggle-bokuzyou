@@ -407,4 +407,10 @@ def choose(raw,cfg,active_specs):
         })
     chosen[0].candidate_scores=candidate_scores
     chosen[0].chosen_candidate_rank=chosen_rank
+    chosen[0].decision_inputs={
+        "fresh_jobs":[j.spec() for j in fresh],
+        "investment_jobs":[j.spec() for j in investments],
+        "active_jobs":[j.spec() for j in active],
+        "operating_jobs":[j.spec() for j in operating_jobs(raw,cfg)],
+    }
     return chosen[0],chosen[1],active,scored[0][0]
