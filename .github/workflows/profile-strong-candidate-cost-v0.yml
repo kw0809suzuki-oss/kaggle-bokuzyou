@@ -1,0 +1,143 @@
+name: Profile Strong Candidate Cost v0
+
+on:
+  push:
+    branches:
+      - diagnostic/strong-candidate-cost-v0-20260929
+    paths:
+      - .github/workflows/profile-strong-candidate-cost-v0.yml
+  workflow_dispatch:
+
+jobs:
+  profile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install official environment
+        run: |
+          python -m pip install --upgrade pip >/dev/null
+          pip install "kaggle-environments>=1.32.7" >/dev/null
+      - name: Profile Strong candidate families
+        run: |
+          python - <<'PY'
+          import copy, json, time
+          from collections import defaultdict
+          from kaggle_environments import make
+          import strong_model_v0_reimplementation.planner as sp
+          import strong_model_v0_reimplementation.agent as sa
+          from return_aware_model_v0.run import _opponent
+
+          stats=defaultdict(lambda: {"generated":0,"selected":0,"seconds":0.0})
+          turn_rows=[]
+
+          def choose_profile(raw,cfg,active_specs):
+              fresh = sp.fresh_jobs(raw,cfg.episodeSteps,cfg.turnsPerDay,cfg.boardSize)
+              investments = sp.investment_jobs(raw,cfg,fresh)
+              lookup = {j.key:j for j in investments+fresh+sp.operating_jobs(raw,cfg)}
+              active = []
+              for key,spec in active_specs.items():
+                  if not sp.still_needed(spec,raw): continue
+                  j = lookup.get(key) or sp.materialize_active(spec,raw)
+                  if j is not None:
+                      j.active=True; active.append(j)
+              action,scheduled,_,_ = sp._service_action(raw,cfg,active)
+              candidates = [("continuation",None,active,action,scheduled,False)]
+              if active:
+                  a,s,_,_ = sp._service_action(raw,cfg,[])
+                  candidates.append(("abandon",None,[],a,s,False))
+              active_keys={j.key for j in active}
+              occupied={tuple(j.target['tile']) for j in active if 'tile' in j.target}
+              groups={}
+              for j in investments:
+                  if j.key in active_keys or tuple(j.target['tile']) in occupied: continue
+                  groups.setdefault((j.kind,j.target.get('crop',j.target.get('animal'))),[]).append(j)
+              for (kind,item),rows in groups.items():
+                  j=min(rows,key=lambda j:(min(sp.distance(pos,j.target['tile']) for pos in sp.positions(raw)),j.key))
+                  planned=active+[j]
+                  a,s,_,_=sp._service_action(raw,cfg,planned,{j.key})
+                  candidates.append((f"invest:{kind}:{item}",j,planned,a,s,False))
+              a,s,_,_=sp._service_action(raw,cfg,active,harvest_now=True)
+              candidates.append(("harvest_now",None,active,a,s,True))
+              if raw['hour']<cfg.turnsPerDay-1 and (active or sp.operating_jobs(raw,cfg)) and len(action['market'])<cfg.maxMarketOrdersPerTurn:
+                  a=copy.deepcopy(action); a['market'].append(['HIRE'])
+                  candidates.append(("hire",None,active,a,scheduled,False))
+              for idx,order in enumerate(action['market']):
+                  if order[0]=='SELL':
+                      a=copy.deepcopy(action); a['market'].pop(idx)
+                      item=order[1] if len(order)>1 else "?"
+                      candidates.append((f"remove_sell:{item}",None,active,a,scheduled,False))
+
+              scored=[]; seen=set()
+              per_turn=[]
+              for label,representative,planned,a,s,early in candidates:
+                  key=(repr(a),tuple(j.key for j in planned),early)
+                  if key in seen: continue
+                  seen.add(key)
+                  t=time.perf_counter()
+                  value,_=sp.rollout(raw,cfg,planned,first_action=a,harvest_now=early)
+                  dt=time.perf_counter()-t
+                  stats[label]["generated"]+=1
+                  stats[label]["seconds"]+=dt
+                  per_turn.append((label,dt,value))
+                  projected=sp._project_one_turn(raw,a,cfg)
+                  b=sp.Bundle(a,s,projected,sp.Envelope(value,value),float(projected['farms'][raw['player']]['money']))
+                  b.commitments=[j.spec() for j in planned]
+                  keys={j.key for j in planned}
+                  b.commitments.extend(j.spec() for j in sp.operating_jobs(raw,cfg,True) if j.key in s and j.key not in keys)
+                  scored.append((b,representative,planned,early,label))
+              chosen=max(scored,key=lambda row:row[0].envelope.central_cash)
+              stats[chosen[4]]["selected"]+=1
+              turn_rows.append({
+                  "step":sp.step_of(raw,cfg),
+                  "chosen":chosen[4],
+                  "candidate_count":len(scored),
+                  "candidate_seconds":sum(x[1] for x in per_turn),
+              })
+              # Intentionally omit diagnostic stress rollouts: they do not affect selection
+              # and have already been isolated by the previous probe.
+              return chosen[0],chosen[1],active,scored[0][0]
+
+          sa.choose=choose_profile
+
+          seed=92804001
+          env=make("kaggriculture",configuration={"seed":seed},debug=False)
+          env.reset(2)
+          runtime=None
+          def act(obs,configuration):
+              global runtime
+              cfg=sp.settings_from(configuration)
+              if runtime is None or runtime.cfg!=cfg:
+                  runtime=sa.Runtime(cfg)
+              return runtime.act(obs)
+
+          agents=[act,_opponent()]
+          runner=env._Environment__agent_runner(agents)
+          for step in range(719):
+              if env.done: break
+              actions,logs=runner.act()
+              env.step(actions,logs)
+              statuses=[str(s.status) for s in env.state]
+              if any(s not in ("ACTIVE","DONE") for s in statuses):
+                  print("WORLD_REJECTED",step,statuses,logs)
+                  break
+
+          out={
+              "steps":len(turn_rows),
+              "statuses":[str(s.status) for s in env.state],
+              "families":dict(sorted(stats.items(), key=lambda kv:(-kv[1]["seconds"],kv[0]))),
+              "total_candidate_seconds":sum(v["seconds"] for v in stats.values()),
+              "total_generated":sum(v["generated"] for v in stats.values()),
+              "total_selected":sum(v["selected"] for v in stats.values()),
+              "top_turns":sorted(turn_rows,key=lambda r:r["candidate_seconds"],reverse=True)[:20],
+          }
+          print("STRONG_CANDIDATE_PROFILE="+json.dumps(out,separators=(",",":")))
+          with open("strong_candidate_cost_v0.json","w") as f:
+              json.dump({"summary":out,"turns":turn_rows},f,indent=2)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: strong-candidate-cost-v0
+          path: strong_candidate_cost_v0.json
+          if-no-files-found: warn
