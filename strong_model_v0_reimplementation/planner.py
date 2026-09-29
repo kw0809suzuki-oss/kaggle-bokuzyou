@@ -277,7 +277,9 @@ def _service_action(raw, cfg, commitments, forced=None, harvest_now=False):
 def rollout(raw, cfg, commitments=(), first_action=None, harvest_now=False, stress=False, trace=False):
     world = copy.deepcopy(raw)
     records = []; first = True
-    final_action = cfg.episodeSteps-2
+    # Kaggle runtime path: bound each forecast to at most 96 actions from the current state.
+    # The actual game still runs for the full episode; only internal candidate rollout is capped.
+    final_action = min(cfg.episodeSteps-2, step_of(world,cfg)+95)
     if stress:
         # One adverse supply shock from visible opponent yield, not a lower bound.
         for seat,farm in enumerate(world['farms']):
