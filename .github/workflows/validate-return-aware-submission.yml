@@ -5,6 +5,7 @@ on:
     branches:
       - submission/return-aware-v0-kaggle-20260929
     paths:
+      - kaggle_submission_return_aware_v0/submission.py
       - .github/workflows/validate-return-aware-submission.yml
   workflow_dispatch:
 
@@ -14,34 +15,42 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-      - name: Install official environment
+      - name: Install Kaggriculture runtime
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-      - name: Build exact submitted main.py
+          python -m pip install --upgrade pip >/dev/null
+          pip install "kaggle-environments>=1.32.7" >/dev/null
+      - name: Build exact submission
         run: |
           cp kaggle_submission_return_aware_v0/submission.py main.py
           python -m py_compile main.py
-      - name: Import exact main.py
+          tar -czf kaggriculture_return_aware_v0.tar.gz main.py
+      - name: Verify Kaggle resolves agent callable
+        run: |
+          python - <<'PY'
+          from kaggle_environments.agent import get_last_callable
+          raw=open("main.py",encoding="utf-8").read()
+          fn=get_last_callable(raw,path="main.py")
+          print("CALLABLE_NAME", getattr(fn,"__name__",None))
+          assert getattr(fn,"__name__",None)=="agent"
+          PY
+      - name: Run exact 720-turn validation episode
         run: |
           python - <<'PY'
           import time
-          t=time.perf_counter()
-          import main
-          print("IMPORT_OK", hasattr(main,"agent"), "seconds", time.perf_counter()-t)
-          PY
-      - name: Run exact 720-turn self validation
-        run: |
-          python - <<'PY'
-          import time, json
           from kaggle_environments import make
-          env=make("kaggriculture", configuration={"episodeSteps":720}, debug=True)
+          env=make("kaggriculture", configuration={"episodeSteps":720}, debug=False)
           t=time.perf_counter()
           env.run(["main.py","main.py"])
           elapsed=time.perf_counter()-t
           final=env.steps[-1]
-          print("ELAPSED", elapsed)
-          print("FINAL", [(i,s.reward,s.status) for i,s in enumerate(final)])
-          for i,s in enumerate(final):
-              print("PLAYER", i, "status", s.status, "reward", s.reward)
+          rows=[(i,s.reward,s.status) for i,s in enumerate(final)]
+          print("ELAPSED",elapsed)
+          print("FINAL",rows)
+          assert all(s.status=="DONE" for s in final), rows
           PY
+      - name: Upload validated tarball
+        uses: actions/upload-artifact@v4
+        with:
+          name: kaggriculture-return-aware-v0-validated
+          path: kaggriculture_return_aware_v0.tar.gz
+          if-no-files-found: error
