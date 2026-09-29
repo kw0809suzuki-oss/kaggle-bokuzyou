@@ -35,7 +35,8 @@ class Runtime:
             if still_needed(spec,raw)
         }
 
-        chosen,chosen_rep,active_jobs,continuation=choose(raw,self.cfg,self.active)
+        diagnostics=step<=1
+        chosen,chosen_rep,active_jobs,continuation=choose(raw,self.cfg,self.active,diagnostics=diagnostics)
 
         self.active={spec["key"]:spec for spec in chosen.commitments}
 
