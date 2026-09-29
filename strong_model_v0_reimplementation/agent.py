@@ -53,6 +53,7 @@ class Runtime:
                 "scheduled":list(chosen.scheduled),
                 "representative":None if chosen_rep is None else chosen_rep.spec(),
             },
+            "decision_inputs":copy.deepcopy(getattr(chosen,"decision_inputs",{})),
             "candidate_scores":copy.deepcopy(getattr(chosen,"candidate_scores",[])),
             "chosen_candidate_rank":getattr(chosen,"chosen_candidate_rank",None),
             "active_after":copy.deepcopy(self.active),
