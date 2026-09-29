@@ -52,6 +52,30 @@ def first_world_divergence_index(
     return None
 
 
+def _field(obj: Any, name: str, default: Any = None) -> Any:
+    if isinstance(obj, dict):
+        return obj.get(name, default)
+    return getattr(obj, name, default)
+
+
+def first_nonactive_record(steps: list[Any], seat: int) -> dict[str, Any] | None:
+    """Return the first recorded frame where the selected seat is no longer ACTIVE."""
+    for frame in steps:
+        if seat >= len(frame):
+            continue
+        state = frame[seat]
+        status = str(_field(state, "status", ""))
+        if status == "ACTIVE":
+            continue
+        obs = _field(state, "observation", {})
+        return {
+            "step": int(_field(obs, "step", 0) or 0),
+            "status": status,
+            "remaining_overage": float(_field(obs, "remainingOverageTime", 0.0) or 0.0),
+        }
+    return None
+
+
 def candidate_identity_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Strip score/rank fields so candidate structure can be compared directly."""
     ignored = {"rank", "central_terminal_cash", "strict_terminal_cash"}
@@ -212,6 +236,9 @@ def _run(label: str, intervene: bool) -> dict[str, Any]:
         "terminal_opponent": opp_cash,
         "margin": self_cash - opp_cash,
         "status": str(env.state[SEAT].status),
+        "env_steps": len(env.steps) - 1,
+        "first_nonactive": first_nonactive_record(env.steps, SEAT),
+        "last_agent_step": traced.trace[-1]["step"] if traced.trace else None,
         "trace": traced.trace,
     }
 
