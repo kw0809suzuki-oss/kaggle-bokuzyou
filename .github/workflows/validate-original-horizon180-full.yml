@@ -1,0 +1,50 @@
+name: Validate Original Horizon180 Full
+
+on:
+  push:
+    branches:
+      - submission/return-aware-v0-original-horizon180-20260929
+    paths:
+      - .github/workflows/validate-original-horizon180-full.yml
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Kaggriculture runtime
+        run: |
+          python -m pip install --upgrade pip >/dev/null
+          pip install "kaggle-environments>=1.32.7" >/dev/null
+      - name: Build exact submission
+        run: |
+          cp kaggle_submission_return_aware_v0/submission.py main.py
+          python -m py_compile main.py
+          tar -czf submission.tar.gz main.py
+          tar -tzf submission.tar.gz
+      - name: Verify loader
+        run: |
+          python - <<'PY'
+          from kaggle_environments.agent import get_last_callable
+          raw=open("main.py",encoding="utf-8").read()
+          fn=get_last_callable(raw,path="main.py")
+          print("CALLABLE_NAME",getattr(fn,"__name__",None))
+          assert getattr(fn,"__name__",None)=="agent"
+          PY
+      - name: Run exact Kaggle-style 720 self validation
+        run: |
+          python - <<'PY'
+          import time
+          from kaggle_environments import make
+          env=make("kaggriculture",configuration={"episodeSteps":720},debug=False)
+          t=time.perf_counter()
+          env.run(["main.py","main.py"])
+          elapsed=time.perf_counter()-t
+          final=env.steps[-1]
+          print("ELAPSED",elapsed)
+          print("FINAL",[(i,s.reward,str(s.status)) for i,s in enumerate(final)])
+          bad=[(i,str(s.status)) for i,s in enumerate(final) if str(s.status)!="DONE"]
+          assert not bad,bad
+          PY
