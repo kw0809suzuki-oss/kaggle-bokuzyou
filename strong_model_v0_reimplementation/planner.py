@@ -372,7 +372,7 @@ def choose(raw,cfg,active_specs,variant=None):
         def is_investment(row):
             return row[1] is not active and row[2] is not None
         def is_animal(row):
-            rep=row[1]
+            rep=row[0]
             return rep is not None and rep.kind in ('establish_animal','expand_animal')
         def is_remove(row):
             return row[1] == []
