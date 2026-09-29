@@ -187,31 +187,40 @@ class TracedStrong:
     def __init__(self, intervene: bool):
         self.intervene = bool(intervene)
         self.trace: list[dict[str, Any]] = []
+        self.last_call_step: int | None = None
 
     def reset(self) -> None:
         from strong_model_v0_reimplementation.agent import reset_agent
 
         self.trace = []
+        self.last_call_step = None
         reset_agent()
 
     def agent(self, obs: Any, configuration: Any) -> dict[str, Any]:
         from strong_model_v0_reimplementation.agent import agent as strong_agent, debug_state
 
-        native = _plain(strong_agent(obs, configuration))
-        debug = _plain(debug_state(SEAT)) or {}
-        emitted = copy.deepcopy(native)
+        step = int(obs["step"])
+        self.last_call_step = step
+        native = strong_agent(obs, configuration)
 
-        if self.intervene and int(obs["step"]) == 0:
+        if self.intervene and step == 0:
+            emitted = copy.deepcopy(native)
             emitted.setdefault("market", [])
             emitted["market"].extend([["HIRE"], ["HIRE"]])
+        else:
+            emitted = native
 
-        self.trace.append({
-            "step": int(obs["step"]),
-            "world": _world_view(obs),
-            "native_action": copy.deepcopy(native),
-            "action": copy.deepcopy(emitted),
-            "debug": copy.deepcopy(debug.get("last_choice")),
-        })
+        if step <= 1:
+            native_plain = _plain(native)
+            emitted_plain = _plain(emitted)
+            debug = _plain(debug_state(SEAT)) or {}
+            self.trace.append({
+                "step": step,
+                "world": _world_view(obs),
+                "native_action": copy.deepcopy(native_plain),
+                "action": copy.deepcopy(emitted_plain),
+                "debug": copy.deepcopy(debug.get("last_choice")),
+            })
         return emitted
 
 
@@ -238,7 +247,8 @@ def _run(label: str, intervene: bool) -> dict[str, Any]:
         "status": str(env.state[SEAT].status),
         "env_steps": len(env.steps) - 1,
         "first_nonactive": first_nonactive_record(env.steps, SEAT),
-        "last_agent_step": traced.trace[-1]["step"] if traced.trace else None,
+        "last_agent_step": traced.last_call_step,
+        "last_traced_step": traced.trace[-1]["step"] if traced.trace else None,
         "trace": traced.trace,
     }
 
