@@ -351,6 +351,11 @@ def choose(raw,cfg,active_specs):
     groups={}
     for j in investments:
         if j.key in active_keys or tuple(j.target['tile']) in occupied: continue
+        # Kaggle runtime path: these four legacy crop-expansion candidates were
+        # generated 1,010 times and selected 0 times in the 719-turn profile.
+        # Keep WHEAT expansion, which was selected, and drop the unused branches.
+        if j.kind=='expand_crop' and str(j.target.get('crop')) in {'CARROT','TOMATO','MELON','STRAWBERRY'}:
+            continue
         groups.setdefault((j.kind,j.target.get('crop',j.target.get('animal'))),[]).append(j)
     for rows in groups.values():
         j=min(rows,key=lambda j:(min(distance(pos,j.target['tile']) for pos in positions(raw)),j.key))
