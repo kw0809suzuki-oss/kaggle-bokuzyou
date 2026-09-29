@@ -367,35 +367,67 @@ def choose(raw,cfg,active_specs,variant=None):
             a=copy.deepcopy(action); a['market'].pop(idx)
             candidates.append((None,active,a,scheduled,False))
     if variant is not None:
-        # Keep the original candidate construction and _service_action path intact;
-        # variants only select a planned-commitment delta before rollout scoring.
-        def is_investment(row):
-            return row[1] is not active and row[2] is not None
-        def is_animal(row):
-            rep=row[0]
-            return rep is not None and rep.kind in ('establish_animal','expand_animal')
-        def is_remove(row):
-            return row[1] == []
-        def is_recover(row):
-            return bool(row[3])
-        def is_hire(row):
-            return bool(row[2].get('market')) and any(o[0] == 'HIRE' for o in row[2].get('market',[]))
-        def is_sell_trim(row):
-            return bool(row[2].get('market')) and not any(o[0] == 'HIRE' for o in row[2].get('market',[]))
-        predicates = {
-            'activate': is_animal,
-            'add': is_investment,
-            'shrink': is_remove,
-            'recover': is_recover,
-            'rebalance': lambda row: is_hire(row) or is_sell_trim(row),
-        }
-        pred = predicates.get(str(variant))
-        if pred is not None:
-            selected = [row for row in candidates if pred(row)]
-            if selected:
-                # Always retain the current active plan as the comparison anchor.
-                anchor = candidates[0]
-                candidates = [anchor] + [row for row in selected if row is not anchor]
+        # Variants stay on the existing planner/service path.  Each one narrows
+        # the candidate surface to the intended Return Stage / Work Allocation
+        # operation; unsupported deltas are left as no-effect rather than
+        # fabricating a different action.
+        anchor = candidates[0]
+
+        def recovery_row(job):
+            planned = list(active)
+            if job.key not in {j.key for j in planned}:
+                planned.append(job)
+            a,s,_,_ = _service_action(raw,cfg,planned,{job.key})
+            return (job,planned,a,s,False)
+
+        recovery_jobs = [j for j in operating_jobs(raw,cfg) if j.category == 'recovery']
+        recovery_rows = [recovery_row(j) for j in recovery_jobs]
+
+        if variant == 'harvest':
+            # V1: prioritize currently harvestable output.
+            selected = [row for row in candidates if row[4]]
+        elif variant == 'carry_to_shed':
+            # V2: advance already-carried output toward the shed.
+            selected = [row for row in recovery_rows if row[0] is not None and row[0].kind == 'deliver']
+        elif variant == 'shed_sell':
+            # V3: _service_action already sells visible shed stock before other
+            # market orders.  There is no independent extra SELL control here,
+            # so keep only the anchor and let the gate report no-effect.
+            selected = []
+        elif variant == 'hold_investment':
+            # V4: do not add a new production/expansion commitment; allow only
+            # continuation plus recovery pressure.
+            selected = [row for row in candidates if row[4]]
+            selected.extend(recovery_rows)
+        elif variant == 'idle_recovery':
+            # V5: accept a recovery candidate only when every already-busy unit
+            # keeps its baseline action and at least one baseline-PASS unit is
+            # activated.  This prevents "idle worker" from becoming a hidden
+            # wholesale reassignment.
+            base_units = [anchor[2]['farmer'], *anchor[2]['hands']]
+            selected = []
+            for row in recovery_rows:
+                cand_units = [row[2]['farmer'], *row[2]['hands']]
+                if len(cand_units) != len(base_units):
+                    continue
+                busy_preserved = all(
+                    b == ['PASS'] or c == b
+                    for b,c in zip(base_units,cand_units)
+                )
+                idle_activated = any(
+                    b == ['PASS'] and c != ['PASS']
+                    for b,c in zip(base_units,cand_units)
+                )
+                if busy_preserved and idle_activated:
+                    selected.append(row)
+        else:
+            selected = []
+
+        narrowed = [anchor]
+        for row in selected:
+            if row is not anchor:
+                narrowed.append(row)
+        candidates = narrowed
     scored=[]; seen=set()
     for representative,planned,a,s,early in candidates:
         key=(repr(a),tuple(j.key for j in planned),early)
