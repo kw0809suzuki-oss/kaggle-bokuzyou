@@ -1,0 +1,2356 @@
+{
+  "schema": "idle-recovery-world-gate-v0",
+  "conditions": {
+    "seed": 92804001,
+    "seat": 0,
+    "opponent": "Seyamalam pinned v21",
+    "official_world_commit": "d7729da06cc1382eb742d6980dc3180aa85caa28",
+    "baseline": "Strong Model v0",
+    "candidate": "idle_recovery: preserve every busy baseline unit action; activate recovery only on baseline-PASS units",
+    "horizon": 24
+  },
+  "comparison": {
+    "variant": "idle_recovery",
+    "seed": 92804001,
+    "seat": 0,
+    "turns": 24,
+    "gate_status": "pass_world_changed",
+    "terminal_eligible": true,
+    "first_action_divergence_turn": 1,
+    "first_world_divergence_turn": 1,
+    "first_worker_divergence_turn": 2,
+    "first_return_stage_divergence_turn": 1,
+    "cash_after_24": 3000.0,
+    "baseline_cash_after_24": 463.0,
+    "cash_delta_after_24": 2537.0,
+    "trace": [
+      {
+        "turn": 1,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "c913fe11e3333f66520e373af82f4956eb3868f8107b62eabdc0b35a32a3c039",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 2,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "3ea54e233a7e8dcb2886759b2b8aaea66fe863d98783014e5a82afa221a99d30",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 3,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "568f1217042e52b44c5b79f4b8de547a746030d746578cbbe13da456615890c3",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 4,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "814c131f50e4b491580aea98765f00cf70015ea7f986589285bf1fe672dfcdde",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 5,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "41d12a8713651bcb0bccf5587884d54366ac137a6593621e65475e4621b8c008",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 6,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "b7d456131d53bc56fc52a98637f585a60318b5b635b4a00ef961bbc17677955a",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 7,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "fda821fe0159852a10ebd35c42aa49011aa7cbccf185da1536dea068bd40c984",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 8,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "f72f9e51597997cbcedc6e7197d7b98ca66b98f662dd5d4dc647dcc019f5ba7f",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 9,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "b9b86ce9fa42c3fc8d6f4d60bbad8da5cbc240077ae1924f66b8b5f71b1412f5",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 10,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "7a5ad90ec643ab47b2884f7606cb0f4b4d77a155810095f97b6d28ff9004bab0",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 11,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "11c3fff36fa53f9f59c180ea90d89c694cba474ad846cf27d15cb57b9b5b7c2e",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 12,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "3951c5ea107f1e0a83c62bf41bf276d866127f4cceb07d160644e5c7edfdf9ae",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 13,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "08e9fde7377c1ca83643d7332304e39de6054d35d2db1396cb901a16ccf6e7d9",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 14,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "09953346ccd66dc6f3c2c32ce9fbf00e7792214786806d12cde3dd70a82d9885",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 15,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "9bdb6255dae123eb70d4d1a259d891b910468232cf9c08b239cc85d8caf8cdbe",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 16,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "ecf60dd5a167b9ae94eddf7789878ee5705badb3ee415792a9f5b50738c5c594",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 17,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "9714684b40cea848c3b5e8ed15526ba9f2142558622c93a138b9397b7d20bc6c",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 18,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "8df20a51365cf39720179c89dee94b20535015072f70f82ec26341d93d5c0011",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 19,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "ea33525138a9c1aee23e6fc3b45f5cf65eea0fc4c263424a53e12362ea61edf1",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 20,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "ed09f7ac08ac85adc2add0d390ed418e71801765421afa081d6a8e48364b56b9",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 21,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "ffeb03502fcbe08fde70bf0a9ee7c5d705e59441dd198e7b90540870770757df",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 22,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "adcc5399dc90599e91ea68f8b3a3f3e3fd3e578889fa95d65700bc862d600dd9",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 23,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "d4a5b234d817c64fed6154d927d9875710d1c7fd5ea2a5f83bf7c3a51cf72ec4",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 24,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "f1fc4f91bb72e2d69964a1773306b48484c95368dbbae18fb7cf79797cee66a4",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      }
+    ]
+  },
+  "baseline": {
+    "variant": "baseline",
+    "seed": 92804001,
+    "seat": 0,
+    "turns": 24,
+    "trace": [
+      {
+        "turn": 1,
+        "action": {
+          "farmer": [
+            "BUILD_PASTURE"
+          ],
+          "hands": [],
+          "market": [
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ]
+          ]
+        },
+        "world_signature": "969dddd9cf28ccf6a54371d69566d0f62dc6f8848a881e76b39824e140728501",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 1,
+          "cash": 2500.0
+        }
+      },
+      {
+        "turn": 2,
+        "action": {
+          "farmer": [
+            "EAST"
+          ],
+          "hands": [],
+          "market": [
+            [
+              "BUY_LAND"
+            ],
+            [
+              "BUY_ANIMAL",
+              "COW",
+              1
+            ]
+          ]
+        },
+        "world_signature": "e083572ba6e1f0e4010d3628872a184eaed34e4d54e7d4d4dbca81318286c5e1",
+        "workers": {
+          "farmer": [
+            5,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 2,
+          "cash": 1100.0
+        }
+      },
+      {
+        "turn": 3,
+        "action": {
+          "farmer": [
+            "NORTH"
+          ],
+          "hands": [],
+          "market": [
+            [
+              "BUY_SEED",
+              "MELON",
+              1
+            ]
+          ]
+        },
+        "world_signature": "f194707f098d8ad9d4ad00a2f29c05689cf36d3d5e1f54edc93cc826e90faa11",
+        "workers": {
+          "farmer": [
+            5,
+            3
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 2,
+          "cash": 1020.0
+        }
+      },
+      {
+        "turn": 4,
+        "action": {
+          "farmer": [
+            "WEST"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "e090162f33365e374dc57ec2dc4140376b6fec95840cf15b294d386c2c823b30",
+        "workers": {
+          "farmer": [
+            4,
+            3
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 2,
+          "cash": 1020.0
+        }
+      },
+      {
+        "turn": 5,
+        "action": {
+          "farmer": [
+            "SOUTH"
+          ],
+          "hands": [],
+          "market": [
+            [
+              "BUY_LAND"
+            ]
+          ]
+        },
+        "world_signature": "98630fb3dd32a912bbe212e8eaf3156beb0c0ceb73e3f05617c663b0a804cc9a",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 2,
+          "cash": 1020.0
+        }
+      },
+      {
+        "turn": 6,
+        "action": {
+          "farmer": [
+            "WEST"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "cf23c9893f15d3b379b321ed741136e811cecdac9a50f46fe8a7acb4a1ca06f7",
+        "workers": {
+          "farmer": [
+            3,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 2,
+          "cash": 1020.0
+        }
+      },
+      {
+        "turn": 7,
+        "action": {
+          "farmer": [
+            "PLANT",
+            "MELON"
+          ],
+          "hands": [],
+          "market": [
+            [
+              "HIRE"
+            ]
+          ]
+        },
+        "world_signature": "b80d74c709a726ca1cee4e892f2e9274d2b78d17ed2b30751fe1f00392696e56",
+        "workers": {
+          "farmer": [
+            3,
+            4
+          ],
+          "hands": [
+            [
+              4,
+              4
+            ]
+          ]
+        },
+        "return_stage": {
+          "productive_assets": 1,
+          "harvestable_units": 1,
+          "carry_units": 0,
+          "shed_units": 2,
+          "cash": 1019.0
+        }
+      },
+      {
+        "turn": 8,
+        "action": {
+          "farmer": [
+            "WATER"
+          ],
+          "hands": [
+            [
+              "WEST"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_LAND"
+            ]
+          ]
+        },
+        "world_signature": "a99c74ca622ea561eab25da34a189a45c968e28081cc435ddc43702ea61f2c1b",
+        "workers": {
+          "farmer": [
+            3,
+            4
+          ],
+          "hands": [
+            [
+              3,
+              4
+            ]
+          ]
+        },
+        "return_stage": {
+          "productive_assets": 1,
+          "harvestable_units": 1,
+          "carry_units": 0,
+          "shed_units": 2,
+          "cash": 1019.0
+        }
+      },
+      {
+        "turn": 9,
+        "action": {
+          "farmer": [
+            "EAST"
+          ],
+          "hands": [
+            [
+              "EAST"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_SEED",
+              "MELON",
+              1
+            ]
+          ]
+        },
+        "world_signature": "1b6a7d51601c5ba9bb6f5ab4d4b1f0b1b44cb6adb3818874c8b65fc391ddfed3",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": [
+            [
+              4,
+              4
+            ]
+          ]
+        },
+        "return_stage": {
+          "productive_assets": 1,
+          "harvestable_units": 1,
+          "carry_units": 0,
+          "shed_units": 2,
+          "cash": 939.0
+        }
+      },
+      {
+        "turn": 10,
+        "action": {
+          "farmer": [
+            "NORTH"
+          ],
+          "hands": [
+            [
+              "PICKUP",
+              "SHEEP",
+              1
+            ]
+          ],
+          "market": [
+            [
+              "HIRE"
+            ]
+          ]
+        },
+        "world_signature": "9b1675807fb9bc7ad530f7bb903eecb196d827544f698a573cee82fc3c8818ad",
+        "workers": {
+          "farmer": [
+            4,
+            3
+          ],
+          "hands": [
+            [
+              4,
+              4
+            ],
+            [
+              5,
+              4
+            ]
+          ]
+        },
+        "return_stage": {
+          "productive_assets": 1,
+          "harvestable_units": 1,
+          "carry_units": 1,
+          "shed_units": 1,
+          "cash": 938.0
+        }
+      },
+      {
+        "turn": 11,
+        "action": {
+          "farmer": [
+            "PLANT",
+            "MELON"
+          ],
+          "hands": [
+            [
+              "PLACE",
+              "SHEEP",
+              1
+            ],
+            [
+              "NORTH"
+            ]
+          ],
+          "market": []
+        },
+        "world_signature": "42e72710c9fa54f9fe9e4c7abc093afd85a744f712e2be9c20246e34ecb9ad64",
+        "workers": {
+          "farmer": [
+            4,
+            3
+          ],
+          "hands": [
+            [
+              4,
+              4
+            ],
+            [
+              5,
+              3
+            ]
+          ]
+        },
+        "return_stage": {
+          "productive_assets": 3,
+          "harvestable_units": 2,
+          "carry_units": 0,
+          "shed_units": 1,
+          "cash": 938.0
+        }
+      },
+      {
+        "turn": 12,
+        "action": {
+          "farmer": [
+            "WEST"
+          ],
+          "hands": [
+            [
+              "NORTH"
+            ],
+            [
+              "PASS"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_SEED",
+              "WHEAT",
+              1
+            ],
+            [
+              "BUY_SEED",
+              "MELON",
+              1
+            ]
+          ]
+        },
+        "world_signature": "78be31794950cd9ba988bae55af7b8720332f40334fcb1a159ad9a0b0cdbbf67",
+        "workers": {
+          "farmer": [
+            3,
+            3
+          ],
+          "hands": [
+            [
+              4,
+              3
+            ],
+            [
+              5,
+              3
+            ]
+          ]
+        },
+        "return_stage": {
+          "productive_assets": 3,
+          "harvestable_units": 2,
+          "carry_units": 0,
+          "shed_units": 1,
+          "cash": 848.0
+        }
+      },
+      {
+        "turn": 13,
+        "action": {
+          "farmer": [
+            "WEST"
+          ],
+          "hands": [
+            [
+              "WATER"
+            ],
+            [
+              "PLANT",
+              "MELON"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_SEED",
+              "CARROT",
+              1
+            ]
+          ]
+        },
+        "world_signature": "4e43d6b31fefa71a72875bb4a293b5943c50d8c70d47e8a058dbd8814e7652b3",
+        "workers": {
+          "farmer": [
+            2,
+            3
+          ],
+          "hands": [
+            [
+              4,
+              3
+            ],
+            [
+              5,
+              3
+            ]
+          ]
+        },
+        "return_stage": {
+          "productive_assets": 4,
+          "harvestable_units": 3,
+          "carry_units": 0,
+          "shed_units": 1,
+          "cash": 828.0
+        }
+      },
+      {
+        "turn": 14,
+        "action": {
+          "farmer": [
+            "SOUTH"
+          ],
+          "hands": [
+            [
+              "WEST"
+            ],
+            [
+              "WATER"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_LAND"
+            ],
+            [
+              "BUY_ANIMAL",
+              "GOOSE",
+              1
+            ]
+          ]
+        },
+        "world_signature": "6a18c4d511b3c347ad3f3d3a7c13d151cfc17e7b3be5cab3b2b88cc0319fdce4",
+        "workers": {
+          "farmer": [
+            2,
+            4
+          ],
+          "hands": [
+            [
+              3,
+              3
+            ],
+            [
+              5,
+              3
+            ]
+          ]
+        },
+        "return_stage": {
+          "productive_assets": 4,
+          "harvestable_units": 3,
+          "carry_units": 0,
+          "shed_units": 2,
+          "cash": 528.0
+        }
+      },
+      {
+        "turn": 15,
+        "action": {
+          "farmer": [
+            "NORTH"
+          ],
+          "hands": [
+            [
+              "PLANT",
+              "WHEAT"
+            ],
+            [
+              "SOUTH"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_PRODUCT",
+              "WHEAT",
+              1
+            ]
+          ]
+        },
+        "world_signature": "352edd7cf557e96d36d321ca66b4f09c34deff96f48712312743fb4a71cd05a3",
+        "workers": {
+          "farmer": [
+            2,
+            3
+          ],
+          "hands": [
+            [
+              3,
+              3
+            ],
+            [
+              5,
+              4
+            ]
+          ]
+        },
+        "return_stage": {
+          "productive_assets": 5,
+          "harvestable_units": 4,
+          "carry_units": 0,
+          "shed_units": 3,
+          "cash": 498.0
+        }
+      },
+      {
+        "turn": 16,
+        "action": {
+          "farmer": [
+            "PLANT",
+            "CARROT"
+          ],
+          "hands": [
+            [
+              "WATER"
+            ],
+            [
+              "PICKUP",
+              "WHEAT",
+              1
+            ]
+          ],
+          "market": []
+        },
+        "world_signature": "85ab31bac171cd5429e0bc130255691f3a0886842ea8d67487db137f399be157",
+        "workers": {
+          "farmer": [
+            2,
+            3
+          ],
+          "hands": [
+            [
+              3,
+              3
+            ],
+            [
+              5,
+              4
+            ]
+          ]
+        },
+        "return_stage": {
+          "productive_assets": 6,
+          "harvestable_units": 5,
+          "carry_units": 1,
+          "shed_units": 2,
+          "cash": 498.0
+        }
+      },
+      {
+        "turn": 17,
+        "action": {
+          "farmer": [
+            "WATER"
+          ],
+          "hands": [
+            [
+              "EAST"
+            ],
+            [
+              "WEST"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_LAND"
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ]
+          ]
+        },
+        "world_signature": "52c3fa3cf365a6c8b283481bab356dc95624d63a9c2513326df833a38ebea906",
+        "workers": {
+          "farmer": [
+            2,
+            3
+          ],
+          "hands": [
+            [
+              4,
+              3
+            ],
+            [
+              4,
+              4
+            ]
+          ]
+        },
+        "return_stage": {
+          "productive_assets": 6,
+          "harvestable_units": 5,
+          "carry_units": 1,
+          "shed_units": 2,
+          "cash": 498.0
+        }
+      },
+      {
+        "turn": 18,
+        "action": {
+          "farmer": [
+            "EAST"
+          ],
+          "hands": [
+            [
+              "WEST"
+            ],
+            [
+              "FEED"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_LAND"
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ],
+            [
+              "HIRE"
+            ]
+          ]
+        },
+        "world_signature": "e87d9b76f7bfb44aa2b690edf7b48362c6c90bd2ad3eed92aaeb9af23c49a162",
+        "workers": {
+          "farmer": [
+            3,
+            3
+          ],
+          "hands": [
+            [
+              3,
+              3
+            ],
+            [
+              4,
+              4
+            ],
+            [
+              5,
+              4
+            ]
+          ]
+        },
+        "return_stage": {
+          "productive_assets": 6,
+          "harvestable_units": 5,
+          "carry_units": 0,
+          "shed_units": 2,
+          "cash": 496.0
+        }
+      },
+      {
+        "turn": 19,
+        "action": {
+          "farmer": [
+            "SOUTH"
+          ],
+          "hands": [
+            [
+              "EAST"
+            ],
+            [
+              "CARE"
+            ],
+            [
+              "WEST"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_LAND"
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ]
+          ]
+        },
+        "world_signature": "4c97418e3dca1875101d8c4981b42f4dbd8400206a3bd227290a87ddf5f23770",
+        "workers": {
+          "farmer": [
+            3,
+            4
+          ],
+          "hands": [
+            [
+              4,
+              3
+            ],
+            [
+              4,
+              4
+            ],
+            [
+              4,
+              4
+            ]
+          ]
+        },
+        "return_stage": {
+          "productive_assets": 6,
+          "harvestable_units": 5,
+          "carry_units": 0,
+          "shed_units": 2,
+          "cash": 496.0
+        }
+      },
+      {
+        "turn": 20,
+        "action": {
+          "farmer": [
+            "WEST"
+          ],
+          "hands": [
+            [
+              "EAST"
+            ],
+            [
+              "SOUTH"
+            ],
+            [
+              "WEST"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_SEED",
+              "CARROT",
+              1
+            ],
+            [
+              "BUY_LAND"
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ]
+          ]
+        },
+        "world_signature": "86e65396e74c876931c6fa164f08c1338327e8644c9f2432172a0286ff8c31d2",
+        "workers": {
+          "farmer": [
+            2,
+            4
+          ],
+          "hands": [
+            [
+              5,
+              3
+            ],
+            [
+              4,
+              5
+            ],
+            [
+              3,
+              4
+            ]
+          ]
+        },
+        "return_stage": {
+          "productive_assets": 6,
+          "harvestable_units": 5,
+          "carry_units": 0,
+          "shed_units": 2,
+          "cash": 476.0
+        }
+      },
+      {
+        "turn": 21,
+        "action": {
+          "farmer": [
+            "PLANT",
+            "CARROT"
+          ],
+          "hands": [
+            [
+              "WEST"
+            ],
+            [
+              "WEST"
+            ],
+            [
+              "EAST"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_LAND"
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ],
+            [
+              "HIRE"
+            ]
+          ]
+        },
+        "world_signature": "a6ad8f33a3a0a79791fd8eeeeab78854536398fcadadf09ab6d52516a4894dd8",
+        "workers": {
+          "farmer": [
+            2,
+            4
+          ],
+          "hands": [
+            [
+              4,
+              3
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              4,
+              4
+            ],
+            [
+              5,
+              4
+            ]
+          ]
+        },
+        "return_stage": {
+          "productive_assets": 7,
+          "harvestable_units": 6,
+          "carry_units": 0,
+          "shed_units": 2,
+          "cash": 473.0
+        }
+      },
+      {
+        "turn": 22,
+        "action": {
+          "farmer": [
+            "WATER"
+          ],
+          "hands": [
+            [
+              "WEST"
+            ],
+            [
+              "EAST"
+            ],
+            [
+              "WEST"
+            ],
+            [
+              "BUILD_PASTURE"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_LAND"
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ]
+          ]
+        },
+        "world_signature": "f0c7fde3720e59b4360076916892231832125e3f63f19bd06a3d9217b9499433",
+        "workers": {
+          "farmer": [
+            2,
+            4
+          ],
+          "hands": [
+            [
+              3,
+              3
+            ],
+            [
+              4,
+              5
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              5,
+              4
+            ]
+          ]
+        },
+        "return_stage": {
+          "productive_assets": 7,
+          "harvestable_units": 6,
+          "carry_units": 0,
+          "shed_units": 2,
+          "cash": 473.0
+        }
+      },
+      {
+        "turn": 23,
+        "action": {
+          "farmer": [
+            "EAST"
+          ],
+          "hands": [
+            [
+              "PASS"
+            ],
+            [
+              "WEST"
+            ],
+            [
+              "EAST"
+            ],
+            [
+              "WEST"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_LAND"
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ]
+          ]
+        },
+        "world_signature": "74b0d0f17705a7bad6bdea614146a0f2a10c5aee53dfc7d4ddf7a1df957a6391",
+        "workers": {
+          "farmer": [
+            3,
+            4
+          ],
+          "hands": [
+            [
+              3,
+              3
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              4,
+              4
+            ],
+            [
+              4,
+              4
+            ]
+          ]
+        },
+        "return_stage": {
+          "productive_assets": 7,
+          "harvestable_units": 6,
+          "carry_units": 0,
+          "shed_units": 2,
+          "cash": 473.0
+        }
+      },
+      {
+        "turn": 24,
+        "action": {
+          "farmer": [
+            "SOUTH"
+          ],
+          "hands": [
+            [
+              "NORTH"
+            ],
+            [
+              "EAST"
+            ],
+            [
+              "WEST"
+            ],
+            [
+              "PICKUP",
+              "COW",
+              1
+            ]
+          ],
+          "market": [
+            [
+              "BUY_LAND"
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ],
+            [
+              "BUY_SEED",
+              "WHEAT",
+              1
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ]
+          ]
+        },
+        "world_signature": "a02ab7a7776c55bf67148025c4ba484ec43be527a74fa6bb8194d4a5b9213d1c",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 7,
+          "harvestable_units": 6,
+          "carry_units": 0,
+          "shed_units": 2,
+          "cash": 463.0
+        }
+      }
+    ]
+  },
+  "candidate": {
+    "variant": "idle_recovery",
+    "seed": 92804001,
+    "seat": 0,
+    "turns": 24,
+    "trace": [
+      {
+        "turn": 1,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "c913fe11e3333f66520e373af82f4956eb3868f8107b62eabdc0b35a32a3c039",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 2,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "3ea54e233a7e8dcb2886759b2b8aaea66fe863d98783014e5a82afa221a99d30",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 3,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "568f1217042e52b44c5b79f4b8de547a746030d746578cbbe13da456615890c3",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 4,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "814c131f50e4b491580aea98765f00cf70015ea7f986589285bf1fe672dfcdde",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 5,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "41d12a8713651bcb0bccf5587884d54366ac137a6593621e65475e4621b8c008",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 6,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "b7d456131d53bc56fc52a98637f585a60318b5b635b4a00ef961bbc17677955a",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 7,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "fda821fe0159852a10ebd35c42aa49011aa7cbccf185da1536dea068bd40c984",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 8,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "f72f9e51597997cbcedc6e7197d7b98ca66b98f662dd5d4dc647dcc019f5ba7f",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 9,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "b9b86ce9fa42c3fc8d6f4d60bbad8da5cbc240077ae1924f66b8b5f71b1412f5",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 10,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "7a5ad90ec643ab47b2884f7606cb0f4b4d77a155810095f97b6d28ff9004bab0",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 11,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "11c3fff36fa53f9f59c180ea90d89c694cba474ad846cf27d15cb57b9b5b7c2e",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 12,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "3951c5ea107f1e0a83c62bf41bf276d866127f4cceb07d160644e5c7edfdf9ae",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 13,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "08e9fde7377c1ca83643d7332304e39de6054d35d2db1396cb901a16ccf6e7d9",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 14,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "09953346ccd66dc6f3c2c32ce9fbf00e7792214786806d12cde3dd70a82d9885",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 15,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "9bdb6255dae123eb70d4d1a259d891b910468232cf9c08b239cc85d8caf8cdbe",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 16,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "ecf60dd5a167b9ae94eddf7789878ee5705badb3ee415792a9f5b50738c5c594",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 17,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "9714684b40cea848c3b5e8ed15526ba9f2142558622c93a138b9397b7d20bc6c",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 18,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "8df20a51365cf39720179c89dee94b20535015072f70f82ec26341d93d5c0011",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 19,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "ea33525138a9c1aee23e6fc3b45f5cf65eea0fc4c263424a53e12362ea61edf1",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 20,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "ed09f7ac08ac85adc2add0d390ed418e71801765421afa081d6a8e48364b56b9",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 21,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "ffeb03502fcbe08fde70bf0a9ee7c5d705e59441dd198e7b90540870770757df",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 22,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "adcc5399dc90599e91ea68f8b3a3f3e3fd3e578889fa95d65700bc862d600dd9",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 23,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "d4a5b234d817c64fed6154d927d9875710d1c7fd5ea2a5f83bf7c3a51cf72ec4",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      },
+      {
+        "turn": 24,
+        "action": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "world_signature": "f1fc4f91bb72e2d69964a1773306b48484c95368dbbae18fb7cf79797cee66a4",
+        "workers": {
+          "farmer": [
+            4,
+            4
+          ],
+          "hands": []
+        },
+        "return_stage": {
+          "productive_assets": 0,
+          "harvestable_units": 0,
+          "carry_units": 0,
+          "shed_units": 0,
+          "cash": 3000.0
+        }
+      }
+    ]
+  },
+  "boundary": {
+    "world_gate_only": true,
+    "terminal_strength_claim": false,
+    "cash_after_24_is_diagnostic_only": true
+  }
+}
