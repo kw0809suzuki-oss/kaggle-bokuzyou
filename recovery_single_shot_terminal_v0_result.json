@@ -1,0 +1,47 @@
+{
+  "schema": "recovery-single-shot-terminal-v0",
+  "conditions": {
+    "seed": 92804001,
+    "seat": 0,
+    "opponent": "Seyamalam pinned v21",
+    "official_world_commit": "d7729da06cc1382eb742d6980dc3180aa85caa28",
+    "world_gate_already_validated": true,
+    "single_shot": true
+  },
+  "baseline": {
+    "label": "baseline_strong",
+    "seed": 92804001,
+    "seat": 0,
+    "self_cash": 24351.0,
+    "opponent_cash": 169130.0,
+    "margin": -144779.0,
+    "status": "DONE",
+    "intervention_steps": [],
+    "scheduled_steps": [],
+    "intervention_count": 0,
+    "scheduled_intervention_count": 0
+  },
+  "candidate": {
+    "label": "recovery_single_shot",
+    "seed": 92804001,
+    "seat": 0,
+    "self_cash": 380.0,
+    "opponent_cash": 144016.0,
+    "margin": -143636.0,
+    "status": "DONE",
+    "intervention_steps": [
+      16
+    ],
+    "scheduled_steps": [
+      16
+    ],
+    "intervention_count": 1,
+    "scheduled_intervention_count": 1
+  },
+  "comparison": {
+    "terminal_self_delta": -23971.0,
+    "terminal_margin_delta": 1143.0,
+    "valid_single_shot": true,
+    "adoption_rule": "terminal self only"
+  }
+}
