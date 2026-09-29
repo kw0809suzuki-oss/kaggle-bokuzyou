@@ -1,9 +1,9 @@
-name: Terminal Return World Gate v0
+name: Recovery Single Shot World Gate v0
 
 on:
   push:
     branches:
-      - "experiment/terminal-return-world-gate-v0-20260929"
+      - "experiment/recovery-single-shot-world-gate-v0-20260929"
     paths:
       - "run_terminal_return_world_gate_v0.py"
       - ".github/workflows/terminal-return-world-gate-v0.yml"
