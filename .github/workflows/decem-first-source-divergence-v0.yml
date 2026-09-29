@@ -4,6 +4,7 @@ on:
     branches: ["model/replay-distilled-decem-157026-v0-20260930"]
     paths:
       - "run_decem_first_source_divergence_v0.py"
+      - "run_decem_step24_prestate_probe_v0.py"
       - ".github/workflows/decem-first-source-divergence-v0.yml"
 permissions:
   contents: read
@@ -25,9 +26,12 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install "git+https://github.com/Kaggle/kaggle-environments.git@d7729da06cc1382eb742d6980dc3180aa85caa28"
       - run: python run_decem_first_source_divergence_v0.py
+      - run: python run_decem_step24_prestate_probe_v0.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: decem-first-divergence-${{ matrix.seed }}
-          path: decem_first_divergence_seed${{ matrix.seed }}.json
+          path: |
+            decem_first_divergence_seed${{ matrix.seed }}.json
+            decem_step24_prestate_seed${{ matrix.seed }}.json
           if-no-files-found: warn
