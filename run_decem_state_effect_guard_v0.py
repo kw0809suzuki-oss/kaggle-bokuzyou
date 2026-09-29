@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Trigger file for state-effect guard v0 A/B.
 import importlib.util, json, os, sys
 from pathlib import Path
 from kaggle_environments import make
