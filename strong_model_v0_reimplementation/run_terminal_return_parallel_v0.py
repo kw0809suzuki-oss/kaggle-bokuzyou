@@ -34,6 +34,8 @@ def run_one(variant,seed,seat):
     getattr(opponent,"reset_agent",lambda:None)()
     env=make("kaggriculture",configuration={"seed":seed},debug=False)
     env.reset(num_agents=2)
+    gate_cfg=dict(env.configuration) if isinstance(env.configuration,dict) else {k:getattr(env.configuration,k) for k in ("episodeSteps","turnsPerDay","boardSize","shedCapacity","maxMarketOrdersPerTurn","farmHandCostMult","townShopSellInterval","townCenterSellInterval") if hasattr(env.configuration,k)}
+    gate_cfg["episodeSteps"]=HORIZON+2
     turn_count=0
     for turn in range(HORIZON):
         if env.done: break
@@ -42,7 +44,7 @@ def run_one(variant,seed,seat):
         observations=[s0["observation"],s1["observation"]]
         configs=[env.configuration,env.configuration]
         actions=[None,None]
-        actions[seat]=strong_agent(observations[seat],configs[seat])
+        actions[seat]=strong_agent(observations[seat],gate_cfg)
         actions[1-seat]=opponent.agent(observations[1-seat])
         env.step(actions)
         turn_count += 1
