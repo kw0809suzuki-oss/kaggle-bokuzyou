@@ -10,7 +10,9 @@ on:
       - 'strong_model_v0_reimplementation/**'
       - 'run_strong_model_v0_reimplementation_contract.py'
       - 'run_strong_model_v0_cash_recovery_regression.py'
+      - 'run_world_divergence_decision_trace_v0.py'
       - 'test_world_divergence_decision_trace_v0.py'
+      - 'test_world_divergence_decision_trace_probe_v0.py'
       - '.github/workflows/strong-model-v0-reimplementation-contract.yml'
 
 jobs:
@@ -31,10 +33,13 @@ jobs:
 
       - name: Syntax check
         run: |
-          python -m py_compile             strong_model_v0_reimplementation/jobs.py             strong_model_v0_reimplementation/planner.py             strong_model_v0_reimplementation/agent.py             run_strong_model_v0_reimplementation_contract.py             test_world_divergence_decision_trace_v0.py
+          python -m py_compile             strong_model_v0_reimplementation/jobs.py             strong_model_v0_reimplementation/planner.py             strong_model_v0_reimplementation/agent.py             run_strong_model_v0_reimplementation_contract.py             test_world_divergence_decision_trace_v0.py             test_world_divergence_decision_trace_probe_v0.py
 
       - name: Decision trace contract
         run: python test_world_divergence_decision_trace_v0.py
+
+      - name: World divergence trace helper contract
+        run: python test_world_divergence_decision_trace_probe_v0.py
 
       - name: Strong Model contract
         run: python run_strong_model_v0_reimplementation_contract.py
