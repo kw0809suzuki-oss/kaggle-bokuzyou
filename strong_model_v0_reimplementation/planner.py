@@ -331,7 +331,7 @@ def better(candidate,base,minimal_commitment=True):
     return candidate.envelope.central_cash>base.envelope.central_cash
 
 
-def choose(raw,cfg,active_specs):
+def choose(raw,cfg,active_specs,diagnostics=False):
     fresh = fresh_jobs(raw,cfg.episodeSteps,cfg.turnsPerDay,cfg.boardSize)
     investments = investment_jobs(raw,cfg,fresh)
     lookup = {j.key:j for j in investments+fresh+operating_jobs(raw,cfg)}
@@ -384,33 +384,34 @@ def choose(raw,cfg,active_specs):
         strict,_=rollout(raw,cfg,planned,first_action=b.action,harvest_now=early,stress=True)
         b.envelope=Envelope(strict,b.envelope.central_cash)
 
-    ordered=sorted(scored,key=lambda row:row[0].envelope.central_cash,reverse=True)
-    candidate_scores=[]
-    chosen_rank=None
-    for rank,row in enumerate(ordered,1):
-        b,representative,planned,early=row
-        if b is chosen[0]:
-            chosen_rank=rank
-        candidate_scores.append({
-            "rank":rank,
-            "central_terminal_cash":b.envelope.central_cash,
-            "strict_terminal_cash":(
-                b.envelope.strict_cash
-                if b is scored[0][0] or b is chosen[0]
-                else None
-            ),
-            "action":copy.deepcopy(b.action),
-            "scheduled":list(b.scheduled),
-            "commitments":[j.spec() for j in planned],
-            "representative":None if representative is None else representative.spec(),
-            "harvest_now":bool(early),
-        })
-    chosen[0].candidate_scores=candidate_scores
-    chosen[0].chosen_candidate_rank=chosen_rank
-    chosen[0].decision_inputs={
-        "fresh_jobs":[j.spec() for j in fresh],
-        "investment_jobs":[j.spec() for j in investments],
-        "active_jobs":[j.spec() for j in active],
-        "operating_jobs":[j.spec() for j in operating_jobs(raw,cfg)],
-    }
+    if diagnostics:
+        ordered=sorted(scored,key=lambda row:row[0].envelope.central_cash,reverse=True)
+        candidate_scores=[]
+        chosen_rank=None
+        for rank,row in enumerate(ordered,1):
+            b,representative,planned,early=row
+            if b is chosen[0]:
+                chosen_rank=rank
+            candidate_scores.append({
+                "rank":rank,
+                "central_terminal_cash":b.envelope.central_cash,
+                "strict_terminal_cash":(
+                    b.envelope.strict_cash
+                    if b is scored[0][0] or b is chosen[0]
+                    else None
+                ),
+                "action":copy.deepcopy(b.action),
+                "scheduled":list(b.scheduled),
+                "commitments":[j.spec() for j in planned],
+                "representative":None if representative is None else representative.spec(),
+                "harvest_now":bool(early),
+            })
+        chosen[0].candidate_scores=candidate_scores
+        chosen[0].chosen_candidate_rank=chosen_rank
+        chosen[0].decision_inputs={
+            "fresh_jobs":[j.spec() for j in fresh],
+            "investment_jobs":[j.spec() for j in investments],
+            "active_jobs":[j.spec() for j in active],
+            "operating_jobs":[j.spec() for j in operating_jobs(raw,cfg)],
+        }
     return chosen[0],chosen[1],active,scored[0][0]
