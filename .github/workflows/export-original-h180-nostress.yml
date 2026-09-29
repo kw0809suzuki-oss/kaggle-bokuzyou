@@ -1,0 +1,28 @@
+name: Export Original H180 NoStress
+
+on:
+  push:
+    branches:
+      - submission/return-aware-v0-original-h180-nostress-20260930
+    paths:
+      - .github/workflows/export-original-h180-nostress.yml
+  workflow_dispatch:
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build package
+        run: |
+          cp kaggle_submission_return_aware_v0/submission.py main.py
+          python -m py_compile main.py
+          tar -czf kaggriculture_return_aware_v0_original_h180_nostress.tar.gz main.py
+          tar -tzf kaggriculture_return_aware_v0_original_h180_nostress.tar.gz
+          sha256sum kaggriculture_return_aware_v0_original_h180_nostress.tar.gz
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kaggriculture-return-aware-v0-original-h180-nostress-export
+          path: kaggriculture_return_aware_v0_original_h180_nostress.tar.gz
+          if-no-files-found: error
