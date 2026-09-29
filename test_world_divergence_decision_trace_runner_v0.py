@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
+from types import SimpleNamespace
 from run_world_divergence_decision_trace_v0 import (
     first_world_divergence_index,
     summarize_first_divergence,
+    first_nonactive_record,
 )
 
 
@@ -57,6 +59,14 @@ def main():
     assert summary["candidate_score_diff_paths"]==["[0].central_terminal_cash","[0].strict_terminal_cash"]
     assert summary["chosen_diff_paths"]==["central_terminal_cash"]
     assert summary["action_diff_paths"]==[]
+
+    steps=[
+        [SimpleNamespace(status="ACTIVE", observation=SimpleNamespace(step=0, remainingOverageTime=60.0))],
+        [SimpleNamespace(status="TIMEOUT", observation=SimpleNamespace(step=202, remainingOverageTime=-0.2))],
+        [SimpleNamespace(status="DONE", observation=SimpleNamespace(step=719, remainingOverageTime=-0.2))],
+    ]
+    nonactive=first_nonactive_record(steps,0)
+    assert nonactive=={"step":202,"status":"TIMEOUT","remaining_overage":-0.2}
 
     print("WORLD_DIVERGENCE_RUNNER_HELPER_OK")
 
