@@ -331,7 +331,7 @@ def better(candidate,base,minimal_commitment=True):
     return candidate.envelope.central_cash>base.envelope.central_cash
 
 
-def choose(raw,cfg,active_specs):
+def choose(raw,cfg,active_specs,prefer_hire_once=False):
     fresh = fresh_jobs(raw,cfg.episodeSteps,cfg.turnsPerDay,cfg.boardSize)
     investments = investment_jobs(raw,cfg,fresh)
     lookup = {j.key:j for j in investments+fresh+operating_jobs(raw,cfg)}
@@ -378,7 +378,15 @@ def choose(raw,cfg,active_specs):
         keys={j.key for j in planned}
         b.commitments.extend(j.spec() for j in operating_jobs(raw,cfg,True) if j.key in s and j.key not in keys)
         scored.append((b,representative,planned,early))
-    chosen=max(scored,key=lambda row:row[0].envelope.central_cash)
+    normal=max(scored,key=lambda row:row[0].envelope.central_cash)
+    chosen=normal
+    if prefer_hire_once:
+        normal_has_hire=any(o and o[0]=='HIRE' for o in normal[0].action.get('market',[]))
+        if not normal_has_hire:
+            hire_rows=[row for row in scored if any(o and o[0]=='HIRE' for o in row[0].action.get('market',[]))]
+            if hire_rows:
+                chosen=max(hire_rows,key=lambda row:row[0].envelope.central_cash)
+    chosen[0].hire_pulse_intervened=(chosen is not normal)
     for row in (scored[0],chosen):
         b,_,planned,early=row
         strict,_=rollout(raw,cfg,planned,first_action=b.action,harvest_now=early,stress=True)
