@@ -379,8 +379,7 @@ def choose(raw,cfg,active_specs):
         b.commitments.extend(j.spec() for j in operating_jobs(raw,cfg,True) if j.key in s and j.key not in keys)
         scored.append((b,representative,planned,early))
     chosen=max(scored,key=lambda row:row[0].envelope.central_cash)
-    for row in (scored[0],chosen):
-        b,_,planned,early=row
-        strict,_=rollout(raw,cfg,planned,first_action=b.action,harvest_now=early,stress=True)
-        b.envelope=Envelope(strict,b.envelope.central_cash)
+    # Kaggle runtime path: stress rollouts are diagnostic only and do not
+    # participate in action selection. Keep the selected central forecast
+    # as both envelope values to avoid two post-selection terminal rollouts.
     return chosen[0],chosen[1],active,scored[0][0]
