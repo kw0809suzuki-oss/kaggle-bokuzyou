@@ -1,0 +1,36 @@
+name: Export Strong Model v0 Reimplementation
+
+on:
+  push:
+    branches:
+      - experiment/strong-model-v0-reimplementation-20260928
+    paths:
+      - .github/workflows/export-strong-model-v0-reimplementation.yml
+  workflow_dispatch:
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build submission package
+        run: |
+          rm -rf submission_pack
+          mkdir -p submission_pack/strong_model_v0_reimplementation
+          cp strong_model_v0_reimplementation/__init__.py submission_pack/strong_model_v0_reimplementation/
+          cp strong_model_v0_reimplementation/agent.py submission_pack/strong_model_v0_reimplementation/
+          cp strong_model_v0_reimplementation/jobs.py submission_pack/strong_model_v0_reimplementation/
+          cp strong_model_v0_reimplementation/planner.py submission_pack/strong_model_v0_reimplementation/
+          cp plan_generator_entrance_v0.py submission_pack/
+          cp short_plan_action_projector_v0.py submission_pack/
+          printf '%s\n' 'from strong_model_v0_reimplementation.agent import agent' > submission_pack/main.py
+          python -m py_compile submission_pack/main.py submission_pack/strong_model_v0_reimplementation/*.py submission_pack/plan_generator_entrance_v0.py submission_pack/short_plan_action_projector_v0.py
+          tar -C submission_pack -czf kaggriculture_strong_model_v0_reimplementation_ceb799d.tar.gz .
+          tar -tzf kaggriculture_strong_model_v0_reimplementation_ceb799d.tar.gz
+          sha256sum kaggriculture_strong_model_v0_reimplementation_ceb799d.tar.gz
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kaggriculture-strong-model-v0-reimplementation-ceb799d
+          path: kaggriculture_strong_model_v0_reimplementation_ceb799d.tar.gz
+          if-no-files-found: error
