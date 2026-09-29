@@ -1,0 +1,29 @@
+name: Export Corrected Return-Aware Tarball
+
+on:
+  push:
+    branches:
+      - submission/return-aware-v0-kaggle-20260929
+    paths:
+      - .github/workflows/export-corrected-return-aware-targz.yml
+  workflow_dispatch:
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build corrected Kaggriculture archive
+        run: |
+          cp kaggle_submission_return_aware_v0/submission.py main.py
+          python -m py_compile main.py
+          tail -n 3 main.py
+          tar -czf kaggriculture_return_aware_v0_fixed.tar.gz main.py
+          tar -tzf kaggriculture_return_aware_v0_fixed.tar.gz
+          sha256sum kaggriculture_return_aware_v0_fixed.tar.gz
+      - name: Upload corrected tarball
+        uses: actions/upload-artifact@v4
+        with:
+          name: kaggriculture-return-aware-v0-fixed
+          path: kaggriculture_return_aware_v0_fixed.tar.gz
+          if-no-files-found: error
