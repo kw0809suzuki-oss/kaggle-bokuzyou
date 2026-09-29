@@ -16,11 +16,13 @@ class Runtime:
         self.active={}
         self.last_step=-1
         self.last_choice=None
+        self.hire_pulse_used=False
 
     def reset(self):
         self.active={}
         self.last_step=-1
         self.last_choice=None
+        self.hire_pulse_used=False
 
     def act(self,obs:Any):
         snapshot=bind_official_state(obs)
@@ -35,7 +37,11 @@ class Runtime:
             if still_needed(spec,raw)
         }
 
-        chosen,chosen_rep,active_jobs,continuation=choose(raw,self.cfg,self.active)
+        chosen,chosen_rep,active_jobs,continuation=choose(
+            raw,self.cfg,self.active,prefer_hire_once=not self.hire_pulse_used
+        )
+        if bool(getattr(chosen,"hire_pulse_intervened",False)):
+            self.hire_pulse_used=True
 
         self.active={spec["key"]:spec for spec in chosen.commitments}
 
