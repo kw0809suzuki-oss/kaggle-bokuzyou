@@ -1,0 +1,39 @@
+name: Profile Return-Aware Submission Runtime
+
+on:
+  push:
+    branches:
+      - submission/return-aware-v0-kaggle-20260929
+    paths:
+      - .github/workflows/profile-return-aware-submission.yml
+  workflow_dispatch:
+
+jobs:
+  profile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Kaggriculture runtime
+        run: |
+          python -m pip install --upgrade pip >/dev/null
+          pip install "kaggle-environments>=1.32.7" >/dev/null
+      - name: Prepare exact main.py
+        run: cp kaggle_submission_return_aware_v0/submission.py main.py
+      - name: Time import and first callback
+        run: |
+          python - <<'PY'
+          import time
+          t=time.perf_counter()
+          import main
+          print("IMPORT_SECONDS", time.perf_counter()-t)
+          from kaggle_environments import make
+          env=make("kaggriculture", configuration={"episodeSteps":720}, debug=True)
+          states=env.reset(2)
+          obs=states[0].observation
+          cfg=env.configuration
+          t=time.perf_counter()
+          a=main.agent(obs,cfg)
+          print("FIRST_CALLBACK_SECONDS", time.perf_counter()-t)
+          print("ACTION",a)
+          PY
