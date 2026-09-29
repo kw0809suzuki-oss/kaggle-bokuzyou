@@ -1,0 +1,47 @@
+name: Validate Return-Aware Kaggle Submission
+
+on:
+  push:
+    branches:
+      - submission/return-aware-v0-kaggle-20260929
+    paths:
+      - .github/workflows/validate-return-aware-submission.yml
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install official environment
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Build exact submitted main.py
+        run: |
+          cp kaggle_submission_return_aware_v0/submission.py main.py
+          python -m py_compile main.py
+      - name: Import exact main.py
+        run: |
+          python - <<'PY'
+          import time
+          t=time.perf_counter()
+          import main
+          print("IMPORT_OK", hasattr(main,"agent"), "seconds", time.perf_counter()-t)
+          PY
+      - name: Run exact 720-turn self validation
+        run: |
+          python - <<'PY'
+          import time, json
+          from kaggle_environments import make
+          env=make("kaggriculture", configuration={"episodeSteps":720}, debug=True)
+          t=time.perf_counter()
+          env.run(["main.py","main.py"])
+          elapsed=time.perf_counter()-t
+          final=env.steps[-1]
+          print("ELAPSED", elapsed)
+          print("FINAL", [(i,s.reward,s.status) for i,s in enumerate(final)])
+          for i,s in enumerate(final):
+              print("PLAYER", i, "status", s.status, "reward", s.reward)
+          PY
