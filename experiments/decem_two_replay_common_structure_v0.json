@@ -1,0 +1,62 @@
+{
+  "schema": "decem-two-replay-common-structure-v0",
+  "evidence": [
+    {
+      "episode": 115303987,
+      "seed": 1305581493,
+      "seat": 0,
+      "agent": "DECEM",
+      "terminal_self": 157026
+    },
+    {
+      "episode": 115311113,
+      "seed": 2077205579,
+      "seat": 1,
+      "agent": "DECEM",
+      "terminal_self": 128532
+    }
+  ],
+  "confirmed_observations": {
+    "first_exact_action_divergence_step": 37,
+    "exact_same_actions_before_divergence": 37,
+    "day0_end_both": {
+      "cash": 1,
+      "hands": 4,
+      "land_quadrants": 1,
+      "crops": {"WHEAT": 13, "MELON": 6},
+      "animals": {"COW": 2, "SHEEP": 3}
+    },
+    "land_expansion_state": {
+      "through_day5": 1,
+      "day6": 2,
+      "day8": 3,
+      "day10": 4
+    },
+    "season_action_totals": {
+      "episode_115303987": {
+        "HIRE": 305,
+        "PLANT": 285,
+        "HARVEST": 603,
+        "SELL_orders": 486,
+        "BUY_LAND_orders": 3
+      },
+      "episode_115311113": {
+        "HIRE": 301,
+        "PLANT": 316,
+        "HARVEST": 616,
+        "SELL_orders": 544,
+        "BUY_LAND_orders": 4
+      }
+    },
+    "common_operating_shape": [
+      "Day0 establishes COW + SHEEP + WHEAT/MELON + labor together.",
+      "Both runs expand land state on Day6, Day8, and reach all four quadrants on Day10.",
+      "Both runs add GOOSE during expansion and operate a mixed crop/animal farm rather than a single-resource loop.",
+      "Both runs continue high HIRE, HARVEST, and SELL activity across the season."
+    ]
+  },
+  "boundary": [
+    "The two replays support a repeated operating shape; they do not prove that any listed component is individually causal for terminal strength.",
+    "Replay-distilled v0 encodes only Episode 115303987's 719-action source program. Generalization is decided by Battle."
+  ]
+}
