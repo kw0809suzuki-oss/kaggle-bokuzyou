@@ -29,6 +29,12 @@ def main():
     assert dbg is not None and dbg.get("last_choice") is not None
     trace = dbg["last_choice"]
 
+    assert "decision_inputs" in trace, trace.keys()
+    inputs = trace["decision_inputs"]
+    for key in ("fresh_jobs", "investment_jobs", "active_jobs", "operating_jobs"):
+        assert key in inputs, (key, inputs.keys())
+        assert isinstance(inputs[key], list), (key, type(inputs[key]))
+
     assert "candidate_scores" in trace, trace.keys()
     assert isinstance(trace["candidate_scores"], list) and trace["candidate_scores"], trace["candidate_scores"]
 
