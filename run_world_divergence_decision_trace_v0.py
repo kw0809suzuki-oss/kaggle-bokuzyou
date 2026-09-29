@@ -35,6 +35,19 @@ def first_diff_paths(left: Any, right: Any, path: str = "") -> list[str]:
     return [] if left == right else [path or "$"]
 
 
+def first_world_divergence_index(
+    baseline: list[dict[str, Any]],
+    candidate: list[dict[str, Any]],
+) -> int | None:
+    """Return the first aligned trace index whose World view differs."""
+    for idx in range(min(len(baseline), len(candidate))):
+        if baseline[idx].get("world") != candidate[idx].get("world"):
+            return idx
+    if len(baseline) != len(candidate):
+        return min(len(baseline), len(candidate))
+    return None
+
+
 def candidate_identity_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Strip score/rank fields so candidate structure can be compared directly."""
     ignored = {"rank", "central_terminal_cash", "strict_terminal_cash"}
