@@ -1,0 +1,44 @@
+name: DECEM Replay Distilled 157026 v0 Battle
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "model/replay-distilled-decem-157026-v0-20260930"
+    paths:
+      - "decem_replay_distilled_157026_v0.py"
+      - "run_decem_replay_distilled_157026_v0_battle.py"
+      - ".github/workflows/decem-replay-distilled-157026-v0-battle.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  battle:
+    strategy:
+      fail-fast: false
+      matrix:
+        seed: [92802001, 92802002, 92802003]
+        seat: [0, 1]
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      SEED: ${{ matrix.seed }}
+      SELF_SEAT: ${{ matrix.seat }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned Official Kaggriculture environment
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "git+https://github.com/Kaggle/kaggle-environments.git@d7729da06cc1382eb742d6980dc3180aa85caa28"
+      - name: Run battle
+        run: python run_decem_replay_distilled_157026_v0_battle.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: decem-distilled-seed-${{ matrix.seed }}-seat-${{ matrix.seat }}
+          path: decem_replay_distilled_seed${{ matrix.seed }}_seat${{ matrix.seat }}_summary.json
+          if-no-files-found: warn
