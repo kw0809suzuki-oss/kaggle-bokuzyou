@@ -1,0 +1,139 @@
+name: Profile Return-Aware Time Budget v0
+
+on:
+  push:
+    branches:
+      - model/return-aware-v0-20260929
+    paths:
+      - .github/workflows/profile-return-aware-time-budget-v0.yml
+  workflow_dispatch:
+
+jobs:
+  profile:
+    strategy:
+      fail-fast: false
+      matrix:
+        budget: [0, 6]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install official environment
+        run: |
+          python -m pip install --upgrade pip >/dev/null
+          pip install "kaggle-environments>=1.32.7" >/dev/null
+      - name: Profile one full official episode
+        env:
+          BUDGET: ${{ matrix.budget }}
+        run: |
+          python - <<'PY'
+          import json, os, time
+          from kaggle_environments import make
+          import strong_model_v0_reimplementation.planner as sp
+          import return_aware_model_v0.model as ram
+          from return_aware_model_v0.agent import Runtime
+          from return_aware_model_v0.run import _opponent
+          from strong_model_v0_reimplementation.planner import settings_from
+
+          budget=int(os.environ["BUDGET"])
+          seed=92804001
+          env=make("kaggriculture", configuration={"seed":seed}, debug=False)
+          env.reset(2)
+          cfg=settings_from(env.configuration)
+          runtime=Runtime(cfg,max_candidates=budget)
+
+          current={"strong_n":0,"strong_s":0.0,"extra_n":0,"extra_s":0.0}
+          orig=sp.rollout
+
+          def strong_rollout(*args,**kwargs):
+              t=time.perf_counter()
+              try:
+                  return orig(*args,**kwargs)
+              finally:
+                  current["strong_n"]+=1
+                  current["strong_s"]+=time.perf_counter()-t
+
+          def extra_rollout(*args,**kwargs):
+              t=time.perf_counter()
+              try:
+                  return orig(*args,**kwargs)
+              finally:
+                  current["extra_n"]+=1
+                  current["extra_s"]+=time.perf_counter()-t
+
+          sp.rollout=strong_rollout
+          ram.rollout=extra_rollout
+
+          rows=[]
+          def act(obs, configuration):
+              for k in current:
+                  current[k]=0 if k.endswith("_n") else 0.0
+              t=time.perf_counter()
+              action=runtime.act(obs)
+              total=time.perf_counter()-t
+              d=runtime.last_choice or {}
+              rows.append({
+                  "step":len(rows),
+                  "total":total,
+                  "strong_rollouts":current["strong_n"],
+                  "strong_rollout_s":current["strong_s"],
+                  "extra_rollouts":current["extra_n"],
+                  "extra_rollout_s":current["extra_s"],
+                  "generated":d.get("generated_count",0),
+                  "evaluated":d.get("evaluated_count",0),
+                  "selected":bool(d.get("extension_selected",False)),
+              })
+              return action
+
+          agents=[act,_opponent()]
+          runner=env._Environment__agent_runner(agents)
+          for step in range(719):
+              if env.done:
+                  break
+              actions,logs=runner.act()
+              env.step(actions,logs)
+              statuses=[str(s.status) for s in env.state]
+              if any(s not in ("ACTIVE","DONE") for s in statuses):
+                  print("WORLD_REJECTED",step,statuses,logs)
+                  break
+
+          def pct(vals,p):
+              if not vals: return 0.0
+              vals=sorted(vals)
+              i=round((len(vals)-1)*p)
+              return vals[i]
+
+          vals=[r["total"] for r in rows]
+          strong=[r["strong_rollout_s"] for r in rows]
+          extra=[r["extra_rollout_s"] for r in rows]
+          top=sorted(rows,key=lambda r:r["total"],reverse=True)[:20]
+          summary={
+              "budget":budget,
+              "steps":len(rows),
+              "statuses":[str(s.status) for s in env.state],
+              "mean":sum(vals)/len(vals),
+              "p50":pct(vals,.50),"p90":pct(vals,.90),"p95":pct(vals,.95),"p99":pct(vals,.99),
+              "max":max(vals),
+              "over_0_8":sum(v>0.8 for v in vals),
+              "over_1_0":sum(v>1.0 for v in vals),
+              "over_1_2":sum(v>1.2 for v in vals),
+              "strong_rollout_seconds":sum(strong),
+              "extra_rollout_seconds":sum(extra),
+              "total_decision_seconds":sum(vals),
+              "strong_rollout_calls":sum(r["strong_rollouts"] for r in rows),
+              "extra_rollout_calls":sum(r["extra_rollouts"] for r in rows),
+              "generated_total":sum(r["generated"] for r in rows),
+              "evaluated_total":sum(r["evaluated"] for r in rows),
+              "selected_total":sum(r["selected"] for r in rows),
+              "top20":top,
+          }
+          print("PROFILE_SUMMARY="+json.dumps(summary,separators=(",",":")))
+          with open(f"profile_budget_{budget}.json","w") as f:
+              json.dump({"summary":summary,"rows":rows},f,indent=2)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: profile-return-aware-budget-${{ matrix.budget }}
+          path: profile_budget_${{ matrix.budget }}.json
+          if-no-files-found: warn
