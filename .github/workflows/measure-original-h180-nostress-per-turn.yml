@@ -1,0 +1,52 @@
+name: Measure H180 NoStress Per-Turn Timing
+
+on:
+  workflow_dispatch:
+
+jobs:
+  measure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install runtime
+        run: |
+          python -m pip install --upgrade pip >/dev/null
+          pip install "kaggle-environments>=1.32.7" >/dev/null
+      - name: Measure per-agent action timing
+        run: |
+          cp kaggle_submission_return_aware_v0/submission.py main.py
+          python -m py_compile main.py
+          python - <<'PY'
+          import time, statistics, importlib.util
+          from kaggle_environments import make
+          spec=importlib.util.spec_from_file_location("submission_agent","main.py")
+          mod=importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
+          agents=[]
+          for i in range(2):
+              # isolate runtime state by loading the submission twice
+              s=importlib.util.spec_from_file_location(f"submission_agent_{i}","main.py")
+              m=importlib.util.module_from_spec(s); s.loader.exec_module(m)
+              agents.append(m.agent)
+          times=[[],[]]
+          def wrap(i):
+              def a(obs,config):
+                  t=time.perf_counter()
+                  out=agents[i](obs,config)
+                  times[i].append(time.perf_counter()-t)
+                  return out
+              return a
+          env=make("kaggriculture",configuration={"episodeSteps":720},debug=False)
+          wall=time.perf_counter()
+          env.run([wrap(0),wrap(1)])
+          wall=time.perf_counter()-wall
+          print("WALL",wall)
+          for i,x in enumerate(times):
+              xs=sorted(x)
+              q=lambda p: xs[min(len(xs)-1,int((len(xs)-1)*p))]
+              over=sum(max(0.0,t-1.0) for t in x)
+              print("AGENT",i,"N",len(x),"MEAN",statistics.mean(x),"P50",q(.5),"P90",q(.9),"P95",q(.95),"P99",q(.99),"MAX",max(x),"OVER1_COUNT",sum(t>1 for t in x),"OVERAGE_SUM",over)
+          both=times[0]+times[1]
+          print("BOTH_OVERAGE_SUM",sum(max(0.0,t-1.0) for t in both))
+          print("FINAL",[(i,s.reward,str(s.status)) for i,s in enumerate(env.steps[-1])])
+          PY
