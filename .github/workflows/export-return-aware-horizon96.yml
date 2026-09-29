@@ -1,0 +1,58 @@
+name: Export Return-Aware Horizon96 Submission
+
+on:
+  push:
+    branches:
+      - submission/return-aware-v0-kaggle-20260929
+    paths:
+      - .github/workflows/export-return-aware-horizon96.yml
+  workflow_dispatch:
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install official environment
+        run: |
+          python -m pip install --upgrade pip >/dev/null
+          pip install "kaggle-environments>=1.32.7" >/dev/null
+      - name: Verify bundle and 24-turn smoke
+        run: |
+          cp kaggle_submission_return_aware_v0/submission.py main.py
+          python -m py_compile main.py
+          python - <<'PY'
+          import importlib.util, time
+          from kaggle_environments import make
+          spec=importlib.util.spec_from_file_location("main","main.py")
+          m=importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+          assert callable(m.agent)
+          env=make("kaggriculture",configuration={"seed":92804001},debug=False)
+          env.reset(2)
+          def opp(obs,configuration):
+              return {"farmer":["PASS"],"hands":[["PASS"] for _ in (obs.farms[obs.player].hands or [])],"market":[]}
+          runner=env._Environment__agent_runner([m.agent,opp])
+          ts=[]
+          for step in range(24):
+              t=time.perf_counter()
+              actions,logs=runner.act()
+              ts.append(time.perf_counter()-t)
+              env.step(actions,logs)
+              statuses=[str(s.status) for s in env.state]
+              if any(s not in ("ACTIVE","DONE") for s in statuses):
+                  raise RuntimeError((step,statuses,logs))
+          print("SMOKE24_MEAN",sum(ts)/len(ts))
+          print("SMOKE24_MAX",max(ts))
+          print("SMOKE24_STATUS",[str(s.status) for s in env.state])
+          PY
+      - name: Build Kaggriculture archive
+        run: |
+          tar -czf kaggriculture_return_aware_v0_horizon96.tar.gz main.py
+          tar -tzf kaggriculture_return_aware_v0_horizon96.tar.gz
+          sha256sum kaggriculture_return_aware_v0_horizon96.tar.gz
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kaggriculture-return-aware-v0-horizon96
+          path: kaggriculture_return_aware_v0_horizon96.tar.gz
+          if-no-files-found: error
