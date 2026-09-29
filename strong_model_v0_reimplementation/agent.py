@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import copy
+import os
 from typing import Any
 
 from plan_generator_entrance_v0 import bind_official_state
@@ -35,12 +36,14 @@ class Runtime:
             if still_needed(spec,raw)
         }
 
-        chosen,chosen_rep,active_jobs,continuation=choose(raw,self.cfg,self.active)
+        variant=os.environ.get("STRONG_VARIANT") or None
+        chosen,chosen_rep,active_jobs,continuation=choose(raw,self.cfg,self.active,variant=variant)
 
         self.active={spec["key"]:spec for spec in chosen.commitments}
 
         self.last_choice={
             "step":step,
+            "variant":variant or "baseline",
             "active_before":[j.key for j in active_jobs],
             "continuation":{
                 "strict_terminal_cash":continuation.envelope.strict_cash,
