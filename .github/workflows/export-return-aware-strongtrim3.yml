@@ -1,0 +1,37 @@
+name: Export Return-Aware StrongTrim3 Submission
+
+on:
+  push:
+    branches:
+      - submission/return-aware-v0-kaggle-20260929
+    paths:
+      - .github/workflows/export-return-aware-strongtrim3.yml
+  workflow_dispatch:
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Kaggriculture archive
+        run: |
+          cp kaggle_submission_return_aware_v0/submission.py main.py
+          python -m py_compile main.py
+          python - <<'PY'
+          import pathlib
+          s=pathlib.Path("main.py").read_text()
+          assert "harvest_now=True)\n    candidates.append" not in s
+          assert "candidates.append((None,[],a,s,False))" not in s
+          assert "'GOOSE','SHEEP','COW'" in s
+          assert "{'CARROT','TOMATO','MELON','STRAWBERRY'}" in s
+          print("TRIM_CHECK_PASS")
+          PY
+          tar -czf kaggriculture_return_aware_v0_strongtrim3.tar.gz main.py
+          tar -tzf kaggriculture_return_aware_v0_strongtrim3.tar.gz
+          sha256sum kaggriculture_return_aware_v0_strongtrim3.tar.gz
+      - name: Upload archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: kaggriculture-return-aware-v0-strongtrim3
+          path: kaggriculture_return_aware_v0_strongtrim3.tar.gz
+          if-no-files-found: error
