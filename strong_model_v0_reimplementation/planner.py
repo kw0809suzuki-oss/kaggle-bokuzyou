@@ -357,8 +357,6 @@ def choose(raw,cfg,active_specs):
         planned=active+[j]
         a,s,_,_=_service_action(raw,cfg,planned,{j.key})
         candidates.append((j,planned,a,s,False))
-    a,s,_,_=_service_action(raw,cfg,active,harvest_now=True)
-    candidates.append((None,active,a,s,True))
     if raw['hour']<cfg.turnsPerDay-1 and (active or operating_jobs(raw,cfg)) and len(action['market'])<cfg.maxMarketOrdersPerTurn:
         a=copy.deepcopy(action); a['market'].append(['HIRE'])
         candidates.append((None,active,a,scheduled,False))
