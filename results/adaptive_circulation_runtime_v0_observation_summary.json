@@ -1,0 +1,70 @@
+{
+  "schema": "adaptive-circulation-runtime-v0-observation-summary",
+  "status": "observer_model_ready_no_new_policy_repair",
+  "source": {
+    "episode_id": 115303987,
+    "terminal_self": 157026
+  },
+  "current_world": {
+    "seed": 92802001,
+    "opponent": "Seyamalam pinned v21",
+    "terminal_self": 99834
+  },
+  "confirmed_observations": {
+    "first_cash_effect_difference": {
+      "step": 0,
+      "source_cash_delta": -1039,
+      "current_cash_delta": -1033,
+      "note": "same ActionBundle; shared market context already differs"
+    },
+    "step24_effect_contract": {
+      "source_action_hire_requests": 3,
+      "current_action_hire_requests": 1,
+      "source_cash_delta": -1,
+      "current_cash_delta": -1,
+      "source_hands_delta": 1,
+      "current_hands_delta": 1,
+      "meaning": "Action differs while realized circulation effect remains aligned"
+    },
+    "first_structural_material_difference": {
+      "step": 34,
+      "action_equal": true,
+      "market_orders": [["SELL","FERTILIZER",1],["BUY_PRODUCT","WHEAT",4]],
+      "source_shed_wheat_delta": 4,
+      "current_shed_wheat_delta": 3,
+      "source_pre_cash": 24,
+      "current_pre_cash": 23,
+      "source_pre_wheat_price": 29,
+      "current_pre_wheat_price": 30,
+      "meaning": "material acquisition feasibility break, not a Return-stage break"
+    },
+    "first_input_inventory_difference": {
+      "step": 85,
+      "current_extra_seed_delta": {"STRAWBERRY": 1}
+    },
+    "first_productive_body_effect_difference": {
+      "step": 120,
+      "source_hands_delta": 5,
+      "current_hands_delta": 3
+    }
+  },
+  "representation_correction": {
+    "rejected": "treat all shed inventory as Return",
+    "replacement": "classify flow by operation provenance; the same resource can be input, stock, output, or return material depending on the transition"
+  },
+  "runtime_architecture": [
+    "Frozen Replay Skeleton",
+    "Operation decomposition",
+    "Source realized-effect contract",
+    "Current World feasibility/effect check",
+    "Only A/B-promoted minimal repair"
+  ],
+  "active_policy_change": "none beyond existing step24 HIRE Effect Contract",
+  "boundary": [
+    "Cash difference alone is not a repair trigger",
+    "Replay fidelity is not the parent objective",
+    "Observed effect divergence is not automatically harmful",
+    "No new operation contract is promoted without terminal A/B evidence"
+  ],
+  "workflow_run_id": 36702046273
+}
