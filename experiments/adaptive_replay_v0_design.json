@@ -1,0 +1,66 @@
+{
+  "schema": "adaptive-replay-v0-design",
+  "objective": "terminal_self",
+  "principle_ja": "Replayで運転骨格を持ち、Worldで実行を成立させる",
+  "baseline": {
+    "body": "decem_replay_distilled_157026_v0.py",
+    "source_episode": 115303987,
+    "source_seed": 1305581493,
+    "source_terminal_self": 157026,
+    "source_reproduction": "719 actions -> 157026, zero state divergence"
+  },
+  "candidate": {
+    "body": "adaptive_replay_v0.py",
+    "active_layers": [
+      "Replay Skeleton",
+      "Proven HIRE Effect Guard",
+      "Diagnostic Effect Observation"
+    ],
+    "inactive_layers": [
+      "automatic recovery",
+      "general replay restoration",
+      "policy replanning",
+      "market restoration"
+    ]
+  },
+  "active_guard": {
+    "name": "step24 HIRE Effect Guard",
+    "evidence": {
+      "source_requested_hires": 3,
+      "source_realized_hires": 1,
+      "current_world_observed_pre_cash": 6,
+      "previous_fixed2_terminal_deltas": [60189, 50056]
+    },
+    "rule": "At step 24 only, compute how many replay HIRE orders can succeed under current money / hires_today / official Fibonacci hire cost. If more than the source-realized one hire would succeed, cap replay HIRE orders to one."
+  },
+  "closed_candidate": {
+    "name": "step85 STRAWBERRY restoration",
+    "reason": "Activated 1/1 in both observed seeds but terminal delta was 0, 0.",
+    "status": "closed_not_in_model"
+  },
+  "adoption_gate": {
+    "comparison": "DECEM Replay baseline vs Adaptive Replay v0",
+    "opponent": "Seyamalam v21",
+    "seat": 0,
+    "fixed_seeds": [
+      92802001, 92802002, 92802003, 92802004, 92802005,
+      92802006, 92802007, 92802008, 92802009, 92802010
+    ],
+    "primary_metric": "terminal_self",
+    "diagnostics": [
+      "guard trigger count",
+      "step24 pre/post hands",
+      "margin"
+    ],
+    "not_metrics": [
+      "replay fidelity",
+      "number of source-state matches"
+    ]
+  },
+  "boundary": [
+    "This v0 does not claim the replay policy is globally correct.",
+    "Only the observed step24 execution failure is guarded.",
+    "A replay difference is not automatically repair-worthy.",
+    "New guards require separate terminal evidence before promotion."
+  ]
+}
