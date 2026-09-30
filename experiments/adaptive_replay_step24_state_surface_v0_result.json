@@ -1,0 +1,60 @@
+{
+  "schema": "adaptive-replay-step24-state-surface-v0-result",
+  "run_id": 36653695049,
+  "branch": "experiment/adaptive-replay-step24-state-surface-v0-20260930",
+  "engine_commit": "d7729da06cc1382eb742d6980dc3180aa85caa28",
+  "summary": {
+    "n_seeds": 5,
+    "unique_full_step24_states": 1,
+    "variable_top_level_sections": {},
+    "negative_seed": 93803005,
+    "negative_terminal_delta": -19442,
+    "positive_seeds": [
+      93803001,
+      93803002,
+      93803003,
+      93803004
+    ],
+    "positive_terminal_deltas": {
+      "93803001": 2409,
+      "93803002": 59892,
+      "93803003": 63193,
+      "93803004": 66962
+    },
+    "common_diff_path_count_positive_vs_negative": 0,
+    "common_diff_path_sample": []
+  },
+  "comparisons": [
+    {
+      "pair": "93803001_vs_93803005",
+      "full_state_equal": true,
+      "diff_leaf_count": 0,
+      "diff_buckets": {},
+      "sample_paths": []
+    },
+    {
+      "pair": "93803002_vs_93803005",
+      "full_state_equal": true,
+      "diff_leaf_count": 0,
+      "diff_buckets": {},
+      "sample_paths": []
+    },
+    {
+      "pair": "93803003_vs_93803005",
+      "full_state_equal": true,
+      "diff_leaf_count": 0,
+      "diff_buckets": {},
+      "sample_paths": []
+    },
+    {
+      "pair": "93803004_vs_93803005",
+      "full_state_equal": true,
+      "diff_leaf_count": 0,
+      "diff_buckets": {},
+      "sample_paths": []
+    }
+  ],
+  "observation": "All five Seyamalam/seat0 seeds had exactly the same full observable pre-step24 state, while Boundary Observation v0 produced four positive terminal deltas and one negative delta.",
+  "boundary": "The positive/negative terminal boundary is not observable in the pre-step24 state. Do not add more step24 state features as a rescue based on this probe.",
+  "next_unknown": "When does the positive seed 93803004 and negative seed 93803005 first become observably different after the identical step24 state?"
+}
