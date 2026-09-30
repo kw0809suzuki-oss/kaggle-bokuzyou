@@ -1,0 +1,70 @@
+{
+  "schema": "adaptive-replay-runtime-v0.1-evidence-manifest",
+  "release": "v0.1",
+  "objective": "Preserve proven Replay effects in the Current World without adding unproven policy.",
+  "primary_metric": "terminal_self",
+  "active_contracts": [
+    {
+      "id": "step24-hire-realized-plus1-v0",
+      "status": "active",
+      "promotion": {
+        "run_id": 36649687912,
+        "improved": 10,
+        "worsened": 0,
+        "same": 0,
+        "mean_delta_terminal_self": 37840.5
+      },
+      "equivalence": {
+        "run_id": 36651253022,
+        "n": 10,
+        "equivalent": 10,
+        "self_action_trace_equal": 10,
+        "opponent_action_trace_equal": 10,
+        "terminal_self_equal": 10
+      }
+    }
+  ],
+  "closed_evidence": [
+    {
+      "id": "step85-strawberry-source-effect-restoration",
+      "status": "closed_inactive",
+      "reason": "Observed source-effect difference did not move terminal in the checked comparison (0/0)."
+    }
+  ],
+  "world_observations": [
+    {
+      "name": "boundary_observation",
+      "run_id": 36653074221,
+      "result": "16 improved / 4 worsened across 20 conditions; requested=3 and feasible=3 in 20/20, so adaptive input branching not exposed."
+    },
+    {
+      "name": "step72_to_73_engine_transition",
+      "run_id": 36655515683,
+      "result": "Shop difference mechanically maps to observed Market inventory difference through official _town_consume."
+    },
+    {
+      "name": "step96_to_97_cash_emergence",
+      "run_id": 36656460289,
+      "result": "Same SELL WHEAT 8; per-unit quote sequences yield 248 vs 242 revenue and exactly +6 Cash difference."
+    },
+    {
+      "name": "step110_to_111_cash_to_effect",
+      "run_id": 36658077957,
+      "result": "+6 Cash persists as 104 vs 98 and crosses official STRAWBERRY seed cost 100; same BUY_SEED request realizes only on positive side, yielding seed 5 vs 4."
+    }
+  ],
+  "boundaries": {
+    "source_effect_is_not_automatically_contract": true,
+    "observer_is_not_policy": true,
+    "automatic_recovery": false,
+    "policy_replanning": false,
+    "market_restoration": false,
+    "adaptive_generality_unproven": true,
+    "terminal_amplification_from_seed_gap_unproven": true
+  },
+  "immutable_behavior_files": [
+    "adaptive_replay_contract_runtime_v0.py",
+    "adaptive_replay_effect_contracts_v0.json",
+    "adaptive_replay_world_adapter_v0.py"
+  ]
+}
