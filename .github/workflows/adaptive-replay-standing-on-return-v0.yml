@@ -8,13 +8,14 @@ on:
       - adaptive_replay_contract_runtime_v0.py
       - adaptive_replay_standing_on_return_v0.py
       - test_adaptive_replay_standing_on_return_v0.py
+      - run_adaptive_replay_standing_on_return_fixed10.py
       - .github/workflows/adaptive-replay-standing-on-return-v0.yml
   workflow_dispatch:
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - name: Install runtime
@@ -23,3 +24,11 @@ jobs:
           pip install "kaggle-environments>=1.32.7" >/dev/null
       - name: Run standing-on-return contract test
         run: python -m unittest test_adaptive_replay_standing_on_return_v0 -v
+      - name: Run fixed10 terminal A/B
+        run: python run_adaptive_replay_standing_on_return_fixed10.py
+      - name: Upload fixed10 result
+        uses: actions/upload-artifact@v4
+        with:
+          name: adaptive-replay-standing-on-return-v0-fixed10
+          path: adaptive_replay_standing_on_return_v0_fixed10.json
+          if-no-files-found: error
