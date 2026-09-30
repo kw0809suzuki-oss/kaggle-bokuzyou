@@ -1,0 +1,36 @@
+{
+  "schema": "adaptive-circulation-opportunity-step250-investigation-v0",
+  "status": "candidate-context-observed_no-selector",
+  "runs": {
+    "fixed10_ab": 36704505677,
+    "step250_context": 36705655401
+  },
+  "confirmed": [
+    {
+      "point": "shared_local_trigger",
+      "detail": "All 10 cases reached the same step250 / Day10 h10 opportunity shape: actor3 stood on the same Day8 WHEAT with yield_units=1, baseline actor3 action was WATER, actor6 action was PLANT WHEAT, and no HARVEST was already issued."
+    },
+    {
+      "point": "local_context_not_a_clean_separator",
+      "detail": "Hands=12, action-op composition, harvestable actor indices [3,11], actor3 tile, and most mature backlog measures were identical across negative and large-positive cases."
+    },
+    {
+      "point": "near_local_match_opposite_terminal_response",
+      "detail": "seed92802003 (-9494) and seed92802010 (+21995) had the same mature counts, WHEAT seeds=4, shed WHEAT=18, carried EGG=3/FERTILIZER=7/MELON=18/WHEAT=13, and actor3 inventory WHEAT=1. Their visible differences were mainly cash/opponent cash and shared-market prices."
+    },
+    {
+      "point": "water_is_productive_not_idle",
+      "detail": "Official WHEAT rules: first_yield_day=2, max_yield_day=4, non-ongoing. At Day10 for a Day8 WHEAT with yield_units=1, WATER is inside the yield-growth window and raises yield_units by 1 (unless already watered). HARVEST instead transfers current yield to inventory and removes the non-ongoing plant."
+    }
+  ],
+  "interpretation_boundary": [
+    "The current one-shot candidate is not simply return-now versus expansion. It replaces a productive WATER operation with immediate HARVEST.",
+    "The sign difference cannot currently be assigned to cash, inventory, or any single observed market price.",
+    "Market/opponent World context is a plausible next observation surface because locally similar self-farm states can have opposite terminal response, but causality is not established."
+  ],
+  "next_probe": {
+    "question": "Can a one-shot return alternative be found where HARVEST does not replace an operation that is itself increasing the target plant's future output?",
+    "example_gate": "mature crop under actor + concurrent expansion labor + original actor action is not HARVEST/WATER/FERTILIZE or another productive maintenance action",
+    "policy_change": "none yet"
+  }
+}
