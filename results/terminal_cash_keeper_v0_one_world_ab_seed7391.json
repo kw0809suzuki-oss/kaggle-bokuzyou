@@ -1,0 +1,24 @@
+{
+  "schema": "terminal-cash-keeper-v0-one-world-ab",
+  "seed": 7391,
+  "seat": 0,
+  "opponent": "Seyamalam pinned v21",
+  "keeper": {
+    "turns": 719,
+    "terminal_self": 4373.0,
+    "terminal_opponent": 152356.0,
+    "margin": -147983.0
+  },
+  "adaptive_replay_contract_runtime_v0": {
+    "turns": 719,
+    "terminal_self": 76202.0,
+    "terminal_opponent": 38802.0,
+    "margin": 37400.0
+  },
+  "delta_keeper_minus_adaptive": {
+    "terminal_self": -71829.0,
+    "margin": -185383.0
+  },
+  "boundary": "One seed only; no general strength conclusion and no cause analysis.",
+  "workflow_run_id": 36699594481
+}
