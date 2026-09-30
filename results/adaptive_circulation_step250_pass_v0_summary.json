@@ -1,0 +1,61 @@
+{
+  "schema": "adaptive-circulation-step250-pass-v0-summary",
+  "run_id": 36710018003,
+  "status": "observed",
+  "question": "Was the earlier WATER->HARVEST gain supported by skipping WATER, by HARVEST itself, or both?",
+  "fixed10": {
+    "pass_vs_water": {
+      "improved": 7,
+      "worsened": 3,
+      "same": 0,
+      "mean_delta_terminal_self": 141.3,
+      "median_delta_terminal_self": 70.5,
+      "min": -209,
+      "max": 810
+    },
+    "harvest_vs_water": {
+      "improved": 8,
+      "worsened": 2,
+      "same": 0,
+      "mean_delta_terminal_self": 2614.2,
+      "median_delta_terminal_self": 95.0,
+      "min": -9494,
+      "max": 21995
+    },
+    "harvest_vs_pass": {
+      "improved": 4,
+      "worsened": 6,
+      "same": 0,
+      "mean_delta_terminal_self": 2472.9,
+      "median_delta_terminal_self": -51.5,
+      "min": -9578,
+      "max": 21568
+    }
+  },
+  "seed_deltas": [
+    {"seed":92802001,"pass_minus_water":33,"harvest_minus_water":-7624,"harvest_minus_pass":-7657},
+    {"seed":92802002,"pass_minus_water":273,"harvest_minus_water":169,"harvest_minus_pass":-104},
+    {"seed":92802003,"pass_minus_water":84,"harvest_minus_water":-9494,"harvest_minus_pass":-9578},
+    {"seed":92802004,"pass_minus_water":71,"harvest_minus_water":21,"harvest_minus_pass":-50},
+    {"seed":92802005,"pass_minus_water":810,"harvest_minus_water":16,"harvest_minus_pass":-794},
+    {"seed":92802006,"pass_minus_water":-209,"harvest_minus_water":686,"harvest_minus_pass":895},
+    {"seed":92802007,"pass_minus_water":-17,"harvest_minus_water":173,"harvest_minus_pass":190},
+    {"seed":92802008,"pass_minus_water":70,"harvest_minus_water":17,"harvest_minus_pass":-53},
+    {"seed":92802009,"pass_minus_water":-129,"harvest_minus_water":20183,"harvest_minus_pass":20312},
+    {"seed":92802010,"pass_minus_water":427,"harvest_minus_water":21995,"harvest_minus_pass":21568}
+  ],
+  "confirmed": [
+    "Skipping the step250 WATER alone changes terminal_self and improves 7/10 in this fixed10.",
+    "Among the eight cases where HARVEST beat WATER, HARVEST also beat PASS in only four cases.",
+    "In seeds 92802002, 92802004, 92802005, and 92802008, PASS beat HARVEST even though HARVEST beat WATER.",
+    "In seeds 92802006, 92802007, 92802009, and 92802010, HARVEST beat both WATER and PASS.",
+    "In the two HARVEST-vs-WATER worsening cases, seeds 92802001 and 92802003, PASS still beat WATER while HARVEST was much worse than PASS."
+  ],
+  "boundary": [
+    "PASS is itself a world-changing intervention.",
+    "HARVEST-PASS is not a pure crop-value estimate because downstream actions and World divergence remain included.",
+    "The result weakens the interpretation that the earlier 8/10 gain was simply due to harvesting mature output.",
+    "No state-based decision rule is promoted yet."
+  ],
+  "next_open_question": "What observable step250 Current-World difference separates cases where HARVEST adds value beyond PASS from cases where simply skipping WATER is better?"
+}
