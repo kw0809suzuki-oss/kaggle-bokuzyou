@@ -1,0 +1,107 @@
+name: Build Adaptive Replay v0 Submission
+on:
+  push:
+    branches: ["packaging/adaptive-replay-v0-submission-20260930"]
+    paths:
+      - ".github/workflows/build-adaptive-replay-v0-submission.yml"
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build single-file submission
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          src = Path("decem_replay_distilled_157026_v0.py").read_text(encoding="utf-8")
+          src = src.replace("def reset_agent():\n    return None", "def _replay_reset_agent():\n    return None")
+          src = src.replace("def agent(obs, configuration=None):", "def _replay_agent(obs, configuration=None):", 1)
+          suffix = r'''
+
+_SOURCE_HIRE_GUARD_STEP = 24
+_SOURCE_REALIZED_HIRES = 1
+
+def _fib(n: int) -> int:
+    a, b = 1, 1
+    for _ in range(max(0, n - 1)):
+        a, b = b, a + b
+    return a
+
+def _count_feasible_hires(money: float, hires_today: int, requested: int, cost_mult: float) -> int:
+    cash = float(money)
+    done = 0
+    for offset in range(requested):
+        nth = int(hires_today) + offset + 1
+        cost = float(cost_mult) * _fib(nth)
+        if cash < cost:
+            break
+        cash -= cost
+        done += 1
+    return done
+
+def agent(obs, configuration=None):
+    action = deepcopy(_replay_agent(obs, configuration))
+    step = int(obs.get("step", 0) or 0)
+    if step != _SOURCE_HIRE_GUARD_STEP:
+        return action
+
+    player = int(obs.get("player", 0) or 0)
+    farm = obs["farms"][player]
+    market_orders = list(action.get("market", []) or [])
+    requested_hires = sum(
+        1 for order in market_orders
+        if isinstance(order, (list, tuple)) and len(order) >= 1 and order[0] == "HIRE"
+    )
+    if requested_hires <= _SOURCE_REALIZED_HIRES:
+        return action
+
+    money = float(farm.get("money", 0) or 0)
+    hires_today = int(farm.get("hires_today", 0) or 0)
+    cost_mult = 1.0
+    if configuration is not None:
+        if isinstance(configuration, dict):
+            cost_mult = float(configuration.get("farmHandCostMult", 1) or 1)
+        else:
+            cost_mult = float(getattr(configuration, "farmHandCostMult", 1) or 1)
+
+    feasible = _count_feasible_hires(money, hires_today, requested_hires, cost_mult)
+    if feasible <= _SOURCE_REALIZED_HIRES:
+        return action
+
+    kept = 0
+    guarded_market = []
+    for order in market_orders:
+        is_hire = isinstance(order, (list, tuple)) and len(order) >= 1 and order[0] == "HIRE"
+        if not is_hire:
+            guarded_market.append(order)
+            continue
+        if kept < _SOURCE_REALIZED_HIRES:
+            guarded_market.append(order)
+            kept += 1
+
+    action["market"] = guarded_market
+    return action
+'''
+          Path("main.py").write_text(src + suffix, encoding="utf-8")
+          PY
+          python -m py_compile main.py
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+          p=Path("main.py")
+          tree=ast.parse(p.read_text(encoding="utf-8"))
+          public=[n.name for n in tree.body if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef)) and not n.name.startswith("_")]
+          print("public callables:", public)
+          assert public == ["agent"], public
+          print("main.py bytes:", p.stat().st_size)
+          PY
+          tar -czf kaggriculture_adaptive_replay_v0_submission.tar.gz main.py
+          tar -tzf kaggriculture_adaptive_replay_v0_submission.tar.gz
+          sha256sum kaggriculture_adaptive_replay_v0_submission.tar.gz
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kaggriculture-adaptive-replay-v0-submission
+          path: kaggriculture_adaptive_replay_v0_submission.tar.gz
+          if-no-files-found: error
