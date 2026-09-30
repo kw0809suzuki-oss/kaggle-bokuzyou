@@ -357,6 +357,79 @@ def first_action_divergence(source, current):
     return None
 
 
+
+def action_operations(action):
+    action = action or {}
+    unit_actions = [action.get("farmer", ["PASS"])] + list(action.get("hands", []) or [])
+    market_actions = list(action.get("market", []) or [])
+    ops = []
+    for a in unit_actions:
+        if isinstance(a, (list, tuple)) and a:
+            ops.append(str(a[0]))
+    for a in market_actions:
+        if isinstance(a, (list, tuple)) and a:
+            ops.append(str(a[0]))
+    return ops
+
+
+def flow_roles(action):
+    ops = set(action_operations(action))
+    roles = set()
+
+    if ops & {"BUY_SEED", "BUY_ANIMAL", "BUY_LAND", "HIRE"}:
+        roles.add("EXPAND_OR_INVEST")
+    if "BUY_PRODUCT" in ops:
+        roles.add("ACQUIRE_MATERIAL")
+    if ops & {"PLANT", "BUILD_COOP", "BUILD_PASTURE"}:
+        roles.add("ACTIVATE_PRODUCTIVE_BODY")
+    if "PLACE" in ops:
+        roles.add("PLACE_OR_APPLY_MATERIAL")
+    if ops & {"WATER", "FEED", "CARE", "FERTILIZE"}:
+        roles.add("MAINTAIN_PRODUCTIVE_BODY")
+    if "HARVEST" in ops:
+        roles.add("EXTRACT_OUTPUT")
+        roles.add("RETURN_PATH")
+    if "DROP" in ops:
+        roles.add("TRANSFER_TO_SHED")
+        roles.add("RETURN_PATH")
+    if "SELL" in ops:
+        roles.add("REALIZE_CASH")
+        roles.add("RETURN_PATH")
+    if "PICKUP" in ops:
+        roles.add("TRANSFER_FROM_SHED")
+    if "COLLECT_FERTILIZER" in ops:
+        roles.add("COLLECT_BYPRODUCT")
+    if ops & {"NORTH", "SOUTH", "EAST", "WEST"}:
+        roles.add("MOVE")
+    if not roles:
+        roles.add("OTHER")
+    return sorted(roles)
+
+
+def first_effect_divergence_by_role(source, current, role):
+    n = min(len(source), len(current))
+    for i in range(n):
+        sr = flow_roles(source[i]["W"]["action"])
+        cr = flow_roles(current[i]["W"]["action"])
+        if role not in sr and role not in cr:
+            continue
+        differing = [
+            ch for ch in ("L", "P", "R", "X")
+            if source[i][ch] != current[i][ch]
+        ]
+        if differing:
+            return {
+                "transition_index": i,
+                "source_roles": sr,
+                "current_roles": cr,
+                "source_action": source[i]["W"]["action"],
+                "current_action": current[i]["W"]["action"],
+                "differing_effect_channels": differing,
+                "source_effect": {ch: source[i][ch] for ch in differing},
+                "current_effect": {ch: current[i][ch] for ch in differing},
+            }
+    return None
+
 def compact_effect(e):
     return {k: e[k] for k in ("issued_step", "observed_step", "L", "P", "R", "X", "W", "C")}
 
@@ -369,6 +442,20 @@ def main():
     channels = ["L", "P", "R", "X", "W", "C"]
     first_by_channel = {ch: first_divergence(source, current, ch) for ch in channels}
     first_action = first_action_divergence(source, current)
+    role_names = [
+        "EXPAND_OR_INVEST",
+        "ACQUIRE_MATERIAL",
+        "ACTIVATE_PRODUCTIVE_BODY",
+        "MAINTAIN_PRODUCTIVE_BODY",
+        "RETURN_PATH",
+        "EXTRACT_OUTPUT",
+        "TRANSFER_TO_SHED",
+        "REALIZE_CASH",
+    ]
+    first_by_role = {
+        role: first_effect_divergence_by_role(source, current, role)
+        for role in role_names
+    }
 
     # Preserve a narrow window around the earliest self-circulation divergence.
     self_channels = ["L", "P", "R", "X"]
@@ -410,13 +497,14 @@ def main():
         "surface_definition": {
             "L": "liquid cash transition",
             "P": "productive-body transition",
-            "R": "return-pipeline transition",
+            "R": "material-stage transition (yield / carry / shed); role-neutral until action provenance is checked",
             "X": "input inventory transition",
             "W": "issued work + actor-position transition",
             "C": "shared World context transition",
         },
         "first_action_divergence": first_action,
         "first_divergence_by_channel": first_by_channel,
+        "first_effect_divergence_by_flow_role": first_by_role,
         "first_self_circulation_divergence_index": first_self_idx,
         "window_around_first_self_divergence": window,
         "boundary": [
@@ -443,6 +531,9 @@ def main():
         "first_W": None if first_by_channel["W"] is None else first_by_channel["W"]["transition_index"],
         "first_C": None if first_by_channel["C"] is None else first_by_channel["C"]["transition_index"],
         "first_self_circulation": first_self_idx,
+        "first_return_path_effect": None if first_by_role["RETURN_PATH"] is None else first_by_role["RETURN_PATH"]["transition_index"],
+        "first_acquire_material_effect": None if first_by_role["ACQUIRE_MATERIAL"] is None else first_by_role["ACQUIRE_MATERIAL"]["transition_index"],
+        "first_expand_effect": None if first_by_role["EXPAND_OR_INVEST"] is None else first_by_role["EXPAND_OR_INVEST"]["transition_index"],
     }
     print("SUMMARY " + json.dumps(summary, separators=(",", ":")))
     for ch in ["L", "P", "R", "X", "W", "C"]:
@@ -454,6 +545,10 @@ def main():
                 "current": row.get("current"),
             }, ensure_ascii=False, separators=(",", ":")))
     print("FIRST_ACTION " + json.dumps(first_action, ensure_ascii=False, separators=(",", ":")))
+    for role in role_names:
+        row = first_by_role[role]
+        if row is not None:
+            print("FIRST_ROLE_" + role + " " + json.dumps(row, ensure_ascii=False, separators=(",", ":")))
 
 
 if __name__ == "__main__":
