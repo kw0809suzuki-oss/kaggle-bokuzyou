@@ -1,0 +1,2679 @@
+{
+  "schema": "adaptive-replay-boundary-observation-v0-result",
+  "run_id": 36653074221,
+  "branch": "experiment/adaptive-replay-boundary-observation-v0-20260930",
+  "engine_commit": "d7729da06cc1382eb742d6980dc3180aa85caa28",
+  "summary": {
+    "n": 20,
+    "improved": 16,
+    "worsened": 4,
+    "same": 0,
+    "mean_delta_terminal_self": 32541.4,
+    "median_delta_terminal_self": 31386.5,
+    "guard_triggered_cases": 20,
+    "step24_pre_equal_ab": 20,
+    "unique_contract_inputs": 2,
+    "contract_input_distribution": {
+      "6.0|0|0|3|3": 10,
+      "4.0|0|0|3|3": 10
+    },
+    "worlds": {
+      "decem_replay|seat0": {
+        "n": 5,
+        "improved": 4,
+        "worsened": 1,
+        "same": 0,
+        "mean_delta_terminal_self": 33213.6,
+        "guard_triggered": 5,
+        "prestate_equal_ab": 5,
+        "input_distribution": {
+          "4.0|0|0|3|3": 5
+        }
+      },
+      "decem_replay|seat1": {
+        "n": 5,
+        "improved": 4,
+        "worsened": 1,
+        "same": 0,
+        "mean_delta_terminal_self": 27521.8,
+        "guard_triggered": 5,
+        "prestate_equal_ab": 5,
+        "input_distribution": {
+          "4.0|0|0|3|3": 5
+        }
+      },
+      "seyamalam_v21|seat0": {
+        "n": 5,
+        "improved": 4,
+        "worsened": 1,
+        "same": 0,
+        "mean_delta_terminal_self": 34602.8,
+        "guard_triggered": 5,
+        "prestate_equal_ab": 5,
+        "input_distribution": {
+          "6.0|0|0|3|3": 5
+        }
+      },
+      "seyamalam_v21|seat1": {
+        "n": 5,
+        "improved": 4,
+        "worsened": 1,
+        "same": 0,
+        "mean_delta_terminal_self": 34827.4,
+        "guard_triggered": 5,
+        "prestate_equal_ab": 5,
+        "input_distribution": {
+          "6.0|0|0|3|3": 5
+        }
+      }
+    }
+  },
+  "observation": {
+    "contract_input_variety": "2 tuples, distinguished by money=6 vs money=4; feasible_hires remained 3 in all 20 cases",
+    "runtime_response": "Guard triggered 20/20 and issued the same protected HIRE x1 response",
+    "terminal_response": "16 improved / 4 worsened; all four worsened cases were seed 93803005 across both opponents and both seats",
+    "boundary": "Current Contract input does not discriminate positive from negative terminal response."
+  },
+  "cases": [
+    {
+      "opponent": "seyamalam_v21",
+      "subject_seat": 0,
+      "seed": 93803001,
+      "step24_pre_equal": true,
+      "contract_input": {
+        "money": 6,
+        "hires_today": 0,
+        "hands": 0,
+        "replay_requested_hires": 3,
+        "feasible_hires": 3
+      },
+      "baseline": {
+        "terminal_self": 91962,
+        "terminal_opponent": 120714,
+        "margin": -28752,
+        "guard_trigger_count": 0,
+        "guard_event": null,
+        "contract_id": null,
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 2,
+            "hires_today": 3,
+            "hands": 3,
+            "realized_hires_delta": 3
+          }
+        }
+      },
+      "candidate": {
+        "terminal_self": 94371,
+        "terminal_opponent": 24898,
+        "margin": 69473,
+        "guard_trigger_count": 1,
+        "guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "contract_id": "step24-hire-realized-plus1-v0",
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 5,
+            "hires_today": 1,
+            "hands": 1,
+            "realized_hires_delta": 1
+          }
+        }
+      },
+      "delta_terminal_self": 2409,
+      "delta_margin": 98225
+    },
+    {
+      "opponent": "seyamalam_v21",
+      "subject_seat": 0,
+      "seed": 93803002,
+      "step24_pre_equal": true,
+      "contract_input": {
+        "money": 6,
+        "hires_today": 0,
+        "hands": 0,
+        "replay_requested_hires": 3,
+        "feasible_hires": 3
+      },
+      "baseline": {
+        "terminal_self": 55703,
+        "terminal_opponent": 27923,
+        "margin": 27780,
+        "guard_trigger_count": 0,
+        "guard_event": null,
+        "contract_id": null,
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 2,
+            "hires_today": 3,
+            "hands": 3,
+            "realized_hires_delta": 3
+          }
+        }
+      },
+      "candidate": {
+        "terminal_self": 115595,
+        "terminal_opponent": 81835,
+        "margin": 33760,
+        "guard_trigger_count": 1,
+        "guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "contract_id": "step24-hire-realized-plus1-v0",
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 5,
+            "hires_today": 1,
+            "hands": 1,
+            "realized_hires_delta": 1
+          }
+        }
+      },
+      "delta_terminal_self": 59892,
+      "delta_margin": 5980
+    },
+    {
+      "opponent": "seyamalam_v21",
+      "subject_seat": 0,
+      "seed": 93803003,
+      "step24_pre_equal": true,
+      "contract_input": {
+        "money": 6,
+        "hires_today": 0,
+        "hands": 0,
+        "replay_requested_hires": 3,
+        "feasible_hires": 3
+      },
+      "baseline": {
+        "terminal_self": 48975,
+        "terminal_opponent": 26887,
+        "margin": 22088,
+        "guard_trigger_count": 0,
+        "guard_event": null,
+        "contract_id": null,
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 2,
+            "hires_today": 3,
+            "hands": 3,
+            "realized_hires_delta": 3
+          }
+        }
+      },
+      "candidate": {
+        "terminal_self": 112168,
+        "terminal_opponent": 72371,
+        "margin": 39797,
+        "guard_trigger_count": 1,
+        "guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "contract_id": "step24-hire-realized-plus1-v0",
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 5,
+            "hires_today": 1,
+            "hands": 1,
+            "realized_hires_delta": 1
+          }
+        }
+      },
+      "delta_terminal_self": 63193,
+      "delta_margin": 17709
+    },
+    {
+      "opponent": "seyamalam_v21",
+      "subject_seat": 0,
+      "seed": 93803004,
+      "step24_pre_equal": true,
+      "contract_input": {
+        "money": 6,
+        "hires_today": 0,
+        "hands": 0,
+        "replay_requested_hires": 3,
+        "feasible_hires": 3
+      },
+      "baseline": {
+        "terminal_self": 100141,
+        "terminal_opponent": 78188,
+        "margin": 21953,
+        "guard_trigger_count": 0,
+        "guard_event": null,
+        "contract_id": null,
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 2,
+            "hires_today": 3,
+            "hands": 3,
+            "realized_hires_delta": 3
+          }
+        }
+      },
+      "candidate": {
+        "terminal_self": 167103,
+        "terminal_opponent": 147353,
+        "margin": 19750,
+        "guard_trigger_count": 1,
+        "guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "contract_id": "step24-hire-realized-plus1-v0",
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 5,
+            "hires_today": 1,
+            "hands": 1,
+            "realized_hires_delta": 1
+          }
+        }
+      },
+      "delta_terminal_self": 66962,
+      "delta_margin": -2203
+    },
+    {
+      "opponent": "seyamalam_v21",
+      "subject_seat": 0,
+      "seed": 93803005,
+      "step24_pre_equal": true,
+      "contract_input": {
+        "money": 6,
+        "hires_today": 0,
+        "hands": 0,
+        "replay_requested_hires": 3,
+        "feasible_hires": 3
+      },
+      "baseline": {
+        "terminal_self": 100364,
+        "terminal_opponent": 120454,
+        "margin": -20090,
+        "guard_trigger_count": 0,
+        "guard_event": null,
+        "contract_id": null,
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 2,
+            "hires_today": 3,
+            "hands": 3,
+            "realized_hires_delta": 3
+          }
+        }
+      },
+      "candidate": {
+        "terminal_self": 80922,
+        "terminal_opponent": 48729,
+        "margin": 32193,
+        "guard_trigger_count": 1,
+        "guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "contract_id": "step24-hire-realized-plus1-v0",
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 5,
+            "hires_today": 1,
+            "hands": 1,
+            "realized_hires_delta": 1
+          }
+        }
+      },
+      "delta_terminal_self": -19442,
+      "delta_margin": 52283
+    },
+    {
+      "opponent": "seyamalam_v21",
+      "subject_seat": 1,
+      "seed": 93803001,
+      "step24_pre_equal": true,
+      "contract_input": {
+        "money": 6,
+        "hires_today": 0,
+        "hands": 0,
+        "replay_requested_hires": 3,
+        "feasible_hires": 3
+      },
+      "baseline": {
+        "terminal_self": 91982,
+        "terminal_opponent": 120682,
+        "margin": -28700,
+        "guard_trigger_count": 0,
+        "guard_event": null,
+        "contract_id": null,
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 2,
+            "hires_today": 3,
+            "hands": 3,
+            "realized_hires_delta": 3
+          }
+        }
+      },
+      "candidate": {
+        "terminal_self": 94371,
+        "terminal_opponent": 24898,
+        "margin": 69473,
+        "guard_trigger_count": 1,
+        "guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "contract_id": "step24-hire-realized-plus1-v0",
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 5,
+            "hires_today": 1,
+            "hands": 1,
+            "realized_hires_delta": 1
+          }
+        }
+      },
+      "delta_terminal_self": 2389,
+      "delta_margin": 98173
+    },
+    {
+      "opponent": "seyamalam_v21",
+      "subject_seat": 1,
+      "seed": 93803002,
+      "step24_pre_equal": true,
+      "contract_input": {
+        "money": 6,
+        "hires_today": 0,
+        "hands": 0,
+        "replay_requested_hires": 3,
+        "feasible_hires": 3
+      },
+      "baseline": {
+        "terminal_self": 55921,
+        "terminal_opponent": 27873,
+        "margin": 28048,
+        "guard_trigger_count": 0,
+        "guard_event": null,
+        "contract_id": null,
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 2,
+            "hires_today": 3,
+            "hands": 3,
+            "realized_hires_delta": 3
+          }
+        }
+      },
+      "candidate": {
+        "terminal_self": 115362,
+        "terminal_opponent": 82039,
+        "margin": 33323,
+        "guard_trigger_count": 1,
+        "guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "contract_id": "step24-hire-realized-plus1-v0",
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 5,
+            "hires_today": 1,
+            "hands": 1,
+            "realized_hires_delta": 1
+          }
+        }
+      },
+      "delta_terminal_self": 59441,
+      "delta_margin": 5275
+    },
+    {
+      "opponent": "seyamalam_v21",
+      "subject_seat": 1,
+      "seed": 93803003,
+      "step24_pre_equal": true,
+      "contract_input": {
+        "money": 6,
+        "hires_today": 0,
+        "hands": 0,
+        "replay_requested_hires": 3,
+        "feasible_hires": 3
+      },
+      "baseline": {
+        "terminal_self": 50145,
+        "terminal_opponent": 27646,
+        "margin": 22499,
+        "guard_trigger_count": 0,
+        "guard_event": null,
+        "contract_id": null,
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 2,
+            "hires_today": 3,
+            "hands": 3,
+            "realized_hires_delta": 3
+          }
+        }
+      },
+      "candidate": {
+        "terminal_self": 115980,
+        "terminal_opponent": 74555,
+        "margin": 41425,
+        "guard_trigger_count": 1,
+        "guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "contract_id": "step24-hire-realized-plus1-v0",
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 5,
+            "hires_today": 1,
+            "hands": 1,
+            "realized_hires_delta": 1
+          }
+        }
+      },
+      "delta_terminal_self": 65835,
+      "delta_margin": 18926
+    },
+    {
+      "opponent": "seyamalam_v21",
+      "subject_seat": 1,
+      "seed": 93803004,
+      "step24_pre_equal": true,
+      "contract_input": {
+        "money": 6,
+        "hires_today": 0,
+        "hands": 0,
+        "replay_requested_hires": 3,
+        "feasible_hires": 3
+      },
+      "baseline": {
+        "terminal_self": 100834,
+        "terminal_opponent": 77984,
+        "margin": 22850,
+        "guard_trigger_count": 0,
+        "guard_event": null,
+        "contract_id": null,
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 2,
+            "hires_today": 3,
+            "hands": 3,
+            "realized_hires_delta": 3
+          }
+        }
+      },
+      "candidate": {
+        "terminal_self": 167060,
+        "terminal_opponent": 147393,
+        "margin": 19667,
+        "guard_trigger_count": 1,
+        "guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "contract_id": "step24-hire-realized-plus1-v0",
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 5,
+            "hires_today": 1,
+            "hands": 1,
+            "realized_hires_delta": 1
+          }
+        }
+      },
+      "delta_terminal_self": 66226,
+      "delta_margin": -3183
+    },
+    {
+      "opponent": "seyamalam_v21",
+      "subject_seat": 1,
+      "seed": 93803005,
+      "step24_pre_equal": true,
+      "contract_input": {
+        "money": 6,
+        "hires_today": 0,
+        "hands": 0,
+        "replay_requested_hires": 3,
+        "feasible_hires": 3
+      },
+      "baseline": {
+        "terminal_self": 100367,
+        "terminal_opponent": 120329,
+        "margin": -19962,
+        "guard_trigger_count": 0,
+        "guard_event": null,
+        "contract_id": null,
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 2,
+            "hires_today": 3,
+            "hands": 3,
+            "realized_hires_delta": 3
+          }
+        }
+      },
+      "candidate": {
+        "terminal_self": 80613,
+        "terminal_opponent": 48377,
+        "margin": 32236,
+        "guard_trigger_count": 1,
+        "guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "contract_id": "step24-hire-realized-plus1-v0",
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 5,
+            "hires_today": 1,
+            "hands": 1,
+            "realized_hires_delta": 1
+          }
+        }
+      },
+      "delta_terminal_self": -19754,
+      "delta_margin": 52198
+    },
+    {
+      "opponent": "decem_replay",
+      "subject_seat": 0,
+      "seed": 93803001,
+      "step24_pre_equal": true,
+      "contract_input": {
+        "money": 4,
+        "hires_today": 0,
+        "hands": 0,
+        "replay_requested_hires": 3,
+        "feasible_hires": 3
+      },
+      "baseline": {
+        "terminal_self": 82219,
+        "terminal_opponent": 82219,
+        "margin": 0,
+        "guard_trigger_count": 0,
+        "guard_event": null,
+        "contract_id": null,
+        "step24": {
+          "pre": {
+            "money": 4,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 0,
+            "hires_today": 3,
+            "hands": 3,
+            "realized_hires_delta": 3
+          }
+        }
+      },
+      "candidate": {
+        "terminal_self": 106331,
+        "terminal_opponent": 53391,
+        "margin": 52940,
+        "guard_trigger_count": 1,
+        "guard_event": {
+          "step": 24,
+          "money": 4,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "contract_id": "step24-hire-realized-plus1-v0",
+        "step24": {
+          "pre": {
+            "money": 4,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 3,
+            "hires_today": 1,
+            "hands": 1,
+            "realized_hires_delta": 1
+          }
+        }
+      },
+      "delta_terminal_self": 24112,
+      "delta_margin": 52940
+    },
+    {
+      "opponent": "decem_replay",
+      "subject_seat": 0,
+      "seed": 93803002,
+      "step24_pre_equal": true,
+      "contract_input": {
+        "money": 4,
+        "hires_today": 0,
+        "hands": 0,
+        "replay_requested_hires": 3,
+        "feasible_hires": 3
+      },
+      "baseline": {
+        "terminal_self": 72875,
+        "terminal_opponent": 72959,
+        "margin": -84,
+        "guard_trigger_count": 0,
+        "guard_event": null,
+        "contract_id": null,
+        "step24": {
+          "pre": {
+            "money": 4,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 0,
+            "hires_today": 3,
+            "hands": 3,
+            "realized_hires_delta": 3
+          }
+        }
+      },
+      "candidate": {
+        "terminal_self": 88846,
+        "terminal_opponent": 51197,
+        "margin": 37649,
+        "guard_trigger_count": 1,
+        "guard_event": {
+          "step": 24,
+          "money": 4,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "contract_id": "step24-hire-realized-plus1-v0",
+        "step24": {
+          "pre": {
+            "money": 4,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 3,
+            "hires_today": 1,
+            "hands": 1,
+            "realized_hires_delta": 1
+          }
+        }
+      },
+      "delta_terminal_self": 15971,
+      "delta_margin": 37733
+    },
+    {
+      "opponent": "decem_replay",
+      "subject_seat": 0,
+      "seed": 93803003,
+      "step24_pre_equal": true,
+      "contract_input": {
+        "money": 4,
+        "hires_today": 0,
+        "hands": 0,
+        "replay_requested_hires": 3,
+        "feasible_hires": 3
+      },
+      "baseline": {
+        "terminal_self": 58111,
+        "terminal_opponent": 58111,
+        "margin": 0,
+        "guard_trigger_count": 0,
+        "guard_event": null,
+        "contract_id": null,
+        "step24": {
+          "pre": {
+            "money": 4,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 0,
+            "hires_today": 3,
+            "hands": 3,
+            "realized_hires_delta": 3
+          }
+        }
+      },
+      "candidate": {
+        "terminal_self": 106039,
+        "terminal_opponent": 64677,
+        "margin": 41362,
+        "guard_trigger_count": 1,
+        "guard_event": {
+          "step": 24,
+          "money": 4,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "contract_id": "step24-hire-realized-plus1-v0",
+        "step24": {
+          "pre": {
+            "money": 4,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 3,
+            "hires_today": 1,
+            "hands": 1,
+            "realized_hires_delta": 1
+          }
+        }
+      },
+      "delta_terminal_self": 47928,
+      "delta_margin": 41362
+    },
+    {
+      "opponent": "decem_replay",
+      "subject_seat": 0,
+      "seed": 93803004,
+      "step24_pre_equal": true,
+      "contract_input": {
+        "money": 4,
+        "hires_today": 0,
+        "hands": 0,
+        "replay_requested_hires": 3,
+        "feasible_hires": 3
+      },
+      "baseline": {
+        "terminal_self": 63874,
+        "terminal_opponent": 64305,
+        "margin": -431,
+        "guard_trigger_count": 0,
+        "guard_event": null,
+        "contract_id": null,
+        "step24": {
+          "pre": {
+            "money": 4,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 0,
+            "hires_today": 3,
+            "hands": 3,
+            "realized_hires_delta": 3
+          }
+        }
+      },
+      "candidate": {
+        "terminal_self": 145896,
+        "terminal_opponent": 86262,
+        "margin": 59634,
+        "guard_trigger_count": 1,
+        "guard_event": {
+          "step": 24,
+          "money": 4,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "contract_id": "step24-hire-realized-plus1-v0",
+        "step24": {
+          "pre": {
+            "money": 4,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 3,
+            "hires_today": 1,
+            "hands": 1,
+            "realized_hires_delta": 1
+          }
+        }
+      },
+      "delta_terminal_self": 82022,
+      "delta_margin": 60065
+    },
+    {
+      "opponent": "decem_replay",
+      "subject_seat": 0,
+      "seed": 93803005,
+      "step24_pre_equal": true,
+      "contract_input": {
+        "money": 4,
+        "hires_today": 0,
+        "hands": 0,
+        "replay_requested_hires": 3,
+        "feasible_hires": 3
+      },
+      "baseline": {
+        "terminal_self": 96805,
+        "terminal_opponent": 96805,
+        "margin": 0,
+        "guard_trigger_count": 0,
+        "guard_event": null,
+        "contract_id": null,
+        "step24": {
+          "pre": {
+            "money": 4,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 0,
+            "hires_today": 3,
+            "hands": 3,
+            "realized_hires_delta": 3
+          }
+        }
+      },
+      "candidate": {
+        "terminal_self": 92840,
+        "terminal_opponent": 46131,
+        "margin": 46709,
+        "guard_trigger_count": 1,
+        "guard_event": {
+          "step": 24,
+          "money": 4,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "contract_id": "step24-hire-realized-plus1-v0",
+        "step24": {
+          "pre": {
+            "money": 4,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 3,
+            "hires_today": 1,
+            "hands": 1,
+            "realized_hires_delta": 1
+          }
+        }
+      },
+      "delta_terminal_self": -3965,
+      "delta_margin": 46709
+    },
+    {
+      "opponent": "decem_replay",
+      "subject_seat": 1,
+      "seed": 93803001,
+      "step24_pre_equal": true,
+      "contract_input": {
+        "money": 4,
+        "hires_today": 0,
+        "hands": 0,
+        "replay_requested_hires": 3,
+        "feasible_hires": 3
+      },
+      "baseline": {
+        "terminal_self": 82219,
+        "terminal_opponent": 82219,
+        "margin": 0,
+        "guard_trigger_count": 0,
+        "guard_event": null,
+        "contract_id": null,
+        "step24": {
+          "pre": {
+            "money": 4,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 0,
+            "hires_today": 3,
+            "hands": 3,
+            "realized_hires_delta": 3
+          }
+        }
+      },
+      "candidate": {
+        "terminal_self": 106331,
+        "terminal_opponent": 53391,
+        "margin": 52940,
+        "guard_trigger_count": 1,
+        "guard_event": {
+          "step": 24,
+          "money": 4,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "contract_id": "step24-hire-realized-plus1-v0",
+        "step24": {
+          "pre": {
+            "money": 4,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 3,
+            "hires_today": 1,
+            "hands": 1,
+            "realized_hires_delta": 1
+          }
+        }
+      },
+      "delta_terminal_self": 24112,
+      "delta_margin": 52940
+    },
+    {
+      "opponent": "decem_replay",
+      "subject_seat": 1,
+      "seed": 93803002,
+      "step24_pre_equal": true,
+      "contract_input": {
+        "money": 4,
+        "hires_today": 0,
+        "hands": 0,
+        "replay_requested_hires": 3,
+        "feasible_hires": 3
+      },
+      "baseline": {
+        "terminal_self": 72959,
+        "terminal_opponent": 72875,
+        "margin": 84,
+        "guard_trigger_count": 0,
+        "guard_event": null,
+        "contract_id": null,
+        "step24": {
+          "pre": {
+            "money": 4,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 0,
+            "hires_today": 3,
+            "hands": 3,
+            "realized_hires_delta": 3
+          }
+        }
+      },
+      "candidate": {
+        "terminal_self": 88908,
+        "terminal_opponent": 51113,
+        "margin": 37795,
+        "guard_trigger_count": 1,
+        "guard_event": {
+          "step": 24,
+          "money": 4,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "contract_id": "step24-hire-realized-plus1-v0",
+        "step24": {
+          "pre": {
+            "money": 4,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 3,
+            "hires_today": 1,
+            "hands": 1,
+            "realized_hires_delta": 1
+          }
+        }
+      },
+      "delta_terminal_self": 15949,
+      "delta_margin": 37711
+    },
+    {
+      "opponent": "decem_replay",
+      "subject_seat": 1,
+      "seed": 93803003,
+      "step24_pre_equal": true,
+      "contract_input": {
+        "money": 4,
+        "hires_today": 0,
+        "hands": 0,
+        "replay_requested_hires": 3,
+        "feasible_hires": 3
+      },
+      "baseline": {
+        "terminal_self": 58111,
+        "terminal_opponent": 58111,
+        "margin": 0,
+        "guard_trigger_count": 0,
+        "guard_event": null,
+        "contract_id": null,
+        "step24": {
+          "pre": {
+            "money": 4,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 0,
+            "hires_today": 3,
+            "hands": 3,
+            "realized_hires_delta": 3
+          }
+        }
+      },
+      "candidate": {
+        "terminal_self": 96772,
+        "terminal_opponent": 58106,
+        "margin": 38666,
+        "guard_trigger_count": 1,
+        "guard_event": {
+          "step": 24,
+          "money": 4,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "contract_id": "step24-hire-realized-plus1-v0",
+        "step24": {
+          "pre": {
+            "money": 4,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 3,
+            "hires_today": 1,
+            "hands": 1,
+            "realized_hires_delta": 1
+          }
+        }
+      },
+      "delta_terminal_self": 38661,
+      "delta_margin": 38666
+    },
+    {
+      "opponent": "decem_replay",
+      "subject_seat": 1,
+      "seed": 93803004,
+      "step24_pre_equal": true,
+      "contract_input": {
+        "money": 4,
+        "hires_today": 0,
+        "hands": 0,
+        "replay_requested_hires": 3,
+        "feasible_hires": 3
+      },
+      "baseline": {
+        "terminal_self": 64305,
+        "terminal_opponent": 63874,
+        "margin": 431,
+        "guard_trigger_count": 0,
+        "guard_event": null,
+        "contract_id": null,
+        "step24": {
+          "pre": {
+            "money": 4,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 0,
+            "hires_today": 3,
+            "hands": 3,
+            "realized_hires_delta": 3
+          }
+        }
+      },
+      "candidate": {
+        "terminal_self": 126895,
+        "terminal_opponent": 77763,
+        "margin": 49132,
+        "guard_trigger_count": 1,
+        "guard_event": {
+          "step": 24,
+          "money": 4,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "contract_id": "step24-hire-realized-plus1-v0",
+        "step24": {
+          "pre": {
+            "money": 4,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 3,
+            "hires_today": 1,
+            "hands": 1,
+            "realized_hires_delta": 1
+          }
+        }
+      },
+      "delta_terminal_self": 62590,
+      "delta_margin": 48701
+    },
+    {
+      "opponent": "decem_replay",
+      "subject_seat": 1,
+      "seed": 93803005,
+      "step24_pre_equal": true,
+      "contract_input": {
+        "money": 4,
+        "hires_today": 0,
+        "hands": 0,
+        "replay_requested_hires": 3,
+        "feasible_hires": 3
+      },
+      "baseline": {
+        "terminal_self": 96805,
+        "terminal_opponent": 96805,
+        "margin": 0,
+        "guard_trigger_count": 0,
+        "guard_event": null,
+        "contract_id": null,
+        "step24": {
+          "pre": {
+            "money": 4,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 0,
+            "hires_today": 3,
+            "hands": 3,
+            "realized_hires_delta": 3
+          }
+        }
+      },
+      "candidate": {
+        "terminal_self": 93102,
+        "terminal_opponent": 46130,
+        "margin": 46972,
+        "guard_trigger_count": 1,
+        "guard_event": {
+          "step": 24,
+          "money": 4,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "contract_id": "step24-hire-realized-plus1-v0",
+        "step24": {
+          "pre": {
+            "money": 4,
+            "hires_today": 0,
+            "hands": 0,
+            "replay_requested_hires": 3,
+            "feasible_hires": 3
+          },
+          "replay_requested_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 3,
+            "hires_today": 1,
+            "hands": 1,
+            "realized_hires_delta": 1
+          }
+        }
+      },
+      "delta_terminal_self": -3703,
+      "delta_margin": 46972
+    }
+  ]
+}
