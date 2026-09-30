@@ -1,0 +1,483 @@
+{
+  "schema": "adaptive-replay-contract-runtime-v0-equivalence-result",
+  "run_id": 36651253022,
+  "branch": "engineering/adaptive-replay-contract-runtime-v0-20260930",
+  "engine_commit": "d7729da06cc1382eb742d6980dc3180aa85caa28",
+  "reference": "adaptive_replay_v0.py",
+  "contract_runtime": "adaptive_replay_contract_runtime_v0.py",
+  "effect_contracts": "adaptive_replay_effect_contracts_v0.json",
+  "world_adapter": "adaptive_replay_world_adapter_v0.py",
+  "summary": {
+    "n": 10,
+    "equivalent": 10,
+    "not_equivalent": 0,
+    "self_action_trace_equal": 10,
+    "opponent_action_trace_equal": 10,
+    "terminal_self_equal": 10,
+    "guard_event_equal": 10
+  },
+  "observation": "Fixed10 exact equivalence: self action trace, opponent action trace, terminal values, trigger count, and guard event all matched in every case.",
+  "conclusion_boundary": "The proven step24 behavior was structurally extracted without changing behavior. This does not promote any new Effect Contract or establish broader world/seat generality.",
+  "cases": [
+    {
+      "seed": 92802001,
+      "self_action_trace_equal": true,
+      "opponent_action_trace_equal": true,
+      "terminal_self_equal": true,
+      "terminal_opponent_equal": true,
+      "trigger_count_equal": true,
+      "guard_event_equal": true,
+      "first_self_action_mismatch": null,
+      "first_opponent_action_mismatch": null,
+      "reference": {
+        "terminal_self": 99834,
+        "terminal_opponent": 33702,
+        "margin": 66132,
+        "trigger_count": 1,
+        "last_guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "self_action_count": 719,
+        "self_action_trace_sha256": "7f0c796f06efbca3de2433e6dbd30f2c2a19f2a82e72b6e7a01954039daf5410",
+        "opponent_action_trace_sha256": "b46c4fb25afb4e9a83976512de8296a7c9efa273b362bed87f7a74367a8dc0ed"
+      },
+      "contract": {
+        "terminal_self": 99834,
+        "terminal_opponent": 33702,
+        "margin": 66132,
+        "trigger_count": 1,
+        "last_guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "self_action_count": 719,
+        "self_action_trace_sha256": "7f0c796f06efbca3de2433e6dbd30f2c2a19f2a82e72b6e7a01954039daf5410",
+        "opponent_action_trace_sha256": "b46c4fb25afb4e9a83976512de8296a7c9efa273b362bed87f7a74367a8dc0ed"
+      },
+      "equivalent": true
+    },
+    {
+      "seed": 92802002,
+      "self_action_trace_equal": true,
+      "opponent_action_trace_equal": true,
+      "terminal_self_equal": true,
+      "terminal_opponent_equal": true,
+      "trigger_count_equal": true,
+      "guard_event_equal": true,
+      "first_self_action_mismatch": null,
+      "first_opponent_action_mismatch": null,
+      "reference": {
+        "terminal_self": 100769,
+        "terminal_opponent": 58212,
+        "margin": 42557,
+        "trigger_count": 1,
+        "last_guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "self_action_count": 719,
+        "self_action_trace_sha256": "7f0c796f06efbca3de2433e6dbd30f2c2a19f2a82e72b6e7a01954039daf5410",
+        "opponent_action_trace_sha256": "fcd55772c42d4aa0edd791be4112a0f46f5918f1416ca990946a48ade7182252"
+      },
+      "contract": {
+        "terminal_self": 100769,
+        "terminal_opponent": 58212,
+        "margin": 42557,
+        "trigger_count": 1,
+        "last_guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "self_action_count": 719,
+        "self_action_trace_sha256": "7f0c796f06efbca3de2433e6dbd30f2c2a19f2a82e72b6e7a01954039daf5410",
+        "opponent_action_trace_sha256": "fcd55772c42d4aa0edd791be4112a0f46f5918f1416ca990946a48ade7182252"
+      },
+      "equivalent": true
+    },
+    {
+      "seed": 92802003,
+      "self_action_trace_equal": true,
+      "opponent_action_trace_equal": true,
+      "terminal_self_equal": true,
+      "terminal_opponent_equal": true,
+      "trigger_count_equal": true,
+      "guard_event_equal": true,
+      "first_self_action_mismatch": null,
+      "first_opponent_action_mismatch": null,
+      "reference": {
+        "terminal_self": 89441,
+        "terminal_opponent": 59887,
+        "margin": 29554,
+        "trigger_count": 1,
+        "last_guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "self_action_count": 719,
+        "self_action_trace_sha256": "68d76bb7279d2d74a53b0e5d9d1e474d2aca82ef40a21602e63e88f51e7c23e4",
+        "opponent_action_trace_sha256": "03dbed14553343247f8a086d4864fe4d1bdcaf5becb0595fc36c0ae02423d9d8"
+      },
+      "contract": {
+        "terminal_self": 89441,
+        "terminal_opponent": 59887,
+        "margin": 29554,
+        "trigger_count": 1,
+        "last_guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "self_action_count": 719,
+        "self_action_trace_sha256": "68d76bb7279d2d74a53b0e5d9d1e474d2aca82ef40a21602e63e88f51e7c23e4",
+        "opponent_action_trace_sha256": "03dbed14553343247f8a086d4864fe4d1bdcaf5becb0595fc36c0ae02423d9d8"
+      },
+      "equivalent": true
+    },
+    {
+      "seed": 92802004,
+      "self_action_trace_equal": true,
+      "opponent_action_trace_equal": true,
+      "terminal_self_equal": true,
+      "terminal_opponent_equal": true,
+      "trigger_count_equal": true,
+      "guard_event_equal": true,
+      "first_self_action_mismatch": null,
+      "first_opponent_action_mismatch": null,
+      "reference": {
+        "terminal_self": 78365,
+        "terminal_opponent": 49249,
+        "margin": 29116,
+        "trigger_count": 1,
+        "last_guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "self_action_count": 719,
+        "self_action_trace_sha256": "68d76bb7279d2d74a53b0e5d9d1e474d2aca82ef40a21602e63e88f51e7c23e4",
+        "opponent_action_trace_sha256": "9ee80d3877fe356242a26be210518f79ec415a5c0acb732bc6c259eae3671a29"
+      },
+      "contract": {
+        "terminal_self": 78365,
+        "terminal_opponent": 49249,
+        "margin": 29116,
+        "trigger_count": 1,
+        "last_guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "self_action_count": 719,
+        "self_action_trace_sha256": "68d76bb7279d2d74a53b0e5d9d1e474d2aca82ef40a21602e63e88f51e7c23e4",
+        "opponent_action_trace_sha256": "9ee80d3877fe356242a26be210518f79ec415a5c0acb732bc6c259eae3671a29"
+      },
+      "equivalent": true
+    },
+    {
+      "seed": 92802005,
+      "self_action_trace_equal": true,
+      "opponent_action_trace_equal": true,
+      "terminal_self_equal": true,
+      "terminal_opponent_equal": true,
+      "trigger_count_equal": true,
+      "guard_event_equal": true,
+      "first_self_action_mismatch": null,
+      "first_opponent_action_mismatch": null,
+      "reference": {
+        "terminal_self": 99499,
+        "terminal_opponent": 90728,
+        "margin": 8771,
+        "trigger_count": 1,
+        "last_guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "self_action_count": 719,
+        "self_action_trace_sha256": "7f0c796f06efbca3de2433e6dbd30f2c2a19f2a82e72b6e7a01954039daf5410",
+        "opponent_action_trace_sha256": "266d8af8b716c7131cc8bc6792fdbafa1278c451155548610e69f984421f9ba6"
+      },
+      "contract": {
+        "terminal_self": 99499,
+        "terminal_opponent": 90728,
+        "margin": 8771,
+        "trigger_count": 1,
+        "last_guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "self_action_count": 719,
+        "self_action_trace_sha256": "7f0c796f06efbca3de2433e6dbd30f2c2a19f2a82e72b6e7a01954039daf5410",
+        "opponent_action_trace_sha256": "266d8af8b716c7131cc8bc6792fdbafa1278c451155548610e69f984421f9ba6"
+      },
+      "equivalent": true
+    },
+    {
+      "seed": 92802006,
+      "self_action_trace_equal": true,
+      "opponent_action_trace_equal": true,
+      "terminal_self_equal": true,
+      "terminal_opponent_equal": true,
+      "trigger_count_equal": true,
+      "guard_event_equal": true,
+      "first_self_action_mismatch": null,
+      "first_opponent_action_mismatch": null,
+      "reference": {
+        "terminal_self": 95227,
+        "terminal_opponent": 64055,
+        "margin": 31172,
+        "trigger_count": 1,
+        "last_guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "self_action_count": 719,
+        "self_action_trace_sha256": "7f0c796f06efbca3de2433e6dbd30f2c2a19f2a82e72b6e7a01954039daf5410",
+        "opponent_action_trace_sha256": "2b5446f12bef4580f0cda60ff565e98e7af66f97e913abf6b0f1cf3ebbc486ba"
+      },
+      "contract": {
+        "terminal_self": 95227,
+        "terminal_opponent": 64055,
+        "margin": 31172,
+        "trigger_count": 1,
+        "last_guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "self_action_count": 719,
+        "self_action_trace_sha256": "7f0c796f06efbca3de2433e6dbd30f2c2a19f2a82e72b6e7a01954039daf5410",
+        "opponent_action_trace_sha256": "2b5446f12bef4580f0cda60ff565e98e7af66f97e913abf6b0f1cf3ebbc486ba"
+      },
+      "equivalent": true
+    },
+    {
+      "seed": 92802007,
+      "self_action_trace_equal": true,
+      "opponent_action_trace_equal": true,
+      "terminal_self_equal": true,
+      "terminal_opponent_equal": true,
+      "trigger_count_equal": true,
+      "guard_event_equal": true,
+      "first_self_action_mismatch": null,
+      "first_opponent_action_mismatch": null,
+      "reference": {
+        "terminal_self": 163879,
+        "terminal_opponent": 113157,
+        "margin": 50722,
+        "trigger_count": 1,
+        "last_guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "self_action_count": 719,
+        "self_action_trace_sha256": "7f0c796f06efbca3de2433e6dbd30f2c2a19f2a82e72b6e7a01954039daf5410",
+        "opponent_action_trace_sha256": "21fc6c29f15ec5448674b81c83c06c7d2cd1629639f4e2354902ff95b65d5f05"
+      },
+      "contract": {
+        "terminal_self": 163879,
+        "terminal_opponent": 113157,
+        "margin": 50722,
+        "trigger_count": 1,
+        "last_guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "self_action_count": 719,
+        "self_action_trace_sha256": "7f0c796f06efbca3de2433e6dbd30f2c2a19f2a82e72b6e7a01954039daf5410",
+        "opponent_action_trace_sha256": "21fc6c29f15ec5448674b81c83c06c7d2cd1629639f4e2354902ff95b65d5f05"
+      },
+      "equivalent": true
+    },
+    {
+      "seed": 92802008,
+      "self_action_trace_equal": true,
+      "opponent_action_trace_equal": true,
+      "terminal_self_equal": true,
+      "terminal_opponent_equal": true,
+      "trigger_count_equal": true,
+      "guard_event_equal": true,
+      "first_self_action_mismatch": null,
+      "first_opponent_action_mismatch": null,
+      "reference": {
+        "terminal_self": 94290,
+        "terminal_opponent": 65694,
+        "margin": 28596,
+        "trigger_count": 1,
+        "last_guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "self_action_count": 719,
+        "self_action_trace_sha256": "68d76bb7279d2d74a53b0e5d9d1e474d2aca82ef40a21602e63e88f51e7c23e4",
+        "opponent_action_trace_sha256": "7238aec5ec9946d628bd941305499a19c1297ccd6e7c50de5a75b858db651990"
+      },
+      "contract": {
+        "terminal_self": 94290,
+        "terminal_opponent": 65694,
+        "margin": 28596,
+        "trigger_count": 1,
+        "last_guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "self_action_count": 719,
+        "self_action_trace_sha256": "68d76bb7279d2d74a53b0e5d9d1e474d2aca82ef40a21602e63e88f51e7c23e4",
+        "opponent_action_trace_sha256": "7238aec5ec9946d628bd941305499a19c1297ccd6e7c50de5a75b858db651990"
+      },
+      "equivalent": true
+    },
+    {
+      "seed": 92802009,
+      "self_action_trace_equal": true,
+      "opponent_action_trace_equal": true,
+      "terminal_self_equal": true,
+      "terminal_opponent_equal": true,
+      "trigger_count_equal": true,
+      "guard_event_equal": true,
+      "first_self_action_mismatch": null,
+      "first_opponent_action_mismatch": null,
+      "reference": {
+        "terminal_self": 82652,
+        "terminal_opponent": 56740,
+        "margin": 25912,
+        "trigger_count": 1,
+        "last_guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "self_action_count": 719,
+        "self_action_trace_sha256": "7f0c796f06efbca3de2433e6dbd30f2c2a19f2a82e72b6e7a01954039daf5410",
+        "opponent_action_trace_sha256": "124d2b135681c484471848bd8b60a5365977437caeec80c7bb48cabbe71b49f6"
+      },
+      "contract": {
+        "terminal_self": 82652,
+        "terminal_opponent": 56740,
+        "margin": 25912,
+        "trigger_count": 1,
+        "last_guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "self_action_count": 719,
+        "self_action_trace_sha256": "7f0c796f06efbca3de2433e6dbd30f2c2a19f2a82e72b6e7a01954039daf5410",
+        "opponent_action_trace_sha256": "124d2b135681c484471848bd8b60a5365977437caeec80c7bb48cabbe71b49f6"
+      },
+      "equivalent": true
+    },
+    {
+      "seed": 92802010,
+      "self_action_trace_equal": true,
+      "opponent_action_trace_equal": true,
+      "terminal_self_equal": true,
+      "terminal_opponent_equal": true,
+      "trigger_count_equal": true,
+      "guard_event_equal": true,
+      "first_self_action_mismatch": null,
+      "first_opponent_action_mismatch": null,
+      "reference": {
+        "terminal_self": 135496,
+        "terminal_opponent": 90480,
+        "margin": 45016,
+        "trigger_count": 1,
+        "last_guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "self_action_count": 719,
+        "self_action_trace_sha256": "68d76bb7279d2d74a53b0e5d9d1e474d2aca82ef40a21602e63e88f51e7c23e4",
+        "opponent_action_trace_sha256": "fb54c848c4983d4e1682115ae03715faf84dc633f8234516a05354116712a0dc"
+      },
+      "contract": {
+        "terminal_self": 135496,
+        "terminal_opponent": 90480,
+        "margin": 45016,
+        "trigger_count": 1,
+        "last_guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "self_action_count": 719,
+        "self_action_trace_sha256": "68d76bb7279d2d74a53b0e5d9d1e474d2aca82ef40a21602e63e88f51e7c23e4",
+        "opponent_action_trace_sha256": "fb54c848c4983d4e1682115ae03715faf84dc633f8234516a05354116712a0dc"
+      },
+      "equivalent": true
+    }
+  ]
+}
