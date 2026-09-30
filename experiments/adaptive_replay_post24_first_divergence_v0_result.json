@@ -1,0 +1,49 @@
+{
+  "schema": "adaptive-replay-post24-first-divergence-v0-result",
+  "run_id": 36653987826,
+  "branch": "experiment/adaptive-replay-post24-first-divergence-v0-20260930",
+  "engine_commit": "d7729da06cc1382eb742d6980dc3180aa85caa28",
+  "world": "Seyamalam v21 / subject seat0",
+  "positive_seed": 93803004,
+  "negative_seed": 93803005,
+  "observations": [
+    {
+      "model": "baseline",
+      "step24_world_equal": true,
+      "step24_subject_action_equal": true,
+      "step24_opponent_action_equal": true,
+      "first_world_divergence_step": 72,
+      "first_world_diff_paths": [
+        "town.unlocked_shops[0]"
+      ],
+      "first_subject_action_divergence_step": null,
+      "first_opponent_action_divergence_step": 361,
+      "positive_terminal_self": 100141,
+      "negative_terminal_self": 100364,
+      "terminal_self_difference_positive_minus_negative": -223
+    },
+    {
+      "model": "candidate",
+      "step24_world_equal": true,
+      "step24_subject_action_equal": true,
+      "step24_opponent_action_equal": true,
+      "first_world_divergence_step": 72,
+      "first_world_diff_paths": [
+        "town.unlocked_shops[0]"
+      ],
+      "first_subject_action_divergence_step": 121,
+      "first_opponent_action_divergence_step": 244,
+      "positive_terminal_self": 167103,
+      "negative_terminal_self": 80922,
+      "terminal_self_difference_positive_minus_negative": 86181
+    }
+  ],
+  "confirmed": [
+    "The two seeds have identical observable World, subject Action, and opponent Action at step24.",
+    "For both baseline and candidate, the first observable seed-to-seed World divergence is step72 at town.unlocked_shops[0].",
+    "Baseline subject Action never diverges between the two seeds; candidate subject Action first diverges at step121.",
+    "Baseline terminal self difference between seeds is 223; candidate terminal self difference between seeds is 86181."
+  ],
+  "boundary": "Do not infer why town.unlocked_shops differs or why candidate amplifies the later path from this probe alone.",
+  "next_unknown": "What observable transition between step72 and step121 first connects the town difference to the candidate subject Action divergence?"
+}
