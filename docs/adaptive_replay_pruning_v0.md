@@ -18,12 +18,13 @@ DECEM 157,026 Replay + step24 HIRE Effect Contract only.
 ## Intervention
 One market order only is omitted at one replay step after the baseline runtime emits its action.
 
-Eligible spending operations:
+Stage-1 eligible high-commitment operations:
 - HIRE
 - BUY_ANIMAL
-- BUY_SEED
 - BUY_LAND
 - BUY_PRODUCT
+
+BUY_SEED is intentionally deferred. There are 244 distinct seed-order omissions; v0 first spends the time budget on larger commitments.
 
 SELL is never removed.
 
@@ -34,7 +35,7 @@ All other market orders, farmer action, hand actions, and step24 HIRE contract b
 
 ## Stage 1 — screen
 World: seed 92802001, seat0, Seyamalam v21.
-Enumerate every eligible spending-order occurrence in the baseline action trace.
+Enumerate distinct omission outcomes only. If removing different identical orders at the same step produces the same final market list, keep one representative candidate.
 For each occurrence, run a full terminal A/B with only that one order omitted.
 
 Record:
