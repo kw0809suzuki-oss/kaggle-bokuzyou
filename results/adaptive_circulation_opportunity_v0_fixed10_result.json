@@ -1,0 +1,57 @@
+{
+  "schema": "adaptive-circulation-opportunity-v0-fixed10-result",
+  "run_id": 36704505677,
+  "status": "candidate_not_promoted",
+  "baseline": "adaptive_circulation_runtime_v0",
+  "candidate": "adaptive_circulation_opportunity_v0",
+  "condition": "one-shot: mature crop under an actor + concurrent expansion labor + no HARVEST already issued",
+  "trigger": {
+    "cases": "10/10",
+    "step": 250,
+    "day": 10,
+    "hour": 10,
+    "actor_index": 3,
+    "position": [2, 6],
+    "crop": "WHEAT",
+    "planted_day": 8,
+    "yield_units": 1,
+    "replaced_action": "WATER -> HARVEST",
+    "concurrent_expansion": "actor 6 PLANT WHEAT"
+  },
+  "summary": {
+    "n": 10,
+    "improved": 8,
+    "worsened": 2,
+    "same": 0,
+    "baseline_mean_terminal_self": 103945.2,
+    "candidate_mean_terminal_self": 106559.4,
+    "mean_delta_terminal_self": 2614.2,
+    "median_delta_terminal_self": 95.0,
+    "min_delta_terminal_self": -9494.0,
+    "max_delta_terminal_self": 21995.0,
+    "mean_delta_margin": 1227.1
+  },
+  "terminal_self_deltas": {
+    "92802001": -7624,
+    "92802002": 169,
+    "92802003": -9494,
+    "92802004": 21,
+    "92802005": 16,
+    "92802006": 686,
+    "92802007": 173,
+    "92802008": 17,
+    "92802009": 20183,
+    "92802010": 21995
+  },
+  "decision": {
+    "promote": false,
+    "reason": "The same local condition and transform fires in all 10 worlds but terminal response ranges from -9494 to +21995. The candidate demonstrates value potential, but the current trigger does not yet distinguish when the one-shot alternative should be used.",
+    "next_boundary": "Observe current-world context at the shared step250 decision point for the two negative and two large-positive cases without changing policy. Do not fit a selector until a concrete observable difference is found and independently tested."
+  },
+  "boundary": [
+    "This does not validate general HARVEST priority.",
+    "This does not invalidate conditional harvest reallocation in other contexts.",
+    "The 8/10 count alone is not promotion evidence because two losses are material and the median gain is only +95.",
+    "No second contract is added."
+  ]
+}
