@@ -1,0 +1,38 @@
+{
+  "schema": "adaptive-circulation-step250-state-separator-v0-summary",
+  "run_id": 36710894765,
+  "status": "no_simple_single_field_separator",
+  "question": "Can the step250 Current World separate HARVEST>PASS from PASS>HARVEST in fixed10?",
+  "groups": {
+    "harvest_gt_pass": [92802006, 92802007, 92802009, 92802010],
+    "pass_gt_harvest": [92802001, 92802002, 92802003, 92802004, 92802005, 92802008]
+  },
+  "confirmed": {
+    "unique_full_state_fingerprints": 10,
+    "cross_label_exact_state_matches": 0,
+    "common_scalar_fields": 1032,
+    "disjoint_observed_value_field_count": 2,
+    "perfect_single_numeric_threshold_count": 0
+  },
+  "disjoint_observed_value_fields": [
+    {
+      "path": "farms[0].money",
+      "harvest_gt_pass_values": [708, 1523, 1317, 1852],
+      "pass_gt_harvest_values": [1077, 1070, 1326, 1204, 1942, 1471],
+      "note": "Observed value sets do not overlap, but their numeric order interleaves; no single threshold separates the sign groups."
+    },
+    {
+      "path": "market.inventory.WHEAT",
+      "harvest_gt_pass_values": [9809, 9815, 9832, 9867],
+      "pass_gt_harvest_values": [9810, 9801, 9831, 9868, 9826, 9831],
+      "note": "Observed value sets do not overlap, but their numeric order interleaves; no single threshold separates the sign groups."
+    }
+  ],
+  "boundary": [
+    "The ten Current Worlds are observably different, so opposite terminal response is not occurring from an exactly identical visible State.",
+    "A non-overlapping set of ten observed numeric values is not a usable selector by itself.",
+    "No single numeric State field with one threshold perfectly separates HARVEST>PASS from PASS>HARVEST in this fixed10.",
+    "No compound classifier, interaction rule, or causal explanation is introduced in this pass."
+  ],
+  "closure": "Simple one-field State separation was not found. The question of whether a small relation/interaction among State fields separates the response remains open."
+}
