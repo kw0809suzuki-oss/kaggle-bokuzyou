@@ -1,0 +1,37 @@
+{
+  "schema": "adaptive-replay-96-97-cash-emergence-v0-result",
+  "run_id": 36656460289,
+  "branch": "experiment/adaptive-replay-96-97-cash-emergence-v0-20260930",
+  "engine_commit": "d7729da06cc1382eb742d6980dc3180aa85caa28",
+  "world": "Seyamalam v21 / subject seat0",
+  "positive_seed": 93803004,
+  "negative_seed": 93803005,
+  "confirmed": [
+    "At step96, subject actions are identical and opponent actions are identical across the two seeds.",
+    "Both subjects start with cash 20, shed WHEAT 9, displayed WHEAT price 31, zero hands, and hires_today 0.",
+    "Both subjects issue SELL WHEAT 8 followed by HIRE x6.",
+    "All 8 WHEAT units sell in both seeds and all 6 HIREs realize in both seeds.",
+    "Positive seed WHEAT market inventory is 9962; negative seed WHEAT market inventory is 9968.",
+    "Pinned-engine per-unit SELL quote sequence is [31,31,31,31,31,31,31,31] for the positive seed and [31,31,30,30,30,30,30,30] for the negative seed.",
+    "Realized SELL revenue is 248 vs 242, a difference of +6 for the positive seed.",
+    "HIRE cost sequence is [1,1,2,3,5,8] in both seeds, total 20.",
+    "Observed post-step Cash is 248 vs 242, and exact reconstruction from pre Cash + SELL revenue - HIRE cost matches both outcomes.",
+    "Therefore the first self-Cash divergence at step97 is exactly accounted for by the per-unit SELL revenue difference."
+  ],
+  "correction_to_prior_hypothesis": "The divergence is not explained by different displayed pre-step WHEAT prices: both display 31. It arises because different market inventory positions produce different per-unit quote sequences during the same 8-unit SELL.",
+  "closed_chain": [
+    "step72 shop difference",
+    "step73 market inventory difference via official _town_consume",
+    "different later WHEAT market inventory position",
+    "same step96 SELL WHEAT 8",
+    "different per-unit quote sequence",
+    "realized SELL revenue 248 vs 242",
+    "step97 self Cash 248 vs 242"
+  ],
+  "boundary": [
+    "This probe closes only the first Cash-emergence transition.",
+    "It does not establish that the +6 Cash difference alone causes the eventual terminal gap.",
+    "No new Guard, Recovery, or policy rule is promoted."
+  ],
+  "next_unknown": "What is the first downstream transition where this +6 Cash difference changes a realized BUY/HIRE/asset effect?"
+}
