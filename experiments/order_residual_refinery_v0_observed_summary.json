@@ -1,0 +1,76 @@
+{
+  "schema": "order-residual-refinery-v0-observed-summary",
+  "run_id": 36673204618,
+  "branch": "experiment/order-residual-refinery-v0-20260930",
+  "observed": {
+    "worlds": 20,
+    "frozen_carrier": {
+      "feature": "market.inventory.EGG",
+      "threshold": 9961.5,
+      "rule": "EGG <= 9961.5 -> Original; else Swap",
+      "correct": 18,
+      "total": 20
+    },
+    "carrier_failures": [
+      {
+        "seed": 94002001,
+        "seat": 0,
+        "label": "swap",
+        "delta_swap_minus_original": 3333,
+        "egg_inventory": 9952,
+        "self_cash": 82,
+        "wheat_inventory": 9918,
+        "wheat_price": 34,
+        "shop_signature": ["BAKERY", "YARN_STORE", "BRUNCH_SPOT"]
+      },
+      {
+        "seed": 94002004,
+        "seat": 0,
+        "label": "swap",
+        "delta_swap_minus_original": 19,
+        "egg_inventory": 9934,
+        "self_cash": 83,
+        "wheat_inventory": 9900,
+        "wheat_price": 35,
+        "shop_signature": ["BRUNCH_SPOT", "BRUNCH_SPOT", "SMOOTHIE_SHOP"]
+      }
+    ],
+    "conflicting_numeric_snapshot_groups_when_seat_excluded": 2,
+    "same_seed_order_flips": [
+      {
+        "seed": 94002001,
+        "seat0": {"label": "swap", "delta": 3333},
+        "seat1": {"label": "original", "delta": -1815}
+      },
+      {
+        "seed": 94002004,
+        "seat0": {"label": "swap", "delta": 19},
+        "seat1": {"label": "original", "delta": -50}
+      }
+    ],
+    "shop_signature_plus_seat_conflicts": 0,
+    "low_egg_subset_worlds": 8,
+    "best_residual_rule_same_sample": {
+      "rule": "queue.self_first AND market.inventory.WHEAT > 9899.5 -> Swap; else Original",
+      "queue.self_first_definition": "seat == 0",
+      "correct": 8,
+      "total": 8
+    },
+    "two_stage_rule_same_sample": {
+      "stage1": "if EGG > 9961.5 -> Swap",
+      "stage2": "otherwise, if seat == 0 AND WHEAT inventory > 9899.5 -> Swap; else Original",
+      "correct": 20,
+      "total": 20
+    }
+  },
+  "boundary": {
+    "same_20_worlds_as_separator_probe": true,
+    "exploratory_same_sample": true,
+    "not_fresh_validation": true,
+    "no_policy_promotion": true,
+    "egg_not_claimed_causal": true,
+    "wheat_threshold_not_claimed_general": true,
+    "seat_is_engine_order_information": true
+  },
+  "next_question": "Does the tiny two-stage Order selector survive fresh Worlds without changing Frozen A or the action set?"
+}
