@@ -3,7 +3,8 @@
 
 Question:
     At the first observed candidate self-Cash divergence, does the same Replay
-    SELL realize a different Cash return because current market quotes differ?
+    SELL realize a different Cash return because the per-unit market quotes
+    differ during execution?
 
 Scope:
     Contract Runtime v0 only
@@ -12,13 +13,12 @@ Scope:
     negative seed 93803005
     one transition only: step96 pre-state -> step97 post-state
 
-Observe:
-    - exact subject/opponent actions
-    - pre/post self Cash
-    - pre shed and market prices/inventory
-    - every realized market unit commit with quoted price
-    - HIRE / BUY_LAND atomic Cash effects
-    - successful SELL units and realized SELL revenue
+Important:
+    Kaggriculture SELL is executed per unit. A displayed pre-step price can be
+    equal while later units in the same SELL order receive different quotes as
+    market inventory changes. This probe reconstructs the exact subject SELL
+    quote sequence from the pinned official market_price() function and verifies
+    it against realized shed, HIRE, and Cash changes.
 
 No new Guard, Recovery, policy, or downstream explanation.
 """
@@ -28,7 +28,6 @@ import importlib.util
 import json
 import os
 import sys
-from collections import defaultdict
 from pathlib import Path
 
 from kaggle_environments import make
@@ -73,6 +72,29 @@ def shared(env, seat):
     return env._Environment__get_shared_state(seat)["observation"]
 
 
+def first_sell_order(action):
+    for order in action.get("market", []) or []:
+        if isinstance(order, list) and len(order) >= 3 and order[0] == "SELL":
+            return {
+                "item": order[1],
+                "requested": int(order[2]),
+            }
+    return None
+
+
+def count_hires(action):
+    return sum(
+        1
+        for order in (action.get("market", []) or [])
+        if isinstance(order, list) and order and order[0] == "HIRE"
+    )
+
+
+def first_market_order(action):
+    market = action.get("market", []) or []
+    return market[0] if market else None
+
+
 def run_transition(seed: int, tag: str):
     model = load(MODEL, f"cash_probe_model_{tag}_{seed}_{os.getpid()}")
     opponent = load(OPPONENT, f"cash_probe_opp_{tag}_{seed}_{os.getpid()}")
@@ -92,141 +114,105 @@ def run_transition(seed: int, tag: str):
             env.step([a0, a1])
             continue
 
-        live_farms = env.state[0].observation.farms
-        farm_to_player = {id(live_farms[i]): i for i in range(len(live_farms))}
-        commit_log = []
-        atomic_log = []
-
-        original_commit = kg._commit_unit
-        original_hire = kg._do_hire
-        original_land = kg._do_buy_land
-
-        def wrapped_commit(op, item, price, farm, private, market, shed_capacity=100):
-            player_id = farm_to_player.get(id(farm))
-            before = {
-                "cash": float(farm["money"]),
-                "shed_item": int(private["shed"].get(item, 0)),
-                "market_inventory": int(market["inventory"].get(item, 0)) if item in market["inventory"] else None,
-            }
-            ok = original_commit(op, item, price, farm, private, market, shed_capacity)
-            after = {
-                "cash": float(farm["money"]),
-                "shed_item": int(private["shed"].get(item, 0)),
-                "market_inventory": int(market["inventory"].get(item, 0)) if item in market["inventory"] else None,
-            }
-            commit_log.append({
-                "player": player_id,
-                "op": op,
-                "item": item,
-                "quote_price": float(price),
-                "success": bool(ok),
-                "before": before,
-                "after": after,
-                "cash_effect": after["cash"] - before["cash"],
-            })
-            return ok
-
-        def wrapped_hire(farm, private, board_size, mult=kg.FARM_HAND_COST_MULT):
-            player_id = farm_to_player.get(id(farm))
-            before_cash = float(farm["money"])
-            before_hands = len(farm["hands"])
-            before_hires_today = int(farm["hires_today"])
-            result = original_hire(farm, private, board_size, mult)
-            atomic_log.append({
-                "player": player_id,
-                "op": "HIRE",
-                "before_cash": before_cash,
-                "after_cash": float(farm["money"]),
-                "cash_effect": float(farm["money"]) - before_cash,
-                "before_hands": before_hands,
-                "after_hands": len(farm["hands"]),
-                "before_hires_today": before_hires_today,
-                "after_hires_today": int(farm["hires_today"]),
-                "realized": len(farm["hands"]) > before_hands,
-            })
-            return result
-
-        def wrapped_land(farm, board_size):
-            player_id = farm_to_player.get(id(farm))
-            before_cash = float(farm["money"])
-            before_unlocked = list(farm["unlocked_quadrants"])
-            result = original_land(farm, board_size)
-            atomic_log.append({
-                "player": player_id,
-                "op": "BUY_LAND",
-                "before_cash": before_cash,
-                "after_cash": float(farm["money"]),
-                "cash_effect": float(farm["money"]) - before_cash,
-                "before_unlocked": before_unlocked,
-                "after_unlocked": list(farm["unlocked_quadrants"]),
-                "realized": len(farm["unlocked_quadrants"]) > len(before_unlocked),
-            })
-            return result
-
         pre = {
             "cash": float(obs0["farms"][0]["money"]),
             "shed": plain(obs0["private"]["shed"]),
-            "seeds": plain(obs0["private"]["seeds"]),
             "market_inventory": plain(obs0["market"]["inventory"]),
             "market_prices": plain(obs0["market"]["prices"]),
             "hands": len(obs0["farms"][0].get("hands", []) or []),
             "hires_today": int(obs0["farms"][0].get("hires_today", 0) or 0),
         }
 
-        kg._commit_unit = wrapped_commit
-        kg._do_hire = wrapped_hire
-        kg._do_buy_land = wrapped_land
-        try:
-            env.step([a0, a1])
-        finally:
-            kg._commit_unit = original_commit
-            kg._do_hire = original_hire
-            kg._do_buy_land = original_land
+        env.step([a0, a1])
 
         obs97 = plain(shared(env, 0))
         post = {
             "cash": float(obs97["farms"][0]["money"]),
             "shed": plain(obs97["private"]["shed"]),
-            "seeds": plain(obs97["private"]["seeds"]),
             "market_inventory": plain(obs97["market"]["inventory"]),
             "market_prices": plain(obs97["market"]["prices"]),
             "hands": len(obs97["farms"][0].get("hands", []) or []),
             "hires_today": int(obs97["farms"][0].get("hires_today", 0) or 0),
         }
 
-        self_commits = [x for x in commit_log if x["player"] == 0]
-        self_atomic = [x for x in atomic_log if x["player"] == 0]
+        sell = first_sell_order(a0)
+        hire_requested = count_hires(a0)
 
-        sell_units = defaultdict(int)
-        sell_prices = defaultdict(list)
-        sell_revenue = 0.0
-        for row in self_commits:
-            if row["op"] == "SELL" and row["success"]:
-                sell_units[row["item"]] += 1
-                sell_prices[row["item"]].append(row["quote_price"])
-                sell_revenue += row["quote_price"]
+        if sell is None:
+            raise RuntimeError("No subject SELL order at target step")
 
-        committed_cash_effect = sum(row["cash_effect"] for row in self_commits)
-        atomic_cash_effect = sum(row["cash_effect"] for row in self_atomic)
-        total_logged_market_cash_effect = committed_cash_effect + atomic_cash_effect
+        item = sell["item"]
+        requested = sell["requested"]
+
+        subject_first_order = first_market_order(a0)
+        opponent_first_order = first_market_order(a1)
+
+        opponent_first_same_item_sell = (
+            isinstance(opponent_first_order, list)
+            and len(opponent_first_order) >= 3
+            and opponent_first_order[0] == "SELL"
+            and opponent_first_order[1] == item
+        )
+
+        if opponent_first_same_item_sell:
+            raise RuntimeError(
+                "Probe arithmetic assumes opponent first order does not sell "
+                "the same item during the subject first SELL order."
+            )
+
+        pre_shed_item = int(pre["shed"].get(item, 0))
+        post_shed_item = int(post["shed"].get(item, 0))
+        realized_sell_units = pre_shed_item - post_shed_item
+
+        if realized_sell_units < 0:
+            raise RuntimeError("Observed shed item increased across SELL transition")
+
+        start_inventory = int(pre["market_inventory"][item])
+        quote_sequence = [
+            int(kg.market_price(item, start_inventory + unit_index))
+            for unit_index in range(realized_sell_units)
+        ]
+        reconstructed_sell_revenue = sum(quote_sequence)
+
+        hire_costs = [
+            int(kg._hire_cost(pre["hires_today"] + i))
+            for i in range(hire_requested)
+        ]
+
+        realized_hires = post["hands"] - pre["hands"]
+        all_requested_hires_realized = realized_hires == hire_requested
+
+        reconstructed_cash = (
+            pre["cash"]
+            + reconstructed_sell_revenue
+            - sum(hire_costs[:realized_hires])
+        )
 
         return {
             "seed": seed,
             "step": TARGET_STEP,
             "subject_action": a0,
             "opponent_action": a1,
+            "subject_first_market_order": subject_first_order,
+            "opponent_first_market_order": opponent_first_order,
             "pre": pre,
             "post": post,
             "cash_delta": post["cash"] - pre["cash"],
-            "self_commit_log": self_commits,
-            "self_atomic_log": self_atomic,
-            "successful_sell_units": dict(sell_units),
-            "sell_quote_prices": {k: v for k, v in sell_prices.items()},
-            "sell_revenue": sell_revenue,
-            "logged_non_sell_cash_effect": total_logged_market_cash_effect - sell_revenue,
-            "total_logged_market_cash_effect": total_logged_market_cash_effect,
-            "logged_cash_matches_observed_delta":
-                abs(total_logged_market_cash_effect - (post["cash"] - pre["cash"])) < 1e-9,
+            "sell_item": item,
+            "sell_requested_units": requested,
+            "sell_realized_units": realized_sell_units,
+            "sell_all_requested_realized": realized_sell_units == requested,
+            "pre_display_price": int(pre["market_prices"][item]),
+            "sell_quote_sequence": quote_sequence,
+            "reconstructed_sell_revenue": reconstructed_sell_revenue,
+            "hire_requested": hire_requested,
+            "realized_hires": realized_hires,
+            "all_requested_hires_realized": all_requested_hires_realized,
+            "hire_cost_sequence": hire_costs,
+            "realized_hire_cost_total": sum(hire_costs[:realized_hires]),
+            "reconstructed_post_cash": reconstructed_cash,
+            "reconstructed_cash_matches_observed":
+                abs(reconstructed_cash - post["cash"]) < 1e-9,
         }
 
     raise RuntimeError(f"step {TARGET_STEP} not reached for seed {seed}")
@@ -237,46 +223,55 @@ def main():
     pos = runs["positive"]
     neg = runs["negative"]
 
-    subject_action_equal = pos["subject_action"] == neg["subject_action"]
-    opponent_action_equal = pos["opponent_action"] == neg["opponent_action"]
-    pre_cash_equal = pos["pre"]["cash"] == neg["pre"]["cash"]
-    realized_sell_units_equal = pos["successful_sell_units"] == neg["successful_sell_units"]
-    non_sell_cash_effect_equal = (
-        pos["logged_non_sell_cash_effect"] == neg["logged_non_sell_cash_effect"]
-    )
-
-    observed_cash_delta_difference = pos["cash_delta"] - neg["cash_delta"]
-    sell_revenue_difference = pos["sell_revenue"] - neg["sell_revenue"]
-
     summary = {
-        "subject_action_equal": subject_action_equal,
-        "opponent_action_equal": opponent_action_equal,
-        "pre_cash_equal": pre_cash_equal,
-        "positive_pre_cash": pos["pre"]["cash"],
-        "negative_pre_cash": neg["pre"]["cash"],
+        "subject_action_equal": pos["subject_action"] == neg["subject_action"],
+        "opponent_action_equal": pos["opponent_action"] == neg["opponent_action"],
+        "pre_cash_equal": pos["pre"]["cash"] == neg["pre"]["cash"],
+        "pre_display_price_equal":
+            pos["pre_display_price"] == neg["pre_display_price"],
+        "positive_pre_display_price": pos["pre_display_price"],
+        "negative_pre_display_price": neg["pre_display_price"],
+        "positive_pre_inventory": pos["pre"]["market_inventory"][pos["sell_item"]],
+        "negative_pre_inventory": neg["pre"]["market_inventory"][neg["sell_item"]],
+        "sell_item_equal": pos["sell_item"] == neg["sell_item"],
+        "sell_requested_units_equal":
+            pos["sell_requested_units"] == neg["sell_requested_units"],
+        "sell_realized_units_equal":
+            pos["sell_realized_units"] == neg["sell_realized_units"],
+        "positive_sell_realized_units": pos["sell_realized_units"],
+        "negative_sell_realized_units": neg["sell_realized_units"],
+        "positive_quote_sequence": pos["sell_quote_sequence"],
+        "negative_quote_sequence": neg["sell_quote_sequence"],
+        "positive_sell_revenue": pos["reconstructed_sell_revenue"],
+        "negative_sell_revenue": neg["reconstructed_sell_revenue"],
+        "sell_revenue_difference_positive_minus_negative":
+            pos["reconstructed_sell_revenue"] - neg["reconstructed_sell_revenue"],
+        "hire_requested_equal": pos["hire_requested"] == neg["hire_requested"],
+        "realized_hires_equal": pos["realized_hires"] == neg["realized_hires"],
+        "positive_realized_hires": pos["realized_hires"],
+        "negative_realized_hires": neg["realized_hires"],
+        "positive_realized_hire_cost_total": pos["realized_hire_cost_total"],
+        "negative_realized_hire_cost_total": neg["realized_hire_cost_total"],
         "positive_post_cash": pos["post"]["cash"],
         "negative_post_cash": neg["post"]["cash"],
+        "post_cash_difference_positive_minus_negative":
+            pos["post"]["cash"] - neg["post"]["cash"],
         "positive_cash_delta": pos["cash_delta"],
         "negative_cash_delta": neg["cash_delta"],
-        "observed_cash_delta_difference_positive_minus_negative":
-            observed_cash_delta_difference,
-        "positive_successful_sell_units": pos["successful_sell_units"],
-        "negative_successful_sell_units": neg["successful_sell_units"],
-        "realized_sell_units_equal": realized_sell_units_equal,
-        "positive_sell_quote_prices": pos["sell_quote_prices"],
-        "negative_sell_quote_prices": neg["sell_quote_prices"],
-        "positive_sell_revenue": pos["sell_revenue"],
-        "negative_sell_revenue": neg["sell_revenue"],
-        "sell_revenue_difference_positive_minus_negative": sell_revenue_difference,
-        "positive_non_sell_cash_effect": pos["logged_non_sell_cash_effect"],
-        "negative_non_sell_cash_effect": neg["logged_non_sell_cash_effect"],
-        "non_sell_cash_effect_equal": non_sell_cash_effect_equal,
-        "cash_delta_difference_equals_sell_revenue_difference":
-            abs(observed_cash_delta_difference - sell_revenue_difference) < 1e-9,
-        "positive_logged_cash_matches_observed_delta":
-            pos["logged_cash_matches_observed_delta"],
-        "negative_logged_cash_matches_observed_delta":
-            neg["logged_cash_matches_observed_delta"],
+        "cash_delta_difference_positive_minus_negative":
+            pos["cash_delta"] - neg["cash_delta"],
+        "positive_reconstruction_matches":
+            pos["reconstructed_cash_matches_observed"],
+        "negative_reconstruction_matches":
+            neg["reconstructed_cash_matches_observed"],
+        "cash_difference_equals_sell_revenue_difference":
+            abs(
+                (pos["post"]["cash"] - neg["post"]["cash"])
+                - (
+                    pos["reconstructed_sell_revenue"]
+                    - neg["reconstructed_sell_revenue"]
+                )
+            ) < 1e-9,
     }
 
     print("CASH_96_97_SUMMARY " + json.dumps(summary, separators=(",", ":")))
@@ -287,7 +282,8 @@ def main():
         "schema": "adaptive-replay-96-97-cash-emergence-v0",
         "question": (
             "At the first observed self-Cash divergence, does the same Replay "
-            "SELL realize a different Cash return because market quotes differ?"
+            "SELL realize a different Cash return because per-unit market "
+            "quotes differ during execution?"
         ),
         "engine_commit": "d7729da06cc1382eb742d6980dc3180aa85caa28",
         "world": "Seyamalam v21 / subject seat0",
@@ -298,11 +294,10 @@ def main():
             "no_new_guard": True,
             "no_recovery": True,
             "no_downstream_causal_claim": True,
-            "interpretation_rule": (
-                "Only if actions and realized SELL units are equal, non-SELL "
-                "Cash effects are equal, and Cash-delta difference equals "
-                "SELL-revenue difference may this probe close the "
-                "Price -> same SELL -> Cash link."
+            "important_distinction": (
+                "Displayed pre-step price equality does not imply equal "
+                "per-unit SELL quote sequences because market inventory changes "
+                "after each successful unit."
             ),
         },
     }
