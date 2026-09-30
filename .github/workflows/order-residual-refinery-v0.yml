@@ -1,0 +1,29 @@
+name: Order Residual Refinery v0
+on:
+  push:
+    branches: ["experiment/order-residual-refinery-v0-20260930"]
+    paths:
+      - "run_order_residual_refinery_v0.py"
+      - ".github/workflows/order-residual-refinery-v0.yml"
+permissions:
+  contents: read
+jobs:
+  refinery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - name: Install pinned Official Kaggriculture environment
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "git+https://github.com/Kaggle/kaggle-environments.git@d7729da06cc1382eb742d6980dc3180aa85caa28"
+      - name: Run Order Residual Refinery v0
+        run: python run_order_residual_refinery_v0.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: order-residual-refinery-v0
+          path: order_residual_refinery_v0_result.json
+          if-no-files-found: warn
