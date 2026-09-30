@@ -1,0 +1,37 @@
+{
+  "schema": "adaptive-circulation-price-board-v0-summary",
+  "run_id": 36712962773,
+  "status": "price_surface_observed_but_no_selection_separation",
+  "objective": "terminal_self",
+  "rule": "target normalized current price vs mean normalized current price across market products",
+  "confirmed": {
+    "triggered": "10/10",
+    "choices": {"HARVEST": 10, "ORIGINAL": 0, "PASS": 0},
+    "improved": 8,
+    "worsened": 2,
+    "same": 0,
+    "mean_delta_self": 2614.2,
+    "median_delta_self": 95.0,
+    "baseline_mean": 103945.2,
+    "candidate_mean": 106559.4,
+    "min_delta_self": -9494.0,
+    "max_delta_self": 21995.0
+  },
+  "observed_price_board": {
+    "target_crop": "WHEAT",
+    "current_prices": [39,39,38,36,38,39,39,38,38,37],
+    "target_normalized_price": [1.56,1.56,1.52,1.44,1.52,1.56,1.56,1.52,1.52,1.48],
+    "result": "WHEAT normalized price was above the market-wide mean in all 10 cases."
+  },
+  "interpretation": [
+    "The visible price board is a real directly observable world-evaluation surface.",
+    "This particular relative-price rule provided no selection power at step250 because it chose HARVEST in every case.",
+    "The terminal result therefore exactly reproduces the earlier one-shot HARVEST result rather than establishing a new adaptive policy.",
+    "The two losing cases remain losing despite high current WHEAT relative price, so current price level alone is insufficient here."
+  ],
+  "boundary": [
+    "Do not rescue this rule with a fitted threshold.",
+    "Do not conclude that price is irrelevant; conclude only that current relative price level alone did not separate these ten cases at this decision point.",
+    "No policy promotion."
+  ]
+}
