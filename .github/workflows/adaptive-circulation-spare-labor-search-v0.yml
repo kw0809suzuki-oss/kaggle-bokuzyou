@@ -7,6 +7,7 @@ on:
     paths:
       - "run_adaptive_circulation_spare_labor_search_v0.py"
       - "run_adaptive_circulation_first_move_route_trace_v0.py"
+      - "run_adaptive_circulation_adjacent_pass_search_v0.py"
       - ".github/workflows/adaptive-circulation-spare-labor-search-v0.yml"
   workflow_dispatch:
 
@@ -30,6 +31,8 @@ jobs:
         run: python run_adaptive_circulation_spare_labor_search_v0.py
       - name: Trace first move candidate
         run: python run_adaptive_circulation_first_move_route_trace_v0.py
+      - name: Search adjacent PASS candidates
+        run: python run_adaptive_circulation_adjacent_pass_search_v0.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -37,4 +40,5 @@ jobs:
           path: |
             adaptive_circulation_spare_labor_search_v0.json
             adaptive_circulation_first_move_route_trace_v0.json
+            adaptive_circulation_adjacent_pass_search_v0.json
           if-no-files-found: warn
