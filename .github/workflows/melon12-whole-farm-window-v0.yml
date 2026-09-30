@@ -29,6 +29,7 @@ jobs:
       - name: Observe whole-farm window only
         run: |
           python observe_melon12_whole_farm_window_v0.py melon12-seed801.zip > melon12_whole_farm_window_v0.json
+          cat melon12_whole_farm_window_v0.json
 
       - uses: actions/upload-artifact@v4
         with:
