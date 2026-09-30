@@ -1,0 +1,63 @@
+{
+  "schema": "adaptive-circulation-intent-detour-v0-result",
+  "status": "rejected_this_detour",
+  "run_id": 36708723877,
+  "branch": "experiment/adaptive-circulation-intent-detour-v0-20260930",
+  "comparison": {
+    "baseline": "adaptive_circulation_runtime_v0",
+    "candidate": "step252 actor11 HARVEST WHEAT3, then retain only intent: establish STRAWBERRY at [5,7]"
+  },
+  "world_gate": {
+    "role": "implementation validity only",
+    "valid_cases": "10/10",
+    "harvest_wheat_delta": 3,
+    "other_workers_and_market_unchanged": "10/10",
+    "target_strawberry_observed": "10/10",
+    "intent_completed": "10/10",
+    "failure_cases": 0,
+    "observed_sequence": [
+      "step252 HARVEST instead of EAST",
+      "step253 EAST",
+      "step254 EAST instead of timed Replay PLANT",
+      "step255 PLANT STRAWBERRY instead of timed Replay WATER",
+      "step256 Official State confirms STRAWBERRY at [5,7] and closes intent"
+    ]
+  },
+  "terminal": {
+    "n": 10,
+    "improved": 3,
+    "worsened": 7,
+    "same": 0,
+    "baseline_mean_terminal_self": 103945.2,
+    "candidate_mean_terminal_self": 103726.3,
+    "mean_delta_terminal_self": -218.9,
+    "median_delta_terminal_self": -120.0,
+    "min_delta_terminal_self": -1136.0,
+    "max_delta_terminal_self": 84.0,
+    "mean_delta_margin": -406.4,
+    "delta_terminal_self_by_seed": {
+      "92802001": -225,
+      "92802002": -254,
+      "92802003": 84,
+      "92802004": -35,
+      "92802005": -155,
+      "92802006": -450,
+      "92802007": -1136,
+      "92802008": 64,
+      "92802009": -85,
+      "92802010": 3
+    }
+  },
+  "decision": {
+    "adopt": false,
+    "reason": "The intended comparison was implemented successfully, but terminal_self worsened in 7/10 with negative mean and median delta.",
+    "no_rescue": "Do not extend the retained intent with WATER or add outcome-fitted conditions to save this candidate.",
+    "what_remains_open": "Intent-preserving detours as a general idea are not rejected; only this fixed step252 WHEAT3 detour with the observed planting intent is rejected."
+  },
+  "boundary": [
+    "WHEAT3 is not counted as profit by itself.",
+    "Carry changes, delayed planting, missed/shifted later maintenance, and downstream world changes are part of the detour's actual cost and benefit.",
+    "This result does not establish that purpose retention is weak in general.",
+    "No second contract is promoted."
+  ]
+}
