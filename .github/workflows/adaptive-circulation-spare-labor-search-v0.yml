@@ -6,6 +6,7 @@ on:
       - "experiment/adaptive-circulation-opportunity-v0-20260930"
     paths:
       - "run_adaptive_circulation_spare_labor_search_v0.py"
+      - "run_adaptive_circulation_first_move_route_trace_v0.py"
       - ".github/workflows/adaptive-circulation-spare-labor-search-v0.yml"
   workflow_dispatch:
 
@@ -27,9 +28,13 @@ jobs:
           python -m pip install "git+https://github.com/Kaggle/kaggle-environments.git@d7729da06cc1382eb742d6980dc3180aa85caa28"
       - name: Search strict spare-labor candidates
         run: python run_adaptive_circulation_spare_labor_search_v0.py
+      - name: Trace first move candidate
+        run: python run_adaptive_circulation_first_move_route_trace_v0.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: adaptive-circulation-spare-labor-search-v0
-          path: adaptive_circulation_spare_labor_search_v0.json
+          path: |
+            adaptive_circulation_spare_labor_search_v0.json
+            adaptive_circulation_first_move_route_trace_v0.json
           if-no-files-found: warn
