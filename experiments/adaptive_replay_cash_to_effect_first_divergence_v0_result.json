@@ -1,0 +1,37 @@
+{
+  "schema": "adaptive-replay-cash-to-effect-first-divergence-v0-result",
+  "run_id": 36658077957,
+  "branch": "experiment/adaptive-replay-cash-to-effect-first-divergence-v0-20260930",
+  "engine_commit": "d7729da06cc1382eb742d6980dc3180aa85caa28",
+  "world": "Seyamalam v21 / subject seat0",
+  "positive_seed": 93803004,
+  "negative_seed": 93803005,
+  "target_transition": "step110 pre-state -> step111 post-state",
+  "confirmed": [
+    "The subject action is identical in both seeds at step110, including PLANT STRAWBERRY by one hand and market BUY_SEED STRAWBERRY 1.",
+    "The opponent action is also identical in both seeds.",
+    "Before the transition, self Cash is 104 in the positive seed and 98 in the negative seed; the +6 Cash gap from step97 is still exactly present.",
+    "Official STRAWBERRY seed cost is 100.",
+    "Both worlds successfully realize the STRAWBERRY PLANT, so one existing STRAWBERRY seed is consumed in both.",
+    "Positive seed can afford BUY_SEED STRAWBERRY 1: Cash 104 -> 4 and STRAWBERRY seeds remain 5 after plant-consume plus buy-replenish.",
+    "Negative seed cannot afford BUY_SEED STRAWBERRY 1: Cash remains 98 and STRAWBERRY seeds fall 5 -> 4 after the same successful plant.",
+    "Therefore the +6 Cash gap crosses the exact 100-Cash affordability threshold and becomes the first observed different realized self-resource effect at step111."
+  ],
+  "closed_chain": [
+    "step72 different unlocked shop",
+    "step73 market inventory difference through official town consumption",
+    "different WHEAT market inventory position",
+    "step96 same SELL WHEAT 8 receives different per-unit quote sequence",
+    "step97 realized Cash 248 vs 242 (+6)",
+    "step110 pre Cash 104 vs 98 (+6)",
+    "same PLANT STRAWBERRY + BUY_SEED STRAWBERRY 1 request",
+    "100-Cash affordability boundary",
+    "step111 seed inventory diverges: 5 vs 4"
+  ],
+  "boundary": [
+    "This establishes Cash gap -> BUY_SEED feasibility/effect divergence for this transition.",
+    "It does not yet establish how the one-seed difference propagates to terminal self.",
+    "No new Guard, Recovery, or policy rule is promoted."
+  ],
+  "next_unknown": "What is the first downstream World or productive-capacity difference caused by the one-seed STRAWBERRY inventory gap?"
+}
