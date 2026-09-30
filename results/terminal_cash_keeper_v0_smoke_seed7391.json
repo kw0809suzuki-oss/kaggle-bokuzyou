@@ -1,0 +1,22 @@
+{
+  "schema": "terminal-cash-keeper-v0-runtime-smoke-observation",
+  "status": "runtime_verified_not_strength_verified",
+  "environment_seed": 7391,
+  "opponent": "Seyamalam pinned v21",
+  "workflow_run_id": 36698981773,
+  "turns": 719,
+  "terminal_cash": 4373.0,
+  "opponent_terminal_cash": 152356.0,
+  "deterministic_after_reset": true,
+  "action_sequence_digest": "37d1c25e0739b5fbfe26505c248bea079625309b739c29e3455c870645cc1661",
+  "decision_kind_counts": {
+    "PASS": 52,
+    "collect_plant_output": 158,
+    "deliver_carried_to_shed": 129,
+    "establish_plant": 183,
+    "maintain_plant_today": 70,
+    "prepare_for_plant": 72,
+    "realize_shed_stock_sale": 55
+  },
+  "boundary": "This proves executable deterministic behavior on one smoke World only. It is not A/B strength evidence and does not establish general terminal-cash improvement."
+}
