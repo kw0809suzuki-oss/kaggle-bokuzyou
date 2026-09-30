@@ -1,0 +1,78 @@
+{
+  "schema": "adaptive-replay-terminal-distribution-v0-result",
+  "run_id": 36659147195,
+  "branch": "experiment/adaptive-replay-terminal-distribution-v0-20260930",
+  "model": "adaptive_replay_contract_runtime_v0.py",
+  "opponent": "Seyamalam v21",
+  "world_design": "fresh 10 seeds x subject seat0/seat1 = 20 worlds",
+  "summary": {
+    "n": 20,
+    "mean_terminal_self": 109982.55,
+    "median_terminal_self": 100308,
+    "min_terminal_self": 71590,
+    "max_terminal_self": 174587,
+    "p10_terminal_self_nearest": 88516,
+    "p25_terminal_self_nearest": 90150,
+    "below_50000_count": 0,
+    "below_25000_count": 0
+  },
+  "by_seat": {
+    "seat0": {
+      "n": 10,
+      "mean_terminal_self": 109751.2,
+      "median_terminal_self": 99619.5,
+      "min_terminal_self": 71594,
+      "max_terminal_self": 174587,
+      "below_50000_count": 0,
+      "below_25000_count": 0
+    },
+    "seat1": {
+      "n": 10,
+      "mean_terminal_self": 110213.9,
+      "median_terminal_self": 100937,
+      "min_terminal_self": 71590,
+      "max_terminal_self": 173774,
+      "below_50000_count": 0,
+      "below_25000_count": 0
+    }
+  },
+  "lower_five": [
+    {
+      "seed": 93901005,
+      "seat": 1,
+      "terminal_self": 71590
+    },
+    {
+      "seed": 93901005,
+      "seat": 0,
+      "terminal_self": 71594
+    },
+    {
+      "seed": 93901007,
+      "seat": 1,
+      "terminal_self": 88516
+    },
+    {
+      "seed": 93901007,
+      "seat": 0,
+      "terminal_self": 89100
+    },
+    {
+      "seed": 93901010,
+      "seat": 0,
+      "terminal_self": 90150
+    }
+  ],
+  "observation": [
+    "No clear collapse world appeared in this 20-world gate.",
+    "Seat0 and seat1 distributions are close in mean, median, and minimum.",
+    "Every world triggered the existing step24 Contract once.",
+    "Under the agreed observation policy, no internal divergence analysis is opened from this gate."
+  ],
+  "boundary": [
+    "This is not a proof of global robustness.",
+    "The below-50k and below-25k counts are operational counters, not promoted universal success criteria.",
+    "No new Guard, Recovery, Contract, or policy change is justified by this gate."
+  ],
+  "decision": "HOLD: keep the current runtime unchanged; return to microscope only when a future broader-world gate shows a clearly low terminal-self case."
+}
