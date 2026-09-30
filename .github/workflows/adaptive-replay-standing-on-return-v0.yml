@@ -6,6 +6,7 @@ on:
       - experiment/adaptive-replay-standing-on-return-v0-20260930
     paths:
       - adaptive_replay_contract_runtime_v0.py
+      - adaptive_replay_standing_on_return_v0.py
       - test_adaptive_replay_standing_on_return_v0.py
       - .github/workflows/adaptive-replay-standing-on-return-v0.yml
   workflow_dispatch:
