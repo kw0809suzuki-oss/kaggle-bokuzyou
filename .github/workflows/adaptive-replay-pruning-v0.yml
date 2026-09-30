@@ -1,0 +1,31 @@
+name: Adaptive Replay Pruning v0
+
+on:
+  push:
+    branches:
+      - experiment/adaptive-replay-pruning-v0-20260930
+    paths:
+      - adaptive_replay_pruning_v0.py
+      - run_adaptive_replay_pruning_v0.py
+      - docs/adaptive_replay_pruning_v0.md
+      - .github/workflows/adaptive-replay-pruning-v0.yml
+  workflow_dispatch:
+
+jobs:
+  pruning:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          python -m pip install --upgrade pip >/dev/null
+          pip install "kaggle-environments>=1.32.7" >/dev/null
+      - name: Compile
+        run: python -m py_compile adaptive_replay_pruning_v0.py run_adaptive_replay_pruning_v0.py
+      - name: Screen and fixed10
+        run: python run_adaptive_replay_pruning_v0.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: adaptive-replay-pruning-v0-result
+          path: adaptive_replay_pruning_v0_result.json
+          if-no-files-found: error
