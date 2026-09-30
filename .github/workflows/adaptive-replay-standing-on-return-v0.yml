@@ -1,0 +1,24 @@
+name: Adaptive Replay Standing On Return v0
+
+on:
+  push:
+    branches:
+      - experiment/adaptive-replay-standing-on-return-v0-20260930
+    paths:
+      - adaptive_replay_contract_runtime_v0.py
+      - test_adaptive_replay_standing_on_return_v0.py
+      - .github/workflows/adaptive-replay-standing-on-return-v0.yml
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install runtime
+        run: |
+          python -m pip install --upgrade pip >/dev/null
+          pip install "kaggle-environments>=1.32.7" >/dev/null
+      - name: Run standing-on-return contract test
+        run: python -m unittest test_adaptive_replay_standing_on_return_v0 -v
