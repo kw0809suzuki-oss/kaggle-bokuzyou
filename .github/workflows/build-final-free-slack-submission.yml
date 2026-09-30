@@ -1,0 +1,83 @@
+name: Build final Free Slack submission
+
+on:
+  push:
+    branches:
+      - "experiment/adaptive-replay-free-slack-surface-v0-20260930"
+    paths:
+      - "build_adaptive_replay_free_slack_submission_v0.py"
+      - "verify_adaptive_replay_free_slack_submission_v0.py"
+      - "adaptive_replay_contract_runtime_v0.py"
+      - "decem_replay_distilled_157026_v0.py"
+      - "world_lens_agent_v0.py"
+      - ".github/workflows/build-final-free-slack-submission.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install pinned Official Kaggriculture environment
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "git+https://github.com/Kaggle/kaggle-environments.git@d7729da06cc1382eb742d6980dc3180aa85caa28"
+
+      - name: Build self-contained main.py
+        run: |
+          rm -rf dist/free_slack_submission
+          mkdir -p dist/free_slack_submission
+          python build_adaptive_replay_free_slack_submission_v0.py dist/free_slack_submission/main.py
+          python -m py_compile dist/free_slack_submission/main.py
+
+      - name: Verify built main.py fixed10
+        run: |
+          python verify_adaptive_replay_free_slack_submission_v0.py
+
+      - name: Inspect public callable tail
+        run: |
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+
+          p = Path("dist/free_slack_submission/main.py")
+          tree = ast.parse(p.read_text(encoding="utf-8"))
+
+          callables = []
+          for node in tree.body:
+              if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+                  callables.append((node.lineno, node.name, type(node).__name__))
+
+          assert callables, "no top-level callable definitions found"
+          assert callables[-1][1] == "agent", callables[-10:]
+          print("FINAL_TOP_LEVEL_CALLABLE", callables[-1])
+          print("MAIN_BYTES", p.stat().st_size)
+          PY
+
+      - name: Package tar.gz with root main.py only
+        run: |
+          rm -f kaggriculture_adaptive_replay_free_slack_v0_submission.tar.gz
+          tar -czf kaggriculture_adaptive_replay_free_slack_v0_submission.tar.gz             -C dist/free_slack_submission main.py
+          echo "ARCHIVE_LIST"
+          tar -tzf kaggriculture_adaptive_replay_free_slack_v0_submission.tar.gz
+          test "$(tar -tzf kaggriculture_adaptive_replay_free_slack_v0_submission.tar.gz | wc -l)" -eq 1
+          test "$(tar -tzf kaggriculture_adaptive_replay_free_slack_v0_submission.tar.gz)" = "main.py"
+          sha256sum kaggriculture_adaptive_replay_free_slack_v0_submission.tar.gz
+          ls -lh kaggriculture_adaptive_replay_free_slack_v0_submission.tar.gz
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kaggriculture-adaptive-replay-free-slack-v0-submission
+          path: |
+            kaggriculture_adaptive_replay_free_slack_v0_submission.tar.gz
+            dist/free_slack_submission/verification.json
+          if-no-files-found: error
