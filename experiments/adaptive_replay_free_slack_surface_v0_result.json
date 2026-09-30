@@ -1,0 +1,60 @@
+{
+  "schema": "adaptive-replay-free-slack-surface-v0-result",
+  "date": "2026-09-30",
+  "objective": "terminal_self",
+  "design": {
+    "principle": "GENERATE FREE + DETERMINE WITH WARRANT",
+    "standing_model": "adaptive_replay_contract_runtime_v0",
+    "free_generator_v0": "world_lens_agent_v0",
+    "candidate_similarity_constraint": false,
+    "automatic_unwarranted_adoption": false
+  },
+  "rejected_intermediate": {
+    "branch": "experiment/adaptive-replay-open-slack-v0-20260930",
+    "run_id": 36727635809,
+    "result": {
+      "fixed10_improved": 0,
+      "fixed10_worsened": 10,
+      "candidate_mean_terminal_self": 0.0,
+      "alternative_used_cases": 10,
+      "total_alternative_count": 463
+    },
+    "boundary": "The free candidate surface itself was not falsified. The one-step terminal-reachable-value heuristic was not a valid adoption warrant and was rejected."
+  },
+  "final_gate": {
+    "branch": "experiment/adaptive-replay-free-slack-surface-v0-20260930",
+    "run_id": 36728612254,
+    "fixed_seeds": [
+      92802001,
+      92802002,
+      92802003,
+      92802004,
+      92802005,
+      92802006,
+      92802007,
+      92802008,
+      92802009,
+      92802010
+    ],
+    "action_trace_equal_cases": 10,
+    "terminal_equal_cases": 10,
+    "baseline_mean_terminal_self": 103945.2,
+    "candidate_mean_terminal_self": 103945.2,
+    "mean_delta_terminal_self": 0.0,
+    "surface_count_total": 7190,
+    "distinct_alternative_count_total": 7190,
+    "distinct_alternative_cases": 10
+  },
+  "confirmed": [
+    "A complete alternative ActionBundle can be generated every turn without requiring similarity to Replay.",
+    "The free candidate surface is non-interfering while no replacement warrant is promoted.",
+    "Fixed10 action traces and terminal results remain exactly equal to the proven Adaptive Replay Contract Runtime."
+  ],
+  "boundary": [
+    "A generated alternative is not Evidence.",
+    "World Lens v0 is a generator, not a promoted selector.",
+    "No general automatic replacement warrant has been established.",
+    "The existing promoted step24 Effect Contract remains inside the standing runtime."
+  ],
+  "current_position": "The submission-facing model can keep the proven Adaptive Replay as standing behavior while permanently exposing an unconstrained Current-World candidate surface. Future alternatives may be generated freely; adoption requires separate terminal-supported warrant."
+}
