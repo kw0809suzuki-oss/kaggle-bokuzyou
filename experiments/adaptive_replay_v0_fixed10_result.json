@@ -1,0 +1,806 @@
+{
+  "schema": "adaptive-replay-v0-fixed10-result",
+  "run_id": 36649687912,
+  "branch": "experiment/adaptive-replay-v0-20260930",
+  "engine_commit": "d7729da06cc1382eb742d6980dc3180aa85caa28",
+  "opponent": "seyamalam_v21",
+  "seat": 0,
+  "summary": {
+    "n": 10,
+    "improved": 10,
+    "worsened": 0,
+    "same": 0,
+    "guard_triggered_cases": 10,
+    "baseline_mean_terminal_self": 66104.7,
+    "candidate_mean_terminal_self": 103945.2,
+    "mean_delta_terminal_self": 37840.5,
+    "median_delta_terminal_self": 29847.5,
+    "min_delta_terminal_self": 6144,
+    "max_delta_terminal_self": 89284,
+    "mean_delta_margin": 38183.5
+  },
+  "cases": [
+    {
+      "seed": 92802001,
+      "baseline": {
+        "terminal_self": 39645,
+        "terminal_opponent": 22723,
+        "margin": 16922,
+        "guard_trigger_count": 0,
+        "guard_event": null,
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hands": 0,
+            "hires_today": 0
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 2,
+            "hands": 3,
+            "hires_today": 3
+          }
+        }
+      },
+      "candidate": {
+        "terminal_self": 99834,
+        "terminal_opponent": 33702,
+        "margin": 66132,
+        "guard_trigger_count": 1,
+        "guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hands": 0,
+            "hires_today": 0
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 5,
+            "hands": 1,
+            "hires_today": 1
+          }
+        }
+      },
+      "delta_terminal_self": 60189,
+      "delta_margin": 49210
+    },
+    {
+      "seed": 92802002,
+      "baseline": {
+        "terminal_self": 50713,
+        "terminal_opponent": 69630,
+        "margin": -18917,
+        "guard_trigger_count": 0,
+        "guard_event": null,
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hands": 0,
+            "hires_today": 0
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 2,
+            "hands": 3,
+            "hires_today": 3
+          }
+        }
+      },
+      "candidate": {
+        "terminal_self": 100769,
+        "terminal_opponent": 58212,
+        "margin": 42557,
+        "guard_trigger_count": 1,
+        "guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hands": 0,
+            "hires_today": 0
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 5,
+            "hands": 1,
+            "hires_today": 1
+          }
+        }
+      },
+      "delta_terminal_self": 50056,
+      "delta_margin": 61474
+    },
+    {
+      "seed": 92802003,
+      "baseline": {
+        "terminal_self": 83297,
+        "terminal_opponent": 85481,
+        "margin": -2184,
+        "guard_trigger_count": 0,
+        "guard_event": null,
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hands": 0,
+            "hires_today": 0
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 2,
+            "hands": 3,
+            "hires_today": 3
+          }
+        }
+      },
+      "candidate": {
+        "terminal_self": 89441,
+        "terminal_opponent": 59887,
+        "margin": 29554,
+        "guard_trigger_count": 1,
+        "guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hands": 0,
+            "hires_today": 0
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 5,
+            "hands": 1,
+            "hires_today": 1
+          }
+        }
+      },
+      "delta_terminal_self": 6144,
+      "delta_margin": 31738
+    },
+    {
+      "seed": 92802004,
+      "baseline": {
+        "terminal_self": 54146,
+        "terminal_opponent": 36338,
+        "margin": 17808,
+        "guard_trigger_count": 0,
+        "guard_event": null,
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hands": 0,
+            "hires_today": 0
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 2,
+            "hands": 3,
+            "hires_today": 3
+          }
+        }
+      },
+      "candidate": {
+        "terminal_self": 78365,
+        "terminal_opponent": 49249,
+        "margin": 29116,
+        "guard_trigger_count": 1,
+        "guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hands": 0,
+            "hires_today": 0
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 5,
+            "hands": 1,
+            "hires_today": 1
+          }
+        }
+      },
+      "delta_terminal_self": 24219,
+      "delta_margin": 11308
+    },
+    {
+      "seed": 92802005,
+      "baseline": {
+        "terminal_self": 67717,
+        "terminal_opponent": 60351,
+        "margin": 7366,
+        "guard_trigger_count": 0,
+        "guard_event": null,
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hands": 0,
+            "hires_today": 0
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 2,
+            "hands": 3,
+            "hires_today": 3
+          }
+        }
+      },
+      "candidate": {
+        "terminal_self": 99499,
+        "terminal_opponent": 90728,
+        "margin": 8771,
+        "guard_trigger_count": 1,
+        "guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hands": 0,
+            "hires_today": 0
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 5,
+            "hands": 1,
+            "hires_today": 1
+          }
+        }
+      },
+      "delta_terminal_self": 31782,
+      "delta_margin": 1405
+    },
+    {
+      "seed": 92802006,
+      "baseline": {
+        "terminal_self": 67314,
+        "terminal_opponent": 85756,
+        "margin": -18442,
+        "guard_trigger_count": 0,
+        "guard_event": null,
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hands": 0,
+            "hires_today": 0
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 2,
+            "hands": 3,
+            "hires_today": 3
+          }
+        }
+      },
+      "candidate": {
+        "terminal_self": 95227,
+        "terminal_opponent": 64055,
+        "margin": 31172,
+        "guard_trigger_count": 1,
+        "guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hands": 0,
+            "hires_today": 0
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 5,
+            "hands": 1,
+            "hires_today": 1
+          }
+        }
+      },
+      "delta_terminal_self": 27913,
+      "delta_margin": 49614
+    },
+    {
+      "seed": 92802007,
+      "baseline": {
+        "terminal_self": 74595,
+        "terminal_opponent": 68715,
+        "margin": 5880,
+        "guard_trigger_count": 0,
+        "guard_event": null,
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hands": 0,
+            "hires_today": 0
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 2,
+            "hands": 3,
+            "hires_today": 3
+          }
+        }
+      },
+      "candidate": {
+        "terminal_self": 163879,
+        "terminal_opponent": 113157,
+        "margin": 50722,
+        "guard_trigger_count": 1,
+        "guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hands": 0,
+            "hires_today": 0
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 5,
+            "hands": 1,
+            "hires_today": 1
+          }
+        }
+      },
+      "delta_terminal_self": 89284,
+      "delta_margin": 44842
+    },
+    {
+      "seed": 92802008,
+      "baseline": {
+        "terminal_self": 74326,
+        "terminal_opponent": 99133,
+        "margin": -24807,
+        "guard_trigger_count": 0,
+        "guard_event": null,
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hands": 0,
+            "hires_today": 0
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 2,
+            "hands": 3,
+            "hires_today": 3
+          }
+        }
+      },
+      "candidate": {
+        "terminal_self": 94290,
+        "terminal_opponent": 65694,
+        "margin": 28596,
+        "guard_trigger_count": 1,
+        "guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hands": 0,
+            "hires_today": 0
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 5,
+            "hands": 1,
+            "hires_today": 1
+          }
+        }
+      },
+      "delta_terminal_self": 19964,
+      "delta_margin": 53403
+    },
+    {
+      "seed": 92802009,
+      "baseline": {
+        "terminal_self": 58171,
+        "terminal_opponent": 36190,
+        "margin": 21981,
+        "guard_trigger_count": 0,
+        "guard_event": null,
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hands": 0,
+            "hires_today": 0
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 2,
+            "hands": 3,
+            "hires_today": 3
+          }
+        }
+      },
+      "candidate": {
+        "terminal_self": 82652,
+        "terminal_opponent": 56740,
+        "margin": 25912,
+        "guard_trigger_count": 1,
+        "guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hands": 0,
+            "hires_today": 0
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 5,
+            "hands": 1,
+            "hires_today": 1
+          }
+        }
+      },
+      "delta_terminal_self": 24481,
+      "delta_margin": 3931
+    },
+    {
+      "seed": 92802010,
+      "baseline": {
+        "terminal_self": 91123,
+        "terminal_opponent": 121017,
+        "margin": -29894,
+        "guard_trigger_count": 0,
+        "guard_event": null,
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hands": 0,
+            "hires_today": 0
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 2,
+            "hands": 3,
+            "hires_today": 3
+          }
+        }
+      },
+      "candidate": {
+        "terminal_self": 135496,
+        "terminal_opponent": 90480,
+        "margin": 45016,
+        "guard_trigger_count": 1,
+        "guard_event": {
+          "step": 24,
+          "money": 6,
+          "hires_today": 0,
+          "requested_hires": 3,
+          "current_feasible_hires": 3,
+          "source_realized_hires": 1
+        },
+        "step24": {
+          "pre": {
+            "money": 6,
+            "hands": 0,
+            "hires_today": 0
+          },
+          "issued_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "post": {
+            "money": 5,
+            "hands": 1,
+            "hires_today": 1
+          }
+        }
+      },
+      "delta_terminal_self": 44373,
+      "delta_margin": 74910
+    }
+  ],
+  "observation": "HIRE guard triggered exactly once in all 10 cases; candidate improved terminal_self in all 10.",
+  "boundary": "This is a fixed10 seat0 result. It does not yet establish cross-seat or broader-world generality."
+}
