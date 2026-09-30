@@ -1,0 +1,38 @@
+name: Terminal Cash Keeper v0 One World AB
+
+on:
+  push:
+    branches:
+      - "model/terminal-cash-keeper-v0-20260930"
+    paths:
+      - "run_terminal_cash_keeper_v0_one_world_ab.py"
+      - ".github/workflows/terminal-cash-keeper-v0-one-world-ab.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  one-world-ab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install official Kaggle environments
+        run: python -m pip install -r requirements.txt
+      - name: Fetch pinned Seyamalam opponent
+        run: |
+          mkdir -p opponents
+          curl -fL --retry 3 \
+            -o opponents/seyamalam_v21.py \
+            https://raw.githubusercontent.com/Seyamalam/Kaggriculture/8b8c421eb10634c756583ce10c75189f50c83a72/main.py
+      - name: Run one-world terminal cash A/B
+        run: python run_terminal_cash_keeper_v0_one_world_ab.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: terminal-cash-keeper-v0-one-world-ab
+          path: terminal_cash_keeper_v0_one_world_ab_seed7391.json
