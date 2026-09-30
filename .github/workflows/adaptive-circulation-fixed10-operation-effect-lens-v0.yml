@@ -1,0 +1,35 @@
+name: Adaptive Circulation Fixed10 Operation Effect Lens v0
+
+on:
+  push:
+    branches:
+      - "model/adaptive-circulation-runtime-v0-20260930"
+    paths:
+      - "run_adaptive_circulation_fixed10_operation_effect_lens_v0.py"
+      - ".github/workflows/adaptive-circulation-fixed10-operation-effect-lens-v0.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fixed10-lens:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned Official Kaggriculture environment
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "git+https://github.com/Kaggle/kaggle-environments.git@d7729da06cc1382eb742d6980dc3180aa85caa28"
+      - name: Run fixed10 Operation Effect Lens
+        run: python run_adaptive_circulation_fixed10_operation_effect_lens_v0.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: adaptive-circulation-fixed10-operation-effect-lens-v0
+          path: adaptive_circulation_fixed10_operation_effect_lens_v0.json
+          if-no-files-found: warn
