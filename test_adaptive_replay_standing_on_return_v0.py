@@ -1,7 +1,7 @@
 import copy
 import unittest
 
-import adaptive_replay_contract_runtime_v0 as model
+import adaptive_replay_standing_on_return_v0 as model
 
 
 class StandingOnReturnTests(unittest.TestCase):
@@ -14,7 +14,7 @@ class StandingOnReturnTests(unittest.TestCase):
             "hands": [["PASS"]],
             "market": [["SELL", "MILK", 1]],
         }
-        model.replay.agent = lambda obs, configuration=None: copy.deepcopy(original)
+        model.base.replay.agent = lambda obs, configuration=None: copy.deepcopy(original)
 
         tiles = [[None for _ in range(5)] for _ in range(5)]
         tiles[1][0] = {
