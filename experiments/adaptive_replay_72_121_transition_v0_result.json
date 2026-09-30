@@ -1,0 +1,63 @@
+{
+  "schema": "adaptive-replay-72-121-transition-v0-result",
+  "run_id": 36654703588,
+  "branch": "experiment/adaptive-replay-72-121-transition-v0-20260930",
+  "engine_commit": "d7729da06cc1382eb742d6980dc3180aa85caa28",
+  "world": "Seyamalam v21 / subject seat0",
+  "positive_seed": 93803004,
+  "negative_seed": 93803005,
+  "summary": {
+    "candidate_first_subject_action_divergence_step": 121,
+    "candidate_first_opponent_action_divergence_step": null,
+    "baseline_first_subject_action_divergence_step": null,
+    "baseline_first_opponent_action_divergence_step": null,
+    "first_candidate_only_world_diff_step": 73,
+    "first_candidate_only_world_diff_paths": [
+      "market.inventory.CARROT",
+      "market.inventory.MILK",
+      "market.inventory.WHEAT",
+      "market.prices.MILK"
+    ],
+    "candidate_only_world_diff_first_seen": {
+      "market.inventory.CARROT": 73,
+      "market.inventory.MILK": 73,
+      "market.inventory.WHEAT": 73,
+      "market.prices.MILK": 73,
+      "market.prices.WHEAT": 74,
+      "market.prices.CARROT": 77,
+      "farms[1].money": 79,
+      "farms[0].money": 97,
+      "private.seeds.STRAWBERRY": 111,
+      "farms[0].hands.length": 121,
+      "farms[0].hires_today": 121,
+      "private.inventories.length": 121
+    },
+    "shared_world_diff_first_seen": {
+      "town.unlocked_shops[0]": {
+        "baseline_first_seen": 72,
+        "candidate_first_seen": 72
+      },
+      "market.inventory.STRAWBERRY": {
+        "baseline_first_seen": 73,
+        "candidate_first_seen": 73
+      },
+      "market.prices.STRAWBERRY": {
+        "baseline_first_seen": 73,
+        "candidate_first_seen": 73
+      }
+    }
+  },
+  "confirmed": [
+    "Both bodies first show the seed-to-seed World difference at step72 in town.unlocked_shops[0].",
+    "At step73 the candidate seed comparison widens to candidate-only market differences in CARROT, MILK, WHEAT inventories and MILK price; shared baseline/candidate differences include STRAWBERRY inventory and price.",
+    "Candidate-only first-seen differences then reach WHEAT price at step74, CARROT price at step77, opponent money at step79, self money at step97, private STRAWBERRY seeds at step111, and self hands/hires_today/private inventory length at step121.",
+    "The candidate's first self Action difference at step121 is only hands.length (3 vs 5).",
+    "Frozen Replay adjusts its hands Action list to the current observed hand count via (scheduled + PASS padding)[:hands], so the step121 Action-list length difference is a mechanical reflection of the World hand-count difference, not evidence of a new policy choice."
+  ],
+  "boundary": [
+    "Candidate-only path means a seed04-vs-seed05 difference observed in candidate during steps72-122 that was not observed in the baseline seed comparison during the same window.",
+    "No causal claim is made that town unlock or any market field causes terminal sign.",
+    "No new Guard, Recovery, or feature is promoted."
+  ],
+  "next_unknown": "What exact engine transition at step72->73 maps the town.unlocked_shops difference into the wider candidate market differences?"
+}
