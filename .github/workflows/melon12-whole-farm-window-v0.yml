@@ -1,0 +1,37 @@
+name: MELON12 Whole Farm Window v0
+
+on:
+  push:
+    branches:
+      - "experiment/melon12-whole-farm-window-v0-20260930"
+    paths:
+      - "observe_melon12_whole_farm_window_v0.py"
+      - ".github/workflows/melon12-whole-farm-window-v0.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  observe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download existing seed801 Battle artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          curl -L --fail --silent --show-error             -H "Authorization: Bearer $GH_TOKEN"             -H "Accept: application/vnd.github+json"             "https://api.github.com/repos/kw0809suzuki-oss/kaggle-bokuzyou/actions/artifacts/10932304536/zip"             -o melon12-seed801.zip
+
+      - name: Observe whole-farm window only
+        run: |
+          python observe_melon12_whole_farm_window_v0.py melon12-seed801.zip > melon12_whole_farm_window_v0.json
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: melon12-whole-farm-window-v0
+          path: melon12_whole_farm_window_v0.json
+          if-no-files-found: error
