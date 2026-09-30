@@ -1,0 +1,38 @@
+{
+  "schema": "world-rhythm-extra-worker-conversion-v0-result",
+  "run_id": 36663921005,
+  "branch": "experiment/world-rhythm-extra-worker-conversion-v0-20260930",
+  "worlds": 20,
+  "known_phase_sign_split": {
+    "positive": 6,
+    "negative": 14
+  },
+  "observation": {
+    "marginal_worker_window": "step169..191",
+    "marginal_worker_requested_steps_per_world": 23,
+    "marginal_worker_pass_steps_per_world": 23,
+    "marginal_worker_productive_actions_per_world": 0,
+    "marginal_worker_move_actions_per_world": 0,
+    "worker_action_value_positive_group": {
+      "n": 6,
+      "mean": 0,
+      "median": 0,
+      "min": 0,
+      "max": 0
+    },
+    "worker_action_value_negative_group": {
+      "n": 14,
+      "mean": 0,
+      "median": 0,
+      "min": 0,
+      "max": 0
+    },
+    "early_vs_pass9_terminal_equal": "20/20"
+  },
+  "conclusion": "The sign split from step168 HIRE +1 is not explained by the added 9th worker performing productive or movement actions during steps169..191. The 9th worker is PASS throughout and forcing PASS changes terminal by 0 in all 20 worlds.",
+  "boundary": [
+    "This does not identify which non-worker consequence of the extra HIRE causes terminal divergence.",
+    "Cash, hires_today/hand-count state, later feasibility/effects, productive assets, inventory, and unrecovered value remain open.",
+    "No Phase semantics and no World Rhythm Rider policy are promoted."
+  ]
+}
