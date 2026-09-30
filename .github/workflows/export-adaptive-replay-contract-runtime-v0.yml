@@ -1,0 +1,61 @@
+name: Export Adaptive Replay Contract Runtime v0
+
+on:
+  push:
+    branches:
+      - submission/adaptive-replay-contract-runtime-v0-20260930
+    paths:
+      - adaptive_replay_contract_runtime_v0.py
+      - adaptive_replay_effect_contracts_v0.json
+      - adaptive_replay_world_adapter_v0.py
+      - decem_replay_distilled_157026_v0.py
+      - build_adaptive_replay_contract_submission_v0.py
+      - run_adaptive_replay_contract_submission_equivalence_fixed10.py
+      - .github/workflows/export-adaptive-replay-contract-runtime-v0.yml
+  workflow_dispatch:
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install official Kaggriculture runtime
+        run: |
+          python -m pip install --upgrade pip >/dev/null
+          pip install "kaggle-environments>=1.32.7" >/dev/null
+
+      - name: Build single-file submission
+        run: |
+          python build_adaptive_replay_contract_submission_v0.py
+          python -m py_compile main.py
+
+      - name: Verify Kaggle resolves agent callable
+        run: |
+          python - <<'PY'
+          from kaggle_environments.agent import get_last_callable
+          raw = open("main.py", encoding="utf-8").read()
+          fn = get_last_callable(raw, path="main.py")
+          print("CALLABLE_NAME", getattr(fn, "__name__", None))
+          assert getattr(fn, "__name__", None) == "agent"
+          PY
+
+      - name: Verify exact fixed10 equivalence
+        run: python run_adaptive_replay_contract_submission_equivalence_fixed10.py
+
+      - name: Build submission archive
+        run: |
+          tar -czf kaggriculture_adaptive_replay_contract_runtime_v0.tar.gz main.py
+          tar -tzf kaggriculture_adaptive_replay_contract_runtime_v0.tar.gz
+          sha256sum kaggriculture_adaptive_replay_contract_runtime_v0.tar.gz | tee kaggriculture_adaptive_replay_contract_runtime_v0.sha256
+
+      - name: Upload submission artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: kaggriculture-adaptive-replay-contract-runtime-v0-submission
+          path: |
+            kaggriculture_adaptive_replay_contract_runtime_v0.tar.gz
+            kaggriculture_adaptive_replay_contract_runtime_v0.sha256
+            adaptive_replay_contract_submission_equivalence_fixed10.json
+          if-no-files-found: error
