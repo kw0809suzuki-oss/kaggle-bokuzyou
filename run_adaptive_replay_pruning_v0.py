@@ -9,7 +9,7 @@ CAND=ROOT/"adaptive_replay_pruning_v0.py"
 OPP=ROOT/"astra_flow_vendor"/"seyamalam_v21.py"
 SCREEN_SEED=92802001
 FIXED10=[92802001,92802002,92802003,92802004,92802005,92802006,92802007,92802008,92802009,92802010]
-ELIGIBLE={"HIRE","BUY_ANIMAL","BUY_SEED","BUY_LAND","BUY_PRODUCT"}
+ELIGIBLE={"HIRE","BUY_ANIMAL","BUY_LAND","BUY_PRODUCT"}
 
 def plain(x):
     if isinstance(x,dict): return {str(k):plain(v) for k,v in x.items()}
@@ -53,9 +53,17 @@ def run(seed, mode="base", candidate=None):
 def candidates_from(trace):
     out=[]
     for row in trace:
-        for i,order in enumerate(row["action"].get("market",[]) or []):
-            if isinstance(order,list) and order and order[0] in ELIGIBLE:
-                out.append({"step":row["step"],"market_index":i,"order":order})
+        market=list(row["action"].get("market",[]) or [])
+        seen=set()
+        for i,order in enumerate(market):
+            if not (isinstance(order,list) and order and order[0] in ELIGIBLE):
+                continue
+            reduced=market[:i]+market[i+1:]
+            key=json.dumps(reduced,sort_keys=True,separators=(",",":"))
+            if key in seen:
+                continue
+            seen.add(key)
+            out.append({"step":row["step"],"market_index":i,"order":order})
     return out
 
 def main():
@@ -107,6 +115,7 @@ def main():
       "baseline":"adaptive_replay_contract_runtime_v0",
       "screen_seed":SCREEN_SEED,
       "eligible_operations":sorted(ELIGIBLE),
+      "deferred_operation":"BUY_SEED",
       "screen_candidate_count":len(candidates),
       "screen_positive_count":len([r for r in screen if r["activation_count"]==1 and r["delta_terminal_self"]>0]),
       "screen_top3":survivors,
