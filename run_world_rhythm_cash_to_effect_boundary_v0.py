@@ -215,7 +215,26 @@ def first_boundary(base, early):
                 "opponent_action_equal": opponent_equal,
             }
 
-        if action_equal and b["effect"] != e["effect"]:
+        # Known structural residues from the extra HIRE are not the target:
+        # - persistent Cash offset itself
+        # - extra hand-count / hires_today count and their day-end reset
+        # We want the first downstream realized resource/world consequence.
+        b_meaningful = {
+            "seed_delta": b["effect"]["seed_delta"],
+            "shed_delta": b["effect"]["shed_delta"],
+            "unlocked_added": b["effect"]["unlocked_added"],
+            "unlocked_removed": b["effect"]["unlocked_removed"],
+            "tile_count_delta": b["effect"]["tile_count_delta"],
+        }
+        e_meaningful = {
+            "seed_delta": e["effect"]["seed_delta"],
+            "shed_delta": e["effect"]["shed_delta"],
+            "unlocked_added": e["effect"]["unlocked_added"],
+            "unlocked_removed": e["effect"]["unlocked_removed"],
+            "tile_count_delta": e["effect"]["tile_count_delta"],
+        }
+
+        if action_equal and b_meaningful != e_meaningful:
             first_equal_action_effect_divergence = {
                 "step": step,
                 "subject_core_action": b["subject_core_action"],
@@ -225,6 +244,8 @@ def first_boundary(base, early):
                 "pre_cash_difference_early_minus_base": e["pre"]["cash"] - b["pre"]["cash"],
                 "baseline_effect": b["effect"],
                 "early_effect": e["effect"],
+                "baseline_meaningful_effect": b_meaningful,
+                "early_meaningful_effect": e_meaningful,
                 "baseline_post": b["post"],
                 "early_post": e["post"],
             }
