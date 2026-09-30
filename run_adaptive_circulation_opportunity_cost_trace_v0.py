@@ -88,31 +88,46 @@ def diff(a,b):
         if a.get(k)!=b.get(k): out[k]={"a":a.get(k),"b":b.get(k)}
     return out
 
-def first_diff(ta,tb):
+def first_diff(ta,tb, *, start_step=251, include_action=True):
     by={r["step"]:r for r in tb}
     for a in ta:
+        if a["step"] < start_step:
+            continue
         b=by.get(a["step"])
-        if b is None: continue
+        if b is None:
+            continue
         d=diff(a,b)
-        if d: return {"step":a["step"],"diff":d}
+        if not include_action:
+            d.pop("action", None)
+        if d:
+            return {"step":a["step"],"diff":d}
     return None
+
+def first_resource_diff(ta,tb):
+    return first_diff(ta,tb,start_step=251,include_action=False)
 
 def main():
     out={"schema":"adaptive-circulation-opportunity-cost-trace-v0","end_step":END_STEP,"seeds":{}}
     for seed in SEEDS:
         w=run(seed,WATER,"water"); p=run(seed,PASS,"pass"); h=run(seed,HARVEST,"harvest")
         rec={
-          "water_vs_pass_first_diff":first_diff(w,p),
-          "water_vs_harvest_first_diff":first_diff(w,h),
-          "pass_vs_harvest_first_diff":first_diff(p,h),
+          "water_vs_pass_first_post_action_diff":first_diff(w,p,start_step=251,include_action=True),
+          "water_vs_harvest_first_post_action_diff":first_diff(w,h,start_step=251,include_action=True),
+          "pass_vs_harvest_first_post_action_diff":first_diff(p,h,start_step=251,include_action=True),
+          "water_vs_pass_first_resource_diff":first_resource_diff(w,p),
+          "water_vs_harvest_first_resource_diff":first_resource_diff(w,h),
+          "pass_vs_harvest_first_resource_diff":first_resource_diff(p,h),
           "water":w,"pass":p,"harvest":h,
         }
         out["seeds"][str(seed)]=rec
         print("SEED "+json.dumps({
           "seed":seed,
-          "water_vs_pass_first_diff":rec["water_vs_pass_first_diff"],
-          "water_vs_harvest_first_diff":rec["water_vs_harvest_first_diff"],
-          "pass_vs_harvest_first_diff":rec["pass_vs_harvest_first_diff"],
+          "water_vs_pass_first_post_action_diff":rec["water_vs_pass_first_post_action_diff"],
+          "water_vs_harvest_first_post_action_diff":rec["water_vs_harvest_first_post_action_diff"],
+          "pass_vs_harvest_first_post_action_diff":rec["pass_vs_harvest_first_post_action_diff"],
+          "water_vs_pass_first_resource_diff":rec["water_vs_pass_first_resource_diff"],
+          "water_vs_harvest_first_resource_diff":rec["water_vs_harvest_first_resource_diff"],
+          "pass_vs_harvest_first_resource_diff":rec["pass_vs_harvest_first_resource_diff"],
         },ensure_ascii=False,separators=(",",":")))
     Path("adaptive_circulation_opportunity_cost_trace_v0_result.json").write_text(json.dumps(out,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
 
