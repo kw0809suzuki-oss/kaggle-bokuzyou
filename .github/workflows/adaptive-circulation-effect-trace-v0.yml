@@ -1,0 +1,36 @@
+name: Adaptive Circulation Effect Trace v0
+
+on:
+  push:
+    branches:
+      - "model/adaptive-circulation-runtime-v0-20260930"
+    paths:
+      - "adaptive_circulation_runtime_v0.py"
+      - "run_circulation_effect_trace_v0.py"
+      - ".github/workflows/adaptive-circulation-effect-trace-v0.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  trace:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned Official Kaggriculture environment
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "git+https://github.com/Kaggle/kaggle-environments.git@d7729da06cc1382eb742d6980dc3180aa85caa28"
+      - name: Run circulation effect trace
+        run: python run_circulation_effect_trace_v0.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: adaptive-circulation-effect-trace-v0
+          path: adaptive_circulation_effect_trace_v0.json
+          if-no-files-found: warn
