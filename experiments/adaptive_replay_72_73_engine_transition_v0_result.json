@@ -1,0 +1,440 @@
+{
+  "schema": "adaptive-replay-72-73-engine-transition-v0-result",
+  "run_id": 36655515683,
+  "branch": "experiment/adaptive-replay-72-73-engine-transition-v0-20260930",
+  "engine_commit": "d7729da06cc1382eb742d6980dc3180aa85caa28",
+  "world": "Seyamalam v21 / subject seat0",
+  "positive_seed": 93803004,
+  "negative_seed": 93803005,
+  "summary": {
+    "engine_order": [
+      "_process_market(state, env)",
+      "_town_consume(env, state, step)",
+      "_refresh_prices(market) inside _town_consume"
+    ],
+    "step72_shop_consume_fires": true,
+    "step72_center_consume_fires": true,
+    "results": {
+      "baseline": {
+        "pre72_market_equal": true,
+        "step72_subject_action_equal": true,
+        "step72_opponent_action_equal": true,
+        "positive_shop": "PIZZA_SHOP",
+        "negative_shop": "ICE_CREAM_SHOP",
+        "positive_shop_products": [
+          "MILK",
+          "TOMATO",
+          "WHEAT"
+        ],
+        "negative_shop_products": [
+          "STRAWBERRY",
+          "MILK",
+          "WHEAT"
+        ],
+        "positive_shop_consumption": {
+          "MILK": 1,
+          "TOMATO": 1,
+          "WHEAT": 1
+        },
+        "negative_shop_consumption": {
+          "STRAWBERRY": 1,
+          "MILK": 1,
+          "WHEAT": 1
+        },
+        "expected_post_inventory_seed_diff_from_shop_only": {
+          "STRAWBERRY": 1,
+          "TOMATO": -1
+        },
+        "observed_post_inventory_seed_diff": {
+          "STRAWBERRY": 1,
+          "TOMATO": -1
+        },
+        "observed_post_price_seed_diff": {
+          "STRAWBERRY": -2,
+          "TOMATO": 1
+        },
+        "expected_inventory_diff_matches_observed": true,
+        "step72_pre_inventory_seed_diff": {},
+        "positive_transition": {
+          "pre_inventory": {
+            "WHEAT": 9964,
+            "CARROT": 9997,
+            "TOMATO": 9997,
+            "STRAWBERRY": 9997,
+            "MELON": 9997,
+            "EGG": 9997,
+            "MILK": 9997,
+            "WOOL": 9997,
+            "FERTILIZER": 10012
+          },
+          "post_inventory": {
+            "WHEAT": 9963,
+            "CARROT": 9996,
+            "TOMATO": 9995,
+            "STRAWBERRY": 9996,
+            "MELON": 9996,
+            "EGG": 9996,
+            "MILK": 9995,
+            "WOOL": 9996,
+            "FERTILIZER": 10012
+          },
+          "post_prices": {
+            "WHEAT": 31,
+            "CARROT": 35,
+            "TOMATO": 61,
+            "STRAWBERRY": 137,
+            "MELON": 264,
+            "EGG": 50,
+            "MILK": 179,
+            "WOOL": 214,
+            "FERTILIZER": 98
+          },
+          "subject_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "SELL",
+                "WHEAT",
+                1
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "opponent_action": {
+            "farmer": [
+              "PICKUP",
+              "WHEAT",
+              2
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          }
+        },
+        "negative_transition": {
+          "pre_inventory": {
+            "WHEAT": 9964,
+            "CARROT": 9997,
+            "TOMATO": 9997,
+            "STRAWBERRY": 9997,
+            "MELON": 9997,
+            "EGG": 9997,
+            "MILK": 9997,
+            "WOOL": 9997,
+            "FERTILIZER": 10012
+          },
+          "post_inventory": {
+            "WHEAT": 9963,
+            "CARROT": 9996,
+            "TOMATO": 9996,
+            "STRAWBERRY": 9995,
+            "MELON": 9996,
+            "EGG": 9996,
+            "MILK": 9995,
+            "WOOL": 9996,
+            "FERTILIZER": 10012
+          },
+          "post_prices": {
+            "WHEAT": 31,
+            "CARROT": 35,
+            "TOMATO": 60,
+            "STRAWBERRY": 139,
+            "MELON": 264,
+            "EGG": 50,
+            "MILK": 179,
+            "WOOL": 214,
+            "FERTILIZER": 98
+          },
+          "subject_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "SELL",
+                "WHEAT",
+                1
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "opponent_action": {
+            "farmer": [
+              "PICKUP",
+              "WHEAT",
+              2
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          }
+        }
+      },
+      "candidate": {
+        "pre72_market_equal": true,
+        "step72_subject_action_equal": true,
+        "step72_opponent_action_equal": true,
+        "positive_shop": "ICE_CREAM_SHOP",
+        "negative_shop": "PET_CAFE",
+        "positive_shop_products": [
+          "STRAWBERRY",
+          "MILK",
+          "WHEAT"
+        ],
+        "negative_shop_products": [
+          "CARROT"
+        ],
+        "positive_shop_consumption": {
+          "STRAWBERRY": 1,
+          "MILK": 1,
+          "WHEAT": 1
+        },
+        "negative_shop_consumption": {
+          "CARROT": 2
+        },
+        "expected_post_inventory_seed_diff_from_shop_only": {
+          "CARROT": 2,
+          "MILK": -1,
+          "STRAWBERRY": -1,
+          "WHEAT": -1
+        },
+        "observed_post_inventory_seed_diff": {
+          "CARROT": 2,
+          "MILK": -1,
+          "STRAWBERRY": -1,
+          "WHEAT": -1
+        },
+        "observed_post_price_seed_diff": {
+          "MILK": 2,
+          "STRAWBERRY": 2
+        },
+        "expected_inventory_diff_matches_observed": true,
+        "step72_pre_inventory_seed_diff": {},
+        "positive_transition": {
+          "pre_inventory": {
+            "WHEAT": 9964,
+            "CARROT": 9997,
+            "TOMATO": 9997,
+            "STRAWBERRY": 9997,
+            "MELON": 9997,
+            "EGG": 9997,
+            "MILK": 9997,
+            "WOOL": 9997,
+            "FERTILIZER": 10014
+          },
+          "post_inventory": {
+            "WHEAT": 9963,
+            "CARROT": 9996,
+            "TOMATO": 9996,
+            "STRAWBERRY": 9995,
+            "MELON": 9996,
+            "EGG": 9996,
+            "MILK": 9995,
+            "WOOL": 9996,
+            "FERTILIZER": 10014
+          },
+          "post_prices": {
+            "WHEAT": 31,
+            "CARROT": 35,
+            "TOMATO": 60,
+            "STRAWBERRY": 139,
+            "MELON": 264,
+            "EGG": 50,
+            "MILK": 179,
+            "WOOL": 214,
+            "FERTILIZER": 97
+          },
+          "subject_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "SELL",
+                "WHEAT",
+                1
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "opponent_action": {
+            "farmer": [
+              "PICKUP",
+              "WHEAT",
+              2
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          }
+        },
+        "negative_transition": {
+          "pre_inventory": {
+            "WHEAT": 9964,
+            "CARROT": 9997,
+            "TOMATO": 9997,
+            "STRAWBERRY": 9997,
+            "MELON": 9997,
+            "EGG": 9997,
+            "MILK": 9997,
+            "WOOL": 9997,
+            "FERTILIZER": 10014
+          },
+          "post_inventory": {
+            "WHEAT": 9964,
+            "CARROT": 9994,
+            "TOMATO": 9996,
+            "STRAWBERRY": 9996,
+            "MELON": 9996,
+            "EGG": 9996,
+            "MILK": 9996,
+            "WOOL": 9996,
+            "FERTILIZER": 10014
+          },
+          "post_prices": {
+            "WHEAT": 31,
+            "CARROT": 35,
+            "TOMATO": 60,
+            "STRAWBERRY": 137,
+            "MELON": 264,
+            "EGG": 50,
+            "MILK": 177,
+            "WOOL": 214,
+            "FERTILIZER": 97
+          },
+          "subject_action": {
+            "farmer": [
+              "COLLECT_FERTILIZER"
+            ],
+            "hands": [],
+            "market": [
+              [
+                "SELL",
+                "WHEAT",
+                1
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          "opponent_action": {
+            "farmer": [
+              "PICKUP",
+              "WHEAT",
+              2
+            ],
+            "hands": [],
+            "market": [
+              [
+                "HIRE"
+              ],
+              [
+                "HIRE"
+              ]
+            ]
+          }
+        }
+      }
+    }
+  },
+  "confirmed": [
+    "At step72, within each body, positive and negative seeds have identical market state and identical subject/opponent actions; town.unlocked_shops[0] differs.",
+    "Official interpreter order is _process_market -> _town_consume(step) -> price refresh.",
+    "Step72 triggers both shop consumption (72 mod 4 = 0) and town-center consumption (72 mod 24 = 0); town-center contribution is common to both seeds and cancels in the seed-to-seed comparison.",
+    "In candidate, positive shop is ICE_CREAM_SHOP and negative shop is PET_CAFE.",
+    "Candidate shop-only predicted inventory difference (positive minus negative) CARROT +2, MILK -1, STRAWBERRY -1, WHEAT -1 exactly matches observed step73 inventory difference.",
+    "In baseline, positive shop is PIZZA_SHOP and negative shop is ICE_CREAM_SHOP; predicted STRAWBERRY +1, TOMATO -1 exactly matches observed step73 inventory difference."
+  ],
+  "conclusion_boundary": "The step72 town-shop difference mechanically maps into the step73 market inventory difference through official _town_consume. This does not establish why the candidate terminal sign differs or why the earlier step24 Guard changes which shop is unlocked.",
+  "next_unknown": "Why does the same step24 Guard lead the candidate worlds to different first unlocked shops at step72, while step24 observable state was identical?"
+}
