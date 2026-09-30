@@ -445,6 +445,15 @@ def main():
         "first_self_circulation": first_self_idx,
     }
     print("SUMMARY " + json.dumps(summary, separators=(",", ":")))
+    for ch in ["L", "P", "R", "X", "W", "C"]:
+        row = first_by_channel[ch]
+        if row is not None:
+            print("FIRST_" + ch + " " + json.dumps({
+                "transition_index": row.get("transition_index"),
+                "source": row.get("source"),
+                "current": row.get("current"),
+            }, ensure_ascii=False, separators=(",", ":")))
+    print("FIRST_ACTION " + json.dumps(first_action, ensure_ascii=False, separators=(",", ":")))
 
 
 if __name__ == "__main__":
