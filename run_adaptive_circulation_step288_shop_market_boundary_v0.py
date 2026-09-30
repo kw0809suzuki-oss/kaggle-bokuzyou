@@ -72,6 +72,10 @@ def main():
           "pass_market_288_289":rec["market_effect_288_to_289"]["pass"],
           "harvest_market_288_289":rec["market_effect_288_to_289"]["harvest"],
           "harvest_minus_pass_at_289":rec["harvest_minus_pass_at_289"],
+          "pass_action_289":p[289]["action"],
+          "harvest_action_289":h[289]["action"],
+          "pass_prices_289":p[289]["market_prices"],
+          "harvest_prices_289":h[289]["market_prices"],
         },ensure_ascii=False,separators=(",",":")))
     Path("adaptive_circulation_step288_shop_market_boundary_v0_result.json").write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
 
