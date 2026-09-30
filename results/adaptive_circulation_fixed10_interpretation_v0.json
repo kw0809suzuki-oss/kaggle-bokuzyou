@@ -1,0 +1,57 @@
+{
+  "schema": "adaptive-circulation-fixed10-interpretation-v0",
+  "status": "no-second-contract-promoted",
+  "fixed10": {
+    "terminal_mean": 103945.2,
+    "terminal_min": 78365,
+    "terminal_max": 163879
+  },
+  "confirmed": [
+    {
+      "point": "step24_effect_aligned_action_divergence",
+      "cases": "10/10",
+      "source_action": "HIRE x3",
+      "current_action": "HIRE x1",
+      "realized_effect": "Cash delta -1 and Hands delta +1 on both sides",
+      "meaning": "Different action can preserve the relevant realized effect."
+    },
+    {
+      "point": "step34_first_same_action_noncash_break",
+      "cases": "10/10",
+      "operation_bundle": "SELL FERTILIZER 1 + BUY_PRODUCT WHEAT 4 with same unit actions",
+      "source_wheat_acquired": 4,
+      "current_wheat_acquired": 3,
+      "meaning": "Common material-acquisition feasibility break. It does not separate terminal outcomes because all 10 share it while terminal ranges from 78365 to 163879."
+    },
+    {
+      "point": "first_productive_body_break_split",
+      "step120_cases": 6,
+      "step479_cases": 4,
+      "step120_terminal_mean": 106976.66666666667,
+      "step120_terminal_range": [82652, 163879],
+      "step479_terminal_mean": 99398,
+      "step479_terminal_range": [78365, 135496],
+      "meaning": "The groups overlap strongly; P-break timing is not a terminal separator."
+    },
+    {
+      "point": "step120_hire_effect_break",
+      "cases": 6,
+      "same_action": "PICKUP WHEAT 3 + HIRE x5",
+      "source_pre_cash": 35,
+      "current_pre_cash": 4,
+      "source_hands_delta": 5,
+      "current_hands_delta": 3,
+      "note": "The highest fixed10 terminal, 163879, is in this break group. Restoring Source +5 hires is therefore not justified by this evidence."
+    }
+  ],
+  "decision": {
+    "active_contracts": ["step24 HIRE realized-effect contract"],
+    "new_contract": null,
+    "reason": "Neither the common step34 break nor the step120/479 productive-body split supplies evidence that restoring Source effect improves terminal self.",
+    "principle_update": "Source realized effect is a reference surface, not a target. Only terminal-supported effect contracts may alter the Frozen Replay Skeleton."
+  },
+  "runs": {
+    "operation_effect_lens": 36703148938,
+    "productive_body_break_probe": 36703645386
+  }
+}
