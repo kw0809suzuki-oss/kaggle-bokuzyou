@@ -33,3 +33,5 @@ jobs:
           name: adaptive-circulation-opportunity-step250-context-v0
           path: adaptive_circulation_opportunity_step250_context_v0.json
           if-no-files-found: warn
+
+# rerun immediate-effect confirmation
