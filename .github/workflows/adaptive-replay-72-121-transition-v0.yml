@@ -1,0 +1,29 @@
+name: Adaptive Replay 72-121 Transition v0
+on:
+  push:
+    branches: ["experiment/adaptive-replay-72-121-transition-v0-20260930"]
+    paths:
+      - "run_adaptive_replay_72_121_transition_v0.py"
+      - ".github/workflows/adaptive-replay-72-121-transition-v0.yml"
+permissions:
+  contents: read
+jobs:
+  observe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - name: Install pinned Official Kaggriculture environment
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "git+https://github.com/Kaggle/kaggle-environments.git@d7729da06cc1382eb742d6980dc3180aa85caa28"
+      - name: Run 72-121 transition probe
+        run: python run_adaptive_replay_72_121_transition_v0.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: adaptive-replay-72-121-transition-v0
+          path: adaptive_replay_72_121_transition_v0.json
+          if-no-files-found: warn
