@@ -1,0 +1,45 @@
+{
+  "schema": "adaptive-replay-effect-contracts-v0",
+  "contracts": [
+    {
+      "id": "step24-hire-realized-plus1-v0",
+      "status": "active",
+      "scope": {
+        "step": 24
+      },
+      "operation": "HIRE",
+      "source_requested": {
+        "count": 3
+      },
+      "protected_effect": {
+        "kind": "hires_delta",
+        "count": 1
+      },
+      "world_check": {
+        "adapter": "hire_feasibility",
+        "trigger_when": "feasible_count_exceeds_protected_effect"
+      },
+      "transform": {
+        "kind": "cap_market_operation_count",
+        "operation": "HIRE",
+        "count": 1
+      },
+      "evidence": {
+        "fixed10_run_id": 36649687912,
+        "improved": 10,
+        "worsened": 0,
+        "same": 0,
+        "mean_delta_terminal_self": 37840.5
+      }
+    }
+  ],
+  "boundary": {
+    "source_effect_is_not_automatically_a_contract": true,
+    "closed_not_active": [
+      "step85 STRAWBERRY source-effect restoration"
+    ],
+    "automatic_recovery": false,
+    "policy_replanning": false,
+    "market_restoration": false
+  }
+}
